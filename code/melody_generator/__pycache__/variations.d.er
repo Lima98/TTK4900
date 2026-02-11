@@ -1,0 +1,2 @@
+##[pylyzer] failed /users/jan-oivindlima/documents/arbeid/skole/10. semester/ttk4900 - masteroppgave/code/melody_generator/variations.py 1770638208 109
+.transpose: (phrase: Obj, interval: Obj) -> Never

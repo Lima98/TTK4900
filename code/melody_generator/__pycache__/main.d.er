@@ -1,0 +1,54 @@
+##[pylyzer] failed /users/jan-oivindlima/documents/arbeid/skole/10. semester/ttk4900 - masteroppgave/code/melody_generator/main.py 1770807293 2186
+.___v_desugar_1 = pyimport "scales"
+.scales = pyimport "scales"
+.generate_major_scale: Never
+.___v_desugar_2 = pyimport "rhythm"
+.rhythm = pyimport "rhythm"
+.generate_rhythm: Never
+.___v_desugar_3 = pyimport "phrase"
+.phrase = pyimport "phrase"
+.generate_phrase: (scale: global::Indexable(Obj, Never), rhythm: Structural({.__len__ = (self: Never) -> Nat}), resolve: Structural({.__and__ = (self: Never, Obj: Bool) -> Bool}) := {False} and Structural({.__and__ = (self: Never, Obj: Bool) -> Bool})) -> global::List!(Never, _: Nat)
+.___v_desugar_4 = pyimport "variation"
+.variation = pyimport "variation"
+.transpose: (phrase: Obj, interval: Obj) -> Never
+.phrase_to_lilypond: (phrase: global::Iterable(global::Indexable(Obj, Never))) -> Str
+
+.tonic: {60}
+.scale: Never
+.rhythm: Never
+.call: global::List!(Never, _: Nat)
+.response: global::List!(Never, _: Nat)
+.varied_call: Never
+.lilypond_output: Str
+
+
+.os: Never
+
+.___v_desugar_5: Never
+.datetime: Never
+.output_dir: Never
+
+.timestamp: Never
+.output_path: Never
+
+
+
+
+.midi_path: Never
+.output_folder: Never
+
+
+
+ir: Never
+
+.timestamp: Never
+.output_path: Never
+
+
+
+
+.midi_path: Never
+.output_folder: Never
+
+
+

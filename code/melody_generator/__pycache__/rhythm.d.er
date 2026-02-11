@@ -1,0 +1,5 @@
+##[pylyzer] failed /users/jan-oivindlima/documents/arbeid/skole/10. semester/ttk4900 - masteroppgave/code/melody_generator/rhythm.py 1770807108 320
+.random: Never
+
+.generate_rhythm: (length: Structural({.__sub__ = (self: Never, global::Add(Never)) -> Never}) := {8} and Structural({.__sub__ = (self: Never, global::Add(Never)) -> Never})) -> global::List!(Never, 1)
+

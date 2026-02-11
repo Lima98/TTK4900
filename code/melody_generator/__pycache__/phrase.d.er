@@ -1,0 +1,6 @@
+##[pylyzer] failed /users/jan-oivindlima/documents/arbeid/skole/10. semester/ttk4900 - masteroppgave/code/melody_generator/phrase.py 1770807035 317
+.random: Never
+
+.generate_phrase: |T :> global::Tuple([T, U]), T: Type, Type_882 <: Structural({.__len__ = (self: Never) -> Nat}), U: Type|(scale: global::Indexable(Obj, T), rhythm: Type_882, resolve: Structural({.__and__ = (self: Never, Obj) -> Bool}) := {False} and Structural({.__and__ = (self: Never, Obj) -> Bool})) -> global::List!(T, _: Nat)
+)
+)
