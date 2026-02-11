@@ -80,3 +80,7 @@ nil
 = 05.02 
 Har ikke fått gjort særlig mye i dag egentlig har vert på jobb og heller jobba med øving og bare konfigurert NVIM egentlig. Ikke særlig produktivt, men det får da bare være. Kan jo ikke få til alt når man er sjuk. 
 
+= Uke 7
+
+== 11.02
+Har bare fikset på masse config greier, har ikke egentlig fått skrevet særlig mye kode. Skal bli flinkere til å oppdatere denne med faktisk nyttig info. Nå står det jo en del som er nyttig både i den fysiske boka mi og i oppdateringene på git så vil det jo stå ting som er av interesse der da. Vi får se hvor flink jeg blir på dette fremover.

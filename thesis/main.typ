@@ -140,7 +140,7 @@ Numbered list:
 == Figures
 <figures>
 Figures are added using ```typst #figure()```. An example is shown in
-#link(<fig:mapNTNU>)[2.1];. By default figures are placed in the flow, exactly where it was specified. To change this set the ```placement``` option to either `top`, `bottom`, or `auto`. To add an image, use ```typst #image()``` and set the `height` or `width` to include the graphics file. If the caption consists of a single sentence fragment (incomplete sentence), it should not be punctuated.
+. By default figures are placed in the flow, exactly where it was specified. To change this set the ```placement``` option to either `top`, `bottom`, or `auto`. To add an image, use ```typst #image()``` and set the `height` or `width` to include the graphics file. If the caption consists of a single sentence fragment (incomplete sentence), it should not be punctuated.
 
 
 
