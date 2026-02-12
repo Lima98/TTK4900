@@ -1,9 +1,3 @@
 = Initial music generation
 
-For the initial testing of music generation complete randomness was used. This was done to test the basic functionality.
-
-If this is the best way to go about it then I am all ears. 
-
-what
-whatever this works fine I guess
-
+Completely random music generation in a given key to get a feel for the process. This is to get basic functionality working which can get improved upon later. I need to make sure that the modules are able to handle new music generation after the initial implementation. This is key to making sure that the system is flexible and can include more complicated musical concepts in the future.  

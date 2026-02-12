@@ -4,7 +4,6 @@
 
 == Møte med Sverre
 
-
   Klanger fra 60 toner system. For eksmepel 5-ere som ikke er en faktor i vanlig
 
   Trommemarsj? Rytmer?
@@ -84,3 +83,8 @@ Har ikke fått gjort særlig mye i dag egentlig har vert på jobb og heller jobb
 
 == 11.02
 Har bare fikset på masse config greier, har ikke egentlig fått skrevet særlig mye kode. Skal bli flinkere til å oppdatere denne med faktisk nyttig info. Nå står det jo en del som er nyttig både i den fysiske boka mi og i oppdateringene på git så vil det jo stå ting som er av interesse der da. Vi får se hvor flink jeg blir på dette fremover.
+
+== 12.02
+
+Skrevet om hele koden fra bunn av selv for å ha litt bedre oversikt til å få det til å bli enklere å jobbe videre med.
+Har startet å se på hvordan jeg skal implementere regler for hvordan å håndtere rytmegenerering slik at det gir mening med tanke på taktene. 
