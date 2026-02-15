@@ -1,5 +1,4 @@
 import random
-
 scale_degrees = ["1", "2", "3", "4", "5", "6", "7"]
 
 # Generate random melody on scale degrees
@@ -35,3 +34,4 @@ def melody_to_notes(melody):
     notes = [degree_to_note[degree] for degree in melody]
     
     return notes
+

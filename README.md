@@ -6,26 +6,22 @@ Master Project Cybernetics and Robotics at NTNU
 - [Team Members](#team-members)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
-This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on [brief description of the project].
+This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on _WIP_.
 
 ## Team Members
-- Member 1: [Name] - [Role]
+- Jan-Øivind Lima - Masters Student
 
 ## Project Structure
 The repository is organized as follows:
-- `src/`: Contains the source code for the project.
-- `docs/`: Documentation related to the project.
-- `data/`: Datasets used in the project.
-- `tests/`: Unit tests and test scripts.
+- `code/`: Code files.
+- `code/output`: Contains generated music files, pdf's etc...
+- `research/`: Documents and notes on relevant 
+- `thesis/`: Typst files and rendered PDF's of the thesis. 
 - `README.md`: This file.
 
 ## Getting Started
 To get started with the project, follow these steps:
-1. Clone the repository:
-   ```bash
-   git clone
 
+_WIP_

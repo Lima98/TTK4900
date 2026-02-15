@@ -28,5 +28,4 @@ This thesis will cover the work of developing an algorithm and software for gene
 == Music theory
 
 == Procedural generation
-
 #figure(image("../code/output/random.cropped.png", width: 50%))
