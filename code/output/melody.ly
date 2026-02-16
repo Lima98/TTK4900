@@ -1,5 +1,13 @@
 \version "2.24.4"
+\language "english"
 
-\relative c' {
-  e4    b2    c2    e4    g4    g8    d8    e4    d8    g2    f4    d8    e2    b2    f2    e8  
+\score {
+	 \new Staff {
+		\key c \major
+		\time 4/4
+		\relative 
+	  e1   e4   d2   e8   g8   b1   c1 
+}
+		\layout {}
+		\midi {}
 }
