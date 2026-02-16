@@ -55,7 +55,7 @@ def note_and_rhythm(notes, rhythm):
 
 # Run lilypond to generate PDF, midi and png files
 def generate_files(filename="code/output/default/output.ly", path = "code/output/"):
-    subprocess.run(["lilypond", "-o", path, "-dcrop", filename])
+    subprocess.run(["lilypond", "-o", path, "-dcrop",  filename])
 
     # Convert MIDI to audio file
     midi_file = filename.replace('.ly', '.midi')
@@ -63,7 +63,7 @@ def generate_files(filename="code/output/default/output.ly", path = "code/output
 
     if os.path.exists(midi_file):
         print("Converting MIDI to audio...")
-        subprocess.run(["timidity", path + midi_file, "-Ow", "-o", audio_file])
+        subprocess.run(["timidity", midi_file, "-Ow", "-o", audio_file])
         print(f"Audio file created: {audio_file}")
         print("Playing audio...")
         subprocess.run(["afplay", audio_file])
