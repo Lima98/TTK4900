@@ -26,7 +26,6 @@ print(rhythm)
 rhythm = ly.beat_to_duration(rhythm)
 print(rhythm)
 
-
 print("=== Scale degree to note ===")
 melody = ms.melody_to_notes(notes)
 print(melody)

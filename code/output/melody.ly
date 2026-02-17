@@ -6,7 +6,7 @@
 		\key c \major
 		\time 4/4
 		\relative c'{
-		  c4   e4   g8   f4   df8   bf4   af4   af4   c4   df8   df4   df8   c4   e4   df8   c4   af8 
+		  c4   bf8   c8   e2   c8   df8   bf4   af4   bf8   bf8   c2   c4   c8   c8   e2 
 			}
 		}
 		\midi {}

@@ -14,7 +14,7 @@ def generate_random_notes(length=8):
 
 # Generate notes based on intervals
 def generate_notes(notes = 4, scale=scale_degrees, ):
-    intervals   =   [-2, -1, 0, 1, 2] # Only 2nds and 3rds for now
+    intervals   =   [-2, -1, 0, 1, 2] # only 2nds and 3rds for now
     melody      =   []
     current     =   0
     
@@ -32,16 +32,16 @@ def generate_notes(notes = 4, scale=scale_degrees, ):
 
     return melody
 
-# Generate a numbers of bars of random rhythm pattern in a given Time Signature
-def generate_rhythm(bars = 1, notesPerBar = 4):
+# generate a numbers of bars of random rhythm pattern in a given time signature
+def generate_rhythm(bars = 1, notesperbar = 4):
     values  =   [4, 2, 1, 0.5]
     rhythm  =   []
     tot     =   0
 
-    for bar in range(bars):
+    for _ in range(bars):
         tot = 0
-        while tot < notesPerBar:
-            choices = [v for v in values if tot + v <= notesPerBar]
+        while tot < notesperbar:
+            choices = [v for v in values if tot + v <= notesperbar]
             val     = random.choice(choices)
             rhythm.append(val)
             tot     += val
@@ -49,7 +49,7 @@ def generate_rhythm(bars = 1, notesPerBar = 4):
     return rhythm
 
 # Convert scale degrees to notes (assuming C major for simplicity)
-# TODO: Implement all keys in a smart way, maybe .csv or something
+# todo: implement all keys in a smart way, maybe .csv or something
 def melody_to_notes(melody):
     degree_to_note = {
         "1": "c",
@@ -71,10 +71,23 @@ def melody_to_notes(melody):
     return notes
 
 # TODO: Implement this
-# Diatonic transposition
-def transpose(melody, interval=0):
+# Diatonic transposition using the scale degrees
+def ttranspose(melody, interval=0):
+    transposed_melody = []
+    for note in melody:
+        if note in scale_degrees_full:
+            index = scale_degrees_full.index(note)
+            transposed_index = (index + interval) % len(scale_degrees_full)
+            transposed_note = scale_degrees_full[transposed_index]
+            transposed_melody.append(transposed_note)
+        else:
+            transposed_melody.append(note)  # If the note is not in the scale, keep it unchanged
+    return transposed_melody
 
-    return
+def transpose(melody, interval=0):
+    transposed_melody = []
+
+    return transposed_melody
 
 # TODO: Implement this
 # Create a variation of given melody
