@@ -10,17 +10,17 @@ def melody_to_lilypond(melody):
     lilypond_output += "\t \\new Staff {\n"
     lilypond_output += "\t\t\\key c \\major\n"
     lilypond_output += "\t\t\\time 4/4\n"
-    lilypond_output += "\t\t\\relative \n"
-    lilypond_output += "\t"
+    lilypond_output += "\t\t\\relative c'{\n"
+    lilypond_output += "\t\t"
 
 
     for note in melody:
         lilypond_output += f"  {note} "
 
-
-    lilypond_output += "\n}"
-    lilypond_output += "\n\t\t\\layout {}"
+    lilypond_output += "\n\t\t\t}"
+    lilypond_output += "\n\t\t}"
     lilypond_output += "\n\t\t\\midi {}"
+    lilypond_output += "\n\t\t\\layout {}"
     lilypond_output += "\n}"
     
     return lilypond_output
@@ -57,10 +57,11 @@ def note_and_rhythm(notes, rhythm):
 def generate_files(filename="code/output/default/output.ly", path = "code/output/"):
     subprocess.run(["lilypond", "-o", path, "-dcrop",  filename])
 
+
+def play(filename="code/output/default/output.ly"):
     # Convert MIDI to audio file
     midi_file = filename.replace('.ly', '.midi')
     audio_file = filename.replace('.ly', '.wav')
-
     if os.path.exists(midi_file):
         print("Converting MIDI to audio...")
         subprocess.run(["timidity", midi_file, "-Ow", "-o", audio_file])
