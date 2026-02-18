@@ -37,7 +37,10 @@ def beat_to_duration(beat):
             "4": "1",
             "2": "2",
             "1": "4",
-            "0.5": "8"
+            "0.5": "8",
+            "0.25": "16",
+            "0.125": "32",
+            "0.0625": "64",
             }
 
     durations = [beat_to_dur[dur] for dur in beat]

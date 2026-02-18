@@ -33,23 +33,40 @@ def generate_notes(notes = 4, scale=scale_degrees, ):
     return melody
 
 # generate a numbers of bars of random rhythm pattern in a given time signature
-def generate_rhythm(bars = 1, notesperbar = 4):
-    values  =   [4, 2, 1, 0.5]
+def generate_rhythm(bars = 1, notesPerBar = 4, values = ["q"]):
     rhythm  =   []
     tot     =   0
-
+    values  =   rhythm_to_values(values)
+    
     for _ in range(bars):
         tot = 0
-        while tot < notesperbar:
-            choices = [v for v in values if tot + v <= notesperbar]
+        while tot < notesPerBar:
+            choices = [v for v in values if tot + v <= notesPerBar]
             val     = random.choice(choices)
             rhythm.append(val)
             tot     += val
 
     return rhythm
 
+# Convert rhythm symbols to their corresponding beat values
+def rhythm_to_values(rhythm):
+    rhythm_to_val = {
+            "b": 8,
+            "w": 4,
+            "h": 2,
+            "q": 1,
+            "e": 0.5,
+            "s": 0.25,
+            "t": 0.125,
+            "x": 0.0625
+            }
+    values = [rhythm_to_val[dur] for dur in rhythm]
+
+    return values
+
+
 # Convert scale degrees to notes (assuming C major for simplicity)
-# todo: implement all keys in a smart way, maybe .csv or something
+# TODO: implement all keys in a smart way, maybe .csv or something
 def melody_to_notes(melody):
     degree_to_note = {
         "1": "c",
@@ -95,3 +112,8 @@ def variation_melody(melody):
     
     return
 
+# TODO: Implement this
+# Create a variation of given melody
+def variation_rhythm(rhythm):
+    
+    return

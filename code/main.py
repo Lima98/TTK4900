@@ -9,8 +9,8 @@ filename = filepath + file
 phrygian_dominant = ["1", "b2", "3", "4", "5", "b6", "b7"]
 
 print("=== Generate Rhythm ===")
-rhythm1 = ms.generate_rhythm(2, 2)
-rhythm2 = ms.generate_rhythm(1, 2)
+rhythm1 = ms.generate_rhythm(2, 4, ["s"]) 
+rhythm2 = ms.generate_rhythm(1, 4, ["e", "s"])
 print(f"Rhythm 1: {rhythm1}")
 print(f"Rhythm 2: {rhythm2}")
 rhythm = rhythm1 + rhythm2 + rhythm1 + rhythm1
