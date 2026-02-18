@@ -9,11 +9,28 @@ scale_degrees_full = ["1","b2" "2","b3", "3", "4", "s4", "5", "b6", "6", "b7", "
 
 # Generate notes in a melody NOTE: Not used anymore
 def generate_random_notes(length=8):
+    """
+
+    Args:
+        length ():  The number of notes in the generated melody.
+
+    Returns:        A list of scale degrees representing a random melody.
+        
+    """
     melody = [random.choice(scale_degrees_full) for _ in range(length)]
     return melody 
 
 # Generate notes based on intervals
-def generate_notes(notes = 4, scale=scale_degrees, ):
+def generate_notes(notes = 4, scale=scale_degrees):
+    """
+
+    Args:
+        notes (): The number of notes in the generated melody.
+        scale (): The scale to use for generating the melody. Default is the major scale represented by scale_degrees. 
+
+    Returns:
+        
+    """
     intervals   =   [-2, -1, 0, 1, 2] # only 2nds and 3rds for now
     melody      =   []
     current     =   0
@@ -34,6 +51,16 @@ def generate_notes(notes = 4, scale=scale_degrees, ):
 
 # generate a numbers of bars of random rhythm pattern in a given time signature
 def generate_rhythm(bars = 1, notesPerBar = 4, values = ["q"]):
+    """
+
+    Args:
+        bars ():        The number of bars to generate.
+        notesPerBar (): The number of beats per bar (e.g., 4 for 4/4 time).
+        values ():      A list of rhythm symbols to use for generating the rhythm. Default is ["q"] (quarter notes).
+
+    Returns:            A list of rhythm values representing the generated rhythm pattern.
+        
+    """
     rhythm  =   []
     tot     =   0
     values  =   rhythm_to_values(values)
@@ -50,6 +77,14 @@ def generate_rhythm(bars = 1, notesPerBar = 4, values = ["q"]):
 
 # Convert rhythm symbols to their corresponding beat values
 def rhythm_to_values(rhythm):
+    """
+
+    Args:
+        rhythm (): A list of rhythm symbols (e.g., ["q", "e", "s"]) to convert to their corresponding beat values.
+
+    Returns:       A list of beat values corresponding to the input rhythm symbols.
+        
+    """
     rhythm_to_val = {
             "b": 8,
             "w": 4,
@@ -68,6 +103,14 @@ def rhythm_to_values(rhythm):
 # Convert scale degrees to notes (assuming C major for simplicity)
 # TODO: implement all keys in a smart way, maybe .csv or something
 def melody_to_notes(melody):
+    """
+
+    Args:
+        melody (): A list of scale degrees (e.g., ["1", "2", "3", "4", "5", "6", "7"]) to convert to their corresponding note names in the C major scale.
+
+    Returns:      A list of note names corresponding to the input scale degrees in the C major scale.
+        
+    """
     degree_to_note = {
         "1": "c",
         "b2": "df",

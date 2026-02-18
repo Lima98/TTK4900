@@ -10,13 +10,13 @@ Master Project Cybernetics and Robotics at NTNU
 ## Project Overview
 This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on _WIP_.
 
-## Team Members
+## Team Member
 - Jan-Øivind Lima - Masters Student
 
 ## Project Structure
 The repository is organized as follows:
-- `code/`: Code files.
-- `code/output`: Contains generated music files, pdf's etc...
+- `code/`: Code files and generated output.
+- `docs/`: Contains documentation generated using Sphinx.
 - `research/`: Documents and notes on relevant 
 - `thesis/`: Typst files and rendered PDF's of the thesis. 
 - `README.md`: This file.

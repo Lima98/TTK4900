@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lilyconvert &#8212; Procedural Music Generation 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for lilyconvert</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Handling conversion to LilyPond and generating associated files.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Convert melody to LilyPond format</span>
+<div class="viewcode-block" id="melody_to_lilypond">
+<a class="viewcode-back" href="../index.html#lilyconvert.melody_to_lilypond">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">melody_to_lilypond</span><span class="p">(</span><span class="n">melody</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        melody (): A list of notes in the melody, where each note is represented as a string (e.g., &quot;c4&quot;, &quot;d8&quot;, &quot;e16&quot;).</span>
+
+<span class="sd">    Returns:        A string containing the LilyPond code representing the melody, including necessary headers and structure for a complete score.</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">version </span><span class="se">\&quot;</span><span class="s2">2.24.4</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">language </span><span class="se">\&quot;</span><span class="s2">english</span><span class="se">\&quot;\n\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">score {</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2"> </span><span class="se">\\</span><span class="s2">new Staff {</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t\\</span><span class="s2">key c </span><span class="se">\\</span><span class="s2">major</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t\\</span><span class="s2">time 4/4</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t\\</span><span class="s2">relative c&#39;{</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">&quot;</span>
+
+
+    <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">melody</span><span class="p">:</span>
+        <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">note</span><span class="si">}</span><span class="s2"> &quot;</span>
+
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\t\t\t</span><span class="s2">}&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\t\t</span><span class="s2">}&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\t\t\\</span><span class="s2">midi </span><span class="si">{}</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n\t\t\\</span><span class="s2">layout </span><span class="si">{}</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">}&quot;</span>
+    
+    <span class="k">return</span> <span class="n">lilypond_output</span></div>
+
+
+<span class="c1"># Write LilyPond code to a file</span>
+<div class="viewcode-block" id="write_to_file">
+<a class="viewcode-back" href="../index.html#lilyconvert.write_to_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_to_file</span><span class="p">(</span><span class="n">lilypond_code</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;code/output/default/output.ly&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lilypond_code (): A string containing the LilyPond code to be written to a file.</span>
+<span class="sd">        filename (): The name of the file where the LilyPond code will be saved. Default is &quot;code/output/default/output.ly&quot;. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span> 
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lilypond_code</span><span class="p">)</span></div>
+
+
+<span class="c1"># Beat to lilypond durations</span>
+<div class="viewcode-block" id="beat_to_duration">
+<a class="viewcode-back" href="../index.html#lilyconvert.beat_to_duration">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">beat_to_duration</span><span class="p">(</span><span class="n">beat</span><span class="p">):</span>
+    <span class="n">beat</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">beat</span><span class="p">]</span>
+    <span class="n">beat_to_dur</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;0.5&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;0.25&quot;</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;0.125&quot;</span><span class="p">:</span> <span class="s2">&quot;32&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;0.0625&quot;</span><span class="p">:</span> <span class="s2">&quot;64&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+
+    <span class="n">durations</span> <span class="o">=</span> <span class="p">[</span><span class="n">beat_to_dur</span><span class="p">[</span><span class="n">dur</span><span class="p">]</span> <span class="k">for</span> <span class="n">dur</span> <span class="ow">in</span> <span class="n">beat</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">durations</span></div>
+
+
+<span class="c1"># Concatenate notes and rhythms</span>
+<div class="viewcode-block" id="note_and_rhythm">
+<a class="viewcode-back" href="../index.html#lilyconvert.note_and_rhythm">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">note_and_rhythm</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="n">rhythm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        notes (): A list of notes in the melody, where each note is represented as a string (e.g., &quot;c&quot;, &quot;d&quot;, &quot;e&quot;).</span>
+<span class="sd">        rhythm (): A list of rhythm durations corresponding to each note, where each duration is represented as a string (e.g., &quot;4&quot; for whole note, &quot;2&quot; for half note, &quot;1&quot; for quarter note, etc.). </span>
+
+<span class="sd">    Returns:    A list of strings where each string represents a note combined with its corresponding rhythm duration in LilyPond format (e.g., &quot;c4&quot;, &quot;d8&quot;, &quot;e16&quot;). The function checks if the lengths of the notes and rhythm lists are the same and prints an error message if they are not.</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhythm</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Notes and rhythm are different lengths&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">melody</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="fm">__add__</span><span class="p">,</span> <span class="n">notes</span><span class="p">,</span> <span class="n">rhythm</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">melody</span></div>
+
+
+<span class="c1"># Run lilypond to generate PDF, midi and png files</span>
+<div class="viewcode-block" id="generate_files">
+<a class="viewcode-back" href="../index.html#lilyconvert.generate_files">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_files</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;code/output/default/output.ly&quot;</span><span class="p">,</span> <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;code/output/&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (): The name of the LilyPond file to be processed, including its path. Default is &quot;code/output/default/output.ly&quot;.</span>
+<span class="sd">        path (): The directory where the generated files (PDF, MIDI, PNG) will be saved. Default is &quot;code/output/&quot;. The function uses the subprocess module to run the LilyPond command-line tool, which processes the specified LilyPond file and generates the corresponding output files in the specified directory. The &quot;-o&quot; option specifies the output directory, and the &quot;-dcrop&quot; option tells LilyPond to crop the PDF output to fit the content.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;lilypond&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="s2">&quot;-dcrop&quot;</span><span class="p">,</span>  <span class="n">filename</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="play">
+<a class="viewcode-back" href="../index.html#lilyconvert.play">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">play</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;code/output/default/output.ly&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (): The name of the LilyPond file to be processed for audio playback, including its path. Default is &quot;code/output/default/output.ly&quot;. The function first checks if a corresponding MIDI file exists (with the same name but a .midi extension). If the MIDI file is found, it uses the Timidity++ software synthesizer to convert the MIDI file into a WAV audio file. After the audio file is created, it uses the &quot;afplay&quot; command (specific to macOS) to play the generated audio file. If the MIDI file is not found, it prints an error message indicating that the MIDI file could not be located.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convert MIDI to audio file</span>
+    <span class="n">midi_file</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.ly&#39;</span><span class="p">,</span> <span class="s1">&#39;.midi&#39;</span><span class="p">)</span>
+    <span class="n">audio_file</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.ly&#39;</span><span class="p">,</span> <span class="s1">&#39;.wav&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">midi_file</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Converting MIDI to audio...&quot;</span><span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;timidity&quot;</span><span class="p">,</span> <span class="n">midi_file</span><span class="p">,</span> <span class="s2">&quot;-Ow&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Audio file created: </span><span class="si">{</span><span class="n">audio_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Playing audio...&quot;</span><span class="p">)</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;afplay&quot;</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">])</span>
+        <span class="c1"># subprocess.run([&quot;timidity&quot;, midi_file]) Does not work</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MIDI file not found: </span><span class="si">{</span><span class="n">midi_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Procedural Music Generation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
