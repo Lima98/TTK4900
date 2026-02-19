@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Procedural Music Generation documentation &#8212; Procedural Music Generation 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="procedural-music-generation-documentation">
+<h1>Procedural Music Generation documentation<a class="headerlink" href="#procedural-music-generation-documentation" title="Link to this heading">¶</a></h1>
+<p>This is the documentation for the Procedural Music Generation project. It includes various modules and examples to help you get started with generating music procedurally.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-music">
+<span id="music-module"></span><h1>Music module<a class="headerlink" href="#module-music" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="music.generate_notes">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['1',</span> <span class="pre">'2',</span> <span class="pre">'3',</span> <span class="pre">'4',</span> <span class="pre">'5',</span> <span class="pre">'6',</span> <span class="pre">'7']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#generate_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.generate_notes" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>)</strong> (<em>scale</em>) – The number of notes in the generated melody.</p></li>
+<li><p><strong>(</strong><strong>)</strong> – The scale to use for generating the melody.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.generate_random_notes">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">generate_random_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#generate_random_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.generate_random_notes" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>length</em>) – The number of notes in the generated melody.</p>
+</dd>
+</dl>
+<p>Returns:        A list of scale degrees representing a random melody.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.generate_rhythm">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">generate_rhythm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notesPerBar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['q']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#generate_rhythm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.generate_rhythm" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>)</strong> (<em>values</em>) – The number of bars to generate.</p></li>
+<li><p><strong>(</strong><strong>)</strong> – The number of beats per bar (e.g., 4 for 4/4 time).</p></li>
+<li><p><strong>(</strong><strong>)</strong> – A list of rhythm symbols to use for generating the rhythm. Default is [“q”] (quarter notes).</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:            A list of rhythm values representing the generated rhythm pattern.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.melody_to_notes">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">melody_to_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#melody_to_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.melody_to_notes" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>melody</em>) – A list of scale degrees (e.g., [“1”, “2”, “3”, “4”, “5”, “6”, “7”]) to convert to their corresponding note names in the C major scale.</p>
+</dd>
+</dl>
+<p>Returns:      A list of note names corresponding to the input scale degrees in the C major scale.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.rhythm_to_values">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">rhythm_to_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhythm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#rhythm_to_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.rhythm_to_values" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>rhythm</em>) – A list of rhythm symbols (e.g., [“q”, “e”, “s”]) to convert to their corresponding beat values.</p>
+</dd>
+</dl>
+<p>Returns:       A list of beat values corresponding to the input rhythm symbols.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.transpose">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">transpose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#transpose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.transpose" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.ttranspose">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">ttranspose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#ttranspose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.ttranspose" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.variation_melody">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">variation_melody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#variation_melody"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.variation_melody" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.variation_rhythm">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">variation_rhythm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhythm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/music.html#variation_rhythm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.variation_rhythm" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-lilyconvert">
+<span id="lilyconvert-module"></span><h1>Lilyconvert module<a class="headerlink" href="#module-lilyconvert" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="lilyconvert.beat_to_duration">
+<span class="sig-prename descclassname"><span class="pre">lilyconvert.</span></span><span class="sig-name descname"><span class="pre">beat_to_duration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lilyconvert.html#beat_to_duration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lilyconvert.beat_to_duration" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lilyconvert.generate_files">
+<span class="sig-prename descclassname"><span class="pre">lilyconvert.</span></span><span class="sig-name descname"><span class="pre">generate_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'code/output/default/output.ly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'code/output/'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lilyconvert.html#generate_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lilyconvert.generate_files" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>)</strong> (<em>path</em>) – The name of the LilyPond file to be processed, including its path.</p></li>
+<li><p><strong>(</strong><strong>)</strong> – The directory where the generated files (PDF, MIDI, PNG) will be saved. The function uses the subprocess module to run the LilyPond command-line tool, which processes the specified LilyPond file and generates the corresponding output files in the specified directory. The “-o” option specifies the output directory, and the “-dcrop” option tells LilyPond to crop the PDF output to fit the content.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lilyconvert.melody_to_lilypond">
+<span class="sig-prename descclassname"><span class="pre">lilyconvert.</span></span><span class="sig-name descname"><span class="pre">melody_to_lilypond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lilyconvert.html#melody_to_lilypond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lilyconvert.melody_to_lilypond" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>melody</em>) – A list of notes in the melody, where each note is represented as a string (e.g., “c4”, “d8”, “e16”).</p>
+</dd>
+</dl>
+<p>Returns:        A string containing the LilyPond code representing the melody, including necessary headers and structure for a complete score.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lilyconvert.note_and_rhythm">
+<span class="sig-prename descclassname"><span class="pre">lilyconvert.</span></span><span class="sig-name descname"><span class="pre">note_and_rhythm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhythm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lilyconvert.html#note_and_rhythm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lilyconvert.note_and_rhythm" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>)</strong> (<em>rhythm</em>) – A list of notes in the melody, where each note is represented as a string (e.g., “c”, “d”, “e”).</p></li>
+<li><p><strong>(</strong><strong>)</strong> – A list of rhythm durations corresponding to each note, where each duration is represented as a string (e.g., “4” for whole note, “2” for half note, “1” for quarter note, etc.).</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:    A list of strings where each string represents a note combined with its corresponding rhythm duration in LilyPond format (e.g., “c4”, “d8”, “e16”). The function checks if the lengths of the notes and rhythm lists are the same and prints an error message if they are not.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lilyconvert.play">
+<span class="sig-prename descclassname"><span class="pre">lilyconvert.</span></span><span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'code/output/default/output.ly'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lilyconvert.html#play"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lilyconvert.play" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>filename</em>) – The name of the LilyPond file to be processed for audio playback, including its path. The function first checks if a corresponding MIDI file exists (with the same name but a .midi extension). If the MIDI file is found, it uses the Timidity++ software synthesizer to convert the MIDI file into a WAV audio file. After the audio file is created, it uses the “afplay” command (specific to macOS) to play the generated audio file. If the MIDI file is not found, it prints an error message indicating that the MIDI file could not be located.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lilyconvert.write_to_file">
+<span class="sig-prename descclassname"><span class="pre">lilyconvert.</span></span><span class="sig-name descname"><span class="pre">write_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lilypond_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'code/output/default/output.ly'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lilyconvert.html#write_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lilyconvert.write_to_file" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>(</strong><strong>)</strong> (<em>filename</em>) – A string containing the LilyPond code to be written to a file.</p></li>
+<li><p><strong>(</strong><strong>)</strong> – The name of the file where the LilyPond code will be saved.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Procedural Music Generation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
