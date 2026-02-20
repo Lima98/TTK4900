@@ -17,7 +17,7 @@ This repository contains the code and documentation for the Master Project in Cy
 The repository is organized as follows:
 - `code/`: Code files and generated output.
 - `docs/_build`: Contains documentation generated using Sphinx.
-- `research/`: Documents and notes on relevant 
+- `research/`: Documents and notes on relevant theory and research papers.
 - `thesis/`: Typst files and rendered PDF's of the thesis. 
 - `README.md`: This file.
 

@@ -9,15 +9,17 @@ file = filepath + filename
 
 key_name = "eb major"
 key = ms.build_key(key_name)
-melody = ms.generate_notes(1000, key)
+melody = ms.generate_notes(4, key)
 print(melody)
+
+melody = ms.generate_notes(64, key)
+
+
 
 lilycode = ly.melody_to_lilypond(melody, key_name, "4/4")
 ly.write_to_file(lilycode, file)
 ly.generate_files(file, filepath)
 ly.play(file)
-
-print(ms.generate_random_notes(16))
 
 # print("=== Generate Rhythm ===")
 # rhythm1 = ms.generate_rhythm(2, 4, ["s"]) 

@@ -4,3 +4,4 @@ Completely random music generation in a given key to get a feel for the process.
 
 = Musical fluency
 Worked on creating a system that lets me generate the music with simple inputs. When given a key center and mode, it should be able to write out the melody in the given key without spelling mistakes.  
+This was successfully implemented, but a few things are missing to make it complete.

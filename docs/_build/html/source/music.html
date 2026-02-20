@@ -33,17 +33,28 @@
   <section id="module-music">
 <span id="music-module"></span><h1>music module<a class="headerlink" href="#module-music" title="Link to this heading">¶</a></h1>
 <dl class="py function">
+<dt class="sig sig-object py" id="music.build_key">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">build_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'c</span> <span class="pre">major'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#build_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.build_key" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – A string representing the musical key, consisting of a root note and an optional scale type (e.g., “c major”, “d minor”, “eb phrygian”). The root note can include accidentals (e.g., “c”, “d”, “eb”, “fs”), and the scale type can be one of the predefined scales in the SCALES dictionary (e.g., “major”, “minor”, “dorian”, etc.). If the scale type is not specified, it defaults to “major”.</p>
+</dd>
+</dl>
+<p>Returns:    A list of pitch names corresponding to the scale degrees of the specified key, where each pitch name is derived from the root note and the intervals defined by the chosen scale. The function processes the input key to determine the root and scale, retrieves the appropriate scale degrees, and converts them into pitch names based on the root and any accidentals present in the key.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="music.generate_notes">
-<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['1',</span> <span class="pre">'2',</span> <span class="pre">'3',</span> <span class="pre">'4',</span> <span class="pre">'5',</span> <span class="pre">'6',</span> <span class="pre">'7']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#generate_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.generate_notes" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['c',</span> <span class="pre">'d',</span> <span class="pre">'e',</span> <span class="pre">'f',</span> <span class="pre">'g',</span> <span class="pre">'a',</span> <span class="pre">'b']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#generate_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.generate_notes" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>)</strong> (<em>scale</em>) – The number of notes in the generated melody.</p></li>
-<li><p><strong>(</strong><strong>)</strong> – The scale to use for generating the melody.</p></li>
+<li><p><strong>notes</strong> (<em>int</em>) – The number of notes in the generated melody.</p></li>
+<li><p><strong>scale</strong> (<em>list</em>) – The scale to use for generating the melody. Default is the major scale represented by scale_degrees.</p></li>
 </ul>
 </dd>
 </dl>
-<p>Returns:</p>
+<p>Returns:       A list of scale degrees representing a melody generated based on random intervals from the given scale.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -51,10 +62,10 @@
 <span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">generate_random_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#generate_random_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.generate_random_notes" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>length</em>) – The number of notes in the generated melody.</p>
+<dd class="field-odd"><p><strong>length</strong> (<em>int</em>) – The number of notes in the generated melody.</p>
 </dd>
 </dl>
-<p>Returns:        A list of scale degrees representing a random melody.</p>
+<p>Returns:        A list of pitch names representing a melody generated by randomly selecting scale degrees from the chromatic scale and converting them to pitch names based on the key of C major.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -63,9 +74,9 @@
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>)</strong> (<em>values</em>) – The number of bars to generate.</p></li>
-<li><p><strong>(</strong><strong>)</strong> – The number of beats per bar (e.g., 4 for 4/4 time).</p></li>
-<li><p><strong>(</strong><strong>)</strong> – A list of rhythm symbols to use for generating the rhythm. Default is [“q”] (quarter notes).</p></li>
+<li><p><strong>bars</strong> (<em>int</em>) – The number of bars to generate.</p></li>
+<li><p><strong>notesPerBar</strong> (<em>int</em>) – The number of beats per bar (e.g., 4 for 4/4 time).</p></li>
+<li><p><strong>values</strong> (<em>list</em>) – A list of rhythm symbols to use for generating the rhythm. Default is [“q”] (quarter notes).</p></li>
 </ul>
 </dd>
 </dl>
@@ -73,35 +84,47 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="music.melody_to_notes">
-<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">melody_to_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#melody_to_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.melody_to_notes" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>melody</em>) – A list of scale degrees (e.g., [“1”, “2”, “3”, “4”, “5”, “6”, “7”]) to convert to their corresponding note names in the C major scale.</p>
-</dd>
-</dl>
-<p>Returns:      A list of note names corresponding to the input scale degrees in the C major scale.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="music.rhythm_to_values">
 <span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">rhythm_to_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhythm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#rhythm_to_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.rhythm_to_values" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>rhythm</em>) – A list of rhythm symbols (e.g., [“q”, “e”, “s”]) to convert to their corresponding beat values.</p>
+<dd class="field-odd"><p><strong>rhythm</strong> (<em>list</em>) – A list of rhythm symbols (e.g., [“q”, “e”, “s”]) to convert to their corresponding beat values.</p>
 </dd>
 </dl>
 <p>Returns:       A list of beat values corresponding to the input rhythm symbols.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="music.transpose">
-<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">transpose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#transpose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.transpose" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt class="sig sig-object py" id="music.scale_degrees_to_pitch">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">scale_degrees_to_pitch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#scale_degrees_to_pitch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.scale_degrees_to_pitch" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>degrees</strong> (<em>list</em>) – A list of scale degrees (e.g., [“1”, “2”, “3”, “4”, “5”, “6”, “7”]) to convert to their corresponding pitch names based on the specified root.</p></li>
+<li><p><strong>root</strong> (<em>str</em>) – The root note of the key (e.g., “c”, “d”, “eb”, “fs”) to use as the basis for calculating the pitch names of the scale degrees.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:      A list of pitch names corresponding to the input scale degrees based on the specified root, taking into account any accidentals in the root and the scale degrees.</p>
+</dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="music.ttranspose">
-<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">ttranspose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#ttranspose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.ttranspose" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="music.spell_note">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">spell_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">letter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accidental</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#spell_note"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.spell_note" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>letter</strong> (<em>str</em>) – The natural letter name of the note (e.g., “c”, “d”, “e”, “f”, “g”, “a”, “b”) to which the accidental will be applied.</p></li>
+<li><p><strong>accidental</strong> (<em>int</em>) – An integer representing the accidental to apply to the letter, where 0 means natural, -1 means flat, and 1 means sharp.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:       A string representing the pitch name of the note after applying the accidental to the natural letter, following standard musical notation conventions (e.g., “c”, “df”, “es”, “f”, “gs”, etc.).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="music.transpose">
+<span class="sig-prename descclassname"><span class="pre">music.</span></span><span class="sig-name descname"><span class="pre">transpose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/music.html#transpose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#music.transpose" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
