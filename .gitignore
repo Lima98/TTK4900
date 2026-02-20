@@ -1,1 +1,6 @@
 adm/
+.venv/
+.DS_Store
+*.wav
+*.ogg
+codebook.toml
