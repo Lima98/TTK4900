@@ -1,3 +1,9 @@
+## 0.3.1 (2026-02-20)
+
+### Fix
+
+- Re-added rhythm capability with more voices
+
 ## 0.3.0 (2026-02-20)
 
 ### BREAKING CHANGE
