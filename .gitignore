@@ -1,6 +1,6 @@
 adm/
 .venv/
 .DS_Store
+codebook.toml
 *.wav
 *.ogg
-codebook.toml
