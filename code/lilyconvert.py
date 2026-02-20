@@ -3,36 +3,34 @@ import subprocess
 import os
 
 # Convert melody to LilyPond format
-def melody_to_lilypond(melody, key, time_sig):
+def melody_to_lilypond(melody, voice_name, clef):
     """
 
     Args:
-        melody (): A list of notes in the melody, where each note is represented as a string (e.g., "c4", "d8", "e16").
+        melody (): A list of strings representing the notes in the melody, where each string is a note in LilyPond format (e.g., "c4", "d8", "e16").
+        voice_name (): A string representing the name of the voice (e.g., "voiceOne", "voiceTwo") to be used in the LilyPond code. This name will be used to define the voice and reference it in the score.
+        clef (): A string representing the clef to be used in the LilyPond code (e.g., "treble", "bass"). This will determine the pitch range of the notes in the score.
 
-    Returns:        A string containing the LilyPond code representing the melody, including necessary headers and structure for a complete score.
+    Returns:    A list containing two strings: the first string is the LilyPond code for the melody definition (including the relative pitch and global settings), and the second string is the LilyPond code for the staff that references the defined voice and includes the specified clef. The function constructs these strings by iterating through the provided melody notes and formatting them according to LilyPond syntax.
         
     """
-    root, quality = key.split()
-    root = root.replace("b","f") if root.endswith("b") else root
-    lilypond_output = "\\version \"2.24.4\"\n"
-    lilypond_output += "\\language \"english\"\n\n"
-    lilypond_output += "\\score {\n"
-    lilypond_output += "\t \\new Staff {\n"
-    lilypond_output += f"\t\t\\key {root} \\{quality}\n"
-    lilypond_output += f"\t\t\\time {time_sig}\n"
-    lilypond_output += "\t\t\\relative c'{\n"
-    lilypond_output += "\t\t"
+    lilypond_melody = f"{voice_name} = \\relative c' " + "{\n"
+    lilypond_melody += "\\global"
+    lilypond_melody += "\t"
 
     for note in melody:
-        lilypond_output += f"  {note} "
+        lilypond_melody += f"  {note} "
 
-    lilypond_output += "\n\t\t\t}"
-    lilypond_output += "\n\t\t}"
-    lilypond_output += "\n\t\t\\midi {}"
-    lilypond_output += "\n\t\t\\layout {}"
-    lilypond_output += "\n}"
+    lilypond_melody += "\n}"
     
-    return lilypond_output
+    score_part = "\\new Staff {\n"
+    score_part += f"\t\t \\clef {clef}\n"
+    score_part += f"\t\t\t\\{voice_name}\n"
+    score_part += "\t\t\t}"
+    
+    output = [lilypond_melody, score_part]
+    return output
+
 
 # Write LilyPond code to a file
 def write_to_file(lilypond_code, filename="code/output/default/output.ly"):
@@ -92,7 +90,7 @@ def generate_files(filename="code/output/default/output.ly", path = "code/output
     """
     subprocess.run(["lilypond", "-o", path, "-dcrop",  filename])
 
-
+# Play the generated MIDI file using Timidity++
 def play(filename="code/output/default/output.ly"):
     """
 
@@ -111,3 +109,41 @@ def play(filename="code/output/default/output.ly"):
         # subprocess.run(["timidity", midi_file]) Does not work
     else:
         print(f"MIDI file not found: {midi_file}")
+
+# Combine multiple voices into a single LilyPond score
+def voices_to_lilypond(voices, key, time_sig):
+    """
+
+    Args:
+        voices (): A list of voices, where each voice is represented as a list containing two strings: the first string is the LilyPond code for the melody definition (including the relative pitch and global settings), and the second string is the LilyPond code for the staff that references the defined voice and includes the specified clef. Each voice in the list should follow this format to ensure proper integration into the final LilyPond score.
+        key (): A string representing the musical key for the score, formatted as "root quality" (e.g., "eb major", "c minor"). The function will parse this string to extract the root note and the quality (major or minor) to set the appropriate key signature in the LilyPond code.
+        time_sig (): A string representing the time signature for the score (e.g., "4/4", "3/4", "6/8"). The function will include this time signature in the global settings of the LilyPond code to ensure that the generated score reflects the specified rhythmic structure.
+
+    Returns:
+        
+    """
+    root, quality = key.split()
+    root = root.replace("b","f") if root.endswith("b") else root
+    lilypond_output = "\\version \"2.24.4\"\n"
+    lilypond_output += "\\language \"english\"\n\n"
+    lilypond_output += "global = { \n"
+    lilypond_output += f"\t\\key {root} \\{quality}\n"
+    lilypond_output += f"\t\\time {time_sig}\n"
+    lilypond_output += "}\n\n"
+
+    for voice in voices:
+        lilypond_output += voice[0] + "\n\n" 
+
+    lilypond_output += "\\score {\n"
+    lilypond_output += "\\new ChoirStaff <<\n"
+
+    for voice in voices:
+        lilypond_output += "\t\t" + voice[1] + "\n"
+
+    lilypond_output += "\t>>\n"
+    lilypond_output += "\n\t\t\\midi {}"
+    lilypond_output += "\n\t\t\\layout {}"
+    lilypond_output += "\n}"
+    
+    return lilypond_output
+
