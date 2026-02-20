@@ -1,3 +1,13 @@
+## 0.3.0 (2026-02-20)
+
+### BREAKING CHANGE
+
+- Usage of the lilyconvert module is completely rewritten, will not be able to handle input from older versions
+
+### Feat
+
+- Lilypond module rewritten
+
 ## 0.2.0 (2026-02-20)
 
 ### Feat
