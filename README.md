@@ -9,7 +9,7 @@ Master Project Cybernetics and Robotics at NTNU
 
 ## Project Overview
 This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on _[TBD: The project is in a very early stage and the scope of the project is yet to be defined.]_
-To listen to generated audio files and view documentation you can visit my [NTNU-webpage](janoivil.folk.ntnu.no).
+To listen to generated audio files and view documentation you can visit my [NTNU-webpage](https://janoivil.folk.ntnu.no).
 
 ## Team Member
 - Jan-Øivind Lima - Masters Student
