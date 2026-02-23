@@ -8,7 +8,7 @@ Master Project Cybernetics and Robotics at NTNU
 - [Getting Started](#getting-started)
 
 ## Project Overview
-This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on _WIP_.
+This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on _[TBD: The project is in a very early stage and the scope of the project is yet to be defined.]_
 
 ## Team Member
 - Jan-Øivind Lima - Masters Student
@@ -22,6 +22,4 @@ The repository is organized as follows:
 - `README.md`: This file.
 
 ## Getting Started
-To get started with the project, follow these steps:
-
-_WIP_
+This project is in a too early stage to provide detailed instructions for getting started. However, you can explore the `code/`, `docs/`, `research/`, and `thesis/` directories to see the current state of the project. Future updates will include more detailed instructions and documentation as the project progresses.

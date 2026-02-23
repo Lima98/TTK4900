@@ -76,7 +76,7 @@ def note_and_rhythm(notes, rhythm):
     if len(notes) != len(rhythm):
         print("Notes and rhythm are different lengths")
         return
-
+    rhythm = beat_to_duration(rhythm)
     melody = list(map(str.__add__, notes, rhythm))
     return melody
 
