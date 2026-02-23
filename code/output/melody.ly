@@ -7,19 +7,19 @@ global = {
 }
 
 voiceOne = \relative c' {
-\global	  d4   f4   d4   f4   ef2   c2   c4   d4   d4   c4   d2   c2 
+\global	  ef8   d8   f8   ef8   d8   c8   ef8   g8   g8   bf8   bf8   af8   g8   f8   ef8   c8   d8   bf8   g8   ef8   ef8   d8   d8   ef8   ef8   g8   bf8   af8   bf8   bf8   d8   d8 
 }
 
 voiceTwo = \relative c' {
-\global	  ef4   g2   f8   ef8   g8   ef4   c4   c4   c8   af8   bf2   c4   af8   f2   g4   g4 
+\global	  ef4   d4   ef4   c4   ef4   d4   ef4   f4   ef4   g4   g4   bf4   af4   f4   d4   d4 
 }
 
 voiceThree = \relative c' {
-\global	  g2   bf2   d8   f4   f4   g8   ef4   d8   bf4   bf2   bf8   bf8   g2   ef8   d4 
+\global	  g2   bf2   g2   ef2   f2   g2   bf2   g2 
 }
 
 voiceFour = \relative c' {
-\global	  c4   c8   c4   ef4   c8   ef4   d2   bf4   c4   d8   bf4   bf8   bf8   bf8   bf4   af4   c8   af8   c8   d8 
+\global	  f1   ef1   g1   f1 
 }
 
 \score {
@@ -29,15 +29,15 @@ voiceFour = \relative c' {
 			\voiceOne
 			}
 		\new Staff {
-		 \clef treble
+		 \clef "treble_8"
 			\voiceTwo
 			}
 		\new Staff {
-		 \clef treble
+		 \clef bass
 			\voiceThree
 			}
 		\new Staff {
-		 \clef treble
+		 \clef bass
 			\voiceFour
 			}
 	>>

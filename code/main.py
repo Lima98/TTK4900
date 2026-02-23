@@ -1,5 +1,5 @@
 import music as ms
-import lilyconvert as ly
+import lilypond as ly
 import generator as gen
 
 filename = "melody.ly"
@@ -10,10 +10,11 @@ key_name = "eb major"
 time_sig = "4/4"
 key = ms.build_key(key_name)
 
-rhythm1 = gen.generate_rhythm(4, time_sig, ["q", "h", "q", "e"] )
-rhythm2 = gen.generate_rhythm(4, time_sig, ["q", "h", "q", "e"] )
-rhythm3 = gen.generate_rhythm(4, time_sig, ["q", "h", "q", "e"] )
-rhythm4 = gen.generate_rhythm(4, time_sig, ["q", "h", "q", "e"] )
+rhythm1 = gen.generate_rhythm(4, time_sig, ["e"])
+rhythm2 = gen.generate_rhythm(4, time_sig, ["q"])
+rhythm3 = gen.generate_rhythm(4, time_sig, ["h"])
+rhythm4 = gen.generate_rhythm(4, time_sig, ["w"])
+
 melody1 = gen.generate_notes(len(rhythm1), key)
 melody2 = gen.generate_notes(len(rhythm2), key)
 melody3 = gen.generate_notes(len(rhythm3), key)
@@ -25,9 +26,9 @@ part3 = ly.note_and_rhythm(melody3, rhythm3)
 part4 = ly.note_and_rhythm(melody4, rhythm4) 
 
 melody1 = ly.melody_to_lilypond(part1, "voiceOne", "treble")
-melody2 = ly.melody_to_lilypond(part2, "voiceTwo", "treble")
-melody3 = ly.melody_to_lilypond(part3, "voiceThree", "treble")
-melody4 = ly.melody_to_lilypond(part4, "voiceFour", "treble")
+melody2 = ly.melody_to_lilypond(part2, "voiceTwo", "\"treble_8\"")
+melody3 = ly.melody_to_lilypond(part3, "voiceThree", "bass")
+melody4 = ly.melody_to_lilypond(part4, "voiceFour", "bass")
 
 parts = [melody1, melody2, melody3, melody4]
 

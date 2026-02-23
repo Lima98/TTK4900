@@ -2,7 +2,7 @@
 import random
 import music
 
-# TODO: Implement this
+# TODO: Implement an automatic way to generate a full melody with rhythms and notes etc...
 def generate_melody(key = "c", scale="major", length_bars=4, time_sig="4/4"):
 
     return
@@ -24,7 +24,6 @@ def generate_random_notes(length=8):
 
 
 # generate a numbers of bars of random rhythm pattern in a given time signature
-# TODO: Change notesPerBar to key signature and split with .split('/') 
 def generate_rhythm(bars = 1, keySig = "4/4", values = ["q"]):
     quantitiy, unit = keySig.split('/')
     notesPerBar = int(quantitiy) * (4 / int(unit))
@@ -42,7 +41,7 @@ def generate_rhythm(bars = 1, keySig = "4/4", values = ["q"]):
 
     return rhythm
 
-
+# TODO: Implement rests in the rhythm generation
 # Convert rhythm symbols to their corresponding beat values
 def rhythm_to_values(rhythm):
     """
@@ -81,6 +80,7 @@ def generate_notes(notes = 4, key = music.build_key("c major")):
 
     """
     intervals   =   [-2, -1, 0, 1, 2] # only 2nds and 3rds for now
+    # intervals   =   [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5 ]
     melody      =   []
     current     =   0
 
