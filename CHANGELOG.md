@@ -1,3 +1,9 @@
+## 0.3.2 (2026-02-23)
+
+### Refactor
+
+- ran new files to fix merge conflicts
+
 ## 0.3.1 (2026-02-20)
 
 ### Fix
