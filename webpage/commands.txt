@@ -1,7 +1,7 @@
-Copy the main webpage
+# Copy the main webpage
 cp -i webpage/index.html /Volumes/janoivil-1/
 
-Copy the documentation
+# Copy the documentation
 rsync -a docs/ /Volumes/janoivil-1/docs/
 
 
