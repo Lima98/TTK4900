@@ -1,3 +1,13 @@
+## 0.5.0 (2026-02-24)
+
+### BREAKING CHANGE
+
+- No code is compatible with earlier versions...
+
+### Feat
+
+- **entire-project-refactor**: all code rewritten to use objects to make manipulation easier
+
 ## 0.4.1 (2026-02-24)
 
 ### Refactor
