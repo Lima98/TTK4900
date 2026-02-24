@@ -1,3 +1,9 @@
+## 0.4.0 (2026-02-24)
+
+### Feat
+
+- updated webpage to look more complete and easy to use
+
 ## 0.3.3 (2026-02-24)
 
 ### Fix
