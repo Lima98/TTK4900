@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>generator module &#8212; Procedural Music Generation 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-generator">
+<span id="generator-module"></span><h1>generator module<a class="headerlink" href="#module-generator" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.generate_melody">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">generate_melody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'c'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'major'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length_bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'4/4'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/generator.html#generate_melody"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generator.generate_melody" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.generate_notes">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['c',</span> <span class="pre">'d',</span> <span class="pre">'e',</span> <span class="pre">'f',</span> <span class="pre">'g',</span> <span class="pre">'a',</span> <span class="pre">'b']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/generator.html#generate_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generator.generate_notes" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>notes</strong> (<em>int</em>) – The number of notes in the generated melody.</p></li>
+<li><p><strong>scale</strong> (<em>list</em>) – The scale to use for generating the melody. Default is the major scale represented by scale_degrees.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:       A list of scale degrees representing a melody generated based on random intervals from the given scale.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.generate_random_notes">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">generate_random_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/generator.html#generate_random_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generator.generate_random_notes" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>length</strong> (<em>int</em>) – The number of notes in the generated melody.</p>
+</dd>
+</dl>
+<p>Returns:        A list of pitch names representing a melody generated by randomly selecting scale degrees from the chromatic scale and converting them to pitch names based on the key of C major.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.generate_rhythm">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">generate_rhythm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keySig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'4/4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['q']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/generator.html#generate_rhythm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generator.generate_rhythm" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generator.rhythm_to_values">
+<span class="sig-prename descclassname"><span class="pre">generator.</span></span><span class="sig-name descname"><span class="pre">rhythm_to_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhythm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/generator.html#rhythm_to_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generator.rhythm_to_values" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhythm</strong> (<em>list</em>) – A list of rhythm symbols (e.g., [“q”, “e”, “s”]) to convert to their corresponding beat values.</p>
+</dd>
+</dl>
+<p>Returns:       A list of beat values corresponding to the input rhythm symbols.</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Procedural Music Generation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/source/generator.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

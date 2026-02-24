@@ -30,49 +30,109 @@
           <div class="body" role="main">
             
   <h1>Source code for test</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span></span><span class="n">LETTER_ORDER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]</span>
 
-<span class="c1"># Mapping scale degrees to semitone offsets from tonic</span>
-<span class="n">DEGREE_TO_OFFSET</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-    <span class="s2">&quot;4s&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;2s&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;5s&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;7s&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;3s&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;6s&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;2b&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;3b&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;4b&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;5b&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;6b&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;7b&quot;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="n">NATURAL_PITCHES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="c1"># C major scale for reference</span>
-<span class="n">NOTE_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
+<span class="c1"># Major scale semitone pattern from root</span>
+<span class="n">MAJOR_SCALE_INTERVALS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
 
-<div class="viewcode-block" id="generate_melody">
-<a class="viewcode-back" href="../docs/source/test.html#test.generate_melody">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">generate_melody</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
-    <span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;4s&quot;</span><span class="p">,</span> <span class="s2">&quot;7b&quot;</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)]</span></div>
-
-
-<div class="viewcode-block" id="degree_to_note">
-<a class="viewcode-back" href="../docs/source/test.html#test.degree_to_note">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">degree_to_note</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="n">tonic</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">):</span>
-    <span class="c1"># Find tonic index</span>
-    <span class="n">tonic_index</span> <span class="o">=</span> <span class="n">NOTE_NAMES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tonic</span><span class="p">)</span>
-    <span class="n">offset</span> <span class="o">=</span> <span class="n">DEGREE_TO_OFFSET</span><span class="p">[</span><span class="n">degree</span><span class="p">]</span>
-    <span class="n">note_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">tonic_index</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
-    <span class="c1"># Map to note name (simplified, only for C major)</span>
-    <span class="c1"># For full chromatic, expand NOTE_NAMES and handle sharps/flats</span>
-    <span class="k">return</span> <span class="n">NOTE_NAMES</span><span class="p">[</span><span class="n">note_index</span> <span class="o">%</span> <span class="mi">7</span><span class="p">]</span>  <span class="c1"># Simplified</span></div>
+<div class="viewcode-block" id="parse_accidentals">
+<a class="viewcode-back" href="../source/test.html#test.parse_accidentals">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_accidentals</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Counts sharps (&#39;s&#39;) and flats (&#39;b&#39;)</span>
+<span class="sd">    Supports unlimited accidentals: bb, sss, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="n">text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="melody_to_lilypond">
-<a class="viewcode-back" href="../docs/source/test.html#test.melody_to_lilypond">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">melody_to_lilypond</span><span class="p">(</span><span class="n">melody</span><span class="p">,</span> <span class="n">tonic</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">):</span>
-    <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">degree_to_note</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="n">tonic</span><span class="p">)</span> <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">melody</span><span class="p">]</span>
-    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">version </span><span class="se">\&quot;</span><span class="s2">2.24.2</span><span class="se">\&quot;\n</span><span class="s2">{ &quot;</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; }&quot;</span></div>
+<div class="viewcode-block" id="parse_note">
+<a class="viewcode-back" href="../source/test.html#test.parse_note">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_note</span><span class="p">(</span><span class="n">note</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">letter</span> <span class="o">=</span> <span class="n">note</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">accidental</span> <span class="o">=</span> <span class="n">parse_accidentals</span><span class="p">(</span><span class="n">note</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">pitch</span> <span class="o">=</span> <span class="p">(</span><span class="n">NATURAL_PITCHES</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span> <span class="o">+</span> <span class="n">accidental</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+    <span class="k">return</span> <span class="n">letter</span><span class="p">,</span> <span class="n">pitch</span></div>
 
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">melody</span> <span class="o">=</span> <span class="n">generate_melody</span><span class="p">()</span>
-    <span class="n">lilypond</span> <span class="o">=</span> <span class="n">melody_to_lilypond</span><span class="p">(</span><span class="n">melody</span><span class="p">,</span> <span class="n">tonic</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;melody.ly&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lilypond</span><span class="p">)</span>
+<div class="viewcode-block" id="scale_degrees_to_pitch">
+<a class="viewcode-back" href="../source/test.html#test.scale_degrees_to_pitch">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scale_degrees_to_pitch</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts scale degrees (e.g., [&quot;1&quot;, &quot;b3&quot;, &quot;5&quot;]) into properly spelled</span>
+<span class="sd">    pitch names in a major key defined by `root`.</span>
+
+<span class="sd">    Supports unlimited sharps/flats in both root and degrees.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pitches</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># --- Parse root ---</span>
+    <span class="n">root_letter</span><span class="p">,</span> <span class="n">root_pitch</span> <span class="o">=</span> <span class="n">parse_note</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+    <span class="n">root_index</span> <span class="o">=</span> <span class="n">LETTER_ORDER</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">root_letter</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="c1"># --- Parse degree ---</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">degree</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">accidental_text</span> <span class="o">=</span> <span class="n">degree</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">degree_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">degree</span><span class="p">[</span><span class="n">i</span><span class="p">:])</span>
+        <span class="n">degree_accidental</span> <span class="o">=</span> <span class="n">parse_accidentals</span><span class="p">(</span><span class="n">accidental_text</span><span class="p">)</span>
+
+        <span class="c1"># --- Determine scale letter ---</span>
+        <span class="n">letter_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">root_index</span> <span class="o">+</span> <span class="n">degree_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span>
+        <span class="n">letter</span> <span class="o">=</span> <span class="n">LETTER_ORDER</span><span class="p">[</span><span class="n">letter_index</span><span class="p">]</span>
+
+        <span class="c1"># --- Target pitch ---</span>
+        <span class="n">scale_interval</span> <span class="o">=</span> <span class="n">MAJOR_SCALE_INTERVALS</span><span class="p">[</span><span class="n">degree_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">pitch</span> <span class="o">=</span> <span class="p">(</span><span class="n">root_pitch</span> <span class="o">+</span> <span class="n">scale_interval</span> <span class="o">+</span> <span class="n">degree_accidental</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+
+        <span class="c1"># --- Natural pitch of letter ---</span>
+        <span class="n">natural_pitch</span> <span class="o">=</span> <span class="n">NATURAL_PITCHES</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span>
+
+        <span class="c1"># --- Required accidental relative to natural letter ---</span>
+        <span class="n">accidental</span> <span class="o">=</span> <span class="n">pitch</span> <span class="o">-</span> <span class="n">natural_pitch</span>
+
+        <span class="c1"># Normalize into range -6 to +6</span>
+        <span class="n">accidental</span> <span class="o">=</span> <span class="p">(</span><span class="n">accidental</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span> <span class="o">-</span> <span class="mi">6</span>
+
+        <span class="n">pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spell_note</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">accidental</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">pitches</span></div>
+
+
+<div class="viewcode-block" id="spell_note">
+<a class="viewcode-back" href="../source/test.html#test.spell_note">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">spell_note</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">accidental</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        letter (str): The natural letter name of the note (e.g., &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;a&quot;, &quot;b&quot;) to which the accidental will be applied.</span>
+<span class="sd">        accidental (int): An integer representing the accidental to apply to the letter, where 0 means natural, -1 means flat, and 1 means sharp.</span>
+
+<span class="sd">    Returns:       A string representing the pitch name of the note after applying the accidental to the natural letter, following standard musical notation conventions (e.g., &quot;c&quot;, &quot;df&quot;, &quot;es&quot;, &quot;f&quot;, &quot;gs&quot;, etc.).</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">accidental</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span>
+    <span class="k">elif</span> <span class="n">accidental</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span> <span class="o">+</span> <span class="s2">&quot;f&quot;</span>
+    <span class="k">elif</span> <span class="n">accidental</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span> <span class="o">+</span> <span class="s2">&quot;s&quot;</span></div>
+
+
 </pre></div>
 
           </div>

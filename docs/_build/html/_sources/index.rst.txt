@@ -5,6 +5,8 @@
 
 Procedural Music Generation documentation
 =========================================
+`Go back to examples page <../../../index.html>`_
+
 
 This is the documentation for the Procedural Music Generation project. It includes various modules and examples to help you get started with generating music procedurally.
 
@@ -13,6 +15,9 @@ This is the documentation for the Procedural Music Generation project. It includ
    :caption: Contents:
 
     modules
+    music
+    lilypond
+    generator
 
 Music module
 ============
@@ -21,10 +26,16 @@ Music module
    :undoc-members:
    :show-inheritance:
 
-Lilyconvert module
+Lilypond module
 ==================
-.. automodule:: lilyconvert
+.. automodule:: lilypond
     :members:
     :undoc-members:
     :show-inheritance:
 
+Generator module
+==================
+.. automodule:: generator
+    :members:
+    :undoc-members:
+    :show-inheritance:

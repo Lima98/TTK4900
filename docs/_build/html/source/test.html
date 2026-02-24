@@ -30,8 +30,42 @@
 
           <div class="body" role="main">
             
-  <section id="test-module">
-<h1>test module<a class="headerlink" href="#test-module" title="Link to this heading">¶</a></h1>
+  <section id="module-test">
+<span id="test-module"></span><h1>test module<a class="headerlink" href="#module-test" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="test.parse_accidentals">
+<span class="sig-prename descclassname"><span class="pre">test.</span></span><span class="sig-name descname"><span class="pre">parse_accidentals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/test.html#parse_accidentals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.parse_accidentals" title="Link to this definition">¶</a></dt>
+<dd><p>Counts sharps (‘s’) and flats (‘b’)
+Supports unlimited accidentals: bb, sss, etc.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.parse_note">
+<span class="sig-prename descclassname"><span class="pre">test.</span></span><span class="sig-name descname"><span class="pre">parse_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/test.html#parse_note"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.parse_note" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.scale_degrees_to_pitch">
+<span class="sig-prename descclassname"><span class="pre">test.</span></span><span class="sig-name descname"><span class="pre">scale_degrees_to_pitch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/test.html#scale_degrees_to_pitch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.scale_degrees_to_pitch" title="Link to this definition">¶</a></dt>
+<dd><p>Converts scale degrees (e.g., [“1”, “b3”, “5”]) into properly spelled
+pitch names in a major key defined by <cite>root</cite>.</p>
+<p>Supports unlimited sharps/flats in both root and degrees.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="test.spell_note">
+<span class="sig-prename descclassname"><span class="pre">test.</span></span><span class="sig-name descname"><span class="pre">spell_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">letter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accidental</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/test.html#spell_note"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test.spell_note" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>letter</strong> (<em>str</em>) – The natural letter name of the note (e.g., “c”, “d”, “e”, “f”, “g”, “a”, “b”) to which the accidental will be applied.</p></li>
+<li><p><strong>accidental</strong> (<em>int</em>) – An integer representing the accidental to apply to the letter, where 0 means natural, -1 means flat, and 1 means sharp.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:       A string representing the pitch name of the note after applying the accidental to the natural letter, following standard musical notation conventions (e.g., “c”, “df”, “es”, “f”, “gs”, etc.).</p>
+</dd></dl>
+
 </section>
 
 
