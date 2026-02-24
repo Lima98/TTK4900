@@ -22,15 +22,6 @@ BARS = 4
 # Voice configuration (extensible)
 VOICES = [
     {"name": "voiceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voiceOnea",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voiceOn",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voiceOe",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voicene",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voicOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voieOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "viceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "oiceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
     # {"name": "voiceTwo",   "clef": "\"treble_8\"", "rhythm_values": ["q"]},
     # {"name": "voiceThree", "clef": "bass",        "rhythm_values": ["h"]},
     # {"name": "voiceFour",  "clef": "bass",        "rhythm_values": ["w"]},
