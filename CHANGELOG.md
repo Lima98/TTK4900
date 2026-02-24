@@ -1,3 +1,9 @@
+## 0.4.1 (2026-02-24)
+
+### Refactor
+
+- **sandbox/**: added sandbox/ folder to experiment with using objects for representing melodies etc
+
 ## 0.4.0 (2026-02-24)
 
 ### Feat
