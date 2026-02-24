@@ -1,5 +1,5 @@
 .DS_Store
-./thesis/TEMPLATE/
+thesis/TEMPLATE/
 adm/
 .venv/
 codebook.toml
