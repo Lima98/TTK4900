@@ -21,21 +21,21 @@ This is the documentation for the Procedural Music Generation project. It includ
 
 Music module
 ============
-.. automodule:: music
+.. automodule:: core.music
    :members:
    :undoc-members:
    :show-inheritance:
 
 Lilypond module
 ==================
-.. automodule:: lilypond
+.. automodule:: out.lilypond
     :members:
     :undoc-members:
     :show-inheritance:
 
 Generator module
 ==================
-.. automodule:: generator
+.. automodule:: generators.generator
     :members:
     :undoc-members:
     :show-inheritance:

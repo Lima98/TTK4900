@@ -34,17 +34,39 @@ class Note:
         duration: duration in beats (optional, e.g., 1 for quarter note, 0.5 for eighth note)
     """
     def __init__(self, degree=None, pitch=None, duration=None):
+        """
+
+        Args:
+            degree (): 
+            pitch (): 
+            duration (): 
+        """
         self.degree = degree    # Scale degree (abstract)
         self.pitch = pitch      # Concrete pitch (string, e.g., 'c4')
         self.duration = duration # Duration in beats (optional)
 
     def is_abstract(self):
+        """
+
+        Returns:
+            
+        """
         return self.degree is not None
 
     def is_concrete(self):
+        """
+
+        Returns:
+            
+        """
         return self.pitch is not None
 
     def __repr__(self):
+        """
+
+        Returns:
+            
+        """
         return f"Note({self.pitch or self.degree}, dur={self.duration})"
 
 
@@ -57,17 +79,41 @@ class Key:
         degrees: list of scale degrees for the mode (derived from SCALES)
     """
     def __init__(self, tonic: str, mode: str = "major"):
+        """
+
+        Args:
+            tonic: 
+            mode: 
+        """
         self.tonic = tonic
         self.mode = mode
         self.degrees = SCALES[mode]
 
     def degree_to_pitch(self, degree: str) -> str:
+        """
+
+        Args:
+            degree: 
+
+        Returns:
+            
+        """
         return scale_degrees_to_pitch([degree], self.tonic)[0]
 
     def get_scale_pitches(self):
+        """
+
+        Returns:
+            
+        """
         return scale_degrees_to_pitch(self.degrees, self.tonic)
 
     def __repr__(self):
+        """
+
+        Returns:
+            
+        """
         return f"Key({self.tonic} {self.mode})"
 
 
@@ -80,11 +126,23 @@ class Melody:
         tags: optional dictionary for additional metadata (e.g., tempo, style)
     """
     def __init__(self, key: Key, notes, tags=None):
+        """
+
+        Args:
+            notes (): 
+            tags (): 
+            key: 
+        """
         self.notes = notes or []  # list of Note objects
         self.key = key
         self.tags = tags or {}
 
     def to_pitches(self):
+        """
+
+        Raises:
+            ValueError: 
+        """
         if self.key is None:
             raise ValueError("Melody has no key assigned")
         for note in self.notes:
@@ -92,12 +150,25 @@ class Melody:
                 note.pitch = self.key.degree_to_pitch(str(note.degree))
 
     def add_rhythm(self, rhythm):
+        """
+
+        Args:
+            rhythm (): 
+
+        Raises:
+            ValueError: 
+        """
         if len(rhythm) != len(self.notes):
             raise ValueError("Rhythm and notes length mismatch")
         for note, dur in zip(self.notes, rhythm):
             note.duration = dur
 
     def __repr__(self):
+        """
+
+        Returns:
+            
+        """
         return f"Melody({self.notes}, key={self.key}, tags={self.tags})"
 
 

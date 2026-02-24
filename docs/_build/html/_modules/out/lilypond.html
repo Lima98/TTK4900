@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>out.lilypond &#8212; Procedural Music Generation 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for out.lilypond</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Handling conversion to LilyPond and generating associated files.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.music</span><span class="w"> </span><span class="kn">import</span> <span class="n">Melody</span>
+
+<span class="c1"># Duration mapping from beats to LilyPond notation</span>
+<div class="viewcode-block" id="beat_to_duration">
+<a class="viewcode-back" href="../../index.html#out.lilypond.beat_to_duration">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">beat_to_duration</span><span class="p">(</span><span class="n">beat</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        beat (): A numerical value representing the duration of a note in beats (e.g., 1 for quarter note, 0.5 for eighth note) to convert to its corresponding LilyPond duration notation.</span>
+
+<span class="sd">    Returns:       A string representing the LilyPond duration notation corresponding to the input beat value, such as &quot;1&quot; for a quarter note, &quot;2&quot; for a half note, &quot;4&quot; for a whole note, etc., based on standard musical durations.</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">beat_to_dur</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">longa&quot;</span><span class="p">,</span>
+        <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">breve&quot;</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+        <span class="mf">0.5</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span>
+        <span class="mf">0.25</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+        <span class="mf">0.125</span><span class="p">:</span> <span class="s2">&quot;32&quot;</span><span class="p">,</span>
+        <span class="mf">0.0625</span><span class="p">:</span> <span class="s2">&quot;64&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">beat_to_dur</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">beat</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Converting Melody objects to LilyPond format</span>
+<div class="viewcode-block" id="melody_to_lilypond">
+<a class="viewcode-back" href="../../index.html#out.lilypond.melody_to_lilypond">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">melody_to_lilypond</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">,</span> <span class="n">voice_name</span><span class="p">,</span> <span class="n">clef</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        voice_name (): A string representing the name of the voice (e.g., &quot;soprano&quot;, &quot;alto&quot;, &quot;tenor&quot;, &quot;bass&quot;) to be used in the LilyPond output for labeling the musical part corresponding to the given melody.</span>
+<span class="sd">        clef (): A string representing the clef (e.g., &quot;treble&quot;, &quot;bass&quot;) to be used in the LilyPond output for the staff that will contain the given melody.</span>
+<span class="sd">        melody: A Melody object containing a list of Note objects representing the melody to be converted into LilyPond format. Each Note object should have its pitch and duration properties populated for accurate conversion.</span>
+
+<span class="sd">    Returns:     A list containing two strings: the first string is the LilyPond code defining the voice with the melody, and the second string is the LilyPond code for the staff that references this voice. These strings can be combined with other voices and staff definitions to create a complete LilyPond score.</span>
+<span class="sd">        </span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: If the melody does not have a key assigned, or if any note in the melody lacks a pitch or duration, a ValueError is raised with an appropriate message indicating the issue.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">melody</span><span class="o">.</span><span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Melody must have a key before exporting to LilyPond&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Ensure pitches are populated</span>
+    <span class="n">melody</span><span class="o">.</span><span class="n">to_pitches</span><span class="p">()</span>
+
+    <span class="n">lilypond_melody</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">voice_name</span><span class="si">}</span><span class="s2"> = </span><span class="se">\\</span><span class="s2">relative c&#39; &quot;</span> <span class="o">+</span> <span class="s2">&quot;{</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_melody</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\\</span><span class="s2">global</span><span class="se">\n\t</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">melody</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Note has no pitch assigned&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Note has no duration assigned&quot;</span><span class="p">)</span>
+
+        <span class="n">duration</span> <span class="o">=</span> <span class="n">beat_to_duration</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+        <span class="n">lilypond_melody</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="si">}{</span><span class="n">duration</span><span class="si">}</span><span class="s2"> &quot;</span>
+
+    <span class="n">lilypond_melody</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">}&quot;</span>
+
+    <span class="n">score_part</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">new Staff {</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">score_part</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\\</span><span class="s2">clef </span><span class="si">{</span><span class="n">clef</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">score_part</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\\</span><span class="si">{</span><span class="n">voice_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">score_part</span> <span class="o">+=</span> <span class="s2">&quot;}&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">lilypond_melody</span><span class="p">,</span> <span class="n">score_part</span><span class="p">]</span></div>
+
+
+
+<span class="c1"># Writing the generated LilyPond code to a .ly file</span>
+<div class="viewcode-block" id="write_to_file">
+<a class="viewcode-back" href="../../index.html#out.lilypond.write_to_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">write_to_file</span><span class="p">(</span><span class="n">lilypond_code</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;output.ly&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        lilypond_code (str): A string containing the complete LilyPond code that represents the musical score to be written to a .ly file. This code should include all necessary definitions for voices, staves, and global settings to create a valid LilyPond file that can be processed to generate MIDI and PDF outputs.</span>
+<span class="sd">        filename (str): The name of the .ly file to which the LilyPond code will be written. This file will be created or overwritten in the current working directory, and it should have a .ly extension to be recognized as a valid LilyPond file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lilypond_code</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Combining multiple voices into a single LilyPond score</span>
+<div class="viewcode-block" id="voices_to_lilypond">
+<a class="viewcode-back" href="../../index.html#out.lilypond.voices_to_lilypond">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">voices_to_lilypond</span><span class="p">(</span><span class="n">voices</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">time_sig</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        voices (list): A list of tuples, where each tuple contains two strings: the first string is the LilyPond code defining a voice with its melody, and the second string is the LilyPond code for the staff that references this voice. This list represents all the voices that will be included in the final LilyPond score.</span>
+<span class="sd">        key (str): A string representing the key signature (e.g., &quot;c major&quot;, &quot;eb minor&quot;) to be included in the global settings of the LilyPond score. This key signature will apply to all voices in the score and should be formatted correctly for LilyPond syntax.</span>
+<span class="sd">        time_sig (str): A string representing the time signature (e.g., &quot;4/4&quot;, &quot;3/4&quot;, &quot;6/8&quot;) to be included in the global settings of the LilyPond score. This time signature will apply to all voices in the score and should be formatted correctly for LilyPond syntax.</span>
+
+<span class="sd">    Returns:    A string containing the complete LilyPond code for the score, which includes global settings for the key signature and time signature, as well as the definitions for all voices and their corresponding staves. This code can be written to a .ly file and processed by LilyPond to generate MIDI and PDF outputs.</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">root</span><span class="p">,</span> <span class="n">quality</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">root</span>
+
+    <span class="n">lilypond_output</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">version </span><span class="se">\&quot;</span><span class="s2">2.24.4</span><span class="se">\&quot;\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">language </span><span class="se">\&quot;</span><span class="s2">english</span><span class="se">\&quot;\n\n</span><span class="s2">&quot;</span>
+
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;global = {</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\\</span><span class="s2">key </span><span class="si">{</span><span class="n">root</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="si">{</span><span class="n">quality</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\\</span><span class="s2">time </span><span class="si">{</span><span class="n">time_sig</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Voice definitions</span>
+    <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">voices</span><span class="p">:</span>
+        <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="n">voice</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">score {</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">new ChoirStaff &lt;&lt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="c1"># Staff references</span>
+    <span class="k">for</span> <span class="n">voice</span> <span class="ow">in</span> <span class="n">voices</span><span class="p">:</span>
+        <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">voice</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&gt;&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\\</span><span class="s2">midi </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t\\</span><span class="s2">layout </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="n">lilypond_output</span> <span class="o">+=</span> <span class="s2">&quot;}&quot;</span>
+
+    <span class="k">return</span> <span class="n">lilypond_output</span></div>
+
+
+<span class="c1"># Generating MIDI and PDF files from the .ly file using LilyPond, and playing the MIDI file using Timidity.</span>
+<div class="viewcode-block" id="generate_files">
+<a class="viewcode-back" href="../../index.html#out.lilypond.generate_files">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_files</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;output.ly&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): The name of the .ly file that contains the LilyPond code to be processed. This file should exist in the current working directory and should have a valid .ly extension for LilyPond to recognize it as an input file.</span>
+<span class="sd">        path (str): The directory path where the generated MIDI and PDF files will be saved. If this path is empty, the generated files will be saved in the current working directory. The path should end with a separator (e.g., &quot;/&quot; or &quot;\\&quot;) if it is not empty to ensure that the generated files are saved in the correct location.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;lilypond&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="s2">&quot;-dcrop&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="play">
+<a class="viewcode-back" href="../../index.html#out.lilypond.play">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">play</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;output.ly&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): The name of the .ly file that contains the LilyPond code for the musical score. This file should exist in the current working directory and should have a valid .ly extension. The function will look for a corresponding MIDI file with the same base name (but with a .midi extension) generated from this .ly file, and if found, it will use Timidity to play the MIDI file. If the MIDI file is not found, an error message will be printed indicating that the MIDI file could not be located.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">midi_file</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.ly&#39;</span><span class="p">,</span> <span class="s1">&#39;.midi&#39;</span><span class="p">)</span>
+    <span class="n">audio_file</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.ly&#39;</span><span class="p">,</span> <span class="s1">&#39;.wav&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">midi_file</span><span class="p">):</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;timidity&quot;</span><span class="p">,</span> <span class="n">midi_file</span><span class="p">,</span> <span class="s2">&quot;-Ow&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">])</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;afplay&quot;</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MIDI file not found: </span><span class="si">{</span><span class="n">midi_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Procedural Music Generation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

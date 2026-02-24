@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>core.music &#8212; Procedural Music Generation 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for core.music</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Handling of music concepts using Key, Note, Melody objects</span>
+
+<span class="c1"># Define scale degrees, and letter order for pitch spelling</span>
+<span class="n">SCALES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;chromatic&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;s4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;minor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+
+    <span class="s2">&quot;major_pentatonic&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;minor_pentatonic&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+
+    <span class="s2">&quot;dorian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;phrygian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;lydian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;s4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;mixolydian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;locrian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;b5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;harmonic_minor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;phrygian_dominant&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">LETTER_ORDER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]</span>
+
+<span class="n">NATURAL_PITCHES</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">11</span>
+<span class="p">}</span>
+
+<span class="c1"># Musical concepts represented as classes</span>
+<div class="viewcode-block" id="Note">
+<a class="viewcode-back" href="../../index.html#core.music.Note">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Note</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        degree: scale degree (abstract, e.g., 1, b2, s4)</span>
+<span class="sd">        pitch: concrete pitch (string, e.g., &#39;c4&#39;)</span>
+<span class="sd">        duration: duration in beats (optional, e.g., 1 for quarter note, 0.5 for eighth note)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pitch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="o">=</span> <span class="n">degree</span>    <span class="c1"># Scale degree (abstract)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">pitch</span>      <span class="c1"># Concrete pitch (string, e.g., &#39;c4&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">duration</span> <span class="c1"># Duration in beats (optional)</span>
+
+<div class="viewcode-block" id="Note.is_abstract">
+<a class="viewcode-back" href="../../index.html#core.music.Note.is_abstract">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_abstract</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Note.is_concrete">
+<a class="viewcode-back" href="../../index.html#core.music.Note.is_concrete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_concrete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Note(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="si">}</span><span class="s2">, dur=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Key">
+<a class="viewcode-back" href="../../index.html#core.music.Key">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Key</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        tonic: root note of the key (string, e.g., &#39;c&#39;, &#39;d&#39;, &#39;eb&#39;)</span>
+<span class="sd">        mode: scale type (string, e.g., &#39;major&#39;, &#39;minor&#39;, &#39;dorian&#39;)</span>
+<span class="sd">        degrees: list of scale degrees for the mode (derived from SCALES)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tonic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;major&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span> <span class="o">=</span> <span class="n">tonic</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">degrees</span> <span class="o">=</span> <span class="n">SCALES</span><span class="p">[</span><span class="n">mode</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Key.degree_to_pitch">
+<a class="viewcode-back" href="../../index.html#core.music.Key.degree_to_pitch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">degree_to_pitch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degree</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">scale_degrees_to_pitch</span><span class="p">([</span><span class="n">degree</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Key.get_scale_pitches">
+<a class="viewcode-back" href="../../index.html#core.music.Key.get_scale_pitches">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_scale_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">scale_degrees_to_pitch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">degrees</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Key(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Melody">
+<a class="viewcode-back" href="../../index.html#core.music.Melody">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Melody</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        notes: list of Note objects representing the melody</span>
+<span class="sd">        key: Key object representing the key of the melody</span>
+<span class="sd">        tags: optional dictionary for additional metadata (e.g., tempo, style)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Key</span><span class="p">,</span> <span class="n">notes</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">notes</span> <span class="ow">or</span> <span class="p">[]</span>  <span class="c1"># list of Note objects</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span> <span class="ow">or</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="Melody.to_pitches">
+<a class="viewcode-back" href="../../index.html#core.music.Melody.to_pitches">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Melody has no key assigned&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">is_abstract</span><span class="p">()</span> <span class="ow">and</span> <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">degree_to_pitch</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">degree</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Melody.add_rhythm">
+<a class="viewcode-back" href="../../index.html#core.music.Melody.add_rhythm">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_rhythm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhythm</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhythm</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Rhythm and notes length mismatch&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">note</span><span class="p">,</span> <span class="n">dur</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">,</span> <span class="n">rhythm</span><span class="p">):</span>
+            <span class="n">note</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">dur</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Melody(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="si">}</span><span class="s2">, key=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">, tags=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+
+
+<span class="c1"># Helper function to spell a note based on its letter and accidental</span>
+<div class="viewcode-block" id="spell_note">
+<a class="viewcode-back" href="../../index.html#core.music.spell_note">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">spell_note</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">accidental</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        letter (str): A string representing the letter name of the note (e.g., &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;a&quot;, &quot;b&quot;) to be spelled.</span>
+<span class="sd">        accidental (int): An integer representing the accidental of the note, where 0 indicates a natural note, -1 indicates a flat, and 1 indicates a sharp. This value is used to determine how to modify the letter name of the note when spelling it (e.g., &quot;c&quot; with an accidental of -1 would be spelled as &quot;cf&quot; for C flat, while &quot;c&quot; with an accidental of 1 would be spelled as &quot;cs&quot; for C sharp).</span>
+
+<span class="sd">    Returns:    A string representing the spelled note name based on the input letter and accidental, where the letter is modified according to the accidental (e.g., &quot;c&quot; with an accidental of -1 would return &quot;cf&quot;, &quot;c&quot; with an accidental of 1 would return &quot;cs&quot;, and &quot;c&quot; with an accidental of 0 would return &quot;c&quot;).</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">accidental</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span>
+    <span class="k">elif</span> <span class="n">accidental</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span> <span class="o">+</span> <span class="s2">&quot;f&quot;</span>
+    <span class="k">elif</span> <span class="n">accidental</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span> <span class="o">+</span> <span class="s2">&quot;s&quot;</span></div>
+
+
+<span class="c1"># Convert scale degrees to pitch names based on the root note</span>
+<div class="viewcode-block" id="scale_degrees_to_pitch">
+<a class="viewcode-back" href="../../index.html#core.music.scale_degrees_to_pitch">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scale_degrees_to_pitch</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        degrees (list): A list of scale degrees (e.g., [&quot;1&quot;, &quot;b2&quot;, &quot;3&quot;]) to be converted to pitch names based on the specified root note. Each degree can include an accidental (e.g., &quot;b2&quot; for flat second, &quot;s4&quot; for sharp fourth) which will be taken into account when calculating the final pitch name.</span>
+<span class="sd">        root (str): A string representing the root note (e.g., &quot;c&quot;, &quot;d&quot;, &quot;eb&quot;) from which the scale degrees will be calculated. The root note can also include an accidental (e.g., &quot;eb&quot; for E flat, &quot;fs&quot; for F sharp) which will affect the starting pitch for the scale degree calculations.</span>
+
+<span class="sd">    Returns:     A list of pitch names corresponding to the input scale degrees based on the specified root note. Each pitch name is derived from the root note and the intervals defined by the scale degrees, taking into account any accidentals in both the root and the degrees. For example, if the root is &quot;c&quot; and the degree is &quot;b2&quot;, the resulting pitch name would be &quot;cf&quot; (C flat), while if the degree is &quot;s4&quot;, the resulting pitch name would be &quot;cs&quot; (C sharp).</span>
+<span class="sd">        </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pitches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">root_letter</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">root_pitch</span> <span class="o">=</span> <span class="n">NATURAL_PITCHES</span><span class="p">[</span><span class="n">root_letter</span><span class="p">]</span>
+
+    <span class="c1"># Adjust for accidental in root</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span>
+            <span class="n">root_pitch</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span>
+            <span class="n">root_pitch</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">degree</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">):</span>
+            <span class="n">accidental</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">degree_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">degree</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">elif</span> <span class="n">degree</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">):</span>
+            <span class="n">accidental</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">degree_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">degree</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">accidental</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">degree_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+
+        <span class="n">letter_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">LETTER_ORDER</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">root_letter</span><span class="p">)</span> <span class="o">+</span> <span class="n">degree_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span>
+        <span class="n">letter</span> <span class="o">=</span> <span class="n">LETTER_ORDER</span><span class="p">[</span><span class="n">letter_index</span><span class="p">]</span>
+        <span class="n">natural_pitch</span> <span class="o">=</span> <span class="n">NATURAL_PITCHES</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span>
+        <span class="n">scale_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">degree_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">degree_num</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">scale_interval</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">pitch</span> <span class="o">=</span> <span class="p">(</span><span class="n">root_pitch</span> <span class="o">+</span> <span class="n">scale_interval</span> <span class="o">+</span> <span class="n">accidental</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="n">final_accidental</span> <span class="o">=</span> <span class="p">(</span><span class="n">pitch</span> <span class="o">-</span> <span class="n">natural_pitch</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="k">if</span> <span class="n">final_accidental</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">final_accidental</span> <span class="o">-=</span> <span class="mi">12</span>
+        <span class="n">pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spell_note</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">final_accidental</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pitches</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Procedural Music Generation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
