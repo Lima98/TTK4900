@@ -1,3 +1,35 @@
+## 0.5.0 (2026-02-24)
+
+### BREAKING CHANGE
+
+- No code is compatible with earlier versions...
+
+### Feat
+
+- **entire-project-refactor**: all code rewritten to use objects to make manipulation easier
+
+## 0.4.1 (2026-02-24)
+
+### Refactor
+
+- **sandbox/**: added sandbox/ folder to experiment with using objects for representing melodies etc
+
+## 0.4.0 (2026-02-24)
+
+### Feat
+
+- updated webpage to look more complete and easy to use
+
+## 0.3.3 (2026-02-24)
+
+### Fix
+
+- Fix conflict for main push
+
+### Refactor
+
+- Updated thesis and some code
+
 ## 0.3.2 (2026-02-23)
 
 ### Refactor

@@ -130,6 +130,24 @@ body {
         section.visible {
           display: block;
         }
+        
+        .back-to-top {
+          display: block;
+          margin: 2rem auto 0 auto;
+          padding: 0.5rem 1.5rem;
+          background: #1e1e2f;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+
+        .back-to-top:hover {
+          background: #33335a;
+        }
+
     </style>
   </head>
 
@@ -141,10 +159,10 @@ body {
     </header>
 
     <nav>
-      <button onclick="showChapter('theory'), this">Theory</button>
-      <button onclick="showChapter('chapter1'), this">Chapter 1</button>
-      <button onclick="showChapter('chapter2'), this">Chapter 2</button>
-      <button onclick="showChapter('chapter3'), this">Chapter 3</button>
+      <button onclick="showChapter('theory', this)">Theory</button>
+      <button onclick="showChapter('chapter1', this)">Chapter 1</button>
+      <button onclick="showChapter('chapter2', this)">Chapter 2</button>
+      <button onclick="showChapter('chapter3', this)">Chapter 3</button>
     </nav>
 
     <main>
@@ -167,6 +185,15 @@ body {
 
         <div class="example">
           <h3>Example 1.2 – Voice Leading Constraints</h3>
+          <p>Description of constraint demonstration.</p>
+
+          <audio controls>
+            <source src="audio/ch1_ex1_2.wav" type="audio/wav">
+          </audio>
+        </div>
+
+        <div class="example">
+          <h3>Example 1.3 – Voice Leading Constraints</h3>
           <p>Description of constraint demonstration.</p>
 
           <audio controls>
@@ -241,7 +268,7 @@ body {
 
       </section>
 
-      <a href="#"> Back to top</a>
+      <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Back to top</button>
 
     </main>
 
@@ -269,7 +296,7 @@ body {
         button.classList.add("active");
       }
 
-      // Show Chapter 1 by default
+      // Show theory by default
       window.onload = function() {
         const firstButton = document.querySelector("nav button");
         showChapter("theory", firstButton);
