@@ -1,3 +1,13 @@
+## 0.3.3 (2026-02-24)
+
+### Fix
+
+- Fix conflict for main push
+
+### Refactor
+
+- Updated thesis and some code
+
 ## 0.3.2 (2026-02-23)
 
 ### Refactor
