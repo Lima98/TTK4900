@@ -30,176 +30,162 @@
           <div class="body" role="main">
             
   <h1>Source code for music</h1><div class="highlight"><pre>
-<span></span><span class="c1"># Handling of music concepts. Melodies, rhythm, keys etc... </span>
+<span></span><span class="c1"># Handling of music concepts.</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
-<span class="c1"># Scales</span>
-<span class="n">scale_degrees</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">]</span>
-<span class="n">scale_degrees_full</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;b2&quot;</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;s4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">]</span>
+<span class="c1"># Define scale degrees, and letter order for pitch spelling</span>
+<span class="n">SCALES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1"># Diatonic modes/scales</span>
+        <span class="s2">&quot;chromatic&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;s4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;minor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;dorian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;phrygian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;lydian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;s4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;mixolydian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;locrian&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;b5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">],</span>
 
-<span class="c1"># Generate random melody on scale degrees</span>
+        <span class="c1"># Exotic scales</span>
+        <span class="s2">&quot;harmonic_minor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;b3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;phrygian_dominant&quot;</span><span class="p">:</span>  <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;b2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;b6&quot;</span><span class="p">,</span> <span class="s2">&quot;b7&quot;</span><span class="p">]</span>
+        <span class="c1"># Add more scales as needed</span>
+        <span class="p">}</span>
 
-<span class="c1"># Generate notes in a melody NOTE: Not used anymore</span>
-<div class="viewcode-block" id="generate_random_notes">
-<a class="viewcode-back" href="../source/music.html#music.generate_random_notes">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">generate_random_notes</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">8</span><span class="p">):</span>
+<span class="n">LETTER_ORDER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]</span>
+
+<span class="n">NATURAL_PITCHES</span> <span class="o">=</span> <span class="p">{</span> 
+                   <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                   <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                   <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                   <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                   <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+                   <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+                   <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">11</span>
+                   <span class="p">}</span>
+
+
+<div class="viewcode-block" id="build_key">
+<a class="viewcode-back" href="../source/music.html#music.build_key">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_key</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;c major&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        length ():  The number of notes in the generated melody.</span>
+<span class="sd">        key (str): A string representing the musical key, consisting of a root note and an optional scale type (e.g., &quot;c major&quot;, &quot;d minor&quot;, &quot;eb phrygian&quot;). The root note can include accidentals (e.g., &quot;c&quot;, &quot;d&quot;, &quot;eb&quot;, &quot;fs&quot;), and the scale type can be one of the predefined scales in the SCALES dictionary (e.g., &quot;major&quot;, &quot;minor&quot;, &quot;dorian&quot;, etc.). If the scale type is not specified, it defaults to &quot;major&quot;.</span>
 
-<span class="sd">    Returns:        A list of scale degrees representing a random melody.</span>
-<span class="sd">        </span>
+<span class="sd">    Returns:    A list of pitch names corresponding to the scale degrees of the specified key, where each pitch name is derived from the root note and the intervals defined by the chosen scale. The function processes the input key to determine the root and scale, retrieves the appropriate scale degrees, and converts them into pitch names based on the root and any accidentals present in the key.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">melody</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">scale_degrees_full</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">)]</span>
-    <span class="k">return</span> <span class="n">melody</span> </div>
+    <span class="c1"># Get root and scale from the key input</span>
+    <span class="n">root</span><span class="p">,</span> <span class="o">*</span><span class="n">rest</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">rest</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">rest</span> <span class="k">else</span> <span class="s2">&quot;major&quot;</span>
+
+    <span class="c1"># Get the scale degrees for the specified scale</span>
+    <span class="n">degrees</span> <span class="o">=</span> <span class="n">SCALES</span><span class="p">[</span><span class="n">scale</span><span class="p">]</span>
+
+    <span class="c1"># Convert scale degrees to pitch names</span>
+    <span class="n">key_pitches</span> <span class="o">=</span> <span class="n">scale_degrees_to_pitch</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">key_pitches</span></div>
 
 
-<span class="c1"># Generate notes based on intervals</span>
-<div class="viewcode-block" id="generate_notes">
-<a class="viewcode-back" href="../source/music.html#music.generate_notes">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">generate_notes</span><span class="p">(</span><span class="n">notes</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale_degrees</span><span class="p">):</span>
+
+<span class="c1"># TODO: Go over this code, make it more readable and handle double flats and sharps</span>
+<div class="viewcode-block" id="scale_degrees_to_pitch">
+<a class="viewcode-back" href="../source/music.html#music.scale_degrees_to_pitch">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">scale_degrees_to_pitch</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        notes (): The number of notes in the generated melody.</span>
-<span class="sd">        scale (): The scale to use for generating the melody. </span>
+<span class="sd">        degrees (list): A list of scale degrees (e.g., [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;]) to convert to their corresponding pitch names based on the specified root.</span>
+<span class="sd">        root (str): The root note of the key (e.g., &quot;c&quot;, &quot;d&quot;, &quot;eb&quot;, &quot;fs&quot;) to use as the basis for calculating the pitch names of the scale degrees.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        </span>
+<span class="sd">    Returns:      A list of pitch names corresponding to the input scale degrees based on the specified root, taking into account any accidentals in the root and the scale degrees.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">intervals</span>   <span class="o">=</span>   <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="c1"># only 2nds and 3rds for now</span>
-    <span class="n">melody</span>      <span class="o">=</span>   <span class="p">[]</span>
-    <span class="n">current</span>     <span class="o">=</span>   <span class="mi">0</span>
-    
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">notes</span><span class="p">):</span>
-        <span class="n">val</span>     <span class="o">=</span>   <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span>
-        <span class="n">current</span> <span class="o">+=</span>  <span class="n">val</span>
-        
-        <span class="k">if</span> <span class="n">current</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">current</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> 
-        <span class="k">if</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
-            <span class="n">current</span> <span class="o">-=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+    <span class="n">pitches</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="n">note</span>    <span class="o">=</span>   <span class="n">scale</span><span class="p">[</span><span class="n">current</span><span class="p">]</span>
-        <span class="n">melody</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+    <span class="c1"># Base root pitch</span>
+    <span class="n">root_letter</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">root_pitch</span> <span class="o">=</span> <span class="n">NATURAL_PITCHES</span><span class="p">[</span><span class="n">root_letter</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="n">melody</span></div>
+    <span class="c1"># Adjust for accidental in the root</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span>
+            <span class="n">root_pitch</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">root</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;s&quot;</span><span class="p">:</span>
+            <span class="n">root_pitch</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Process each degree</span>
+    <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">degrees</span><span class="p">:</span>
+        <span class="c1"># Determine accidental for the degree</span>
+        <span class="k">if</span> <span class="n">degree</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">):</span>
+            <span class="n">accidental</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">degree_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">degree</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">elif</span> <span class="n">degree</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">):</span>
+            <span class="n">accidental</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">degree_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">degree</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">accidental</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">degree_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+
+        <span class="c1"># Find the letter corresponding to this degree in the key</span>
+        <span class="n">letter_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">LETTER_ORDER</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">root_letter</span><span class="p">)</span> <span class="o">+</span> <span class="n">degree_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span>
+        <span class="n">letter</span> <span class="o">=</span> <span class="n">LETTER_ORDER</span><span class="p">[</span><span class="n">letter_index</span><span class="p">]</span>
+
+        <span class="c1"># Natural pitch of the letter</span>
+        <span class="n">natural_pitch</span> <span class="o">=</span> <span class="n">NATURAL_PITCHES</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span>
+
+        <span class="c1"># Compute pitch number relative to root</span>
+        <span class="c1"># Rough approximation: major scale steps</span>
+        <span class="n">scale_interval</span> <span class="o">=</span> <span class="p">(</span><span class="n">degree_num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">degree_num</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># adjust for half steps in major scale</span>
+            <span class="n">scale_interval</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="n">pitch</span> <span class="o">=</span> <span class="p">(</span><span class="n">root_pitch</span> <span class="o">+</span> <span class="n">scale_interval</span> <span class="o">+</span> <span class="n">accidental</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+
+        <span class="c1"># Determine accidental relative to natural letter</span>
+        <span class="n">final_accidental</span> <span class="o">=</span> <span class="p">(</span><span class="n">pitch</span> <span class="o">-</span> <span class="n">natural_pitch</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="k">if</span> <span class="n">final_accidental</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">final_accidental</span> <span class="o">-=</span> <span class="mi">12</span>
+
+        <span class="c1"># Spell the note</span>
+        <span class="n">pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spell_note</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">final_accidental</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">pitches</span></div>
 
 
-<span class="c1"># generate a numbers of bars of random rhythm pattern in a given time signature</span>
-<div class="viewcode-block" id="generate_rhythm">
-<a class="viewcode-back" href="../source/music.html#music.generate_rhythm">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">generate_rhythm</span><span class="p">(</span><span class="n">bars</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">notesPerBar</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;q&quot;</span><span class="p">]):</span>
+
+<div class="viewcode-block" id="spell_note">
+<a class="viewcode-back" href="../source/music.html#music.spell_note">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">spell_note</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">accidental</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        bars ():        The number of bars to generate.</span>
-<span class="sd">        notesPerBar (): The number of beats per bar (e.g., 4 for 4/4 time).</span>
-<span class="sd">        values ():      A list of rhythm symbols to use for generating the rhythm. Default is [&quot;q&quot;] (quarter notes).</span>
+<span class="sd">        letter (str): The natural letter name of the note (e.g., &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;a&quot;, &quot;b&quot;) to which the accidental will be applied.</span>
+<span class="sd">        accidental (int): An integer representing the accidental to apply to the letter, where 0 means natural, -1 means flat, and 1 means sharp.</span>
 
-<span class="sd">    Returns:            A list of rhythm values representing the generated rhythm pattern.</span>
-<span class="sd">        </span>
+<span class="sd">    Returns:       A string representing the pitch name of the note after applying the accidental to the natural letter, following standard musical notation conventions (e.g., &quot;c&quot;, &quot;df&quot;, &quot;es&quot;, &quot;f&quot;, &quot;gs&quot;, etc.).</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rhythm</span>  <span class="o">=</span>   <span class="p">[]</span>
-    <span class="n">tot</span>     <span class="o">=</span>   <span class="mi">0</span>
-    <span class="n">values</span>  <span class="o">=</span>   <span class="n">rhythm_to_values</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
-    
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bars</span><span class="p">):</span>
-        <span class="n">tot</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">tot</span> <span class="o">&lt;</span> <span class="n">notesPerBar</span><span class="p">:</span>
-            <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span> <span class="k">if</span> <span class="n">tot</span> <span class="o">+</span> <span class="n">v</span> <span class="o">&lt;=</span> <span class="n">notesPerBar</span><span class="p">]</span>
-            <span class="n">val</span>     <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
-            <span class="n">rhythm</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-            <span class="n">tot</span>     <span class="o">+=</span> <span class="n">val</span>
-
-    <span class="k">return</span> <span class="n">rhythm</span></div>
+    <span class="k">if</span> <span class="n">accidental</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span>
+    <span class="k">elif</span> <span class="n">accidental</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span> <span class="o">+</span> <span class="s2">&quot;f&quot;</span>
+    <span class="k">elif</span> <span class="n">accidental</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">letter</span> <span class="o">+</span> <span class="s2">&quot;s&quot;</span></div>
 
 
-<span class="c1"># Convert rhythm symbols to their corresponding beat values</span>
-<div class="viewcode-block" id="rhythm_to_values">
-<a class="viewcode-back" href="../source/music.html#music.rhythm_to_values">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">rhythm_to_values</span><span class="p">(</span><span class="n">rhythm</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        rhythm (): A list of rhythm symbols (e.g., [&quot;q&quot;, &quot;e&quot;, &quot;s&quot;]) to convert to their corresponding beat values.</span>
-
-<span class="sd">    Returns:       A list of beat values corresponding to the input rhythm symbols.</span>
-<span class="sd">        </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rhythm_to_val</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-            <span class="s2">&quot;w&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-            <span class="s2">&quot;h&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">&quot;q&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
-            <span class="s2">&quot;s&quot;</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">,</span>
-            <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mf">0.125</span><span class="p">,</span>
-            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mf">0.0625</span>
-            <span class="p">}</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">rhythm_to_val</span><span class="p">[</span><span class="n">dur</span><span class="p">]</span> <span class="k">for</span> <span class="n">dur</span> <span class="ow">in</span> <span class="n">rhythm</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">values</span></div>
-
-
-
-<span class="c1"># Convert scale degrees to notes (assuming C major for simplicity)</span>
-<span class="c1"># TODO: implement all keys in a smart way, maybe .csv or something</span>
-<div class="viewcode-block" id="melody_to_notes">
-<a class="viewcode-back" href="../source/music.html#music.melody_to_notes">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">melody_to_notes</span><span class="p">(</span><span class="n">melody</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        melody (): A list of scale degrees (e.g., [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;]) to convert to their corresponding note names in the C major scale.</span>
-
-<span class="sd">    Returns:      A list of note names corresponding to the input scale degrees in the C major scale.</span>
-<span class="sd">        </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">degree_to_note</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;b2&quot;</span><span class="p">:</span> <span class="s2">&quot;df&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;b3&quot;</span><span class="p">:</span> <span class="s2">&quot;ef&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;s4&quot;</span><span class="p">:</span> <span class="s2">&quot;fs&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;b6&quot;</span><span class="p">:</span> <span class="s2">&quot;af&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;b7&quot;</span><span class="p">:</span> <span class="s2">&quot;bf&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;7&quot;</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span>
-    <span class="p">}</span>
-    
-    <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">degree_to_note</span><span class="p">[</span><span class="n">degree</span><span class="p">]</span> <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">melody</span><span class="p">]</span>
-    
-    <span class="k">return</span> <span class="n">notes</span></div>
 
 
 <span class="c1"># TODO: Implement this</span>
 <span class="c1"># Diatonic transposition using the scale degrees</span>
-<div class="viewcode-block" id="ttranspose">
-<a class="viewcode-back" href="../source/music.html#music.ttranspose">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">ttranspose</span><span class="p">(</span><span class="n">melody</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="n">transposed_melody</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">melody</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">scale_degrees_full</span><span class="p">:</span>
-            <span class="n">index</span> <span class="o">=</span> <span class="n">scale_degrees_full</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
-            <span class="n">transposed_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="n">interval</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">scale_degrees_full</span><span class="p">)</span>
-            <span class="n">transposed_note</span> <span class="o">=</span> <span class="n">scale_degrees_full</span><span class="p">[</span><span class="n">transposed_index</span><span class="p">]</span>
-            <span class="n">transposed_melody</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">transposed_note</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">transposed_melody</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>  <span class="c1"># If the note is not in the scale, keep it unchanged</span>
-    <span class="k">return</span> <span class="n">transposed_melody</span></div>
-
-
 <div class="viewcode-block" id="transpose">
 <a class="viewcode-back" href="../source/music.html#music.transpose">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">transpose</span><span class="p">(</span><span class="n">melody</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">transpose</span><span class="p">(</span><span class="n">melody</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])):</span>
     <span class="n">transposed_melody</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">return</span> <span class="n">transposed_melody</span></div>
+
 
 
 <span class="c1"># TODO: Implement this</span>
@@ -207,8 +193,9 @@
 <div class="viewcode-block" id="variation_melody">
 <a class="viewcode-back" href="../source/music.html#music.variation_melody">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">variation_melody</span><span class="p">(</span><span class="n">melody</span><span class="p">):</span>
-    
+
     <span class="k">return</span></div>
+
 
 
 <span class="c1"># TODO: Implement this</span>

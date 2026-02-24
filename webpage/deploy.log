@@ -1,0 +1,1350 @@
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+
+Mounted drive found: /Volumes/janoivil/
+
+Activating venv...
+
+Done!
+
+./deploy.zsh:22: no such file or directory: ./build_docs.sh
+Building documentation...
+
+Running Sphinx v7.4.7
+loading translations [en]... done
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+WARNING: html_static_path entry '_static' does not exist
+loading pickled environment... done
+myst v3.0.1: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions=set(), disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=0, heading_slug_func=None, html_meta={}, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 0 source files that are out of date
+updating environment: 0 added, 3 changed, 0 removed
+reading sources... [ 33%] index
+reading sources... [ 67%] source/main
+reading sources... [100%] source/modules
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' modules'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' music'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' lilypond'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/index.rst:13: WARNING: toctree contains reference to nonexisting document ' generator'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in source/modules, use :no-index: for one of them
+WARNING: autodoc: failed to import module 'main'; the following exception was raised:
+Traceback (most recent call last):
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/.venv/lib/python3.9/site-packages/sphinx/ext/autodoc/importer.py", line 143, in import_module
+    return importlib.import_module(modname)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1030, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1007, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 986, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 680, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 850, in exec_module
+  File "<frozen importlib._bootstrap>", line 228, in _call_with_frames_removed
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/main.py", line 37, in <module>
+    ly.write_to_file(lilycode, file)
+  File "/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/lilypond.py", line 43, in write_to_file
+    with open(filename, "w") as file:
+FileNotFoundError: [Errno 2] No such file or directory: 'code/output/melody.ly'
+
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst:4: WARNING: toctree contains reference to nonexisting document 'source/lilyconvert'
+WARNING: autodoc: failed to import module 'lilyconvert'; the following exception was raised:
+No module named 'lilyconvert'
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/code/music.py:docstring of music:1: WARNING: duplicate object description of music, other instance in index, use :no-index: for one of them
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... /Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/generator.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/lilypond.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/main.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/modules.rst: WARNING: document isn't included in any toctree
+/Users/jan-oivindlima/Documents/arbeid/skole/10. semester/TTK4900 - Masteroppgave/docs/source/test.rst: WARNING: document isn't included in any toctree
+done
+preparing documents... done
+copying assets... 
+copying static files... done
+copying extra files... done
+copying assets: done
+writing output... [ 33%] index
+writing output... [ 67%] source/main
+writing output... [100%] source/modules
+
+generating indices... genindex py-modindex done
+highlighting module code... [ 25%] generator
+highlighting module code... [ 50%] lilypond
+highlighting module code... [ 75%] music
+highlighting module code... [100%] test
+
+writing additional pages... search done
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded, 15 warnings.
+
+The HTML pages are in _build/html.
+Done!
+
+Copying index.html to /Volumes/janoivil/
+
+Done!
+
+Copying docs/ to /Volumes/janoivil/docs/
+
+Done!
+

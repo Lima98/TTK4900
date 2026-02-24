@@ -1,6 +1,7 @@
+.DS_Store
+thesis/TEMPLATE/
 adm/
 .venv/
-.DS_Store
 codebook.toml
 *.wav
 *.ogg

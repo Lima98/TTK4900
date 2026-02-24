@@ -272,7 +272,7 @@ body {
       // Show Chapter 1 by default
       window.onload = function() {
         const firstButton = document.querySelector("nav button");
-        showChapter("theory", firstButton);
+        showChapter("chapter1", firstButton);
       };
     </script>
 
