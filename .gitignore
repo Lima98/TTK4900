@@ -5,3 +5,4 @@ adm/
 codebook.toml
 *.wav
 *.ogg
+*.log
