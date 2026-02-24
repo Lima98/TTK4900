@@ -1,0 +1,30 @@
+Proposed structure of the music generation library:
+
+music_gen/
+│
+├── __init__.py
+├── core/                  # Base classes and types
+│   ├── __init__.py
+│   ├── melody.py          # Melody class, holds notes + metadata
+│   ├── note.py            # Note representations (abstract and concrete)
+│   └── key.py             # Key, scale, mode info
+│
+├── generators/            # Melody generation strategies
+│   ├── __init__.py
+│   ├── random_gen.py      # Random melodies based on scale degrees
+│   ├── pattern_gen.py     # Pattern-based generators
+│   └── markov_gen.py      # Markov chain or probabilistic generators
+│
+├── converters/            # Converting between representations
+│   ├── __init__.py
+│   ├── degrees_to_pitch.py
+│   └── pitch_to_lilypond.py
+│
+├── io/                    # File input/output
+│   ├── __init__.py
+│   ├── lilypond_writer.py
+│   └── midi_writer.py
+│
+└── utils/
+    ├── __init__.py
+    └── helpers.py
