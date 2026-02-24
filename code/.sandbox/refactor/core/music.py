@@ -1,5 +1,4 @@
 # Handling of music concepts using Key, Note, Melody objects
-import random
 
 # Define scale degrees, and letter order for pitch spelling
 SCALES = {
@@ -21,9 +20,15 @@ NATURAL_PITCHES = {
     "c": 0, "d": 2, "e": 4, "f": 5, "g": 7, "a": 9, "b": 11
 }
 
-
-# ---------------- Note ----------------
+# Musical concepts represented as classes
 class Note:
+    """
+
+    Attributes:
+        degree: scale degree (abstract, e.g., 1, b2, s4)
+        pitch: concrete pitch (string, e.g., 'c4')
+        duration: duration in beats (optional, e.g., 1 for quarter note, 0.5 for eighth note)
+    """
     def __init__(self, degree=None, pitch=None, duration=None):
         self.degree = degree    # Scale degree (abstract)
         self.pitch = pitch      # Concrete pitch (string, e.g., 'c4')
@@ -39,15 +44,20 @@ class Note:
         return f"Note({self.pitch or self.degree}, dur={self.duration})"
 
 
-# ---------------- Key ----------------
 class Key:
+    """
+
+    Attributes:
+        tonic: root note of the key (string, e.g., 'c', 'd', 'eb')
+        mode: scale type (string, e.g., 'major', 'minor', 'dorian')
+        degrees: list of scale degrees for the mode (derived from SCALES)
+    """
     def __init__(self, tonic: str, mode: str = "major"):
         self.tonic = tonic
         self.mode = mode
         self.degrees = SCALES[mode]
 
     def degree_to_pitch(self, degree: str) -> str:
-        """Convert a single scale degree to pitch in this key."""
         return scale_degrees_to_pitch([degree], self.tonic)[0]
 
     def get_scale_pitches(self):
@@ -57,15 +67,20 @@ class Key:
         return f"Key({self.tonic} {self.mode})"
 
 
-# ---------------- Melody ----------------
 class Melody:
-    def __init__(self, notes=None, key: Key = None, tags=None):
+    """
+
+    Attributes:
+        notes: list of Note objects representing the melody
+        key: Key object representing the key of the melody
+        tags: optional dictionary for additional metadata (e.g., tempo, style)
+    """
+    def __init__(self, key: Key, notes, tags=None):
         self.notes = notes or []  # list of Note objects
         self.key = key
         self.tags = tags or {}
 
     def to_pitches(self):
-        """Convert all degree notes to pitches using the melody's key."""
         if self.key is None:
             raise ValueError("Melody has no key assigned")
         for note in self.notes:
@@ -73,7 +88,6 @@ class Melody:
                 note.pitch = self.key.degree_to_pitch(str(note.degree))
 
     def add_rhythm(self, rhythm):
-        """Assign durations to notes."""
         if len(rhythm) != len(self.notes):
             raise ValueError("Rhythm and notes length mismatch")
         for note, dur in zip(self.notes, rhythm):
@@ -83,8 +97,17 @@ class Melody:
         return f"Melody({self.notes}, key={self.key}, tags={self.tags})"
 
 
-# ---------------- Helpers ----------------
+# Helper function to spell a note based on its letter and accidental
 def spell_note(letter, accidental):
+    """
+
+    Args:
+        letter (str): A string representing the letter name of the note (e.g., "c", "d", "e", "f", "g", "a", "b") to be spelled.
+        accidental (int): An integer representing the accidental of the note, where 0 indicates a natural note, -1 indicates a flat, and 1 indicates a sharp. This value is used to determine how to modify the letter name of the note when spelling it (e.g., "c" with an accidental of -1 would be spelled as "cf" for C flat, while "c" with an accidental of 1 would be spelled as "cs" for C sharp).
+
+    Returns:    A string representing the spelled note name based on the input letter and accidental, where the letter is modified according to the accidental (e.g., "c" with an accidental of -1 would return "cf", "c" with an accidental of 1 would return "cs", and "c" with an accidental of 0 would return "c").
+        
+    """
     if accidental == 0:
         return letter
     elif accidental == -1:
@@ -92,9 +115,17 @@ def spell_note(letter, accidental):
     elif accidental == 1:
         return letter + "s"
 
-
+# Convert scale degrees to pitch names based on the root note
 def scale_degrees_to_pitch(degrees, root):
-    """Convert scale degrees to pitch names based on a root."""
+    """
+
+    Args:
+        degrees (list): A list of scale degrees (e.g., ["1", "b2", "3"]) to be converted to pitch names based on the specified root note. Each degree can include an accidental (e.g., "b2" for flat second, "s4" for sharp fourth) which will be taken into account when calculating the final pitch name.
+        root (str): A string representing the root note (e.g., "c", "d", "eb") from which the scale degrees will be calculated. The root note can also include an accidental (e.g., "eb" for E flat, "fs" for F sharp) which will affect the starting pitch for the scale degree calculations.
+
+    Returns:     A list of pitch names corresponding to the input scale degrees based on the specified root note. Each pitch name is derived from the root note and the intervals defined by the scale degrees, taking into account any accidentals in both the root and the degrees. For example, if the root is "c" and the degree is "b2", the resulting pitch name would be "cf" (C flat), while if the degree is "s4", the resulting pitch name would be "cs" (C sharp).
+        
+    """
     pitches = []
     root_letter = root[0]
     root_pitch = NATURAL_PITCHES[root_letter]

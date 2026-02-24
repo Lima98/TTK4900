@@ -1,6 +1,6 @@
 from core.music import Key
 from generators.generator import generate_notes, generate_rhythm
-from out.lilypond import (
+from output.lilypond import (
     melody_to_lilypond,
     voices_to_lilypond,
     write_to_file,
@@ -11,26 +11,17 @@ from out.lilypond import (
 # ---------------- Configuration ----------------
 
 OUTPUT_FILENAME = "melody.ly"
-OUTPUT_PATH = "code/output/default/"
+OUTPUT_PATH = "code/output/"
 FULL_PATH = OUTPUT_PATH + OUTPUT_FILENAME
 
-KEY_NAME = "c"
-MODE = "major_pentatonic"
+KEY_NAME = "eb"
+MODE = "major"
 TIME_SIGNATURE = "4/4"
 BARS = 4
 
 # Voice configuration (extensible)
 VOICES = [
     {"name": "voiceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voiceOnea",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voiceOn",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voiceOe",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voicene",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voicOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voieOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "viceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "oiceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
     # {"name": "voiceTwo",   "clef": "\"treble_8\"", "rhythm_values": ["q"]},
     # {"name": "voiceThree", "clef": "bass",        "rhythm_values": ["h"]},
     # {"name": "voiceFour",  "clef": "bass",        "rhythm_values": ["w"]},

@@ -1,4 +1,5 @@
 Proposed structure of the music generation library:
+will probably use something similar but not completely alike
 
 music_gen/
 │
