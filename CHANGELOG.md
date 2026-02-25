@@ -1,3 +1,9 @@
+## 0.5.1 (2026-02-25)
+
+### Refactor
+
+- cleaned up a bit in main
+
 ## 0.5.0 (2026-02-24)
 
 ### BREAKING CHANGE
