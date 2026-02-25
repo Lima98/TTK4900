@@ -41,7 +41,7 @@
 <span id="music-module"></span><h1>Music module<a class="headerlink" href="#module-core.music" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="core.music.Key">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.music.</span></span><span class="sig-name descname"><span class="pre">Key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'major'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Key" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.music.</span></span><span class="sig-name descname"><span class="pre">Key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'major'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Key" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A musical key, defined by its tonic and mode.</p>
 <dl class="py attribute">
@@ -64,7 +64,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="core.music.Key.get_scale_pitches">
 <span class="sig-name descname"><span class="pre">get_scale_pitches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Key.get_scale_pitches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Key.get_scale_pitches" title="Link to this definition">¶</a></dt>
-<dd><p>Returns:</p>
+<dd><p>Returns:  A list of strings representing the pitch names of the scale degrees in the key.</p>
 </dd></dl>
 
 </dd></dl>
@@ -75,15 +75,15 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A musical melody, consisting of a sequence of notes and an associated key.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="core.music.Melody.notes">
-<span class="sig-name descname"><span class="pre">notes</span></span><a class="headerlink" href="#core.music.Melody.notes" title="Link to this definition">¶</a></dt>
-<dd><p>List of Note objects representing the melody.</p>
-</dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Melody.key">
 <span class="sig-name descname"><span class="pre">key</span></span><a class="headerlink" href="#core.music.Melody.key" title="Link to this definition">¶</a></dt>
 <dd><p>Key object representing the key of the melody.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="core.music.Melody.notes">
+<span class="sig-name descname"><span class="pre">notes</span></span><a class="headerlink" href="#core.music.Melody.notes" title="Link to this definition">¶</a></dt>
+<dd><p>List of Note objects representing the melody.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -95,12 +95,27 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="core.music.Melody.add_rhythm">
 <span class="sig-name descname"><span class="pre">add_rhythm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhythm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Melody.add_rhythm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Melody.add_rhythm" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Adds rhythm to the melody by assigning durations to each note based on a provided rhythm pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhythm</strong> (<em>list</em>) – A list of durations corresponding to each note in the melody.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the length of the rhythm list does not match the number of notes in the melody.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="core.music.Melody.to_pitches">
 <span class="sig-name descname"><span class="pre">to_pitches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Melody.to_pitches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Melody.to_pitches" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Converts abstract notes (with scale degrees) to concrete pitches based on the melody’s key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the melody has no key assigned or if any note is abstract without a degree.</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -130,12 +145,16 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="core.music.Note.is_abstract">
 <span class="sig-name descname"><span class="pre">is_abstract</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Note.is_abstract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Note.is_abstract" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Utility function to check if the note is abstract (has a degree but no concrete pitch).</p>
+<p>Returns: True if the note has a degree but no concrete pitch, False otherwise.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="core.music.Note.is_concrete">
 <span class="sig-name descname"><span class="pre">is_concrete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Note.is_concrete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Note.is_concrete" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Utility function to check if the note is concrete (has a concrete pitch).</p>
+<p>Returns: True if the note has a concrete pitch, False otherwise.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -175,22 +194,24 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="out.lilypond.beat_to_duration">
 <span class="sig-prename descclassname"><span class="pre">out.lilypond.</span></span><span class="sig-name descname"><span class="pre">beat_to_duration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/out/lilypond.html#beat_to_duration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#out.lilypond.beat_to_duration" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a duration in beats to the corresponding LilyPond duration notation.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>(</strong><strong>)</strong> (<em>beat</em>) – A numerical value representing the duration of a note in beats (e.g., 1 for quarter note, 0.5 for eighth note) to convert to its corresponding LilyPond duration notation.</p>
+<dd class="field-odd"><p><strong>beat</strong> (<em>float</em>) – Duration in beats (e.g., 1 for quarter note, 0.5 for eighth note, etc.)</p>
 </dd>
 </dl>
-<p>Returns:       A string representing the LilyPond duration notation corresponding to the input beat value, such as “1” for a quarter note, “2” for a half note, “4” for a whole note, etc., based on standard musical durations.</p>
+<p>Returns: Corresponding LilyPond duration notation as a string.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="out.lilypond.generate_files">
 <span class="sig-prename descclassname"><span class="pre">out.lilypond.</span></span><span class="sig-name descname"><span class="pre">generate_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output.ly'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/out/lilypond.html#generate_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#out.lilypond.generate_files" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Generate MIDI and PDF files from the .ly file using LilyPond.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<em>str</em>) – The name of the .ly file that contains the LilyPond code to be processed. This file should exist in the current working directory and should have a valid .ly extension for LilyPond to recognize it as an input file.</p></li>
-<li><p><strong>path</strong> (<em>str</em>) – The directory path where the generated MIDI and PDF files will be saved. If this path is empty, the generated files will be saved in the current working directory. The path should end with a separator (e.g., “/” or “&quot;) if it is not empty to ensure that the generated files are saved in the correct location.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Name of the .ly file to be processed.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Optional path where the generated files will be saved.</p></li>
 </ul>
 </dd>
 </dl>
@@ -199,19 +220,20 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="out.lilypond.melody_to_lilypond">
 <span class="sig-prename descclassname"><span class="pre">out.lilypond.</span></span><span class="sig-name descname"><span class="pre">melody_to_lilypond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">melody</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#core.music.Melody" title="core.music.Melody"><span class="pre">Melody</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">voice_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clef</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/out/lilypond.html#melody_to_lilypond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#out.lilypond.melody_to_lilypond" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Convert a Melody object to LilyPond format.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>(</strong><strong>)</strong> (<em>clef</em>) – A string representing the name of the voice (e.g., “soprano”, “alto”, “tenor”, “bass”) to be used in the LilyPond output for labeling the musical part corresponding to the given melody.</p></li>
-<li><p><strong>(</strong><strong>)</strong> – A string representing the clef (e.g., “treble”, “bass”) to be used in the LilyPond output for the staff that will contain the given melody.</p></li>
-<li><p><strong>melody</strong> – A Melody object containing a list of Note objects representing the melody to be converted into LilyPond format. Each Note object should have its pitch and duration properties populated for accurate conversion.</p></li>
+<li><p><strong>voice_name</strong> (<em>str</em>) – Name of the voice to be used in LilyPond (e.g., “voiceOne”).</p></li>
+<li><p><strong>clef</strong> (<em>str</em>) – Clef to be used in LilyPond (e.g., “treble”, “bass”, “”treble_8””).</p></li>
+<li><p><strong>melody</strong> – Melody object to be converted to LilyPond format.</p></li>
 </ul>
 </dd>
 </dl>
-<p>Returns:     A list containing two strings: the first string is the LilyPond code defining the voice with the melody, and the second string is the LilyPond code for the staff that references this voice. These strings can be combined with other voices and staff definitions to create a complete LilyPond score.</p>
+<p>Returns: A tuple containing the LilyPond code for the melody and the corresponding staff reference for the score.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ValueError</strong> – If the melody does not have a key assigned, or if any note in the melody lacks a pitch or duration, a ValueError is raised with an appropriate message indicating the issue.</p>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the melody has no key assigned, if any note has no pitch assigned, or if any note has no duration assigned.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -219,9 +241,10 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="out.lilypond.play">
 <span class="sig-prename descclassname"><span class="pre">out.lilypond.</span></span><span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output.ly'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/out/lilypond.html#play"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#out.lilypond.play" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Play generated MIDI file using Timidity. Assumes that the MIDI file has been generated from the .ly file and is in the same directory.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The name of the .ly file that contains the LilyPond code for the musical score. This file should exist in the current working directory and should have a valid .ly extension. The function will look for a corresponding MIDI file with the same base name (but with a .midi extension) generated from this .ly file, and if found, it will use Timidity to play the MIDI file. If the MIDI file is not found, an error message will be printed indicating that the MIDI file could not be located.</p>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – The name of the .ly file from which the MIDI file was generated. The function will look for a corresponding .midi file with the same base name.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -229,26 +252,28 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="out.lilypond.voices_to_lilypond">
 <span class="sig-prename descclassname"><span class="pre">out.lilypond.</span></span><span class="sig-name descname"><span class="pre">voices_to_lilypond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sig</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/out/lilypond.html#voices_to_lilypond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#out.lilypond.voices_to_lilypond" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Write all voices into a single LilyPond score.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>voices</strong> (<em>list</em>) – A list of tuples, where each tuple contains two strings: the first string is the LilyPond code defining a voice with its melody, and the second string is the LilyPond code for the staff that references this voice. This list represents all the voices that will be included in the final LilyPond score.</p></li>
-<li><p><strong>key</strong> (<em>str</em>) – A string representing the key signature (e.g., “c major”, “eb minor”) to be included in the global settings of the LilyPond score. This key signature will apply to all voices in the score and should be formatted correctly for LilyPond syntax.</p></li>
-<li><p><strong>time_sig</strong> (<em>str</em>) – A string representing the time signature (e.g., “4/4”, “3/4”, “6/8”) to be included in the global settings of the LilyPond score. This time signature will apply to all voices in the score and should be formatted correctly for LilyPond syntax.</p></li>
+<li><p><strong>voices</strong> (<em>list</em>) – List of tuples containing LilyPond code for each voice and their staff references.</p></li>
+<li><p><strong>key</strong> (<em>str</em>) – The key to notate the score in.</p></li>
+<li><p><strong>time_sig</strong> (<em>str</em>) – The time signature to notate the score in.</p></li>
 </ul>
 </dd>
 </dl>
-<p>Returns:    A string containing the complete LilyPond code for the score, which includes global settings for the key signature and time signature, as well as the definitions for all voices and their corresponding staves. This code can be written to a .ly file and processed by LilyPond to generate MIDI and PDF outputs.</p>
+<p>Returns:</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="out.lilypond.write_to_file">
 <span class="sig-prename descclassname"><span class="pre">out.lilypond.</span></span><span class="sig-name descname"><span class="pre">write_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lilypond_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'output.ly'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/out/lilypond.html#write_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#out.lilypond.write_to_file" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Write the generated LilyPond code to a .ly file.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lilypond_code</strong> (<em>str</em>) – A string containing the complete LilyPond code that represents the musical score to be written to a .ly file. This code should include all necessary definitions for voices, staves, and global settings to create a valid LilyPond file that can be processed to generate MIDI and PDF outputs.</p></li>
-<li><p><strong>filename</strong> (<em>str</em>) – The name of the .ly file to which the LilyPond code will be written. This file will be created or overwritten in the current working directory, and it should have a .ly extension to be recognized as a valid LilyPond file.</p></li>
+<li><p><strong>lilypond_code</strong> (<em>str</em>) – The LilyPond code to be written to the file.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – The name of the .ly file to write to. Defaults to “output.ly”.</p></li>
 </ul>
 </dd>
 </dl>
@@ -260,40 +285,12 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="generators.generator.generate_notes">
 <span class="sig-prename descclassname"><span class="pre">generators.generator.</span></span><span class="sig-name descname"><span class="pre">generate_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_notes=4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key:</span> <span class="pre">~core.music.Key</span> <span class="pre">=</span> <span class="pre">Key(c</span> <span class="pre">major)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#core.music.Melody" title="core.music.Melody"><span class="pre">Melody</span></a></span></span><a class="reference internal" href="_modules/generators/generator.html#generate_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generators.generator.generate_notes" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Generate a melody by randomly moving in 2nds and 3rds within the scale.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>num_notes</strong> (<em>int</em>) – The number of notes in the generated melody.</p></li>
-<li><p><strong>key</strong> – Key object to decide they key to generate the melody in.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Returns:       A Melody object containing a list of Note objects representing a melody generated by randomly moving in 2nds and 3rds within the scale defined by the provided key.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="generators.generator.generate_random_notes">
-<span class="sig-prename descclassname"><span class="pre">generators.generator.</span></span><span class="sig-name descname"><span class="pre">generate_random_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length=8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key:</span> <span class="pre">~core.music.Key</span> <span class="pre">=</span> <span class="pre">Key(c</span> <span class="pre">major)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#core.music.Melody" title="core.music.Melody"><span class="pre">Melody</span></a></span></span><a class="reference internal" href="_modules/generators/generator.html#generate_random_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generators.generator.generate_random_notes" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>length</strong> (<em>int</em>) – The number of notes in the generated melody.</p></li>
-<li><p><strong>key</strong> – Key object to decide the key to display the chromatic melody.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Returns:        A Melody object containing a list of Note objects with randomly generated pitches based on the chromatic scale and the provided key.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="generators.generator.generate_rhythm">
-<span class="sig-prename descclassname"><span class="pre">generators.generator.</span></span><span class="sig-name descname"><span class="pre">generate_rhythm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'4/4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['q']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/generators/generator.html#generate_rhythm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generators.generator.generate_rhythm" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bars</strong> (<em>int</em>) – The number of bars to generate the rhythm for.</p></li>
-<li><p><strong>time_sig</strong> (<em>str</em>) – The time signature to use for generating the rhythm (e.g., “4/4”, “3/4”, “6/8”).</p></li>
-<li><p><strong>values</strong> (<em>list</em>) – A list of rhythm symbols (e.g., [“q”, “e”, “s”]) to use as the allowed rhythm values for generating the rhythm pattern.</p></li>
+<li><p><strong>num_notes</strong> (<em>int</em>) – Number of notes to generate in the melody.</p></li>
+<li><p><strong>key</strong> – Key object representing the key of the melody.</p></li>
 </ul>
 </dd>
 </dl>
@@ -301,14 +298,46 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="generators.generator.rhythm_to_values">
-<span class="sig-prename descclassname"><span class="pre">generators.generator.</span></span><span class="sig-name descname"><span class="pre">rhythm_to_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhythm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/generators/generator.html#rhythm_to_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generators.generator.rhythm_to_values" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dt class="sig sig-object py" id="generators.generator.generate_random_notes">
+<span class="sig-prename descclassname"><span class="pre">generators.generator.</span></span><span class="sig-name descname"><span class="pre">generate_random_notes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length=8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key:</span> <span class="pre">~core.music.Key</span> <span class="pre">=</span> <span class="pre">Key(c</span> <span class="pre">major)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#core.music.Melody" title="core.music.Melody"><span class="pre">Melody</span></a></span></span><a class="reference internal" href="_modules/generators/generator.html#generate_random_notes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generators.generator.generate_random_notes" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a random chromatic melody.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rhythm</strong> (<em>list</em>) – A list of rhythm symbols (e.g., [“q”, “e”, “s”]) to convert to their corresponding beat values.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>length</strong> (<em>int</em>) – Number of notes in the melody.</p></li>
+<li><p><strong>key</strong> – Key object representing the key to display the melody in.</p></li>
+</ul>
 </dd>
 </dl>
-<p>Returns:      A list of beat values corresponding to the input rhythm symbols.</p>
+<p>Returns: A Melody object containing the generated notes and the associated key.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generators.generator.generate_rhythm">
+<span class="sig-prename descclassname"><span class="pre">generators.generator.</span></span><span class="sig-name descname"><span class="pre">generate_rhythm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_sig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'4/4'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['q']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/generators/generator.html#generate_rhythm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generators.generator.generate_rhythm" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a rhythm pattern based on the time signature and allowed rhythm values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bars</strong> (<em>int</em>) – Number of bars to generate.</p></li>
+<li><p><strong>time_sig</strong> (<em>str</em>) – Time signature in the format “quantity/value” (e.g., “4/4”, “3/4”, “6/8”).</p></li>
+<li><p><strong>values</strong> (<em>list</em>) – List of rhythm symbols (e.g., [“q”, “e”, “h”]) that can be used in the rhythm pattern.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns: A list of rhythm values corresponding to the generated rhythm pattern.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="generators.generator.rhythm_to_values">
+<span class="sig-prename descclassname"><span class="pre">generators.generator.</span></span><span class="sig-name descname"><span class="pre">rhythm_to_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rhythm</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/generators/generator.html#rhythm_to_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#generators.generator.rhythm_to_values" title="Link to this definition">¶</a></dt>
+<dd><p>Convert rhythm symbols to beat values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rhythm</strong> (<em>list</em>) – List of rhythm symbols (e.g., [“q”, “e”, “h”]).</p>
+</dd>
+</dl>
+<p>Returns:</p>
 </dd></dl>
 
 </section>

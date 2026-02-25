@@ -1,6 +1,6 @@
 
 
-\chapter*{A - Github repository}
+\chapter*{A - Github repository}\label{chap:github}
 \addcontentsline{toc}{chapter}{\protect\numberline{}A - Github repository} 
 
 All code and latex-files used in this document are included in the Github repository linked below. Further explanations are given in the readme-file. 
@@ -15,8 +15,8 @@ All code and latex-files used in this document are included in the Github reposi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter*{B - Sidenote statistics}
-\addcontentsline{toc}{chapter}{\protect\numberline{}B - Sidenote statistics} 
+\chapter*{B - Audio examples}\label{chap:audio-examples}
+\addcontentsline{toc}{chapter}{\protect\numberline{}B - Code documentation}
 
 %For included tables and figures renew the numbering such that they are numbered by the appendix they are attached to and not to the conclusion chapter
 \renewcommand{\thefigure}{B.\arabic{figure}}
@@ -24,76 +24,19 @@ All code and latex-files used in this document are included in the Github reposi
 \renewcommand{\thetable}{B.\arabic{table}}
 \setcounter{table}{0}
 
+Audio-files for the examples in the thesis can be played from my NTNU-webpage.
 
-\section*{\large{B1 - Some random table}}
-\vspace*{1cm}
+\subsection*{Audio example archive}
+\begin{itemize}
+    \item \url{https://www.janoivil.folk.ntnu.no}
+\end{itemize}
 
-Remember to only include one thing per page in the appendices.
+\chapter*{C - Code documentation}\label{chap:code-doc}
+\addcontentsline{toc}{chapter}{\protect\numberline{}C - Code documentation} 
 
-\begin{table}[ht!]
-\centering
-    \begin{tabular}{ m{4cm} m{2.5cm} m{2.5cm} m{2.5cm} } 
-    \toprule
-    \toprule
-    \textbf{Statistic} & \textbf{One} & \textbf{Two}  \\
-    \midrule
-    Count   & 387317    & 283960    \\[1.3ex]
-    Mean    & 130.66    & 134.18    \\[1.3ex]
-    Std     & 248.09    & 230.32    \\[1.3ex]
-    Q1      & 31.00     & 21.00     \\[1.3ex]
-    Median  & 67.00     & 63.00     \\[1.3ex]
-    Q3      & 142.00    & 159.00    \\[1.3ex]
-    Min     & 0.00      & 0.00      \\[1.3ex]
-    Max     & 14519.00  & 14253.00  \\[1.3ex]
-    \bottomrule
-    \bottomrule
-    \end{tabular}
-\caption[Statistics on something]{Table of statistics on some sidenote data.}
-\end{table}
+All documentation for the code is included in the Github repository linked in \ref{chap:github} it is also provided as a web-page hosted at my NTNU-webpage.
 
-
-% Page without title but section title:
-\newpage
-\section*{\large{B2 - Some other random table}}
-\vspace*{1cm}
-
-\begin{table}[ht!]
-\centering
-    \begin{tabular}{ m{4cm} m{2.5cm} m{2.5cm} m{2.5cm} } 
-    \toprule
-    \toprule
-    \textbf{Statistic} & \textbf{Three} & \textbf{Four}  \\
-    \midrule
-    Count   & 387317    & 283960    \\[1.3ex]
-    Mean    & 130.66    & 134.18    \\[1.3ex]
-    Std     & 248.09    & 230.32    \\[1.3ex]
-    Q1      & 31.00     & 21.00     \\[1.3ex]
-    Median  & 67.00     & 63.00     \\[1.3ex]
-    Q3      & 142.00    & 159.00    \\[1.3ex]
-    Min     & 0.00      & 0.00      \\[1.3ex]
-    Max     & 14519.00  & 14253.00  \\[1.3ex]
-    \bottomrule
-    \bottomrule
-    \end{tabular}
-\caption[Statistics on something else]{Table of statistics on some other sidenote data.}
-\end{table}
-
-
-
-\newpage
-\section*{\large{B3 - Some random figure}}
-\vspace*{1cm}
-
-\begin{figure}[H]
-  \centering
-  \subfloat[Data set sizes for data X.]
-  {\includegraphics[width=1\textwidth]{Figures/dataset_X.png}}
-  \hfill
-  \subfloat[Data set sizes for data Y.]
-  {\includegraphics[width=1\textwidth]{Figures/dataset_Y.png}}
-  \caption[Data set sizes]{The figures show the data set sizes of X and Y and the proposed cut-off threshold at 10 $\%$ of the mean set size.}
-\end{figure}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Code documentation}
+\begin{itemize}
+    \item \url{https://janoivil.folk.ntnu.no/docs/_build/html/index.html}
+\end{itemize}

@@ -40,11 +40,12 @@
 <a class="viewcode-back" href="../../index.html#out.lilypond.beat_to_duration">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">beat_to_duration</span><span class="p">(</span><span class="n">beat</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a duration in beats to the corresponding LilyPond duration notation.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        beat (): A numerical value representing the duration of a note in beats (e.g., 1 for quarter note, 0.5 for eighth note) to convert to its corresponding LilyPond duration notation.</span>
+<span class="sd">        beat (float): Duration in beats (e.g., 1 for quarter note, 0.5 for eighth note, etc.)</span>
 
-<span class="sd">    Returns:       A string representing the LilyPond duration notation corresponding to the input beat value, such as &quot;1&quot; for a quarter note, &quot;2&quot; for a half note, &quot;4&quot; for a whole note, etc., based on standard musical durations.</span>
+<span class="sd">    Returns: Corresponding LilyPond duration notation as a string.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">beat_to_dur</span> <span class="o">=</span> <span class="p">{</span>
@@ -62,23 +63,22 @@
     <span class="k">return</span> <span class="n">beat_to_dur</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">beat</span><span class="p">)</span></div>
 
 
-
 <span class="c1"># Converting Melody objects to LilyPond format</span>
 <div class="viewcode-block" id="melody_to_lilypond">
 <a class="viewcode-back" href="../../index.html#out.lilypond.melody_to_lilypond">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">melody_to_lilypond</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">,</span> <span class="n">voice_name</span><span class="p">,</span> <span class="n">clef</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert a Melody object to LilyPond format.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        voice_name (): A string representing the name of the voice (e.g., &quot;soprano&quot;, &quot;alto&quot;, &quot;tenor&quot;, &quot;bass&quot;) to be used in the LilyPond output for labeling the musical part corresponding to the given melody.</span>
-<span class="sd">        clef (): A string representing the clef (e.g., &quot;treble&quot;, &quot;bass&quot;) to be used in the LilyPond output for the staff that will contain the given melody.</span>
-<span class="sd">        melody: A Melody object containing a list of Note objects representing the melody to be converted into LilyPond format. Each Note object should have its pitch and duration properties populated for accurate conversion.</span>
+<span class="sd">        voice_name (str): Name of the voice to be used in LilyPond (e.g., &quot;voiceOne&quot;).</span>
+<span class="sd">        clef (str): Clef to be used in LilyPond (e.g., &quot;treble&quot;, &quot;bass&quot;, &quot;\&quot;treble_8\&quot;&quot;).</span>
+<span class="sd">        melody: Melody object to be converted to LilyPond format.</span>
 
-<span class="sd">    Returns:     A list containing two strings: the first string is the LilyPond code defining the voice with the melody, and the second string is the LilyPond code for the staff that references this voice. These strings can be combined with other voices and staff definitions to create a complete LilyPond score.</span>
-<span class="sd">        </span>
+<span class="sd">    Returns: A tuple containing the LilyPond code for the melody and the corresponding staff reference for the score.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: If the melody does not have a key assigned, or if any note in the melody lacks a pitch or duration, a ValueError is raised with an appropriate message indicating the issue.</span>
+<span class="sd">        ValueError: If the melody has no key assigned, if any note has no pitch assigned, or if any note has no duration assigned.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">melody</span><span class="o">.</span><span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Melody must have a key before exporting to LilyPond&quot;</span><span class="p">)</span>
@@ -109,20 +109,19 @@
     <span class="k">return</span> <span class="p">[</span><span class="n">lilypond_melody</span><span class="p">,</span> <span class="n">score_part</span><span class="p">]</span></div>
 
 
-
 <span class="c1"># Writing the generated LilyPond code to a .ly file</span>
 <div class="viewcode-block" id="write_to_file">
 <a class="viewcode-back" href="../../index.html#out.lilypond.write_to_file">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">write_to_file</span><span class="p">(</span><span class="n">lilypond_code</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;output.ly&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write the generated LilyPond code to a .ly file.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        lilypond_code (str): A string containing the complete LilyPond code that represents the musical score to be written to a .ly file. This code should include all necessary definitions for voices, staves, and global settings to create a valid LilyPond file that can be processed to generate MIDI and PDF outputs.</span>
-<span class="sd">        filename (str): The name of the .ly file to which the LilyPond code will be written. This file will be created or overwritten in the current working directory, and it should have a .ly extension to be recognized as a valid LilyPond file.</span>
+<span class="sd">        lilypond_code (str): The LilyPond code to be written to the file.</span>
+<span class="sd">        filename (str): The name of the .ly file to write to. Defaults to &quot;output.ly&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">lilypond_code</span><span class="p">)</span></div>
-
 
 
 <span class="c1"># Combining multiple voices into a single LilyPond score</span>
@@ -130,13 +129,14 @@
 <a class="viewcode-back" href="../../index.html#out.lilypond.voices_to_lilypond">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">voices_to_lilypond</span><span class="p">(</span><span class="n">voices</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">time_sig</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write all voices into a single LilyPond score.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        voices (list): A list of tuples, where each tuple contains two strings: the first string is the LilyPond code defining a voice with its melody, and the second string is the LilyPond code for the staff that references this voice. This list represents all the voices that will be included in the final LilyPond score.</span>
-<span class="sd">        key (str): A string representing the key signature (e.g., &quot;c major&quot;, &quot;eb minor&quot;) to be included in the global settings of the LilyPond score. This key signature will apply to all voices in the score and should be formatted correctly for LilyPond syntax.</span>
-<span class="sd">        time_sig (str): A string representing the time signature (e.g., &quot;4/4&quot;, &quot;3/4&quot;, &quot;6/8&quot;) to be included in the global settings of the LilyPond score. This time signature will apply to all voices in the score and should be formatted correctly for LilyPond syntax.</span>
+<span class="sd">        voices (list): List of tuples containing LilyPond code for each voice and their staff references.</span>
+<span class="sd">        key (str): The key to notate the score in.</span>
+<span class="sd">        time_sig (str): The time signature to notate the score in.</span>
 
-<span class="sd">    Returns:    A string containing the complete LilyPond code for the score, which includes global settings for the key signature and time signature, as well as the definitions for all voices and their corresponding staves. This code can be written to a .ly file and processed by LilyPond to generate MIDI and PDF outputs.</span>
+<span class="sd">    Returns:</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">root</span><span class="p">,</span> <span class="n">quality</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
@@ -174,22 +174,24 @@
 <a class="viewcode-back" href="../../index.html#out.lilypond.generate_files">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">generate_files</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;output.ly&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate MIDI and PDF files from the .ly file using LilyPond.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        filename (str): The name of the .ly file that contains the LilyPond code to be processed. This file should exist in the current working directory and should have a valid .ly extension for LilyPond to recognize it as an input file.</span>
-<span class="sd">        path (str): The directory path where the generated MIDI and PDF files will be saved. If this path is empty, the generated files will be saved in the current working directory. The path should end with a separator (e.g., &quot;/&quot; or &quot;\\&quot;) if it is not empty to ensure that the generated files are saved in the correct location.</span>
+<span class="sd">        filename (str): Name of the .ly file to be processed.</span>
+<span class="sd">        path (str): Optional path where the generated files will be saved.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;lilypond&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="s2">&quot;-dcrop&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">])</span></div>
 
 
-
+<span class="c1"># Play generated files</span>
 <div class="viewcode-block" id="play">
 <a class="viewcode-back" href="../../index.html#out.lilypond.play">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">play</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;output.ly&quot;</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Play generated MIDI file using Timidity. Assumes that the MIDI file has been generated from the .ly file and is in the same directory.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        filename (str): The name of the .ly file that contains the LilyPond code for the musical score. This file should exist in the current working directory and should have a valid .ly extension. The function will look for a corresponding MIDI file with the same base name (but with a .midi extension) generated from this .ly file, and if found, it will use Timidity to play the MIDI file. If the MIDI file is not found, an error message will be printed indicating that the MIDI file could not be located.</span>
+<span class="sd">        filename (str): The name of the .ly file from which the MIDI file was generated. The function will look for a corresponding .midi file with the same base name.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">midi_file</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.ly&#39;</span><span class="p">,</span> <span class="s1">&#39;.midi&#39;</span><span class="p">)</span>
     <span class="n">audio_file</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.ly&#39;</span><span class="p">,</span> <span class="s1">&#39;.wav&#39;</span><span class="p">)</span>

@@ -95,12 +95,24 @@
 <div class="viewcode-block" id="Note.is_abstract">
 <a class="viewcode-back" href="../../index.html#core.music.Note.is_abstract">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_abstract</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility function to check if the note is abstract (has a degree but no concrete pitch).</span>
+
+<span class="sd">        Returns: True if the note has a degree but no concrete pitch, False otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
 
 <div class="viewcode-block" id="Note.is_concrete">
 <a class="viewcode-back" href="../../index.html#core.music.Note.is_concrete">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_concrete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Utility function to check if the note is concrete (has a concrete pitch).</span>
+
+<span class="sd">        Returns: True if the note has a concrete pitch, False otherwise.</span>
+<span class="sd">            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
 
@@ -114,7 +126,7 @@
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Note(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">degree</span><span class="si">}</span><span class="s2">, dur=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="si">}</span><span class="s2">)&quot;</span></div>
 
 
-
+<span class="c1"># Key class</span>
 <div class="viewcode-block" id="Key">
 <a class="viewcode-back" href="../../index.html#core.music.Key">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Key</span><span class="p">:</span>
@@ -125,7 +137,7 @@
 <span class="sd">        tonic: Root note of the key (&#39;c&#39;, &#39;eb&#39;, &#39;fs&#39;, etc.)</span>
 <span class="sd">        mode: Scale type (&#39;major&#39;, &#39;minor&#39;, &#39;dorian&#39;, etc.)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tonic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tonic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;major&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialization function for Key class.</span>
 
@@ -145,9 +157,9 @@
 <span class="sd">        Utility function to convert a scale degree to its corresponding pitch name based on the key&#39;s tonic and mode.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            degree: A string representing the scale degree (e.g., &quot;1&quot;, &quot;b2&quot;, &quot;s4&quot;) to be converted to a pitch name based on the key&#39;s tonic and mode. This function uses the key&#39;s tonic and the intervals defined by the mode to calculate the appropriate pitch name for the given degree.</span>
+<span class="sd">            degree: A string representing the scale degree (e.g., &#39;1&#39;, &#39;b3&#39;, &#39;s4&#39;, etc.)</span>
 
-<span class="sd">        Returns:     A string representing the pitch name corresponding to the input scale degree based on the key&#39;s tonic and mode. The function calculates the pitch by determining the interval from the tonic defined by the degree and adjusting for any accidentals, returning a pitch name that reflects the key&#39;s structure.</span>
+<span class="sd">        Returns: A string representing the corresponding pitch name (e.g., &#39;c&#39;, &#39;eb&#39;, &#39;fs&#39;, etc.)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">scale_degrees_to_pitch</span><span class="p">([</span><span class="n">degree</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
@@ -158,7 +170,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">get_scale_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Returns:  A list of strings representing the pitch names of the scale degrees in the key.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">scale_degrees_to_pitch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">degrees</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="p">)</span></div>
@@ -174,7 +186,7 @@
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Key(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span><span class="s2">)&quot;</span></div>
 
 
-
+<span class="c1"># Melody class</span>
 <div class="viewcode-block" id="Melody">
 <a class="viewcode-back" href="../../index.html#core.music.Melody">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Melody</span><span class="p">:</span>
@@ -182,11 +194,19 @@
 <span class="sd">    A musical melody, consisting of a sequence of notes and an associated key.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        notes: List of Note objects representing the melody.</span>
 <span class="sd">        key: Key object representing the key of the melody.</span>
+<span class="sd">        notes: List of Note objects representing the melody.</span>
 <span class="sd">        tags: optional dictionary for additional metadata (e.g., verse, original/variation, bass/tenor, etc.)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Key</span><span class="p">,</span> <span class="n">notes</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialization function for Melody class.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key: Key object representing the key of the melody.</span>
+<span class="sd">            notes: List of Note objects representing the melody.</span>
+<span class="sd">            tags: optional dictionary for additional metadata (e.g., verse, original/variation, bass/tenor, etc.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">notes</span> <span class="ow">or</span> <span class="p">[]</span>  <span class="c1"># list of Note objects</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span> <span class="ow">or</span> <span class="p">{}</span>
@@ -194,6 +214,12 @@
 <div class="viewcode-block" id="Melody.to_pitches">
 <a class="viewcode-back" href="../../index.html#core.music.Melody.to_pitches">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts abstract notes (with scale degrees) to concrete pitches based on the melody&#39;s key.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the melody has no key assigned or if any note is abstract without a degree.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Melody has no key assigned&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
@@ -204,6 +230,15 @@
 <div class="viewcode-block" id="Melody.add_rhythm">
 <a class="viewcode-back" href="../../index.html#core.music.Melody.add_rhythm">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_rhythm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhythm</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds rhythm to the melody by assigning durations to each note based on a provided rhythm pattern.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rhythm (list): A list of durations corresponding to each note in the melody.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If the length of the rhythm list does not match the number of notes in the melody.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rhythm</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Rhythm and notes length mismatch&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">note</span><span class="p">,</span> <span class="n">dur</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">,</span> <span class="n">rhythm</span><span class="p">):</span>
@@ -212,12 +247,12 @@
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Debugging function to represent the Melody object as a string for easy visualization.</span>
 
-<span class="sd">        Returns:</span>
+<span class="sd">        Returns: A string with the attributes of the Melody object.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Melody(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="si">}</span><span class="s2">, key=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2">, tags=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="si">}</span><span class="s2">)&quot;</span></div>
-
 
 
 <span class="c1"># Helper function to spell a note based on its letter and accidental</span>
@@ -289,6 +324,7 @@
         <span class="k">if</span> <span class="n">final_accidental</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
             <span class="n">final_accidental</span> <span class="o">-=</span> <span class="mi">12</span>
         <span class="n">pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spell_note</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">final_accidental</span><span class="p">))</span>
+
     <span class="k">return</span> <span class="n">pitches</span></div>
 
 </pre></div>
