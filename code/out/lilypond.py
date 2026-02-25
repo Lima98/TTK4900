@@ -6,11 +6,12 @@ from core.music import Melody
 # Duration mapping from beats to LilyPond notation
 def beat_to_duration(beat):
     """
+    Convert a duration in beats to the corresponding LilyPond duration notation.
 
     Args:
-        beat (): A numerical value representing the duration of a note in beats (e.g., 1 for quarter note, 0.5 for eighth note) to convert to its corresponding LilyPond duration notation.
+        beat (float): Duration in beats (e.g., 1 for quarter note, 0.5 for eighth note, etc.)
 
-    Returns:       A string representing the LilyPond duration notation corresponding to the input beat value, such as "1" for a quarter note, "2" for a half note, "4" for a whole note, etc., based on standard musical durations.
+    Returns: Corresponding LilyPond duration notation as a string.
         
     """
     beat_to_dur = {
@@ -27,21 +28,20 @@ def beat_to_duration(beat):
 
     return beat_to_dur.get(beat)
 
-
 # Converting Melody objects to LilyPond format
 def melody_to_lilypond(melody: Melody, voice_name, clef):
     """
+    Convert a Melody object to LilyPond format.
 
     Args:
-        voice_name (): A string representing the name of the voice (e.g., "soprano", "alto", "tenor", "bass") to be used in the LilyPond output for labeling the musical part corresponding to the given melody.
-        clef (): A string representing the clef (e.g., "treble", "bass") to be used in the LilyPond output for the staff that will contain the given melody.
-        melody: A Melody object containing a list of Note objects representing the melody to be converted into LilyPond format. Each Note object should have its pitch and duration properties populated for accurate conversion.
+        voice_name (str): Name of the voice to be used in LilyPond (e.g., "voiceOne").
+        clef (str): Clef to be used in LilyPond (e.g., "treble", "bass", "\"treble_8\"").
+        melody: Melody object to be converted to LilyPond format.
 
-    Returns:     A list containing two strings: the first string is the LilyPond code defining the voice with the melody, and the second string is the LilyPond code for the staff that references this voice. These strings can be combined with other voices and staff definitions to create a complete LilyPond score.
-        
+    Returns: A tuple containing the LilyPond code for the melody and the corresponding staff reference for the score.
 
     Raises:
-        ValueError: If the melody does not have a key assigned, or if any note in the melody lacks a pitch or duration, a ValueError is raised with an appropriate message indicating the issue.
+        ValueError: If the melody has no key assigned, if any note has no pitch assigned, or if any note has no duration assigned.
     """
     if melody.key is None:
         raise ValueError("Melody must have a key before exporting to LilyPond")
@@ -71,29 +71,29 @@ def melody_to_lilypond(melody: Melody, voice_name, clef):
 
     return [lilypond_melody, score_part]
 
-
 # Writing the generated LilyPond code to a .ly file
 def write_to_file(lilypond_code, filename="output.ly"):
     """
+    Write the generated LilyPond code to a .ly file.
 
     Args:
-        lilypond_code (str): A string containing the complete LilyPond code that represents the musical score to be written to a .ly file. This code should include all necessary definitions for voices, staves, and global settings to create a valid LilyPond file that can be processed to generate MIDI and PDF outputs.
-        filename (str): The name of the .ly file to which the LilyPond code will be written. This file will be created or overwritten in the current working directory, and it should have a .ly extension to be recognized as a valid LilyPond file.
+        lilypond_code (str): The LilyPond code to be written to the file.
+        filename (str): The name of the .ly file to write to. Defaults to "output.ly".
     """
     with open(filename, "w") as file:
         file.write(lilypond_code)
 
-
 # Combining multiple voices into a single LilyPond score
 def voices_to_lilypond(voices, key, time_sig):
     """
+    Write all voices into a single LilyPond score.
 
     Args:
-        voices (list): A list of tuples, where each tuple contains two strings: the first string is the LilyPond code defining a voice with its melody, and the second string is the LilyPond code for the staff that references this voice. This list represents all the voices that will be included in the final LilyPond score.
-        key (str): A string representing the key signature (e.g., "c major", "eb minor") to be included in the global settings of the LilyPond score. This key signature will apply to all voices in the score and should be formatted correctly for LilyPond syntax.
-        time_sig (str): A string representing the time signature (e.g., "4/4", "3/4", "6/8") to be included in the global settings of the LilyPond score. This time signature will apply to all voices in the score and should be formatted correctly for LilyPond syntax.
+        voices (list): List of tuples containing LilyPond code for each voice and their staff references.
+        key (str): The key to notate the score in.
+        time_sig (str): The time signature to notate the score in.
 
-    Returns:    A string containing the complete LilyPond code for the score, which includes global settings for the key signature and time signature, as well as the definitions for all voices and their corresponding staves. This code can be written to a .ly file and processed by LilyPond to generate MIDI and PDF outputs.
+    Returns:
         
     """
     root, quality = key.split()
@@ -128,19 +128,21 @@ def voices_to_lilypond(voices, key, time_sig):
 # Generating MIDI and PDF files from the .ly file using LilyPond, and playing the MIDI file using Timidity.
 def generate_files(filename="output.ly", path=""):
     """
+    Generate MIDI and PDF files from the .ly file using LilyPond.
 
     Args:
-        filename (str): The name of the .ly file that contains the LilyPond code to be processed. This file should exist in the current working directory and should have a valid .ly extension for LilyPond to recognize it as an input file.
-        path (str): The directory path where the generated MIDI and PDF files will be saved. If this path is empty, the generated files will be saved in the current working directory. The path should end with a separator (e.g., "/" or "\\") if it is not empty to ensure that the generated files are saved in the correct location.
+        filename (str): Name of the .ly file to be processed.
+        path (str): Optional path where the generated files will be saved.
     """
     subprocess.run(["lilypond", "-o", path, "-dcrop", filename])
 
-
+# Play generated files
 def play(filename="output.ly"):
     """
+    Play generated MIDI file using Timidity. Assumes that the MIDI file has been generated from the .ly file and is in the same directory.
 
     Args:
-        filename (str): The name of the .ly file that contains the LilyPond code for the musical score. This file should exist in the current working directory and should have a valid .ly extension. The function will look for a corresponding MIDI file with the same base name (but with a .midi extension) generated from this .ly file, and if found, it will use Timidity to play the MIDI file. If the MIDI file is not found, an error message will be printed indicating that the MIDI file could not be located.
+        filename (str): The name of the .ly file from which the MIDI file was generated. The function will look for a corresponding .midi file with the same base name.
     """
     midi_file = filename.replace('.ly', '.midi')
     audio_file = filename.replace('.ly', '.wav')

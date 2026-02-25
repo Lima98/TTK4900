@@ -12,7 +12,8 @@ To listen to generated audio files and view documentation you can visit my [NTNU
 
 ## Project Structure
 The repository is organized as follows:
-- `code/`: Code files and generated output.
+- `code/`: Code files. 
+- `output/`: Generated audio files and other outputs from the code.
 - `docs/_build`: Contains documentation generated using Sphinx.
 - `research/`: Documents and notes on relevant theory and research papers.
 - `thesis/`: Typst files and rendered PDF's of the thesis. 

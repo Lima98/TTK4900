@@ -8,7 +8,7 @@ global = {
 
 voiceOne = \relative c' {
 	\global
-	a2 d4 d4 e8 c2 a4 a8 g2 g4 c8 e8 e2 g4 d8 c8 
+	a4 c4 a4 e4 
 }
 
 \score {

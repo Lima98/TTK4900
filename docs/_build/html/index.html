@@ -41,24 +41,19 @@
 <span id="music-module"></span><h1>Music module<a class="headerlink" href="#module-core.music" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="core.music.Key">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.music.</span></span><span class="sig-name descname"><span class="pre">Key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'major'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Key" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.music.</span></span><span class="sig-name descname"><span class="pre">Key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'major'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Key" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A musical key, defined by its tonic and mode.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Key.tonic">
 <span class="sig-name descname"><span class="pre">tonic</span></span><a class="headerlink" href="#core.music.Key.tonic" title="Link to this definition">¶</a></dt>
-<dd><p>root note of the key (string, e.g., ‘c’, ‘d’, ‘eb’)</p>
+<dd><p>Root note of the key (‘c’, ‘eb’, ‘fs’, etc.)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Key.mode">
 <span class="sig-name descname"><span class="pre">mode</span></span><a class="headerlink" href="#core.music.Key.mode" title="Link to this definition">¶</a></dt>
-<dd><p>scale type (string, e.g., ‘major’, ‘minor’, ‘dorian’)</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="core.music.Key.degrees">
-<span class="sig-name descname"><span class="pre">degrees</span></span><a class="headerlink" href="#core.music.Key.degrees" title="Link to this definition">¶</a></dt>
-<dd><p>list of scale degrees for the mode (derived from SCALES)</p>
+<dd><p>Scale type (‘major’, ‘minor’, ‘dorian’, etc.)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -69,7 +64,8 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="core.music.Key.get_scale_pitches">
 <span class="sig-name descname"><span class="pre">get_scale_pitches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Key.get_scale_pitches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Key.get_scale_pitches" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns:</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -77,22 +73,23 @@
 <dt class="sig sig-object py" id="core.music.Melody">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.music.</span></span><span class="sig-name descname"><span class="pre">Melody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#core.music.Key" title="core.music.Key"><span class="pre">Key</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Melody"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Melody" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A musical melody, consisting of a sequence of notes and an associated key.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Melody.notes">
 <span class="sig-name descname"><span class="pre">notes</span></span><a class="headerlink" href="#core.music.Melody.notes" title="Link to this definition">¶</a></dt>
-<dd><p>list of Note objects representing the melody</p>
+<dd><p>List of Note objects representing the melody.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Melody.key">
 <span class="sig-name descname"><span class="pre">key</span></span><a class="headerlink" href="#core.music.Melody.key" title="Link to this definition">¶</a></dt>
-<dd><p>Key object representing the key of the melody</p>
+<dd><p>Key object representing the key of the melody.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Melody.tags">
 <span class="sig-name descname"><span class="pre">tags</span></span><a class="headerlink" href="#core.music.Melody.tags" title="Link to this definition">¶</a></dt>
-<dd><p>optional dictionary for additional metadata (e.g., tempo, style)</p>
+<dd><p>optional dictionary for additional metadata (e.g., verse, original/variation, bass/tenor, etc.)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -111,22 +108,23 @@
 <dt class="sig sig-object py" id="core.music.Note">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.music.</span></span><span class="sig-name descname"><span class="pre">Note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#Note"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.Note" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A musical note, represented by scale degree, concrete pitch and duration.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Note.degree">
 <span class="sig-name descname"><span class="pre">degree</span></span><a class="headerlink" href="#core.music.Note.degree" title="Link to this definition">¶</a></dt>
-<dd><p>scale degree (abstract, e.g., 1, b2, s4)</p>
+<dd><p>Scale degree (1, 2, b3, s4, etc.) (Abstract)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Note.pitch">
 <span class="sig-name descname"><span class="pre">pitch</span></span><a class="headerlink" href="#core.music.Note.pitch" title="Link to this definition">¶</a></dt>
-<dd><p>concrete pitch (string, e.g., ‘c4’)</p>
+<dd><p>Concrete pitch (‘c’, ‘eb’, ‘fs’, etc.) (Concrete)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="core.music.Note.duration">
 <span class="sig-name descname"><span class="pre">duration</span></span><a class="headerlink" href="#core.music.Note.duration" title="Link to this definition">¶</a></dt>
-<dd><p>duration in beats (optional, e.g., 1 for quarter note, 0.5 for eighth note)</p>
+<dd><p>Duration in beats (1 for quarter note, 0.5 for eighth note, etc.)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -144,29 +142,31 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="core.music.scale_degrees_to_pitch">
 <span class="sig-prename descclassname"><span class="pre">core.music.</span></span><span class="sig-name descname"><span class="pre">scale_degrees_to_pitch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degrees</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#scale_degrees_to_pitch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.scale_degrees_to_pitch" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Converting scale degrees to pitch names based on the root note.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>degrees</strong> (<em>list</em>) – A list of scale degrees (e.g., [“1”, “b2”, “3”]) to be converted to pitch names based on the specified root note. Each degree can include an accidental (e.g., “b2” for flat second, “s4” for sharp fourth) which will be taken into account when calculating the final pitch name.</p></li>
-<li><p><strong>root</strong> (<em>str</em>) – A string representing the root note (e.g., “c”, “d”, “eb”) from which the scale degrees will be calculated. The root note can also include an accidental (e.g., “eb” for E flat, “fs” for F sharp) which will affect the starting pitch for the scale degree calculations.</p></li>
+<li><p><strong>degrees</strong> (<em>list</em>) – List of string representing the scale degrees.</p></li>
+<li><p><strong>root</strong> (<em>str</em>) – String representing the root of the key for the melody. (‘c’, ‘eb’, ‘fs’, etc.)</p></li>
 </ul>
 </dd>
 </dl>
-<p>Returns:     A list of pitch names corresponding to the input scale degrees based on the specified root note. Each pitch name is derived from the root note and the intervals defined by the scale degrees, taking into account any accidentals in both the root and the degrees. For example, if the root is “c” and the degree is “b2”, the resulting pitch name would be “cf” (C flat), while if the degree is “s4”, the resulting pitch name would be “cs” (C sharp).</p>
+<p>Returns: A list of strings representing pitch names.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="core.music.spell_note">
 <span class="sig-prename descclassname"><span class="pre">core.music.</span></span><span class="sig-name descname"><span class="pre">spell_note</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">letter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accidental</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/core/music.html#spell_note"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.music.spell_note" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Helper function to spell a note based on its letter and accidental.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>letter</strong> (<em>str</em>) – A string representing the letter name of the note (e.g., “c”, “d”, “e”, “f”, “g”, “a”, “b”) to be spelled.</p></li>
-<li><p><strong>accidental</strong> (<em>int</em>) – An integer representing the accidental of the note, where 0 indicates a natural note, -1 indicates a flat, and 1 indicates a sharp. This value is used to determine how to modify the letter name of the note when spelling it (e.g., “c” with an accidental of -1 would be spelled as “cf” for C flat, while “c” with an accidental of 1 would be spelled as “cs” for C sharp).</p></li>
+<li><p><strong>letter</strong> (<em>str</em>) – A string representing note to be spelled.</p></li>
+<li><p><strong>accidental</strong> (<em>int</em>) – Integer representing accidental. (-2, -1, 0, 1, 2) Negative for flats and positive for sharps.</p></li>
 </ul>
 </dd>
 </dl>
-<p>Returns:    A string representing the spelled note name based on the input letter and accidental, where the letter is modified according to the accidental (e.g., “c” with an accidental of -1 would return “cf”, “c” with an accidental of 1 would return “cs”, and “c” with an accidental of 0 would return “c”).</p>
+<p>Returns: A string with the spelled note.</p>
 </dd></dl>
 
 </section>

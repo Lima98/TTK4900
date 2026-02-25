@@ -11,13 +11,13 @@ from out.lilypond import (
 # ---------------- Configuration ----------------
 
 OUTPUT_FILENAME = "melody.ly"
-OUTPUT_PATH = "code/output/default/"
+OUTPUT_PATH = "../output/.default/"
 FULL_PATH = OUTPUT_PATH + OUTPUT_FILENAME
 
 KEY_NAME = "c"
 MODE = "major_pentatonic"
 TIME_SIGNATURE = "4/4"
-BARS = 4
+BARS = 1
 
 # Voice configuration (extensible)
 VOICES = [
