@@ -11,6 +11,7 @@ if [ ! -d "$VOLUME_PATH" ]; then
     echo "Error: $VOLUME_PATH is not mounted. Please connect to smb://webedit.ntnu.no/janoivil through finder and try again.\n"
     exit 1
 fi
+
 echo "Mounted drive found: $VOLUME_PATH\n"
 
 echo "Activating venv...\n"

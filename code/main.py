@@ -15,16 +15,16 @@ OUTPUT_PATH = "../output/.default/"
 FULL_PATH = OUTPUT_PATH + OUTPUT_FILENAME
 
 KEY_NAME = "c"
-MODE = "major_pentatonic"
+MODE = "major"
 TIME_SIGNATURE = "4/4"
-BARS = 1
+BARS = 8
 
 # Voice configuration (extensible)
 VOICES = [
     {"name": "voiceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    # {"name": "voiceTwo",   "clef": "\"treble_8\"", "rhythm_values": ["q"]},
-    # {"name": "voiceThree", "clef": "bass",        "rhythm_values": ["h"]},
-    # {"name": "voiceFour",  "clef": "bass",        "rhythm_values": ["w"]},
+    {"name": "voiceTwo",   "clef": "\"treble_8\"", "rhythm_values": ["q"]},
+    {"name": "voiceThree", "clef": "bass",        "rhythm_values": ["h"]},
+    {"name": "voiceFour",  "clef": "bass",        "rhythm_values": ["w"]},
 ]
 
 # ---------------- Setup ----------------

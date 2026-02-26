@@ -1,5 +1,5 @@
 # TTK4900
-Master Project Cybernetics and Robotics at NTNU
+Master Project Cybernetics and Robotics at NTNU, the WIP [thesis](thesis/latex/main.pdf) can be found in the `thesis/` directory. 
 
 ## Table of Contents
 - [Project Overview](#project-overview)

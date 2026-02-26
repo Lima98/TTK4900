@@ -16,5 +16,47 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{wolves_of_mount_mckinley}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=a6268e23590490da7e59bc2720752bbf}{%
+           family={Murie},
+           familyi={M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=148abd1afd1e8b14bcf5c50f45857117}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={W.\bibnamedelimi B.},
+           giveni={W\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{5d84df4f438ad0f0848856971d9a61c7}
+      \strng{fullhash}{5d84df4f438ad0f0848856971d9a61c7}
+      \strng{fullhashraw}{5d84df4f438ad0f0848856971d9a61c7}
+      \strng{bibnamehash}{5d84df4f438ad0f0848856971d9a61c7}
+      \strng{authorbibnamehash}{5d84df4f438ad0f0848856971d9a61c7}
+      \strng{authornamehash}{5d84df4f438ad0f0848856971d9a61c7}
+      \strng{authorfullhash}{5d84df4f438ad0f0848856971d9a61c7}
+      \strng{authorfullhashraw}{5d84df4f438ad0f0848856971d9a61c7}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issue}{1}
+      \field{journaltitle}{Journal of Mammalogy}
+      \field{month}{02}
+      \field{title}{\textit{The Wolves of Mount McKinley. Fauna of the National Parks of the United States}}
+      \field{volume}{26}
+      \field{year}{1945}
+      \field{pages}{100\bibrangedash 101}
+      \range{pages}{2}
+      \verb{doi}
+      \verb https://doi.org/10.2307/1375039
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 
