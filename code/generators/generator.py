@@ -1,7 +1,7 @@
 # Main module for generating melodies and rhythms using Melody/Note objects
 import random
 from core.music import Key, Note, Melody, SCALES
-from core.models import Motif
+from core.models import Phrase, Motif
 
 # Generate a random chromatic melody
 # NOTE: Deprecated
@@ -124,19 +124,32 @@ def generate_motif(scale = "major") -> Motif:
     return motif
 
 # Fill a bar with music starting with the motif
-def motif_to_melody(motif: Motif, key: Key, TIME_SIG) -> Melody:
+def motif_to_phrase(motif: Motif, key: Key, TIME_SIG) -> Phrase:
     num_beats = int(TIME_SIG.split("/")[0])
-    motif_length = sum(rhythm_to_values(motif.rhythm))
-    remaining_beats = num_beats- motif_length  # Assuming 4/4 time signature
-    print("Num beats in bar:", num_beats)
-    print("Motif length in beats:", motif_length)
-    print("Remaining beats: ", remaining_beats)
 
     # Place the motif at the beginning of the bar and fill the rest with random rhythm values
-    rhythm = motif.rhythm.extend(generate_rhythm(bars=1, time_sig=TIME_SIG, values=["q", "e", "s"]))
-    # Trim rhythm to fit the bar
-    print(rhythm)
-    print("Rhythm after filling bar: ", rhythm)
-    notes = motif.notes.extend(generate_notes(num_notes=len(rhythm)-len(motif.notes), key=key).notes)
+    rhythm = rhythm_to_values(motif.rhythm)
+    random_rhythm = generate_rhythm(bars=1, time_sig=TIME_SIG, values=["q", "e", "s"])
+    # Append random rhythm until full bar
+    for val in random_rhythm:
+        if sum(rhythm) + val <= num_beats:
+            rhythm.append(val)
+        else:
+            break
 
-    return Melody(notes=None, key = key)
+    degrees = motif.notes
+    
+    while len(degrees) < len(rhythm):
+        degrees.append(random.choice(SCALES[key.mode]))
+
+    return Phrase(notes=degrees, rhythm = rhythm)
+
+# Convert Motif to a Melody by filling in pitches and durations
+def phrase_to_melody(phrase: Phrase, key: Key) -> Melody:
+    notes = []
+    for degree, dur in zip(phrase.notes, phrase.rhythm):
+        pitch = key.degree_to_pitch(degree)
+        note = Note(degree=degree, pitch=pitch, duration=dur)
+        notes.append(note)
+
+    return Melody(key=key, notes=notes, rhythm=dur)

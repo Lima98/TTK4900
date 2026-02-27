@@ -4,12 +4,14 @@ from core.music import Note
 
 
 class Motif:
-    def __init__(self, notes=None, rhythm=None):
+    def __init__(self, notes, rhythm):
         self.notes = notes
         self.rhythm = rhythm
 
 class Phrase:
-    motifs = list[Motif]
+    def __init__(self, notes, rhythm):
+        self.notes = notes
+        self.rhythm = rhythm
 
 class Section:
     phrases = list[Phrase]

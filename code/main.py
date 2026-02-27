@@ -24,10 +24,10 @@ BARS = 8
 
 # Voice configuration (extensible)
 VOICES = [
-    {"name": "voiceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
-    {"name": "voiceTwo",   "clef": "\"treble_8\"", "rhythm_values": ["q"]},
-    {"name": "voiceThree", "clef": "bass",        "rhythm_values": ["h"]},
-    {"name": "voiceFour",  "clef": "bass",        "rhythm_values": ["w"]},
+    {"name": "voiceOne","clef": "treble","rhythm_values": ["q", "e", "h"]},
+    # {"name": "voiceTwo",   "clef": "\"treble_8\"", "rhythm_values": ["q"]},
+    # {"name": "voiceThree", "clef": "bass",        "rhythm_values": ["h"]},
+    # {"name": "voiceFour",  "clef": "bass",        "rhythm_values": ["w"]},
 ]
 
 # ---------------- Setup ----------------
@@ -87,3 +87,4 @@ lily_code = voices_to_lilypond(
 write_to_file(lily_code, FULL_PATH)
 generate_files(FULL_PATH, OUTPUT_PATH)
 play(FULL_PATH)
+
