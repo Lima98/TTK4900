@@ -1,3 +1,13 @@
+## 0.6.0 (2026-02-27)
+
+### Feat
+
+- WIP on phrase generator
+
+### Fix
+
+- **most-files**: broken shit while trying to make melody generator
+
 ## 0.5.1 (2026-02-25)
 
 ### Refactor
