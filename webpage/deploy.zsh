@@ -33,3 +33,6 @@ echo "Done!\n"
 echo "Copying docs/ to /Volumes/janoivil/docs/\n"
 rsync -a ../docs/ /Volumes/janoivil/docs/
 echo "Done!\n"
+echo "Copying output/ to /Volumes/janoivil/output/\n"
+rsync -a ../output/ /Volumes/janoivil/output/
+echo "Done!\n"

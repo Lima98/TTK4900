@@ -8,22 +8,22 @@ global = {
 
 voiceOne = \relative c' {
 	\global
-	b2 c4 a8 c8 d4 e4 e2 e2 c8 a4 b8 d4 b4 d2 d8 d2 b4 b8 a8 g8 b2 g8 f8 d2 c4 d4 c4 e8 c8 e8 g8 b8 g8 
+	a8 f2 a8 f8 f8 f4 g4 e4 c8 d8 d2 b2 d8 b4 a4 b4 a8 c8 a8 c2 c4 c4 a2 b8 a8 a2 c8 e8 d8 f8 f2 g4 a8 f8 
 }
 
 voiceTwo = \relative c' {
 	\global
-	d4 d4 e4 d4 e4 e4 f4 e4 c4 c4 d4 b4 c4 c4 e4 g4 e4 e4 g4 f4 e4 f4 d4 d4 f4 g4 g4 a4 c4 d4 f4 e4 
+	a4 c4 d4 e4 g4 b4 a4 g4 f4 g4 f4 f4 a4 c4 e4 f4 d4 d4 b4 a4 c4 c4 e4 c4 a4 c4 e4 f4 e4 g4 b4 d4 
 }
 
 voiceThree = \relative c' {
 	\global
-	a2 g2 e2 d2 f2 f2 e2 g2 e2 g2 b2 c2 a2 g2 f2 d2 
+	b2 a2 a2 g2 g2 a2 a2 a2 g2 e2 g2 e2 f2 d2 f2 g2 
 }
 
 voiceFour = \relative c' {
 	\global
-	e1 f1 d1 f1 a1 g1 f1 g1 
+	b1 a1 g1 a1 g1 b1 g1 f1 
 }
 
 \score {

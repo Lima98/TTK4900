@@ -148,6 +148,13 @@ body {
           background: #33335a;
         }
 
+        .score-image {
+          width: 100%;
+          margin-top: 1rem;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+        }
+
     </style>
   </head>
 
@@ -159,6 +166,7 @@ body {
     </header>
 
     <nav>
+      <button onclick="showChapter('test', this)">Test</button>
       <button onclick="showChapter('theory', this)">Theory</button>
       <button onclick="showChapter('chapter1', this)">Chapter 1</button>
       <button onclick="showChapter('chapter2', this)">Chapter 2</button>
@@ -166,6 +174,29 @@ body {
     </nav>
 
     <main>
+      <!-- ======================= -->
+      <!-- Test -->
+      <!-- ======================= -->
+      <section id="test">
+        <h2>Test-page for proof of concept</h2>
+
+        <div class="example">
+          <h3>Example 1.1 – Testing audio</h3>
+          <p>Random audio to test playback.</p>
+
+          <img src="output/4-part-random/melody.cropped.pdf"
+               alt="Score example"
+               class="score-image">
+
+          <!-- Replace src with generated file -->
+          <audio controls>
+            <source src="output/4-part-random/melody.wav" type="audio/wav">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+      </section>
+
       <!-- ======================= -->
       <!-- Theory -->
       <!-- ======================= -->

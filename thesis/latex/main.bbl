@@ -19,41 +19,158 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
-    \entry{wolves_of_mount_mckinley}{article}{}{}
-      \name{author}{2}{}{%
-        {{hash=a6268e23590490da7e59bc2720752bbf}{%
-           family={Murie},
-           familyi={M\bibinitperiod},
-           given={A.},
-           giveni={A\bibinitperiod}}}%
-        {{hash=148abd1afd1e8b14bcf5c50f45857117}{%
-           family={Davis},
-           familyi={D\bibinitperiod},
-           given={W.\bibnamedelimi B.},
-           giveni={W\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+    \entry{vanderlindenProceduralGenerationDungeons2014}{article}{}{}
+      \name{author}{3}{}{%
+        {{useprefix=true,hash=1aafc72dd11442dc130beacb4e86c499}{%
+           family={Linden},
+           familyi={L\bibinitperiod},
+           given={Roland},
+           giveni={R\bibinitperiod},
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=88d33934e10fd64a746702e0c4172d1a}{%
+           family={Lopes},
+           familyi={L\bibinitperiod},
+           given={Ricardo},
+           giveni={R\bibinitperiod}}}%
+        {{hash=1d3f4766060649d522cb73a599ad27c5}{%
+           family={Bidarra},
+           familyi={B\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod}}}%
       }
-      \strng{namehash}{5d84df4f438ad0f0848856971d9a61c7}
-      \strng{fullhash}{5d84df4f438ad0f0848856971d9a61c7}
-      \strng{fullhashraw}{5d84df4f438ad0f0848856971d9a61c7}
-      \strng{bibnamehash}{5d84df4f438ad0f0848856971d9a61c7}
-      \strng{authorbibnamehash}{5d84df4f438ad0f0848856971d9a61c7}
-      \strng{authornamehash}{5d84df4f438ad0f0848856971d9a61c7}
-      \strng{authorfullhash}{5d84df4f438ad0f0848856971d9a61c7}
-      \strng{authorfullhashraw}{5d84df4f438ad0f0848856971d9a61c7}
+      \strng{namehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{fullhash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{fullhashraw}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{bibnamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorbibnamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authornamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorfullhash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorfullhashraw}{7c9ff97145cb14c4b1c0f8d33f679755}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{issue}{1}
-      \field{journaltitle}{Journal of Mammalogy}
-      \field{month}{02}
-      \field{title}{\textit{The Wolves of Mount McKinley. Fauna of the National Parks of the United States}}
-      \field{volume}{26}
-      \field{year}{1945}
-      \field{pages}{100\bibrangedash 101}
-      \range{pages}{2}
+      \field{abstract}{The use of procedural content generation (PCG) techniques in game development has been mostly restricted to very specific types of game elements. PCG has seldom been deployed for generating entire game levels, a notable exception to this being dungeons: a specific type of game level often encountered in adventure and role playing games. Due to their peculiar combination of pace, gameplay, and game spaces, dungeon levels are among the most suited to showcase the benefits of PCG. This paper surveys research on procedural methods to generate dungeon game levels. We summarize common practices, discuss pros and cons of different approaches, and identify a few promising challenges ahead. In general, what current procedural dungeon generation methods are missing is not performance, but more powerful, accurate, and richer control over the generation process. Recent research results seem to indicate that gameplay-related criteria can provide this high-level control. However, this area is still in its infancy, and many research challenges still lie ahead, e.g., improving the intuitiveness and accessibility of such methods for designers. We also observe that more research is needed into generic mechanisms for automating the generation of the actual dungeon-geometric models. We conclude that the foundations for enabling gameplay-based control of dungeon-level generation are worth being researched, and that its promising results may be instrumental in bringing PCG into mainstream game development.}
+      \field{issn}{1943-0698}
+      \field{journaltitle}{IEEE Transactions on Computational Intelligence and AI in Games}
+      \field{month}{3}
+      \field{number}{1}
+      \field{title}{Procedural {{Generation}} of {{Dungeons}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{6}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{78\bibrangedash 89}
+      \range{pages}{12}
       \verb{doi}
-      \verb https://doi.org/10.2307/1375039
+      \verb 10.1109/TCIAIG.2013.2290371
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/HUERQ77M/van der Linden et al. - 2014 - Procedural Generation of Dungeons.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/abstract/document/6661386
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/abstract/document/6661386
+      \endverb
+      \keyw{Abstracts,Aerospace electronics,Automata,Gameplay semantics,Games,Geometry,procedural content generation,procedural level generation,Process control,Rocks,role playing games}
+    \endentry
+    \entry{galinProceduralGenerationRoads2010}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=3e72db1b05ba9ebbfdc7d5a32b3ec2db}{%
+           family={Galin},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=93c0a6f65066ccaa0ea8dc0fbb6fbbaf}{%
+           family={Peytavie},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7cb9d5f7613f5b4f171068af3df2f6c9}{%
+           family={Maréchal},
+           familyi={M\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=87271453b4433bae5a2e53eed8817178}{%
+           family={Guérin},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{fullhash}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{fullhashraw}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{bibnamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authorbibnamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authornamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authorfullhash}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{authorfullhashraw}{bd53d1f420e5849f6ce8de20414353e9}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, we propose an automatic method for generating roads based on a weighted anisotropic shortest path algorithm. Given an input scene, we automatically create a path connecting an initial and a final point. The trajectory of the road minimizes a cost function that takes into account the different parameters of the scene including the slope of the terrain, natural obstacles such as rivers, lakes, mountains and forests. The road is generated by excavating the terrain along the path and instantiating generic parameterized models.}
+      \field{issn}{1467-8659}
+      \field{journaltitle}{Computer Graphics Forum}
+      \field{langid}{english}
+      \field{number}{2}
+      \field{title}{Procedural {{Generation}} of {{Roads}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{29}
+      \field{year}{2010}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{429\bibrangedash 438}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/4VSNNCTK/Galin et al. - 2010 - Procedural Generation of Roads.pdf;/Users/jan-oivindlima/Zotero/storage/QGNFN2VM/j.1467-8659.2009.01612.html
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \keyw{Computer Graphics: Three-Dimensional Graphics and Realism,discrete anisotropic shortest path,Procedural modeling,road generation}
+    \endentry
+    \entry{holeAutomaticSpeciesCounterpoint}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=81b8c2063d7b923c9fba931bbe98bf1b}{%
+           family={Hole},
+           familyi={H\bibinitperiod},
+           given={Johan\bibnamedelima Gangsås},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{fullhash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{fullhashraw}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{bibnamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorbibnamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authornamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorfullhash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorfullhashraw}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Master Thesis at NTNU}
+      \field{langid}{english}
+      \field{title}{Automatic {{Species Counterpoint}}}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/B2EFSX9P/Hole - Automatic Species Counterpoint.pdf
       \endverb
     \endentry
   \enddatalist
