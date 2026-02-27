@@ -1,6 +1,7 @@
 # Main module for generating melodies and rhythms using Melody/Note objects
 import random
 from core.music import Key, Note, Melody, SCALES
+from core.models import Phrase, Section, Piece
 
 # Generate a random chromatic melody
 def generate_random_notes(length=8, key: Key = Key("c", "major")) -> Melody:
@@ -99,3 +100,131 @@ def generate_rhythm(bars=1, time_sig="4/4", values=["q"]):
             tot += val
 
     return rhythm
+
+
+# Generate a single phrase for all voices
+def generate_phrase(label, key: Key, bars=4, voice_configs=None, time_sig="4/4") -> Phrase:
+    """
+    Generate a single musical phrase containing one melody per voice.
+
+    Args:
+        label: Label for the phrase (e.g., "a1", "b1").
+        key: Key object representing the key for the phrase.
+        bars: Number of bars in the phrase.
+        voice_configs: List of voice configuration dicts, each with keys:
+            "name" (str), "clef" (str), and "rhythm_values" (list of str).
+        time_sig: Time signature string (e.g., "4/4").
+
+    Returns: A Phrase object containing one Melody per voice.
+    """
+    if voice_configs is None:
+        voice_configs = [{"name": "voiceOne", "clef": "treble", "rhythm_values": ["q"]}]
+
+    melodies = []
+    for voice_config in voice_configs:
+        rhythm = generate_rhythm(bars=bars, time_sig=time_sig, values=voice_config["rhythm_values"])
+        melody = generate_notes(num_notes=len(rhythm), key=key)
+        melody.add_rhythm(rhythm)
+        melodies.append(melody)
+
+    return Phrase(melodies=melodies, label=label, bars=bars)
+
+
+# Generate a section consisting of multiple phrases
+def generate_section(label, key: Key, num_phrases=2, bars_per_phrase=4,
+                     voice_configs=None, time_sig="4/4") -> Section:
+    """
+    Generate a musical section consisting of multiple phrases.
+
+    Args:
+        label: Label for the section (e.g., "A", "B").
+        key: Key object representing the key for the section.
+        num_phrases: Number of phrases in the section.
+        bars_per_phrase: Number of bars per phrase.
+        voice_configs: List of voice configuration dicts (see generate_phrase).
+        time_sig: Time signature string (e.g., "4/4").
+
+    Returns: A Section object containing the generated phrases.
+    """
+    phrases = []
+    for i in range(num_phrases):
+        phrase = generate_phrase(
+            label=f"{label}{i + 1}",
+            key=key,
+            bars=bars_per_phrase,
+            voice_configs=voice_configs,
+            time_sig=time_sig
+        )
+        phrases.append(phrase)
+
+    return Section(phrases=phrases, label=label)
+
+
+# Generate a full musical piece using a defined form
+def generate_piece(title, key: Key, form_def, form_order, voice_configs=None,
+                   time_sig="4/4", tempo=120) -> Piece:
+    """
+    Generate a complete musical piece using a defined form with distinct sections.
+
+    Each entry in form_def specifies how to generate one unique section (e.g., "A"
+    or "B"). The form_order list controls the playback order, allowing repetition
+    (e.g., ["A", "A", "B", "A"] for AABA form).
+
+    Args:
+        title: Title of the piece.
+        key: Key object representing the global key of the piece.
+        form_def: Dictionary mapping section labels to their generation parameters.
+            Each value is a dict with optional keys:
+                "num_phrases" (int, default 2): number of phrases in the section.
+                "bars_per_phrase" (int, default 4): bars per phrase.
+                "rhythm_values" (list of str): allowed rhythm symbols for this section.
+                "voice_overrides" (list of dicts): per-voice config overrides for this section.
+        form_order: List of section labels defining playback order (e.g., ["A", "A", "B", "A"]).
+        voice_configs: Default voice configuration list used for all sections unless
+            overridden via form_def "voice_overrides".
+        time_sig: Time signature string (e.g., "4/4").
+        tempo: Tempo in BPM.
+
+    Returns: A Piece object with all sections generated and arranged in the given form.
+    """
+    if voice_configs is None:
+        voice_configs = [{"name": "voiceOne", "clef": "treble", "rhythm_values": ["q"]}]
+
+    sections = {}
+    for label, params in form_def.items():
+        num_phrases = params.get("num_phrases", 2)
+        bars_per_phrase = params.get("bars_per_phrase", 4)
+        rhythm_values = params.get("rhythm_values", None)
+        voice_overrides = params.get("voice_overrides", None)
+
+        # Build the voice configs for this section, applying any overrides
+        section_voices = []
+        for vc in voice_configs:
+            merged = dict(vc)
+            if rhythm_values:
+                merged["rhythm_values"] = rhythm_values
+            section_voices.append(merged)
+
+        if voice_overrides:
+            for i, override in enumerate(voice_overrides):
+                if i < len(section_voices):
+                    section_voices[i].update(override)
+
+        section = generate_section(
+            label=label,
+            key=key,
+            num_phrases=num_phrases,
+            bars_per_phrase=bars_per_phrase,
+            voice_configs=section_voices,
+            time_sig=time_sig
+        )
+        sections[label] = section
+
+    return Piece(
+        sections=sections,
+        form=form_order,
+        key=key,
+        time_sig=time_sig,
+        tempo=tempo,
+        title=title
+    )

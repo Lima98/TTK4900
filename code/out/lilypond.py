@@ -1,7 +1,7 @@
 # Handling conversion to LilyPond and generating associated files.
 import subprocess
 import os
-from core.music import Melody
+from core.music import Key, Melody
 
 # Duration mapping from beats to LilyPond notation
 def beat_to_duration(beat):
@@ -96,8 +96,24 @@ def voices_to_lilypond(voices, key, time_sig):
     Returns:
         
     """
+    # Map music modes to valid LilyPond key modes
+    _LILYPOND_MODES = {
+        "major": "major",
+        "minor": "minor",
+        "dorian": "dorian",
+        "phrygian": "phrygian",
+        "lydian": "lydian",
+        "mixolydian": "mixolydian",
+        "locrian": "locrian",
+        "major_pentatonic": "major",
+        "minor_pentatonic": "minor",
+        "harmonic_minor": "minor",
+        "phrygian_dominant": "phrygian",
+    }
+
     root, quality = key.split()
     root = root.replace("b", "f") if root.endswith("b") else root
+    quality = _LILYPOND_MODES.get(quality, quality)
 
     lilypond_output = "\\version \"2.24.4\"\n"
     lilypond_output += "\\language \"english\"\n\n"
@@ -152,3 +168,49 @@ def play(filename="output.ly"):
         subprocess.run(["afplay", audio_file])
     else:
         print(f"MIDI file not found: {midi_file}")
+
+
+# Converting a full Piece to a LilyPond score
+def piece_to_lilypond(piece, voice_configs):
+    """
+    Convert a full Piece (with sections, phrases, and voices) to a LilyPond score.
+
+    Iterates over the form, collecting all notes for each voice in playback order,
+    then builds a single combined melody per voice and renders the score.
+
+    Args:
+        piece: A Piece object containing sections, form, key, and time signature.
+        voice_configs: List of voice configuration dicts, each with keys:
+            "name" (str), "clef" (str).
+
+    Returns: A string containing the full LilyPond score.
+    """
+    num_voices = len(voice_configs)
+    all_notes = [[] for _ in range(num_voices)]
+
+    # Collect notes from all sections in form order
+    for section in piece.get_ordered_sections():
+        for phrase in section.phrases:
+            for i, melody in enumerate(phrase.melodies):
+                # Ensure concrete pitches are populated before collecting notes
+                melody.to_pitches()
+                all_notes[i].extend(melody.notes)
+
+    # Build one combined Melody per voice and convert to LilyPond
+    lily_voices = []
+    for i, voice_config in enumerate(voice_configs):
+        combined = Melody(key=piece.key, notes=all_notes[i])
+        lily_voice = melody_to_lilypond(combined, voice_config["name"], voice_config["clef"])
+        lily_voices.append(lily_voice)
+
+    key_string = f"{piece.key.tonic} {piece.key.mode}"
+    lily_code = voices_to_lilypond(lily_voices, key_string, piece.time_sig)
+
+    # Inject tempo marking after the \time directive
+    tempo_line = f"\t\\tempo 4 = {piece.tempo}\n"
+    lily_code = lily_code.replace(
+        f"\t\\time {piece.time_sig}\n",
+        f"\t\\time {piece.time_sig}\n{tempo_line}"
+    )
+
+    return lily_code

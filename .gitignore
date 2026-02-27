@@ -6,3 +6,6 @@ codebook.toml
 *.wav
 *.ogg
 *.log
+__pycache__/
+*.pyc
+*.pyo
