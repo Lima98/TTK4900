@@ -107,7 +107,6 @@ class Key:
         self.degrees = SCALES[mode]
 
     def degree_to_pitch(self, degree: str) -> str:
-        print("Key degree_to_pitch function run")
         """
         Utility function to convert a scale degree to its corresponding pitch name based on the key's tonic and mode.
 
@@ -146,7 +145,7 @@ class Melody:
         notes: List of Note objects representing the melody.
         tags: optional dictionary for additional metadata (e.g., verse, original/variation, bass/tenor, etc.)
     """
-    def __init__(self, key: Key, notes, tags=None):
+    def __init__(self, key: Key, notes, rhythm, tags=None):
         """
         Initialization function for Melody class.
 
@@ -156,6 +155,7 @@ class Melody:
             tags: optional dictionary for additional metadata (e.g., verse, original/variation, bass/tenor, etc.)
         """
         self.notes = notes or []  # list of Note objects
+        self.rhythm = rhythm or []  # list of durations corresponding to each note
         self.key = key
         self.tags = tags or {}
 
@@ -195,6 +195,32 @@ class Melody:
 
         """
         return f"Melody({self.notes}, key={self.key}, tags={self.tags})"
+
+# Rhythm class
+class Rhythm:
+    """
+    A musical rhythm, consisting of a sequence of durations.
+
+    Attributes:
+        pattern: List of durations representing the rhythm pattern (e.g., [1, 0.5, 0.5, 1] for quarter, eighth, eighth, quarter).
+    """
+    def __init__(self, pattern):
+        """
+        Initialization function for Rhythm class.
+
+        Args:
+            pattern: List of durations representing the rhythm pattern (e.g., [1, 0.5, 0.5, 1] for quarter, eighth, eighth, quarter).
+        """
+        self.pattern = pattern
+
+    def __repr__(self):
+        """
+        Debugging function to represent the Rhythm object as a string for easy visualization.
+
+        Returns: A string with the attributes of the Rhythm object.
+
+        """
+        return f"Rhythm({self.pattern})"
 
 # Helper function to spell a note based on its letter and accidental
 def spell_note(letter, accidental):

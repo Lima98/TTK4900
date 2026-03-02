@@ -27,7 +27,7 @@
             sorting = none,
             maxcitenames = 3,   % max names to include before et. al.
             ]{biblatex} %customize the look of your citations and bibliography
-\addbibresource{bibliography.bib} %declare the bibliography resource
+\addbibresource{Master.bib} %declare the bibliography resource
 \usepackage{comment} %to be able to comment out sections in the .tex files
 \usepackage{afterpage} %to customize page commands such as below
 \newcommand\myemptypage{
@@ -37,6 +37,12 @@
     \newpage
     } %sets new page command to insert an empty page without adding to the page counter or having a page number
 
+
+% MY OWN PACKAGES
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit}
+\usepackage{hyperref}
+%\usepackage{refcheck} % Enable this to ensure all imporant things have references.
 
 
 
@@ -49,29 +55,29 @@
 %the title page should be an odd page (right hand side)
 
 \begin{titlepage}
+\hbadness=10000 % to avoide warnings about underfull hbox in the title page.
 \newgeometry{left=1.6in, right=2in}
 \vspace*{1.5cm}
 
 \noindent  \textcolor{gray}{\large Jan-Øivind Lima} \\
 \vspace{1cm}
 
-\noindent \textbf{\Large The title of your master's thesis should be written here} \\
+\noindent \textbf{\Large Procedural generation: music} \\
 \vspace{0.5cm}
 
-\noindent {\large Any undertitle is written here} \\
+\noindent {\large Generating music using method X and Y} \\
 
 
 
 \vspace{7cm}
-\noindent Master's thesis in Physics and Mathematics \\
-Supervisor: Supervisor Name \\
-Co-supervisor: Co-supervisor Name \\
-June 2022 \\
+\noindent Master's thesis in Cybernetics and Robotics\\
+Supervisor: Sverre Hendseth\\
+June 2026 \\
 
 \vspace{0.2cm}
 \noindent Norwegian University of Science and Technology \\
-Faculty of Natural Sciences \\
-Department of Physics \\
+Faculty of Information Technology and Electrical Engineering\\
+Department of Engineering Cybernetics\\
 
 \begin{figure}[h]
     \includegraphics[width=0.28\textwidth]{Figures/ntnu_basic.png}
@@ -84,6 +90,7 @@ Department of Physics \\
 
 % The pre-chapters
 \chapter*{Abstract} %pre-chapters should not be numbered, hence the "*"
+\hbadness = 10000 % to avoid warnings about underfull hbox in the abstract
 \pagenumbering{roman} %introductory pages should be roman
 \setcounter{page}{1}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Abstract} %add the chapter to the table of contents, this is not automatically added when creating unnumbered chapters (*). Add it in a chapter style, and keep all chapters on the same numberline indent regardless of number or not on the chapter

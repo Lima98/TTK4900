@@ -10,18 +10,21 @@ from out.lilypond import (
 
 # ---------------- Configuration ----------------
 
+
 OUTPUT_FILENAME = "melody.ly"
 OUTPUT_PATH = "../output/.default/"
-FULL_PATH = OUTPUT_PATH + OUTPUT_FILENAME
+
+FULL_PATH = OUTPUT_PATH + OUTPUT_FILENAME 
+
 
 KEY_NAME = "c"
-MODE = "major_pentatonic"
+MODE = "major"
 TIME_SIGNATURE = "4/4"
-BARS = 1
+BARS = 8
 
 # Voice configuration (extensible)
 VOICES = [
-    {"name": "voiceOne",   "clef": "treble",      "rhythm_values": ["q", "e", "h"]},
+    {"name": "voiceOne","clef": "treble","rhythm_values": ["q", "e", "h"]},
     # {"name": "voiceTwo",   "clef": "\"treble_8\"", "rhythm_values": ["q"]},
     # {"name": "voiceThree", "clef": "bass",        "rhythm_values": ["h"]},
     # {"name": "voiceFour",  "clef": "bass",        "rhythm_values": ["w"]},
@@ -84,3 +87,4 @@ lily_code = voices_to_lilypond(
 write_to_file(lily_code, FULL_PATH)
 generate_files(FULL_PATH, OUTPUT_PATH)
 play(FULL_PATH)
+

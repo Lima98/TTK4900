@@ -15,9 +15,9 @@ This is the documentation for the Procedural Music Generation project. It includ
    :caption: Contents:
 
     modules
-    music
-    lilypond
-    generator
+    core.music
+    out.lilypond
+    generators.generator
 
 Music module
 ============

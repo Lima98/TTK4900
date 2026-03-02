@@ -11,6 +11,7 @@ if [ ! -d "$VOLUME_PATH" ]; then
     echo "Error: $VOLUME_PATH is not mounted. Please connect to smb://webedit.ntnu.no/janoivil through finder and try again.\n"
     exit 1
 fi
+
 echo "Mounted drive found: $VOLUME_PATH\n"
 
 echo "Activating venv...\n"
@@ -31,4 +32,7 @@ cp -f index.html /Volumes/janoivil/
 echo "Done!\n"
 echo "Copying docs/ to /Volumes/janoivil/docs/\n"
 rsync -a ../docs/ /Volumes/janoivil/docs/
+echo "Done!\n"
+echo "Copying output/ to /Volumes/janoivil/output/\n"
+rsync -a ../output/ /Volumes/janoivil/output/
 echo "Done!\n"
