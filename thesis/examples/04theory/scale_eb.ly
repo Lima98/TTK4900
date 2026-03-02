@@ -19,5 +19,11 @@ voiceOne = \relative c' {
 }
 	>>
 	\midi {}
-	\layout {}
+	\layout {
+    \context {
+    \Staff
+    \omit TimeSignature
+    \omit BarLine
+    }
+  }
 }
