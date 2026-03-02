@@ -6,9 +6,14 @@ global = {
 	\time 4/4
 }
 
-voiceOne = \relative c' {
+voiceOne = \absolute {
 	\global
-	a2 c4 e8 d8 f8 d4 d4 e8 d8 e8 c4 a2 f4 d4 f4 a2 b4 b8 d2 b8 d8 f2 f4 e8 d4 d2 c8 e8 e8 g2 b8 d4 
+  <c' ef'>1 _\markup {"m3"}
+  <c' e'>1 _\markup {"M3"}
+  <c' gf'>2 
+  <c' g'>1 _\markup {"P5"}
+  <c' a'>1 _\markup {"M6"}
+  <c' c''>1 _\markup {"P8"}
 }
 
 \score {

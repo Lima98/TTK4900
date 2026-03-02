@@ -23,7 +23,7 @@ def generate_random_notes(length=8, key: Key = Key("c", "major")) -> Melody:
     notes = [Note(degree=int(d.replace("b","").replace("s","") if d[0] in "bs" else int(d)), 
                   pitch=key.degree_to_pitch(d)) for d in degrees]
     
-    return Melody(notes = notes, key = key)
+    return Melody(notes = notes, key = key, rhythm=None)
 
 # Generate a melody by randomly moving in 2nds and 3rds within the scale
 def generate_notes(num_notes=4, key: Key = Key("c", "major")) -> Melody:
@@ -48,7 +48,7 @@ def generate_notes(num_notes=4, key: Key = Key("c", "major")) -> Melody:
         note = Note(degree=current_idx+1, pitch=scale[current_idx])
         melody_notes.append(note)
 
-    return Melody(notes = melody_notes, key = key)
+    return Melody(notes = melody_notes, key = key, rhythm=None)
 
 # Generate a rhythm pattern based on the time signature and allowed rhythm values
 # TODO: add support for rests?
