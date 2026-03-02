@@ -1,3 +1,9 @@
+## 0.7.0 (2026-03-02)
+
+### Feat
+
+- **scripts**: new scripts to put examples in latex folders for easy inclusion in the thesis
+
 ## 0.6.0 (2026-02-27)
 
 ### Feat
