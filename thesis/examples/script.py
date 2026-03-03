@@ -8,12 +8,13 @@ from pathlib import Path
 # ====================================
 # ======== Folder to process =========
 # ====================================
-PATH = "/FOLDER NAME HERE/"
+PATH = "04theory"
 # ====================================
 # ====================================
 # ====================================
 # ====================================
 
+PATH = "/" + PATH + "/"
 cwd = str(Path(__file__).resolve().parent)
 folder_path = cwd + PATH
 OUTPUT_PATH = cwd + "/../latex/examples" + PATH
