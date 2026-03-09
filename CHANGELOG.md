@@ -1,3 +1,9 @@
+## 0.9.0 (2026-03-09)
+
+### Feat
+
+- **all-files**: started refactor, got some working generation, no output files yet
+
 ## 0.8.0 (2026-03-09)
 
 ### BREAKING CHANGE
