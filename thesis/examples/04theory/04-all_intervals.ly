@@ -31,5 +31,12 @@ voiceOne = \absolute {
 }
 	>>
 	\midi {}
-	\layout {}
+	\layout {
+    \context {
+    \Staff
+    \omit TimeSignature
+    \omit BarLine
+    }
+  }
 }
+
