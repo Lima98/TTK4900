@@ -1,3 +1,13 @@
+## 0.8.0 (2026-03-09)
+
+### BREAKING CHANGE
+
+- Everything is begin re-written, nothing work as of right now
+
+### Refactor
+
+- **all-files**: moved old code to another folder to restart
+
 ## 0.7.0 (2026-03-02)
 
 ### Feat
