@@ -23,6 +23,7 @@ class Note:
     def __init__(self, octave, degree, duration, rest=True):
         self.octave = octave
         self.degree = degree
+        self.pitch = None
         self.duration = duration
         self.rest = rest
 
