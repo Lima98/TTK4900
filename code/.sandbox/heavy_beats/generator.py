@@ -2,7 +2,11 @@
 
 import music
 import random
+import sys
 
+seed = random.randrange(sys.maxsize)
+random.seed(seed)
+print(f"Seed: {seed}")
 
 def generate_bar(beats=4) -> music.Bar:
     output = music.Bar(4)

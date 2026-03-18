@@ -1,7 +1,6 @@
 from music import Note, Bar
 import generator as gen
 
-
 number_of_bars = 2
 
 
@@ -14,6 +13,7 @@ for note in bars.notes:
 
 degree_to_pitch = {
     "1": "c",
+    "s2": "c#",
     "b2": "db",
     "2": "d",
     "b3": "eb",
