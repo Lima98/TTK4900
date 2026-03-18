@@ -1,3 +1,13 @@
+## 0.9.1 (2026-03-18)
+
+### Fix
+
+- experiments with WFC in generation
+
+### Refactor
+
+- **moved-files-for-2nd-iteration**: moved files
+
 ## 0.9.0 (2026-03-09)
 
 ### Feat
