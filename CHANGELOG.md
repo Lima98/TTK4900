@@ -1,3 +1,9 @@
+## 0.10.0 (2026-03-19)
+
+### Feat
+
+- **started-2nd-iteration**: 2nd iteration underway, better structures
+
 ## 0.9.1 (2026-03-18)
 
 ### Fix
