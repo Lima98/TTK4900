@@ -2372,7 +2372,7 @@
     <bcf:datasource type="file" datatype="bibtex" glob="false">Master.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1" intorder="1">JacobsonOOSE</bcf:citekey>
+    <bcf:citekey order="1" intorder="1">MusikalischesWurfelspiel2025</bcf:citekey>
     <bcf:citekey order="2" intorder="1">vanderlindenProceduralGenerationDungeons2014</bcf:citekey>
     <bcf:citekey order="3" intorder="1">galinProceduralGenerationRoads2010</bcf:citekey>
     <bcf:citekey order="4" intorder="1">holeAutomaticSpeciesCounterpoint</bcf:citekey>
