@@ -19,48 +19,36 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
-    \entry{JacobsonOOSE}{book}{}{}
-      \name{author}{4}{}{%
-        {{hash=3e8f03cc324f52193ab00c1fab4df61a}{%
-           family={Jacobson},
-           familyi={J\bibinitperiod},
-           given={Ivar},
-           giveni={I\bibinitperiod}}}%
-        {{hash=87410fac27f1f7aeede0a0788c733cd9}{%
-           family={Christerson},
-           familyi={C\bibinitperiod},
-           given={Magnus},
-           giveni={M\bibinitperiod}}}%
-        {{hash=184b8b22a7b910ba6f8b465a8d75cc1f}{%
-           family={Jonsson},
-           familyi={J\bibinitperiod},
-           given={Patrik},
-           giveni={P\bibinitperiod}}}%
-        {{hash=8ce074478a8018f22f0a21b59d373946}{%
-           family={Övergaard},
-           familyi={Ö\bibinitperiod},
-           given={Gunnar},
-           giveni={G\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Addison-Wesley}%
-      }
-      \strng{namehash}{4efdf840f59e9f84adf0e1a992e1b69d}
-      \strng{fullhash}{df3ce082930bb0893b6cc3de4b4ecfaf}
-      \strng{fullhashraw}{df3ce082930bb0893b6cc3de4b4ecfaf}
-      \strng{bibnamehash}{4efdf840f59e9f84adf0e1a992e1b69d}
-      \strng{authorbibnamehash}{4efdf840f59e9f84adf0e1a992e1b69d}
-      \strng{authornamehash}{4efdf840f59e9f84adf0e1a992e1b69d}
-      \strng{authorfullhash}{df3ce082930bb0893b6cc3de4b4ecfaf}
-      \strng{authorfullhashraw}{df3ce082930bb0893b6cc3de4b4ecfaf}
+    \entry{MusikalischesWurfelspiel2025}{inreference}{}{}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{0-201-54435-0}
-      \field{title}{Object-{{Oriented Software Engineering}}}
-      \field{year}{1992}
+      \field{abstract}{A Musikalisches Würfelspiel (German for "musical dice game") was a system for using dice to randomly generate music from precomposed options. These games were quite popular throughout Western Europe in the 18th century. Several different games were devised, some of which did not require the use of dice but merely choosing a random number. The earliest example is Johann Kirnberger's Der allezeit fertige Menuetten- und Polonaisencomponist (German for "The Ever-Ready Minuet and Polonaise Composer") (1757 [1st edition; revised 2nd 1783]). Examples by well known composers include C. P. E. Bach's Einfall, einen doppelten Contrapunct in der Octave von sechs Tacten zu machen, ohne die Regeln davon zu wissen (German for "A method for making six bars of double counterpoint at the octave without knowing the rules") (1758) and Maximilian Stadler's Table pour composer des minuets et des Trios à la infinie; avec deux dez à jouer (French for "A table for composing minuets and trios to infinity, by playing with two dice") (1780). In the early 20th century the Kaleidacousticon System, using arbitrarily combinable playing cards, was unsuccessfully marketed in the Boston area as a parlour game.}
+      \field{annotation}{Page Version ID: 1313693497}
+      \field{booktitle}{Wikipedia}
+      \field{day}{27}
+      \field{hour}{17}
+      \field{langid}{english}
+      \field{minute}{24}
+      \field{month}{9}
+      \field{second}{22}
+      \field{timezone}{Z}
+      \field{title}{Musikalisches {{Würfelspiel}}}
+      \field{urlday}{24}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/9JNZI43N/index.html
+      \endverb
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Musikalisches_W%C3%BCrfelspiel&oldid=1313693497
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Musikalisches_W%C3%BCrfelspiel&oldid=1313693497
+      \endverb
     \endentry
     \entry{vanderlindenProceduralGenerationDungeons2014}{article}{}{}
       \name{author}{3}{}{%

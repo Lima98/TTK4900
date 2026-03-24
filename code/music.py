@@ -5,7 +5,8 @@ KEYS = ['C', 'Df', 'D', 'Ef', 'E', 'F', 'Fs', 'G', 'Af', 'A', 'Bf', 'B']
 MAJOR_SCALE = [0, 2, 4, 5, 7, 9, 11]
 MINOR_SCALE = [0, 2, 3, 5, 7, 8, 10]
 
-
+def getPitchClass(midiNum):
+    return KEYS[midiNum % 12]
 
 #   Get MIDI num using "Af4" format
 def getMidiNum(note):
@@ -14,8 +15,7 @@ def getMidiNum(note):
     return KEYS.index(key) + 12 * (octave + 1)
 
 #   Max range of a melody of a single instrument, in semitones
-A4 = 69
-MAX_REGISTER = 10 # 10 scale degrees 
+MAX_REGISTER = 11 
 UPPER_BOUND = getMidiNum('A4') 
 LOWER_BOUND = getMidiNum('F2')
 
