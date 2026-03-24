@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1774349613.32679 "main.bcf" "main.bbl" "main" 1774352445.37449 0
+["biber main"] 1774349613.32679 "main.bcf" "main.bbl" "main" 1774352868.50056 0
   "Master.bib" 1774352197.16562 24090 945cf736f03cd255483bd5ffbb073d31 ""
-  "main.bcf" 1774352445.2265 108040 2d36969a5af2268c302474e9743a2762 "pdflatex"
+  "main.bcf" 1774352868.37184 108040 2d36969a5af2268c302474e9743a2762 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1774352443.00612 "main.tex" "main.pdf" "main" 1774352445.37479 0
+["pdflatex"] 1774352866.25156 "main.tex" "main.pdf" "main" 1774352868.50085 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -239,14 +239,14 @@
   "examples/04theory/01-scale.cropped.pdf" 1774352308.2287 13162 3eab033459695a9d945b364091d6f149 ""
   "examples/04theory/02-scale_eb.cropped.pdf" 1774352308.22974 13616 4a291625bcfd8b24c67543e253181333 ""
   "examples/results/iteration1/melody.cropped.pdf" 1773056675.95231 16825 658bbc25ec7c797113da1de18d5e3d1b ""
-  "main.aux" 1774352445.21944 7309 f32aa6b2b352a1f3c8f157195a7eec26 "pdflatex"
+  "main.aux" 1774352868.36374 7309 f32aa6b2b352a1f3c8f157195a7eec26 "pdflatex"
   "main.bbl" 1774352197.1662 11405 a45cce6535b71c1494330b207150789a "biber main"
-  "main.lof" 1774352445.22754 713 05de3cdacb51afce43f8fcacd2419e6f "pdflatex"
-  "main.lot" 1774352445.22757 140 104a8a462b27a2267fd07b368245cdd0 "pdflatex"
-  "main.out" 1774352445.22336 4265 7299e6d85315c9a2499637842852b997 "pdflatex"
-  "main.run.xml" 1774352445.22742 2301 593a7e82fa1de86463427db4c56d30db "pdflatex"
-  "main.tex" 1774352435.54242 8175 e2a25e7a9921a93cd12e7bb6f040cd2d ""
-  "main.toc" 1774352445.22751 2627 2872b7d2f0d5c45d5af0326f771d71e8 "pdflatex"
+  "main.lof" 1774352868.37601 713 05de3cdacb51afce43f8fcacd2419e6f "pdflatex"
+  "main.lot" 1774352868.37606 140 104a8a462b27a2267fd07b368245cdd0 "pdflatex"
+  "main.out" 1774352868.36884 4265 7299e6d85315c9a2499637842852b997 "pdflatex"
+  "main.run.xml" 1774352868.37586 2301 593a7e82fa1de86463427db4c56d30db "pdflatex"
+  "main.tex" 1774352466.98353 8175 e2a25e7a9921a93cd12e7bb6f040cd2d ""
+  "main.toc" 1774352868.37597 2627 2872b7d2f0d5c45d5af0326f771d71e8 "pdflatex"
   (generated)
   "main.aux"
   "main.bcf"
