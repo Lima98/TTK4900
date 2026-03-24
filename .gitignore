@@ -1,4 +1,5 @@
 .DS_Store
+output/.default
 thesis/TEMPLATE/
 adm/
 .venv/
@@ -18,4 +19,4 @@ codebook.toml
 *.run.xml
 *.synctex.gz
 *.toc
-
+*.synctex(busy)
