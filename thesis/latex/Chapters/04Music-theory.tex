@@ -1,0 +1,123 @@
+\section{Music theory}
+This section contains some basic music theory relevant to understand how music is constructed. It is not neccessary to understand everything in depth, but farmiliarity with these concepts will be of great help to understand the project as a whole, not just the procedural generation part.
+
+\subsection{Notes}
+The very core of music is composed of notes. Notes are vibration in air which we interpret as pitches. In the western system we agree upon the standard of pitches is based around A4 which is $440Hz$. All other pitches are tuned in relation to this reference.
+
+\subsection{Scales}
+The musical scale is building block for creating not only melodies but also harmony, which we will cover a bit later.
+Firstly the musical scale is, for the most part, constructed using seven notes. In the western canon this is usually seven notes. You can see the basic c-major scale in Figure~\ref{fig:c-major-scale}, it is comprised of the notes c d e f g a b c. The tones of the scale can be named according to their function within the scale. We often label the notes $ \hat{1}, \hat{2}, \hat{3}, \hat{4}, \hat{5}, \hat{6}, \hat{7}, $ and then starting back at $\hat{1}$. The use of the carets are called the Nashville Number System, this is used to differentiate the scale degrees from the chord tones which will be discussed in Section~\ref{sec:harmony} When we consider chord structures we use the numbers but usually count above from 8 to signify harmonic functions, but when considering only scales and melodies we usually only use 1 through 7 
+\newline
+
+\noindent The most important function is that of the scale degree 1, this is the \textit{tonic}, which is the 'home' of the key. This is the most stable function there is, it feels resolved and does not have any tension urging it to move anywhere. 
+
+Next up we have the dominant function, there are two notes degrees which fall into this category, that is the 5th and 7th scale degree. These notes have tension. They want to move, especially the 7th scale degree, it has a great pull toward the tonic. You can hear this in the example under Figure~\ref{fig:c-major-scale}. The penultimate tone is the 7th scale degree and it leads to the tonic. 
+
+To lead us to the tonic functions we have what are called the pre-dominant function. This simply means 'before dominant', and their function is to set up the tension to lead us to the dominant degrees which in turn leads us back to the tonic. 
+
+% C major scale
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{examples/04theory/01-scale.cropped.pdf}
+  \end{center}
+  \caption{The c-major scale written in the treble clef.}
+  \label{fig:c-major-scale}
+\end{figure}
+
+% Eb major scale
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{examples/04theory/02-scale_eb.cropped.pdf}
+  \end{center}
+  \caption{The eb-major scale written in the treble clef.}
+  \label{fig:eb-major-scale}
+\end{figure}
+
+\subsection{Keys}
+The concept of a musical key is simply shifting around where the tonic note is. For instance in Figure~\ref{fig:c-major-scale} you can see the major scale in c. And in Figure~\ref{fig:eb-major-scale} you can see the major scale in eb. In todays tuning system there are no differences between the keys, meaning that the sound the same, just higher and lower. This was not the case earlier in history, where the temperament(how the tones were tunes in relation to each other) of the keys differed. Today it just sounds higher or lower depending on the key.
+
+\subsection{Melodies}
+
+Melodies is the horizontal component of music, meaning we look at it as a time-series. We have a given note at a given length followed by another note or rest of a given length etc... This means that you can look at a melody as a series of intervals as well. If we do this on known melodies we will observe that they are mainly composed of steps and skips. This means that the distance between one note and the next is one or two tones. Large leaps are usually leaping to important tones like the tonic or the root of the current chord. 
+
+\subsection{Harmony}\label{sec:harmony}
+
+Harmony is the vertical component of the music, harmony is what happens when two or more notes happen at the same time. This is what chords are build around. When considering the harmonic progression in tonal music we can consider all the standard chords in the major key. They are labeled by numbers using the roman numerals. Upper case means the chord in major and lower case means minor. You can see the difference between major and minor chords in figure [make a figure for this], and listen to the difference at the link provided in the caption. 
+
+\begin{figure}[H]\label{fig:harmonic-progression}
+  \centering
+  \begin{tikzpicture}[
+    node distance=1.8cm,
+    every node/.style={font=\large},
+    arrow/.style={-Latex, thick},
+    box/.style={draw, thick, inner sep=6pt}
+    ]
+
+    % Main nodes
+    \node (iii) {iii};
+    \node[right=of iii] (vi) {vi};
+
+    \node[right=of vi] (pre) {
+        \begin{tabular}{c}
+          ii\\
+          IV
+        \end{tabular}
+      };
+
+    \node[right=of pre] (dom) {
+        \begin{tabular}{c}
+          V\\
+          vii$^\circ$
+        \end{tabular}
+      };
+
+    \node[right=of dom] (I) {I};
+    \node[right=0.8cm of I] (any) {ANY};
+    
+    \node[above=24pt of I] {\small Tonic};
+    \node[above=24pt of iii] {\small Mediant};
+    \node[above=24pt of vi] {\small Sub mediant};
+
+    % Boxes around functional groups
+    \node[box, fit=(pre)] (prebox) {};
+    \node[above=4pt of prebox] {\small Pre-dominant};
+
+    \node[box, fit=(dom)] (dombox) {};
+    \node[above=4pt of dombox] {\small Dominant};
+
+    % Arrows (horizontal)
+    \draw[arrow] (iii) -- (vi);
+    \draw[arrow] (vi) -- (prebox);
+    \draw[arrow] (prebox) -- (dombox);
+    \draw[arrow] (dombox) -- (I);
+    \draw[arrow] (I) -- (any);
+
+    % Curved return arrow
+    \draw[arrow] 
+      (dombox.south) 
+      .. controls +(0,-1.5) and +(0,-1.5) .. 
+      (iii.south);
+
+  \end{tikzpicture}
+  \caption{Harmonic progression in tonal music. The arrows indicate the typical flow of harmonic functions.}
+\end{figure}
+
+\subsection{Time signatures}
+
+The time signature explains what is in a bar of music. A bar is the space between the vertical lines on the staff.
+A $4/4$, sometimes written as "C", time means that there are four quarter notes per bar and consequently $3/4$ time means that there are three quarter notes per bar.
+\subsection{Musical form}
+
+Now that we have an idea of the musical structures on the melodic and harmonic layer we will take a look at musical forms. This is a very important idea when it comes to constructing melodies. A melody is not an infinitely wandering idea of music. A good melody follows a form. Often this can be viewed as repetitions and variations of a given musical idea. Two very common forms of musical form are the \textit{sentence form} and the \textit{period form}. 
+
+In Figure~\ref{fig:sentence} we can see an example of the musical sentence. It starts with a 2-bar opnening phrase, labeled as the \textit{basic idea}, then we have a repetition of the same idea only adapted for a new chord. Then the following 2 bars are a fragmentation of the idea. Then for the last two bars we have a conclusion, this ties the idea together. The cadence at the end can be considered the end of a sentence. It concludes the idea before it moves on to something else. 
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{figures/musical_sentence.png}
+  \end{center}
+  \caption{A classical example of the musical sentence form. These are the opening bars of Bethovens piano sonata in F-minor. \cite{SentenceMusic2023}}\label{fig:sentence}
+\end{figure}
+
+
+
