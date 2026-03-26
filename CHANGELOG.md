@@ -1,3 +1,19 @@
+## 0.10.1 (2026-03-26)
+
+### Fix
+
+- **update-latex-files**: written more on the thesis, added figures and changed structure
+- cleanup of outdated files and updated readme
+- deleted aux files
+- aux files problem fixing
+- remove aux files
+- updated gitignore to fix issues with commiting while latex is running. All auxillary files are now ignored
+- **updated-second-iteration**: trying to get a grasp of how to create these models
+
+### Refactor
+
+- wip changes
+
 ## 0.10.0 (2026-03-19)
 
 ### Feat
