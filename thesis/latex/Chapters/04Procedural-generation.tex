@@ -1,40 +1,33 @@
-
 \section{Procedural generation}
+  \ac{PG} is algorithmic generation of content. This content can take many forms including landscape, levels, textures or even 3D models. This leads to smaller file sizes since the program can generate the content using algorithms rather than having everythign pre-made and saved. 
 
-\ac{PG} is algorithmic generation of content. This content can take many forms including landscape, levels, textures or even 3D models. This leads to smaller file sizes since the program can generate the content using algorithms rather than having everythign pre-made and saved. 
+  This section will cover several methods of \ac{PG} and discuss similarities, differences and most importantly limitations of the methods. Additionally we will take a look at and what we are trying to achieve with the procedural generation in this project and propose a new method that will handle the problem of music generation in a new way.
 
-This section will cover several methods of \ac{PG} and discuss similarities, differences and most importantly limitations of the methods. Additionally we will take a look at and what we are trying to achieve with the procedural generation in this project and propose a new method that will handle the problem of music generation in a new way.
+  \subsection{Wave function collapse}
+    \ac{WFC} is a method used to procedurally generate using either given constraints, or it can also use some input that it analyses and generates the constraints procedurally which are then used to generate something in the same style as the input. 
 
-\subsection{Wave function collapse}
+    It works by initializing the entire space in a superposition which means that the state is yet to be determined. We call this an \textit{unobserved} state, meaning we don't know what state it is in yet. These unobserved states are not complex numbers like they are in \ac{QM}, but the process is similar which is why it gets its name inspired by the field of \ac{QM}. Randomly assigning parts of the space we are able to collapse\footnote{collapsing a superposition means that we decide the actual state of the given position in the space} some of the \textit{wave function}\footnote{the wave function is simply the constraints what decide what the state of the object should be dependent on external factors}. In Figure~\ref{fig:wfc_patterns} we can see an illustration of how the "tiles" of an input image re-appear in the final image generation.
 
-  \ac{WFC} is a method used to procedurally generate using either given constraints, or it can also use some input that it analyses and generates the constraints procedurally which are then used to generate something in the same style as the input. 
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/patterns.png}
+      \end{center}
+      \caption{Illustration of how procedural tiles from input image is used to generate a new image. \cite{guminWaveFunctionCollapse2016}}\label{fig:wfc_patterns}
+      \end{figure}
 
-  \begin{figure}
-    \begin{center}
-      \includegraphics[width=0.95\textwidth]{figures/patterns.png}
-    \end{center}
-    \caption{Illustration of how procedural tiles from input image is used to generate a new image. \cite{guminWaveFunctionCollapse2016}}\label{fig:wfc_patterns}
-  \end{figure}
+  \subsection{PG using constraint satisfaction}
+  Similar to \ac{WFC} we have \ac{PG} using constraint satisfaction. This method uses given constraints for influencing the generation. It usually works by randomly generating something in the given domain, then iterates over the generated data and enforces constraints in order to make it adhere to a model designed by the programmer or end user. After several iteration over the domain we end up with a domain where the constraints are satisfied for all the objects in the domain.
 
+  \subsection{L-systems (Lindenmayer systems)}
+    This is a way to generate things organically. The technique is often used in generating organic materials like treesh, bushes or other fractal-like systems.
 
-\subsection{Constraint based generation}
+  \subsection{Binary space partitioning}
+    By partitioning the given space in smaller spaces recursively we are able to find a subdivision small enough to generate something that propagates to the higher space with certain characteristics.
 
-Similar to \ac{WFC} we have constraint based generation, this uses given constraints for influencing the generation. It usually works by randomly generating something in the given domain, then iterates over the generated data and enforces constraints in order to make it adhere to a model designed by the programmer or end user.
-
-\subsection{L-systems (Lindenmayer systems)}
-
-This is a way to generate things organically. The technique is often used in generating organic materials like treesh, bushes or other fractal-like systems.
-
-\subsection{Binary space partitioning}
-
-By partitioning the given space in smaller spaces recursively we are able to find a subdivision small enough to generate something that propagates to the higher space with certain characteristics.
-
-\subsection{Random noise and seeds}
-
-Perlin noinse is a very common way to generate structures like worlds etc... It is very good at creating smooth transitions from one state to another, like height maps.
+  \subsection{Random noise and seeds}
+    Perlin noinse is a very common way to generate structures like worlds etc... It is very good at creating smooth transitions from one state to another, like height maps.
 
 
-\subsection{Random walks}
-
-This works by randomly walking around a space and building a surface or hollow after that. 
+  \subsection{Random walks}
+    This works by randomly walking around a space and building a surface or hollow after that. 
 
