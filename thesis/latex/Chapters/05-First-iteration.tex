@@ -1,0 +1,45 @@
+\section{First iteration}
+  The goal of the first iteration was to get a "proof of concept" working. I wanted to test out how I could generate notes and visualize them as well as listen to audio of the notes generated. For this I used \textit{python} to generate \textit{liypond} files. From these files I was able to generate PDFs of sheet music as well as \textit{wave-files} to listen to how it sounds without having to play/sing it myself. 
+
+  \subsection{Implementation}
+    This first iteration was a very primitive handling of generating music. It had very few constraints on the melody and contained little to no metadata on the music which made it unsuitable for actual music.
+
+    The code generated the notes within a given scale and restricted the distance (called interval in music theory) to only 2nds and 3rds. However this meant that the melody meandered without any other restrictions. If the generated music was long it would have a tendency to go beyond the range of an instrument or the human voice.
+
+  \subsection{Results}
+    The melody generation works fine for smaller melodies, however there is no self-similarity and no rests. This means that the melodies we generate are not particularly musical or interesting, but it is a great starting point to getting to a fully fledged melody generator. In Figure~\ref{fig:iter1_melody} we can see how a short melody using the first iteration looks. 
+
+    In Figure~\ref{fig:iter1_register} you can see what happens when the generated melody is longer, it will tend to go beyond what an instrument will be able to play. You can see this clearly in \textit{bar 6 through 16} (the entire 2nd and 3rd system), where there are lots of ledger lines. Some of these notes are not even available on the grand piano.
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{examples/iter1/register.cropped.pdf}
+      \end{center}
+      \caption{Melody showing how the octave is not restricted and ends up in unplayable range.}\label{fig:iter1_register}
+    \end{figure}
+
+      However a good feature that was included was the ability to generate more voices at the same time. This feature was quite primitive since the voices were generated independently and did not adhere to any harmony, however it can be a good skeleton to use later if we get to the point that we want to actually harmonize with the melody we generate. In Figure~\ref{fig:iter1_voices} you can see how we generated four voices all with their own rhythmic restriction. The bottom voice only has whole notes, the second lowest one has only half-notes, the second highest has only quarter and the top voice has a combination of several types.
+
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.70\textwidth]{examples/iter1/voices.cropped.pdf}
+      \end{center}
+      \caption{Melody showing how we can generate multiple voices with different rhythmic restrictions.}\label{fig:iter1_voices}
+    \end{figure}
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{examples/iter1/melody.cropped.pdf}
+      \end{center}
+      \caption{Example melody of the first iteration melody generator.}\label{fig:iter1_melody}
+    \end{figure}
+  
+  \subsection{Discussion}
+
+    As we can see the first iteration shows a promising proof of concept, however it is quite limited and needs lots of improvement before we have a good system for melody generation. 
+
+    For the second iteration we need to be able to enforce more restictions on the melody so that it follows more convetions of good melody writing. Additionally we need to have some self-similarity so that the music follows some kind of musical form in order for it to feel coherent and part of the same idea.
+
+    The second iteration will focus on creating a generation algorithm that tat is able to generate a melody with a structure. Meaning when generating a melody we will generate a phrase, that phrase should contain an idea, a repetition, and the end of the melody should end resolved with a long note on the tonic of the key. Additionally we need to restirct the range of the melody so that it will be playable/singable.
+
