@@ -1,3 +1,9 @@
+## 0.10.3 (2026-03-27)
+
+### Fix
+
+- **thesis**: written more on thesis and converted figures to examples
+
 ## 0.10.2 (2026-03-27)
 
 ### Fix
