@@ -126,6 +126,37 @@
       \verb https://en.wikipedia.org/w/index.php?title=Sentence_(music)&oldid=1161220566
       \endverb
     \endentry
+    \entry{ObjectorientedProgramming2026}{inreference}{}{}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Object-oriented programming (OOP) is a programming paradigm based on objects – software entities that encapsulate data and function(s). An OOP computer program consists of objects that interact with one another. An OOP language is one that provides object-oriented programming features, but as the set of features that contribute to OOP is contested, classifying a language as OOP – and the degree to which it supports OOP – is debatable. As paradigms are not mutually exclusive, a language can be multi-paradigm (i.e. categorized as more than only OOP). Notable languages with OOP support include Ada, ActionScript, C++, Common Lisp, C\#, Dart, Eiffel, Fortran 2003, Haxe, Java, JavaScript, Kotlin, Logo, MATLAB, Objective-C, Object Pascal, Perl, PHP, Python, R, Raku, Ruby, Scala, SIMSCRIPT, Simula, Smalltalk, Swift, Vala and Visual Basic (.NET).}
+      \field{annotation}{Page Version ID: 1344935717}
+      \field{booktitle}{Wikipedia}
+      \field{day}{23}
+      \field{hour}{11}
+      \field{langid}{english}
+      \field{minute}{12}
+      \field{month}{3}
+      \field{second}{47}
+      \field{timezone}{Z}
+      \field{title}{Object-Oriented Programming}
+      \field{urlday}{27}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/E8UKJC9W/index.html
+      \endverb
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Object-oriented_programming&oldid=1344935717
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Object-oriented_programming&oldid=1344935717
+      \endverb
+    \endentry
     \entry{vanderlindenProceduralGenerationDungeons2014}{article}{}{}
       \name{author}{3}{}{%
         {{useprefix=true,hash=1aafc72dd11442dc130beacb4e86c499}{%
@@ -154,8 +185,8 @@
       \strng{authornamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
       \strng{authorfullhash}{7c9ff97145cb14c4b1c0f8d33f679755}
       \strng{authorfullhashraw}{7c9ff97145cb14c4b1c0f8d33f679755}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The use of procedural content generation (PCG) techniques in game development has been mostly restricted to very specific types of game elements. PCG has seldom been deployed for generating entire game levels, a notable exception to this being dungeons: a specific type of game level often encountered in adventure and role playing games. Due to their peculiar combination of pace, gameplay, and game spaces, dungeon levels are among the most suited to showcase the benefits of PCG. This paper surveys research on procedural methods to generate dungeon game levels. We summarize common practices, discuss pros and cons of different approaches, and identify a few promising challenges ahead. In general, what current procedural dungeon generation methods are missing is not performance, but more powerful, accurate, and richer control over the generation process. Recent research results seem to indicate that gameplay-related criteria can provide this high-level control. However, this area is still in its infancy, and many research challenges still lie ahead, e.g., improving the intuitiveness and accessibility of such methods for designers. We also observe that more research is needed into generic mechanisms for automating the generation of the actual dungeon-geometric models. We conclude that the foundations for enabling gameplay-based control of dungeon-level generation are worth being researched, and that its promising results may be instrumental in bringing PCG into mainstream game development.}
@@ -218,8 +249,8 @@
       \strng{authornamehash}{390a67f1a76771431ea9eb670290536d}
       \strng{authorfullhash}{bd53d1f420e5849f6ce8de20414353e9}
       \strng{authorfullhashraw}{bd53d1f420e5849f6ce8de20414353e9}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{In this paper, we propose an automatic method for generating roads based on a weighted anisotropic shortest path algorithm. Given an input scene, we automatically create a path connecting an initial and a final point. The trajectory of the road minimizes a cost function that takes into account the different parameters of the scene including the slope of the terrain, natural obstacles such as rivers, lakes, mountains and forests. The road is generated by excavating the terrain along the path and instantiating generic parameterized models.}

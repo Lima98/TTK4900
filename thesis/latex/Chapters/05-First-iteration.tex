@@ -7,33 +7,33 @@
     The code generated the notes within a given scale and restricted the distance (called interval in music theory) to only 2nds and 3rds. However this meant that the melody meandered without any other restrictions. If the generated music was long it would have a tendency to go beyond the range of an instrument or the human voice.
 
   \subsection{Results}
-    The melody generation works fine for smaller melodies, however there is no self-similarity and no rests. This means that the melodies we generate are not particularly musical or interesting, but it is a great starting point to getting to a fully fledged melody generator. In Figure~\ref{fig:iter1_melody} we can see how a short melody using the first iteration looks. 
+    The melody generation works fine for smaller melodies, however there is no self-similarity and no rests. This means that the melodies we generate are not particularly musical or interesting, but it is a great starting point to getting to a fully fledged melody generator. In Example~\ref{fig:iter1_melody} we can see how a short melody using the first iteration looks. 
 
-    In Figure~\ref{fig:iter1_register} you can see what happens when the generated melody is longer, it will tend to go beyond what an instrument will be able to play. You can see this clearly in \textit{bar 6 through 16} (the entire 2nd and 3rd system), where there are lots of ledger lines. Some of these notes are not even available on the grand piano.
+    In Example~\ref{fig:iter1_register} you can see what happens when the generated melody is longer, it will tend to go beyond what an instrument will be able to play. You can see this clearly in \textit{bar 6 through 16} (the entire 2nd and 3rd system), where there are lots of ledger lines. Some of these notes are not even available on the grand piano.
 
-    \begin{figure}
+    \begin{example}
       \begin{center}
         \includegraphics[width=0.95\textwidth]{examples/iter1/register.cropped.pdf}
       \end{center}
       \caption{Melody showing how the octave is not restricted and ends up in unplayable range.}\label{fig:iter1_register}
-    \end{figure}
+    \end{example}
 
-      However a good feature that was included was the ability to generate more voices at the same time. This feature was quite primitive since the voices were generated independently and did not adhere to any harmony, however it can be a good skeleton to use later if we get to the point that we want to actually harmonize with the melody we generate. In Figure~\ref{fig:iter1_voices} you can see how we generated four voices all with their own rhythmic restriction. The bottom voice only has whole notes, the second lowest one has only half-notes, the second highest has only quarter and the top voice has a combination of several types.
+      However a good feature that was included was the ability to generate more voices at the same time. This feature was quite primitive since the voices were generated independently and did not adhere to any harmony, however it can be a good skeleton to use later if we get to the point that we want to actually harmonize with the melody we generate. In Example~\ref{fig:iter1_voices} you can see how we generated four voices all with their own rhythmic restriction. The bottom voice only has whole notes, the second lowest one has only half-notes, the second highest has only quarter and the top voice has a combination of several types.
 
 
-    \begin{figure}
+    \begin{example}
       \begin{center}
         \includegraphics[width=0.70\textwidth]{examples/iter1/voices.cropped.pdf}
       \end{center}
       \caption{Melody showing how we can generate multiple voices with different rhythmic restrictions.}\label{fig:iter1_voices}
-    \end{figure}
+    \end{example}
 
-    \begin{figure}
+    \begin{example}
       \begin{center}
         \includegraphics[width=0.95\textwidth]{examples/iter1/melody.cropped.pdf}
       \end{center}
       \caption{Example melody of the first iteration melody generator.}\label{fig:iter1_melody}
-    \end{figure}
+    \end{example}
   
   \subsection{Discussion}
 

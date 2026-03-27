@@ -41,8 +41,14 @@
 % MY OWN PACKAGES
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,fit}
-\usepackage{hyperref}
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}
 \usepackage{acronym}
+\usepackage{tablefootnote}
+\usepackage[bigger]{musicography}
+\usepackage{float}
+\newfloat{example}{htbp}{loe}
+\floatname{example}{Example}
+\numberwithin{example}{section}
 %\usepackage{refcheck} % Enable this to ensure all imporant things have references.
 
 
@@ -63,14 +69,15 @@
 \noindent  \textcolor{gray}{\large Jan-Øivind Lima} \\
 \vspace{1cm}
 
-\noindent \textbf{\Large Procedural generation: music} \\
+\noindent \textbf{\Large Procedural generation: generating music using a bi-directional two-model system for complex generation} \\
 \vspace{0.5cm}
 
-\noindent {\large Generating music using method X and Y} \\
+\noindent {\large Procedural generation using bi-directional two-model system algorhithm design using an iterative software design method.} \\
 
 
 
 \vspace{7cm}
+\vfill
 \noindent Master's thesis in Cybernetics and Robotics\\
 Supervisor: Sverre Hendseth\\
 June 2026 \\
@@ -107,6 +114,10 @@ Department of Engineering Cybernetics\\
 %add to table of contents list of figures and tables, and insert list of figures and tables
 \addcontentsline{toc}{chapter}{\protect\numberline{}\listfigurename}
 \listoffigures
+\addcontentsline{toc}{chapter}{\protect\numberline{}{List of Examples}}
+\listof{example}{List of Examples}
+\vfill
+\noindent All examples can be found at my \href{https://www.janoivil.fol.ntnu.no}{NTNU-webpage} where they can be listened to, numberings are consistent with the thesis for convenience.
 \addcontentsline{toc}{chapter}{\protect\numberline{}\listtablename}
 \listoftables
 
