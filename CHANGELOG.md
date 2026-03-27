@@ -1,3 +1,10 @@
+## 0.10.2 (2026-03-27)
+
+### Fix
+
+- updated thesis
+- **thesis:-first-iteration**: written draft of first iteration
+
 ## 0.10.1 (2026-03-26)
 
 ### Fix
