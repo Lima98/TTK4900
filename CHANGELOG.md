@@ -1,3 +1,9 @@
+## 0.10.4 (2026-03-29)
+
+### Fix
+
+- **updated-second-iteration**: promitive phrase generator working
+
 ## 0.10.3 (2026-03-27)
 
 ### Fix
