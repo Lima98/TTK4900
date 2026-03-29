@@ -28,6 +28,7 @@ class Note:
 
 class Motif:
     def __init__(self, key, beats=[], notes=[]):
+        self.key = key
         self.beats = beats
         self.notes = notes
 
@@ -44,4 +45,5 @@ class Bar:
 
 class Phrase:
     def __init__(self, key, bars):
-        self.melodies = bars
+        self.bars = bars
+        self.key = key

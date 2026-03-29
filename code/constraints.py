@@ -21,3 +21,4 @@ def getValidScale(root_note = music.getMidiNum('A4') + random.randint(-24, -12),
         valid_notes = scale[start_index : start_index + music.MAX_REGISTER]
 
     return valid_notes
+
