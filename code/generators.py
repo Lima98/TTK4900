@@ -31,7 +31,7 @@ def generate_bar(motif, key, position='start'):
             bar.notes.append(note)
         pass
         while beatsLeft > 0:
-            beat = random.choice([0.25, 0.5, 1])
+            beat = random.choice([0.5, 1])
             if beatsLeft - beat < 0:
                 break
             beatsLeft -= beat
