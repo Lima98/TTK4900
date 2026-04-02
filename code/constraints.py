@@ -2,12 +2,13 @@ import music
 import random
 
 #   Get notes in the scale of the root key
-def getValidScale(root_note = music.getMidiNum('A4') + random.randint(-24, -12), scale_type=music.MAJOR_SCALE) -> list:
-    root_key = music.KEYS[root_note % 12]
+def getValidScale(root_note, scale_type=music.MAJOR_SCALE) -> list:
+    print(root_note)
+    root = music.getMidiNum(root_note)
     scale = []
 
     for interval in scale_type:
-        scale.append((root_note + interval))
+        scale.append((root + interval))
 
     # Prepend the scale an octave lower and append the octave higher to the scale
     scale = [note - 12 for note in scale] + scale + [note + 12 for note in scale]

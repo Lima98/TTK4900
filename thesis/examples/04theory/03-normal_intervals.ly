@@ -8,13 +8,14 @@ global = {
 
 voiceOne = \absolute {
 	\global
-  <c' d'>1 _\markup {"2nd"}
+  <c' c'>1 _\markup {"unis."}
+  <c' d'> _\markup {"2nd"}
   <c' e'> _\markup {"3rd"}
   <c' f'> _\markup {"4th"}
   <c' g'> _\markup {"5th"}
   <c' a'> _\markup {"6th"}
   <c' b'> _\markup {"7th"}
-  <c' c''> _\markup {"8th"}
+  <c' c''> _\markup {"8ve"}
 }
 
 \score {

@@ -19,9 +19,39 @@
 
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
+    \entry{shoenbergComposition}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=15672b30228d27126b3b024441a1325c}{%
+           family={Schoenberg},
+           familyi={S\bibinitperiod},
+           given={Arnold},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {faber and faber}%
+      }
+      \strng{namehash}{15672b30228d27126b3b024441a1325c}
+      \strng{fullhash}{15672b30228d27126b3b024441a1325c}
+      \strng{fullhashraw}{15672b30228d27126b3b024441a1325c}
+      \strng{bibnamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorbibnamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authornamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorfullhash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorfullhashraw}{15672b30228d27126b3b024441a1325c}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1}
+      \field{isbn}{0-571-19658-6}
+      \field{pagetotal}{224}
+      \field{title}{Fudamentals of {{Musical Composition}}}
+      \field{year}{1967}
+      \field{dateera}{ce}
+    \endentry
     \entry{MusikalischesWurfelspiel2025}{inreference}{}{}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{abstract}{A Musikalisches Würfelspiel (German for "musical dice game") was a system for using dice to randomly generate music from precomposed options. These games were quite popular throughout Western Europe in the 18th century. Several different games were devised, some of which did not require the use of dice but merely choosing a random number. The earliest example is Johann Kirnberger's Der allezeit fertige Menuetten- und Polonaisencomponist (German for "The Ever-Ready Minuet and Polonaise Composer") (1757 [1st edition; revised 2nd 1783]). Examples by well known composers include C. P. E. Bach's Einfall, einen doppelten Contrapunct in der Octave von sechs Tacten zu machen, ohne die Regeln davon zu wissen (German for "A method for making six bars of double counterpoint at the octave without knowing the rules") (1758) and Maximilian Stadler's Table pour composer des minuets et des Trios à la infinie; avec deux dez à jouer (French for "A table for composing minuets and trios to infinity, by playing with two dice") (1780). In the early 20th century the Kaleidacousticon System, using arbitrarily combinable playing cards, was unsuccessfully marketed in the Boston area as a parlour game.}
       \field{annotation}{Page Version ID: 1313693497}
@@ -66,8 +96,8 @@
       \strng{authornamehash}{46c2caad2d1433d5a224bdbf82de6ffb}
       \strng{authorfullhash}{46c2caad2d1433d5a224bdbf82de6ffb}
       \strng{authorfullhashraw}{46c2caad2d1433d5a224bdbf82de6ffb}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Bitmap \& tilemap generation from a single example with the help of ideas from quantum mechanics}
@@ -96,8 +126,8 @@
       \endverb
     \endentry
     \entry{SentenceMusic2023}{inreference}{}{}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labeltitlesource}{title}
       \field{abstract}{In Western music theory, the term sentence is analogous to the way the term is used in linguistics, in that it usually refers to a complete, somewhat self-contained statement. Usually a sentence refers to musical spans towards the lower end of the durational scale; i.e. melodic or thematic entities well below the level of movement or section, but above the level of motif or measure. The term is usually encountered in discussions of thematic construction. In the last fifty years, an increasing number of theorists such as William Caplin have used the term to refer to a specific theme-type involving repetition and development.}
       \field{annotation}{Page Version ID: 1161220566}
@@ -127,8 +157,8 @@
       \endverb
     \endentry
     \entry{ObjectorientedProgramming2026}{inreference}{}{}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labeltitlesource}{title}
       \field{abstract}{Object-oriented programming (OOP) is a programming paradigm based on objects – software entities that encapsulate data and function(s). An OOP computer program consists of objects that interact with one another. An OOP language is one that provides object-oriented programming features, but as the set of features that contribute to OOP is contested, classifying a language as OOP – and the degree to which it supports OOP – is debatable. As paradigms are not mutually exclusive, a language can be multi-paradigm (i.e. categorized as more than only OOP). Notable languages with OOP support include Ada, ActionScript, C++, Common Lisp, C\#, Dart, Eiffel, Fortran 2003, Haxe, Java, JavaScript, Kotlin, Logo, MATLAB, Objective-C, Object Pascal, Perl, PHP, Python, R, Raku, Ruby, Scala, SIMSCRIPT, Simula, Smalltalk, Swift, Vala and Visual Basic (.NET).}
       \field{annotation}{Page Version ID: 1344935717}
@@ -185,8 +215,8 @@
       \strng{authornamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
       \strng{authorfullhash}{7c9ff97145cb14c4b1c0f8d33f679755}
       \strng{authorfullhashraw}{7c9ff97145cb14c4b1c0f8d33f679755}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The use of procedural content generation (PCG) techniques in game development has been mostly restricted to very specific types of game elements. PCG has seldom been deployed for generating entire game levels, a notable exception to this being dungeons: a specific type of game level often encountered in adventure and role playing games. Due to their peculiar combination of pace, gameplay, and game spaces, dungeon levels are among the most suited to showcase the benefits of PCG. This paper surveys research on procedural methods to generate dungeon game levels. We summarize common practices, discuss pros and cons of different approaches, and identify a few promising challenges ahead. In general, what current procedural dungeon generation methods are missing is not performance, but more powerful, accurate, and richer control over the generation process. Recent research results seem to indicate that gameplay-related criteria can provide this high-level control. However, this area is still in its infancy, and many research challenges still lie ahead, e.g., improving the intuitiveness and accessibility of such methods for designers. We also observe that more research is needed into generic mechanisms for automating the generation of the actual dungeon-geometric models. We conclude that the foundations for enabling gameplay-based control of dungeon-level generation are worth being researched, and that its promising results may be instrumental in bringing PCG into mainstream game development.}
