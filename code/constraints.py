@@ -3,7 +3,6 @@ import random
 
 #   Get notes in the scale of the root key
 def getValidScale(root_note, scale_type=music.MAJOR_SCALE) -> list:
-    print(root_note)
     root = music.getMidiNum(root_note)
     scale = []
 

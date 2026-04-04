@@ -2,17 +2,15 @@ import random
 import music as music
 import constraints as constraints
 
-def generate_phrase(key, bars = 4):
+def generate_phrase(key, bars = 8):
     phrase = music.Phrase(key, bars=[])
 
     motif = generate_motif(key)
 
     for bar in range(bars):
             if bar == bars - 1:
-                print("Generating end-bar")
                 phrase.bars.append(generate_bar(motif, phrase.key, position='end'))
             else:
-                print("Generating generic bar")
                 phrase.bars.append(generate_bar(motif, phrase.key, position='start'))
 
     return phrase
@@ -31,9 +29,9 @@ def generate_bar(motif, key, position='start'):
             bar.notes.append(note)
         pass
         while beatsLeft > 0:
-            beat = random.choice([0.5, 1])
+            beat = random.choice([0.25, 0.5, 1])
             if beatsLeft - beat < 0:
-                break
+                continue
             beatsLeft -= beat
             bar.beats.append(beat)
             pitch = random.choice(constraints.getValidScale(root_note=centerKey))
@@ -41,6 +39,7 @@ def generate_bar(motif, key, position='start'):
             bar.notes.append(note)
 
     if position == 'middle':
+        # TODO: Not yet implemented, but the idea is to randomly place the motif somewhere in the middle of the bar and fill the rest with random notes
         pass
 
     elif position == 'end':
