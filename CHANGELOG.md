@@ -1,3 +1,12 @@
+## 0.10.5 (2026-04-05)
+
+### Fix
+
+- **generator-and-output**: now generates full measures every time
+- **bar-generator**: fixed bar generator not filling the bar
+- **thesis-iter2**: new figure for thesis WIP on iteration 2
+- **melody-generator**: generated melody now in correct key and uses motifs correctly and ends on tonic
+
 ## 0.10.4 (2026-03-29)
 
 ### Fix
