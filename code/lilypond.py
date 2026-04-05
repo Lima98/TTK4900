@@ -20,7 +20,7 @@ def octaveToLilyPond(octave):
     else:
         raise ValueError("Octave out of range (0-6)")
 
-def generateLilyPond(phrase):
+def generateLilyPond(phrase, filename="output.ly"):
     key = phrase.key.lower()
     lilypond_str = "\\version \"2.20.0\"\n\n"
     lilypond_str += "\\language \"english\"\n\n"
@@ -47,13 +47,8 @@ def generateLilyPond(phrase):
     with open("output.ly", "w") as file:
         file.write(lilypond_str)
 
-def playLilyPond(filename):
-    import subprocess
-    subprocess.run(["lilypond", filename])
-    # Using timidity play the generated MIDI file as wav
-    subprocess.run(["timidity", "output.midi", "-Ow", "-o", "output.wav"])
-
 def play(filename):
+    subprocess.run(["lilypond", filename])
     midi_file = filename.replace('.ly', '.midi')
     audio_file = filename.replace('.ly', '.wav')
 

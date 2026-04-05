@@ -2,6 +2,8 @@ import random
 import music as music
 import constraints as constraints
 
+allowedBeats = [0.5, 1]
+
 def generate_phrase(key, bars = 8):
     phrase = music.Phrase(key, bars=[])
 
@@ -29,7 +31,7 @@ def generate_bar(motif, key, position='start'):
             bar.notes.append(note)
         pass
         while beatsLeft > 0:
-            beat = random.choice([0.25, 0.5, 1])
+            beat = random.choice(allowedBeats)
             if beatsLeft - beat < 0:
                 continue
             beatsLeft -= beat
@@ -50,9 +52,9 @@ def generate_bar(motif, key, position='start'):
         # Fill the rest of the bar with the tonic note of the key, meaning the 1 scale degree
         tonic_pitch = music.KEYS.index(key) + 12 * 4  # Get the MIDI number for the tonic note in the 4th octave
         while beatsLeft > 0:
-            beat = random.choice([0.25, 0.5, 1])
+            beat = random.choice(allowedBeats)
             if beatsLeft - beat < 0:
-                break
+                continue
             beatsLeft -= beat
             bar.beats.append(beat)
             note = music.Note(degree=0, key=key, midiNum=tonic_pitch, duration=beat)
@@ -69,7 +71,7 @@ def generate_motif(key):
     centerKey = key + '3'
 
     for _ in range(num_notes):
-        beat = random.choice([0.25, 0.5, 1])
+        beat = random.choice(allowedBeats)
         if sum_beats + beat >= 3:
             break
         sum_beats += beat
