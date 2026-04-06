@@ -1,3 +1,17 @@
+## 0.11.0 (2026-04-06)
+
+### BREAKING CHANGE
+
+- All files form 2nd iteration removed, starting with a fresh 3rd iteration
+
+### Fix
+
+- **second-iteration**: fixed generation and outputfiles
+
+### Refactor
+
+- **all-code-files**: finished 2nd iteration =
+
 ## 0.10.5 (2026-04-05)
 
 ### Fix
