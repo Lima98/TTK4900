@@ -12,5 +12,9 @@ phrase = gen.generate_phrase('C')
 #     for note in bar.notes:
 #         print(f"Note: {note.key}{note.midiNum // 12 - 1}, Duration: {note.duration} beats")
 
+# Generate the lilypond file
 lily.generateLilyPond(phrase)
-lily.play("output.ly")
+lily.generatePDF(cropped=True)
+
+# Play the generated music from the terminal
+lily.play("output/melody.ly")

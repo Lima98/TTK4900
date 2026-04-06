@@ -20,7 +20,7 @@ def octaveToLilyPond(octave):
     else:
         raise ValueError("Octave out of range (0-6)")
 
-def generateLilyPond(phrase, filename="output.ly"):
+def generateLilyPond(phrase, filename="output/melody.ly"):
     key = phrase.key.lower()
     lilypond_str = "\\version \"2.20.0\"\n\n"
     lilypond_str += "\\language \"english\"\n\n"
@@ -36,19 +36,27 @@ def generateLilyPond(phrase, filename="output.ly"):
             duration = int(4 / note.duration)
             octave = note.midiNum // 12 - 1
             octave_str = octaveToLilyPond(octave)
-            lilypond_str += f"    {pitch}{octave_str}{duration} "
+            lilypond_str += f"  \t{pitch}{octave_str}{duration} "
         lilypond_str += "|\n" 
+
+
+    lilypond_str += "  \t\\bar \"|.\"\n"
     
     lilypond_str += "  }\n"
     lilypond_str += "   \\midi{}\n"
     lilypond_str += "   \\layout{}\n"
     lilypond_str += "}\n"
 
-    with open("output.ly", "w") as file:
+    with open(filename, "w") as file:
         file.write(lilypond_str)
 
+def generatePDF(filename="output/melody.ly", cropped=False):
+    if cropped:
+        subprocess.run(["lilypond", "-o","output/", "-dcrop", filename])
+    else:
+        subprocess.run(["lilypond", filename, "-o", "output/"])
+
 def play(filename):
-    subprocess.run(["lilypond", filename])
     midi_file = filename.replace('.ly', '.midi')
     audio_file = filename.replace('.ly', '.wav')
 

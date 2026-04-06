@@ -64,16 +64,17 @@ def generate_bar(motif, key, position='start'):
     return bar
 
 def generate_motif(key):
-    # Generate a motif of 2-5 notes with a max length of 3 beats
+    # Generate a motif of 3-5 notes with a max length of 3 beats
     motif = music.Motif(key=key, beats=[], notes=[])
-    num_notes = random.randint(2, 5)
+    num_notes = random.randint(3, 5)
     sum_beats = 0
     centerKey = key + '3'
+    maxLength = random.choice([1,2, 3])
 
     for _ in range(num_notes):
         beat = random.choice(allowedBeats)
-        if sum_beats + beat >= 3:
-            break
+        if sum_beats + beat > maxLength:
+            continue
         sum_beats += beat
         motif.beats.append(beat)
         pitch = random.choice(constraints.getValidScale(centerKey))
