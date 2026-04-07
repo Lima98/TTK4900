@@ -9,6 +9,7 @@ codebook.toml
 *.log
 *.aux
 *.bbl
+main.bbl
 *.bcf
 *.blg
 *.fdb_latexmk
@@ -18,5 +19,6 @@ codebook.toml
 *.out
 *.run.xml
 *.synctex.gz
+main.synctex.gz
 *.toc
 *.synctex(busy)

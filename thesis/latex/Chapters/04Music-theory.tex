@@ -16,13 +16,13 @@
       \caption{The figure shows the parts of the musical note. The note-head in red, stem in green, beam in purple and flag in blue.}\label{fig:note-value}
     \end{figure}
 
-    \NewDocumentCommand{\musWholeRest} {}{\musFont{\symbol{11}}}
-    \NewDocumentCommand{\musHalfRest} {}{\musFont{\symbol{10}}}
-    \NewDocumentCommand{\musQuarterRest} {}{\musFont{\symbol{62}}}
-    \NewDocumentCommand{\musEightRest} {}{\musFont{\symbol{63}}}
-    \NewDocumentCommand{\musSixteenthRest} {}{\musFont{\symbol{64}}}
-    \NewDocumentCommand{\musThirtySecondRest} {}{\musFont{\symbol{65}}}
     \begin{table} % Table note values
+      \NewDocumentCommand{\musWholeRest} {}{\musFont{\symbol{11}}}
+      \NewDocumentCommand{\musHalfRest} {}{\musFont{\symbol{10}}}
+      \NewDocumentCommand{\musQuarterRest} {}{\musFont{\symbol{62}}}
+      \NewDocumentCommand{\musEightRest} {}{\musFont{\symbol{63}}}
+      \NewDocumentCommand{\musSixteenthRest} {}{\musFont{\symbol{64}}}
+      \NewDocumentCommand{\musThirtySecondRest} {}{\musFont{\symbol{65}}}
       \caption{Table with common note values, their names and their corresponding duration.}\label{tab:note-values}
       \begin{center}
         \begin{tabular}[c]{|c|l|c|l|}
@@ -32,7 +32,7 @@
           \multicolumn{1}{c|}{\textbf{Rest symbol}} & 
           \multicolumn{1}{c|}{\textbf{Duration}} \\
           \hline
-          \musWhole & Whole note & \musWholeRest & 5 beats \\
+          \musWhole & Whole note & \musWholeRest & 4 beats \\
           \musHalf & Half note & \musHalfRest & 2 beats \\
           \musQuarter & Quarter note & \musQuarterRest & 1 beat\\
           \musEighth & Eigth note & \musEightRest & $\sfrac{1}{2}$ beat\\
