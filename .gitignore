@@ -16,6 +16,7 @@ main.bbl
 *.fls
 *.lof
 *.lot
+*.loe
 *.out
 *.run.xml
 *.synctex.gz
