@@ -16,17 +16,16 @@
       \end{figure}
 
   \subsection{PG using constraint satisfaction}
-  Similar to \ac{WFC} we have \ac{PG} using constraint satisfaction. This method uses given constraints for influencing the generation. It usually works by randomly generating something in the given domain, then iterates over the generated data and enforces constraints in order to make it adhere to a model designed by the programmer or end user. After several iteration over the domain we end up with a domain where the constraints are satisfied for all the objects in the domain.
+    Similar to \ac{WFC} we have \ac{PG} using constraint satisfaction. This method uses given constraints for influencing the generation. It usually works by randomly generating something in the given domain, then iterates over the generated data and enforces constraints in order to make it adhere to a model designed by the programmer or end user. After several iteration over the domain we end up with a domain where the constraints are satisfied for all the objects in the domain.
 
   \subsection{L-systems (Lindenmayer systems)}
-    This is a way to generate things organically. The technique is often used in generating organic materials like treesh, bushes or other fractal-like systems.
+  Lindenmayer systems are a method of \ac{PG} based around the idea of creating rules for the generation which lead to self-similarity and fractal-like forms. This kind of \ac{PG} is often used in generating organic structures such as trees or other plant-like structures.
 
   \subsection{Binary space partitioning}
     By partitioning the given space in smaller spaces recursively we are able to find a subdivision small enough to generate something that propagates to the higher space with certain characteristics.
 
   \subsection{Random noise and seeds}
     Perlin noinse is a very common way to generate structures like worlds etc... It is very good at creating smooth transitions from one state to another, like height maps.
-
 
   \subsection{Random walks}
     This works by randomly walking around a space and building a surface or hollow after that. 

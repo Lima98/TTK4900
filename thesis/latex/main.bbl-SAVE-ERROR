@@ -187,6 +187,97 @@
       \verb https://en.wikipedia.org/w/index.php?title=Object-oriented_programming&oldid=1344935717
       \endverb
     \endentry
+    \entry{zurcherIterativeMultiLevelModeling1968}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=3e0285be5c1f35f91aa11aa780e71d82}{%
+           family={Zurcher},
+           familyi={Z\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=76332c6371627eade995a45d9e642654}{%
+           family={Randell},
+           familyi={R\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{fullhash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{fullhashraw}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{bibnamehash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{authorbibnamehash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{authornamehash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{authorfullhash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{authorfullhashraw}{7bb4e12a3345de1659b9fde55b86658d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The paper presents a method of modelling a computer system design as it evolves, so that evaluation can be made an integral part of the design process. The paper introduces the concept of concurrent existence, within a single model, of several representations of the system being modelled, at differing levels of abstraction. Thus important design decisions are expressed directly in terms of appropriately abstract quantities, facilitating understanding, validation, and modification of the system design. The paper includes brief details of an experimental implementation of the modelling technique and of the use of the technique to model both hardware and software components of a multi-processing system.}
+      \field{day}{1}
+      \field{month}{1}
+      \field{title}{Iterative {{Multi-Level Modeling}} - {{A Methodology}} for {{Computer System Design}}}
+      \field{year}{1968}
+      \field{dateera}{ce}
+      \field{pages}{867\bibrangedash 871}
+      \range{pages}{5}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/Q9NQNK5E/Zurcher and Randell - 1968 - Iterative Multi-Level Modeling - A Methodology for Computer System Design.pdf
+      \endverb
+    \endentry
+    \entry{andersConstraintProgrammingSystems2011}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=7a0da404873533df2414e197b756c82a}{%
+           family={Anders},
+           familyi={A\bibinitperiod},
+           given={Torsten},
+           giveni={T\bibinitperiod}}}%
+        {{hash=2ff1aadff07b018b25feb9cac8ad9c7a}{%
+           family={Miranda},
+           familyi={M\bibinitperiod},
+           given={Eduardo\bibnamedelima R.},
+           giveni={E\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{fullhash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{fullhashraw}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{bibnamehash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{authorbibnamehash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{authornamehash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{authorfullhash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{authorfullhashraw}{cc43f47b9f0499ca1babddf37012fd11}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Constraint programming is well suited for the computational modeling of music theories and composition: its declarative and modular approach shares similarities with the way music theory is traditionally expressed, namely by a set of rules which describe the intended result. Various music theory disciplines have been modeled, including counterpoint, harmony, rhythm, form, and instrumentation. Because modeling music theories “from scratch” is a complex task, generic music constraint programming systems have been proposed that predefine the required building blocks for modeling a range of music theories. After introducing the field and its problems in general, this survey compares these generic systems according to a number of criteria such as the range of music theories these systems support.}
+      \field{day}{18}
+      \field{issn}{0360-0300}
+      \field{journaltitle}{ACM Comput. Surv.}
+      \field{month}{10}
+      \field{number}{4}
+      \field{title}{Constraint Programming Systems for Modeling Music Theories and Composition}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{43}
+      \field{year}{2011}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{30:1\bibrangedash 30:38}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1145/1978802.1978809
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/NC6MYALT/Anders and Miranda - 2011 - Constraint programming systems for modeling music theories and composition.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://dl.acm.org/doi/10.1145/1978802.1978809
+      \endverb
+      \verb{url}
+      \verb https://dl.acm.org/doi/10.1145/1978802.1978809
+      \endverb
+    \endentry
     \entry{vanderlindenProceduralGenerationDungeons2014}{article}{}{}
       \name{author}{3}{}{%
         {{useprefix=true,hash=1aafc72dd11442dc130beacb4e86c499}{%
