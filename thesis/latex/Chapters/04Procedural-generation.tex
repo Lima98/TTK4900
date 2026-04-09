@@ -1,5 +1,5 @@
 \section{Procedural generation}
-  \ac{PG} is algorithmic generation of content. This content can take many forms including landscape, levels, textures or even 3D models. This leads to smaller file sizes since the program can generate the content using algorithms rather than having everything pre-made and saved. 
+\ac{PCG}, often reffered to as just \ac{PG}, is algorithmic generation of content. This content can take many forms including landscape, levels, textures or even 3D models. This leads to smaller file sizes since the program can generate the content using algorithms rather than having everything pre-made and saved. 
 
   This section will cover several methods of \ac{PG} and discuss similarities, differences and most importantly limitations of the methods. Additionally we will take a look at and what we are trying to achieve with the procedural generation in this project and propose a new method that will handle the problem of music generation in a new way. 
 
@@ -12,7 +12,7 @@
       \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/patterns.png}
       \end{center}
-      \caption{Illustration of how procedural tiles from input image is used to generate a new image. \cite{guminWaveFunctionCollapse2016}}\label{fig:wfc_patterns}
+      \caption{Illustration showing how tiles from the input image is being reused in the procedurally generated output.}\label{fig:wfc_patterns}
       \end{figure}
 
   \subsection{PG using constraint satisfaction}
@@ -21,6 +21,43 @@
   \subsection{L-systems (Lindenmayer systems)}
     Lindenmayer systems are a method of \ac{PG} based around the idea of creating rules for the generation which lead to self-similarity and fractal-like forms. This kind of \ac{PG} is often used in generating organic structures such as trees or other plant-like structures.
 
+    If we observe Figure~\ref{fig:l_systems} we can see how two different L-systems can create both very rigid results in the form of the sierpinsky triangle and more organic structures like the fractal plant on the second line.
+
+    \begin{figure} % Sierpinksy and plant
+      \begin{tabular}{ccc}
+
+        \includegraphics[width=0.3\textwidth]{figures/sierpinski1.png} &
+        \includegraphics[width=0.3\textwidth]{figures/sierpinski3.png} &
+        \includegraphics[width=0.3\textwidth]{figures/sierpinski5.png} \\
+        & (a) sierpinksi triangle & \\
+
+      
+        \includegraphics[width=0.3\textwidth]{figures/plant1.png} &
+        \includegraphics[width=0.3\textwidth]{figures/plant3.png} &
+        \includegraphics[width=0.3\textwidth]{figures/plant5.png} \\
+        & (b) fractal plant & \\
+
+      \end{tabular}
+
+      \caption{Demonstration of the sierpinski triangle and a fractal plant after one, three and five iterations repsectively.}\label{fig:l_systems}
+    \end{figure}
+
+    \begin{figure} % Arrowhead sierpinski
+      \begin{tabular}{ccc}
+
+        \includegraphics[width=0.3\textwidth]{figures/arrowhead1.png} &
+        \includegraphics[width=0.3\textwidth]{figures/arrowhead2.png} &
+        \includegraphics[width=0.3\textwidth]{figures/arrowhead3.png} \\
+        (a) first iteration & (b) second iteration & (c) third iteration \\
+        \includegraphics[width=0.3\textwidth]{figures/arrowhead4.png} &
+        \includegraphics[width=0.3\textwidth]{figures/arrowhead5.png} &
+        \includegraphics[width=0.3\textwidth]{figures/arrowhead6.png} \\
+        (d) fourth iteration & (e) fifth iterations & (f) sixth iteration \\
+
+      \end{tabular}
+      \caption{Approximation of the sierpinski triangle using the sierpinski arrowhead curve.}\label{fig:arrowhead_sierpinski}
+    \end{figure}
+    
   \subsection{Binary space partitioning}
     By partitioning the given space in smaller spaces recursively we are able to find a subdivision small enough to generate something that propagates to the higher space with certain characteristics.
 
@@ -28,15 +65,21 @@
     Perlin noise is a very common way to generate structures like worlds etc... It is very good at creating smooth transitions from one state to another, like height maps.
 
   \subsection{Random walks}
-    Random walks are often used in generating maps or other spaces. The random walk works by having an entity walk around "drunkenly", in this case meaning randomly. Then the path is traced, either to create a circumference of an area or the traversed spaces become the area itself. Oftentimes the drunk walker has a set amount of time or steps it can walk before it is terminated, then a new walker is placed at a random location, this helps to smooth out the generated area.
+    Random walk procedural generation method that can be used to organic looking structures like maps and textures. It can also be used to describe natural phenomena like bacterial movement. It has been applied in financial economics and computer science
 
-    The same technique can be used to create textures as well, in REFERENCE HERE we can see how changing the colours and directional bias we can generate textures that imitate real life. In the tree and sand example the directional bias is vertial for the tree texture and diagonal for the sand texture. For the map texture it is uniform directional bias, but colouring to indicate water, land and mountains. The least traveled to square get more blue, and the more frequent it goes to green and brown/white to indicate mountains.
+    The random walk works by having an entity walk around randomly. In some cases the random walk is also called the \textit{drunkard's walk}. Then the path is traced, either to create a circumference of an area or the traversed spaces become the area itself. Oftentimes the drunk walker has a set amount of time or steps it can walk before it is terminated, then a new walker is placed at a random location, this helps to smooth out the generated area.
 
-  \begin{figure}[htp]
-    \centering
-      \includegraphics[width=0.3\textwidth]{figures/ex_wood.png}
-      \includegraphics[width=0.3\textwidth]{figures/ex_sand.png}
-      \includegraphics[width=0.3\textwidth]{figures/ex_map.png}
-    \caption{Three different textures generated using random walks.}\label{fig:random_walks}
-  \end{figure}
+    The same technique can be used to create textures as well, in Figure~\ref{fig:random_walks} we can see how changing the colours and directional bias we can generate textures that imitate real life. In the tree and sand example the directional bias is vertical for the tree texture and diagonal for the sand texture. For the map texture it is uniform directional bias, but colouring to indicate water, land and mountains. The least traveled to square get more blue, and the more frequent it goes to green and brown/white to indicate mountains.
+
+    \begin{figure}[]
+      \centering
+        \includegraphics[width=0.32\textwidth]{figures/ex_wood.png}
+        \includegraphics[width=0.32\textwidth]{figures/ex_sand.png}
+        \includegraphics[width=0.32\textwidth]{figures/ex_map.png}
+      \caption{Three different textures generated using random walks.}\label{fig:random_walks}
+    \end{figure}
+
+  \subsection{Discussion}
+
+    Now that we have taken a look into a few methods of \ac{PG} we observe that there are many similarities between the methods. Common for all forms of \ac{PG} is that they utilize some form of randomness. The randomness in a core part of procedural generation, if there was no randomness we would generate the same output every time and that would be the same as just creating the content yourself.
   
