@@ -7,14 +7,14 @@
     \clef "treble_8"
     \key c \major
     \time 4/4
-  	g'4   	c8   	b,8   	e8   	a4   	a,8 |
-  	g'4   	c8   	b,8   	a,8   	a8   	g'4 |
-  	g'4   	c8   	b,8   	b8   	b,4   	f,8 |
-  	g'4   	c8   	b,8   	e4   	a4 |
-  	g'4   	c8   	b,8   	a,4   	c8   	b8 |
-  	g'4   	c8   	b,8   	b,4   	f4 |
-  	g'4   	c8   	b,8   	a,4   	g4 |
-  	g'4   	c8   	b,8   	c4   	c4 |
+  	c'4   	a4   	c'8   	d'8   	b4 |
+  	c'4   	a8   	b8   	g4   	a8   	c'8 |
+  	c'4   	b8   	a8   	c'8   	d'8   	c'8   	a8 |
+  	c'4   	a8   	b4   	c'8   	a4 |
+  	c'4   	d'4   	c'4   	d'4 |
+  	c'4   	a4   	b4   	c'8   	d'8 |
+  	c'4   	d'8   	e'4   	c'8   	d'4 |
+  	c'4   	c8   	c8   	c8   	c8   	c4 |
   	\bar "|."
   }
    \midi{}
