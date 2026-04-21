@@ -1,3 +1,22 @@
+## 0.12.0 (2026-04-21)
+
+### Feat
+
+- **updated-iter2**: few changes to iter2 to make it easier to discuss
+
+### Fix
+
+- **thesis**: updated section about second iteration and procedural generation.
+- **thesis-updates**: written more in thesis
+- **small-changes**: tiny changes to a few files, moved proc-gen folder
+- **thesis**: updated theory part regarding pcg
+- **thesis**: added text and figures to random-walk section of the thesis
+- **aux-files**: removed loe file
+- **aux-files**: removed aux files and updated gitignore
+- **thesis**: updates thesis text
+- **thesis**: updated theory and figures
+- **thesis**: added figures to music theory section
+
 ## 0.11.0 (2026-04-06)
 
 ### BREAKING CHANGE
