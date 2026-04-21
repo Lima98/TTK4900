@@ -1,12 +1,36 @@
 \section{Second iteration}
-  The goal for the second iteration was ...
-
+  As discussed in the previous section there are several issues with the first iteration the second iteration aims to solve. Most of the improvements over the first iteration are not seen by the end-user as the bulk of the improvement is the code handling the musical objects. 
 
   \subsection{Implementation}
-    The second iteration improved on ...
+    As mentioned the code structure has been improved in this iteration, below you can see an excerpt form the code in the \textit{music.py} file.
+    \lstinputlisting[language=Python, firstline=22, lastline=49]{../../code/.old_iter2/music.py}
+    Comparing to the first iteration this has a more defined structure and easier to read, however it needs improvement.
+
+    The second iteration improved upon the structure of the melody. By using a motif we forced some self-similarity in the generated melody which helped generating something more musical, however this generation is very dependent on the generated motif being musical. 
+
+    Structurally the second iteration is quite similar to the first iteration however, the objects used for handling the melodies and such are more robust and easier to understand. However they are not in a final state where we will re-use it in its entirety for the next iteration. 
 
   \subsection{Results}
-    We can see in fig XXX that we have ...
+    We can see in Example~\ref{fig:iter2_melody} that we have a more defined structure. The generator works by generating a motif which is then re-used in every measure in the piece. The rest of the measures are filled with random notes moving by 2nds or 3rds to make a somewhat coherent and singable melody.
 
+    \begin{example}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{examples/iter2/melody.cropped.pdf}
+      \end{center}
+      \caption{Demonstration of a melody generated using the second iteration.}\label{fig:iter2_melody}.
+    \end{example}
+
+    The generated melodies are still quite random and does not follow any musical form or adhere to melodic restrictions other than that the melody has smaller steps and not big leaps. 
+    
   \subsection{Discussion}
-    This is better, but still lacks ...
+    The most glaring issue with this iteration is that the melodic rules have not been formalized and implemented as code. Generating a melody using this restricted form of generation works well when the generated motif is good, and with the current implementation this only happens randomly. By implementing melodic rules and restrictions this generator will greatly improve the melody generation.
+
+    In the first iteration also had the ability to generate several voices at the same time, however, this will not be re-implemented until the melodic generation has been improved and we can enforce harmonic restrictions on one voice. If this is achieved then multi-voice generation will become much more interesting. 
+
+    Additionally the second iteration does not properly spell all notes in the different keys, this does not affect the generation in any way, though it is a trivial fix it was not implemented since the structure of the second iteration was incompatible with it. Therefore it will only be implemented in the final iteration.
+
+    We would also like to implement augmentation of a given melody or phrase, meaning the ability to transpose it up or down or use the same rhythmic outline and moving the notes around to follow a new chord. This will help develop the generated motif and melody to follow a more structured outline of a well composed melody. A key to a good melody is self-similarity, the second iteration just has repetition of a motif, not variations of it. \\
+
+
+    \noindent
+    The main goals of the third iteration is to be able to augment already generated melodies and be able to enforce constraints on the generation. To ble able to easily augment the melodies and phrases we need a robust model for the melodies made of good objects. Well designed objects is also key to ble able to enforce constraints.

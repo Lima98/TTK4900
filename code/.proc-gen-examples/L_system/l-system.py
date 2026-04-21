@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from math import pi
 
-iterations = 6
+iterations = 7
 
 # --- L-system generator ---
 def generate_lsystem(axiom, rules, iterations):
@@ -41,7 +42,7 @@ def draw_lsystem(instructions, angle, step, initial_angle=90):
 # --- Save function ---
 def save_plot(x, y, filename):
     plt.figure(figsize=(6, 6))
-    plt.plot(x, y)
+    plt.plot(x, y, linewidth=0.8)
     plt.axis("equal")
     plt.axis("off")
     plt.savefig(filename, bbox_inches="tight", dpi=300)
@@ -87,6 +88,31 @@ examples = {
         "step": 1,
         "initial_angle": 180,
         "filename": "arrowhead.png"
+    },
+
+    "bush": {
+        "axiom": "F",
+        "rules": {
+            "F": "FF+[+F-F-F]-[-F+F+F]",
+        },
+        "angle": 22.5,
+        "iterations": iterations,
+        "step": 1,
+        "initial_angle": 90,
+        "filename": "bush.png"
+    },
+
+    "chain": {
+        "axiom": "F",
+        "rules": {
+            "F": "FXF",
+            "X": "[-F+F+F]+F-F-F+"
+        },
+        "angle": 60,
+        "iterations": iterations,
+        "step": 1,
+        "initial_angle": 0,
+        "filename": "chain.png"
     }
 
 }

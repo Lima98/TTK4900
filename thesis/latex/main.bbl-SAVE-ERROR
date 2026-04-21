@@ -1,0 +1,339 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{shoenbergComposition}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=15672b30228d27126b3b024441a1325c}{%
+           family={Schoenberg},
+           familyi={S\bibinitperiod},
+           given={Arnold},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {faber and faber}%
+      }
+      \strng{namehash}{15672b30228d27126b3b024441a1325c}
+      \strng{fullhash}{15672b30228d27126b3b024441a1325c}
+      \strng{fullhashraw}{15672b30228d27126b3b024441a1325c}
+      \strng{bibnamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorbibnamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authornamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorfullhash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorfullhashraw}{15672b30228d27126b3b024441a1325c}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1}
+      \field{isbn}{0-571-19658-6}
+      \field{pagetotal}{224}
+      \field{title}{Fudamentals of {{Musical Composition}}}
+      \field{year}{1967}
+      \field{dateera}{ce}
+    \endentry
+    \entry{MusikalischesWurfelspiel2025}{inreference}{}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A Musikalisches Würfelspiel (German for "musical dice game") was a system for using dice to randomly generate music from precomposed options. These games were quite popular throughout Western Europe in the 18th century. Several different games were devised, some of which did not require the use of dice but merely choosing a random number. The earliest example is Johann Kirnberger's Der allezeit fertige Menuetten- und Polonaisencomponist (German for "The Ever-Ready Minuet and Polonaise Composer") (1757 [1st edition; revised 2nd 1783]). Examples by well known composers include C. P. E. Bach's Einfall, einen doppelten Contrapunct in der Octave von sechs Tacten zu machen, ohne die Regeln davon zu wissen (German for "A method for making six bars of double counterpoint at the octave without knowing the rules") (1758) and Maximilian Stadler's Table pour composer des minuets et des Trios à la infinie; avec deux dez à jouer (French for "A table for composing minuets and trios to infinity, by playing with two dice") (1780). In the early 20th century the Kaleidacousticon System, using arbitrarily combinable playing cards, was unsuccessfully marketed in the Boston area as a parlour game.}
+      \field{annotation}{Page Version ID: 1313693497}
+      \field{booktitle}{Wikipedia}
+      \field{day}{27}
+      \field{hour}{17}
+      \field{langid}{english}
+      \field{minute}{24}
+      \field{month}{9}
+      \field{second}{22}
+      \field{timezone}{Z}
+      \field{title}{Musikalisches {{Würfelspiel}}}
+      \field{urlday}{24}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/9JNZI43N/index.html
+      \endverb
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Musikalisches_W%C3%BCrfelspiel&oldid=1313693497
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Musikalisches_W%C3%BCrfelspiel&oldid=1313693497
+      \endverb
+    \endentry
+    \entry{SentenceMusic2023}{inreference}{}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In Western music theory, the term sentence is analogous to the way the term is used in linguistics, in that it usually refers to a complete, somewhat self-contained statement. Usually a sentence refers to musical spans towards the lower end of the durational scale; i.e. melodic or thematic entities well below the level of movement or section, but above the level of motif or measure. The term is usually encountered in discussions of thematic construction. In the last fifty years, an increasing number of theorists such as William Caplin have used the term to refer to a specific theme-type involving repetition and development.}
+      \field{annotation}{Page Version ID: 1161220566}
+      \field{booktitle}{Wikipedia}
+      \field{day}{21}
+      \field{hour}{10}
+      \field{langid}{english}
+      \field{minute}{45}
+      \field{month}{6}
+      \field{second}{23}
+      \field{timezone}{Z}
+      \field{title}{Sentence (Music)}
+      \field{urlday}{26}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/3B3PEBJ7/index.html
+      \endverb
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Sentence_(music)&oldid=1161220566
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Sentence_(music)&oldid=1161220566
+      \endverb
+    \endentry
+    \entry{ObjectorientedProgramming2026}{inreference}{}{}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Object-oriented programming (OOP) is a programming paradigm based on objects – software entities that encapsulate data and function(s). An OOP computer program consists of objects that interact with one another. An OOP language is one that provides object-oriented programming features, but as the set of features that contribute to OOP is contested, classifying a language as OOP – and the degree to which it supports OOP – is debatable. As paradigms are not mutually exclusive, a language can be multi-paradigm (i.e. categorized as more than only OOP). Notable languages with OOP support include Ada, ActionScript, C++, Common Lisp, C\#, Dart, Eiffel, Fortran 2003, Haxe, Java, JavaScript, Kotlin, Logo, MATLAB, Objective-C, Object Pascal, Perl, PHP, Python, R, Raku, Ruby, Scala, SIMSCRIPT, Simula, Smalltalk, Swift, Vala and Visual Basic (.NET).}
+      \field{annotation}{Page Version ID: 1344935717}
+      \field{booktitle}{Wikipedia}
+      \field{day}{23}
+      \field{hour}{11}
+      \field{langid}{english}
+      \field{minute}{12}
+      \field{month}{3}
+      \field{second}{47}
+      \field{timezone}{Z}
+      \field{title}{Object-Oriented Programming}
+      \field{urlday}{27}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/E8UKJC9W/index.html
+      \endverb
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Object-oriented_programming&oldid=1344935717
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Object-oriented_programming&oldid=1344935717
+      \endverb
+    \endentry
+    \entry{zurcherIterativeMultiLevelModeling1968}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=3e0285be5c1f35f91aa11aa780e71d82}{%
+           family={Zurcher},
+           familyi={Z\bibinitperiod},
+           given={F.},
+           giveni={F\bibinitperiod}}}%
+        {{hash=76332c6371627eade995a45d9e642654}{%
+           family={Randell},
+           familyi={R\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{fullhash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{fullhashraw}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{bibnamehash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{authorbibnamehash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{authornamehash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{authorfullhash}{7bb4e12a3345de1659b9fde55b86658d}
+      \strng{authorfullhashraw}{7bb4e12a3345de1659b9fde55b86658d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The paper presents a method of modelling a computer system design as it evolves, so that evaluation can be made an integral part of the design process. The paper introduces the concept of concurrent existence, within a single model, of several representations of the system being modelled, at differing levels of abstraction. Thus important design decisions are expressed directly in terms of appropriately abstract quantities, facilitating understanding, validation, and modification of the system design. The paper includes brief details of an experimental implementation of the modelling technique and of the use of the technique to model both hardware and software components of a multi-processing system.}
+      \field{day}{1}
+      \field{month}{1}
+      \field{title}{Iterative {{Multi-Level Modeling}} - {{A Methodology}} for {{Computer System Design}}}
+      \field{year}{1968}
+      \field{dateera}{ce}
+      \field{pages}{867\bibrangedash 871}
+      \range{pages}{5}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/Q9NQNK5E/Zurcher and Randell - 1968 - Iterative Multi-Level Modeling - A Methodology for Computer System Design.pdf
+      \endverb
+    \endentry
+    \entry{vanderlindenProceduralGenerationDungeons2014}{article}{}{}
+      \name{author}{3}{}{%
+        {{useprefix=true,hash=1aafc72dd11442dc130beacb4e86c499}{%
+           family={Linden},
+           familyi={L\bibinitperiod},
+           given={Roland},
+           giveni={R\bibinitperiod},
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=88d33934e10fd64a746702e0c4172d1a}{%
+           family={Lopes},
+           familyi={L\bibinitperiod},
+           given={Ricardo},
+           giveni={R\bibinitperiod}}}%
+        {{hash=1d3f4766060649d522cb73a599ad27c5}{%
+           family={Bidarra},
+           familyi={B\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{fullhash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{fullhashraw}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{bibnamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorbibnamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authornamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorfullhash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorfullhashraw}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The use of procedural content generation (PCG) techniques in game development has been mostly restricted to very specific types of game elements. PCG has seldom been deployed for generating entire game levels, a notable exception to this being dungeons: a specific type of game level often encountered in adventure and role playing games. Due to their peculiar combination of pace, gameplay, and game spaces, dungeon levels are among the most suited to showcase the benefits of PCG. This paper surveys research on procedural methods to generate dungeon game levels. We summarize common practices, discuss pros and cons of different approaches, and identify a few promising challenges ahead. In general, what current procedural dungeon generation methods are missing is not performance, but more powerful, accurate, and richer control over the generation process. Recent research results seem to indicate that gameplay-related criteria can provide this high-level control. However, this area is still in its infancy, and many research challenges still lie ahead, e.g., improving the intuitiveness and accessibility of such methods for designers. We also observe that more research is needed into generic mechanisms for automating the generation of the actual dungeon-geometric models. We conclude that the foundations for enabling gameplay-based control of dungeon-level generation are worth being researched, and that its promising results may be instrumental in bringing PCG into mainstream game development.}
+      \field{issn}{1943-0698}
+      \field{journaltitle}{IEEE Transactions on Computational Intelligence and AI in Games}
+      \field{month}{3}
+      \field{number}{1}
+      \field{title}{Procedural {{Generation}} of {{Dungeons}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{6}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{78\bibrangedash 89}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/TCIAIG.2013.2290371
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/HUERQ77M/van der Linden et al. - 2014 - Procedural Generation of Dungeons.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/abstract/document/6661386
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/abstract/document/6661386
+      \endverb
+      \keyw{Abstracts,Aerospace electronics,Automata,Gameplay semantics,Games,Geometry,procedural content generation,procedural level generation,Process control,Rocks,role playing games}
+    \endentry
+    \entry{galinProceduralGenerationRoads2010}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=3e72db1b05ba9ebbfdc7d5a32b3ec2db}{%
+           family={Galin},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=93c0a6f65066ccaa0ea8dc0fbb6fbbaf}{%
+           family={Peytavie},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7cb9d5f7613f5b4f171068af3df2f6c9}{%
+           family={Maréchal},
+           familyi={M\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=87271453b4433bae5a2e53eed8817178}{%
+           family={Guérin},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{fullhash}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{fullhashraw}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{bibnamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authorbibnamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authornamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authorfullhash}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{authorfullhashraw}{bd53d1f420e5849f6ce8de20414353e9}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, we propose an automatic method for generating roads based on a weighted anisotropic shortest path algorithm. Given an input scene, we automatically create a path connecting an initial and a final point. The trajectory of the road minimizes a cost function that takes into account the different parameters of the scene including the slope of the terrain, natural obstacles such as rivers, lakes, mountains and forests. The road is generated by excavating the terrain along the path and instantiating generic parameterized models.}
+      \field{issn}{1467-8659}
+      \field{journaltitle}{Computer Graphics Forum}
+      \field{langid}{english}
+      \field{number}{2}
+      \field{title}{Procedural {{Generation}} of {{Roads}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{29}
+      \field{year}{2010}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{429\bibrangedash 438}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/4VSNNCTK/Galin et al. - 2010 - Procedural Generation of Roads.pdf;/Users/jan-oivindlima/Zotero/storage/QGNFN2VM/j.1467-8659.2009.01612.html
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \keyw{Computer Graphics: Three-Dimensional Graphics and Realism,discrete anisotropic shortest path,Procedural modeling,road generation}
+    \endentry
+    \entry{holeAutomaticSpeciesCounterpoint}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=81b8c2063d7b923c9fba931bbe98bf1b}{%
+           family={Hole},
+           familyi={H\bibinitperiod},
+           given={Johan\bibnamedelima Gangsås},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{fullhash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{fullhashraw}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{bibnamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorbibnamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authornamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorfullhash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorfullhashraw}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Master Thesis at NTNU}
+      \field{langid}{english}
+      \field{title}{Automatic {{Species Counterpoint}}}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/B2EFSX9P/Hole - Automatic Species Counterpoint.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

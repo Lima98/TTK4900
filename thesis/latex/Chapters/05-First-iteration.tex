@@ -9,7 +9,7 @@
   \subsection{Results}
     The melody generation works fine for smaller melodies, however there is no self-similarity and no rests. This means that the melodies we generate are not particularly musical or interesting, but it is a great starting point to getting to a fully fledged melody generator. In Example~\ref{fig:iter1_melody} we can see how a short melody using the first iteration looks. 
 
-    In Example~\ref{fig:iter1_register} you can see what happens when the generated melody is longer, it will tend to go beyond what an instrument will be able to play. You can see this clearly in \textit{bar 6 through 16} (the entire 2nd and 3rd system), where there are lots of ledger lines. Some of these notes are not even available on the grand piano.
+    In Example~\ref{fig:iter1_register} you can see what happens when the generated melody is longer, it will tend to go beyond what an instrument will be able to play. You can see this clearly in \textit{bar 6 through 16} (the entire 2nd and 3rd system), where there are very long ledger lines. Some of these notes are not even available on the grand piano.
 
     \begin{example}
       \begin{center}
@@ -40,5 +40,6 @@
 
     For the second iteration we need to be able to enforce more restictions on the melody so that it follows more convetions of good melody writing. Additionally we need to have some self-similarity so that the music follows some kind of musical form in order for it to feel coherent and part of the same idea.
 
-    The second iteration will focus on creating a generation algorithm that tat is able to generate a melody with a structure. Meaning when generating a melody we will generate a phrase, that phrase should contain an idea, a repetition, and the end of the melody should end resolved with a long note on the tonic of the key. Additionally we need to restirct the range of the melody so that it will be playable/singable.
 
+    \noindent
+    The second iteration will focus on creating a generation algorithm that tat is able to generate a melody with a structure. Meaning when generating a melody we will generate a phrase, that phrase should contain an idea, a repetition, and the end of the melody should end resolved with a long note on the tonic of the key. Additionally we need to restirct the range of the melody so that it will be playable/singable.
