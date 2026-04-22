@@ -1,3 +1,20 @@
+## 0.13.0 (2026-04-22)
+
+### BREAKING CHANGE
+
+- complete refactor, iteration three is incompatible, but inspired by the first two iterations.
+
+### Feat
+
+- **webpage-and-documentation**: updates to webpage and documentation with a new script for pushing code to my folk webpage at ntnu
+- **third-iteration-improvements**: lots of new features, clef selection, voice types etc
+- **iteration-3**: lots of features for the third iteration implemented
+
+### Fix
+
+- **pdf**: re-ran PDF file
+- **aux-files**: remved aux files to push to main
+
 ## 0.12.0 (2026-04-21)
 
 ### Feat
