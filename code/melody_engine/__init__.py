@@ -1,3 +1,5 @@
+"""Public API for the current melody-generation engine."""
+
 from .constraints import (
     ChordTonePreferenceConstraint,
     DirectionChangeConstraint,

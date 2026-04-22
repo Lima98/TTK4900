@@ -20,10 +20,9 @@ echo "Done!\n"
 
 # Updating documentation
 cd ../docs/
-./build_docs.sh
+./build_docs.zsh
 
 echo "Building documentation...\n"
-make html
 cd ../webpage/
 echo "Done!\n"
 
@@ -35,7 +34,7 @@ mkdir -p /Volumes/janoivil/thesis/
 cp -f ../thesis/latex/main.pdf /Volumes/janoivil/thesis/main.pdf
 echo "Done!\n"
 echo "Copying docs/ to /Volumes/janoivil/docs/\n"
-rsync -a ../docs/ /Volumes/janoivil/docs/
+rsync -a ../docs/_build/html/ /Volumes/janoivil/docs/
 echo "Done!\n"
 echo "Copying output/ to /Volumes/janoivil/output/\n"
 rsync -a ../output/ /Volumes/janoivil/output/

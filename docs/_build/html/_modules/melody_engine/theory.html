@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>melody_engine.theory &#8212; Procedural Music Generation Docs</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=6855551a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=5a5d1aad" />
+    <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Procedural Music Generation</a></h1>
+
+
+
+<p class="blurb">Documentation for the current procedural music generation engine and CLI.</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/cli-reference.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/thesis-workflow.html">Thesis Workflow</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/melody-engine.html">Melody Engine API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/main-module.html">Main CLI Module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for melody_engine.theory</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="sd">&quot;&quot;&quot;Pitch, key, and Roman-numeral helpers used by the melody engine.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="n">LETTERS</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="n">NATURAL_PITCH_CLASSES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+    <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">MODE_INTERVALS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="s2">&quot;minor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s2">&quot;dorian&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s2">&quot;phrygian&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s2">&quot;lydian&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+    <span class="s2">&quot;mixolydian&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+    <span class="s2">&quot;locrian&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">ROMAN_TO_DEGREE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;i&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;ii&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;iii&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;iv&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;v&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s2">&quot;vi&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">&quot;vii&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">TRIAD_QUALITIES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="s2">&quot;minor&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+    <span class="s2">&quot;diminished&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="s2">&quot;augmented&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="parse_pitch_class">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.parse_pitch_class">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse_pitch_class</span><span class="p">(</span><span class="n">note_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="n">note_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">letter</span> <span class="o">=</span> <span class="n">normalized</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pitch_class</span> <span class="o">=</span> <span class="n">NATURAL_PITCH_CLASSES</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">accidental</span> <span class="ow">in</span> <span class="n">normalized</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">accidental</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">}:</span>
+            <span class="n">pitch_class</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">accidental</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">}:</span>
+            <span class="n">pitch_class</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported accidental in note name: </span><span class="si">{</span><span class="n">note_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pitch_class</span> <span class="o">%</span> <span class="mi">12</span></div>
+
+
+
+<div class="viewcode-block" id="accidental_suffix">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.accidental_suffix">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">accidental_suffix</span><span class="p">(</span><span class="n">accidental</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">accidental_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="o">-</span><span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;ff&quot;</span><span class="p">,</span>
+        <span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;f&quot;</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;ss&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">accidental</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">accidental_map</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported accidental distance: </span><span class="si">{</span><span class="n">accidental</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">accidental_map</span><span class="p">[</span><span class="n">accidental</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="accidental_value">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.accidental_value">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">accidental_value</span><span class="p">(</span><span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">accidental</span> <span class="ow">in</span> <span class="n">symbol</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">accidental</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">}:</span>
+            <span class="n">value</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">accidental</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">}:</span>
+            <span class="n">value</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported accidental marker: </span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span></div>
+
+
+
+<div class="viewcode-block" id="lilypond_octave">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.lilypond_octave">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">lilypond_octave</span><span class="p">(</span><span class="n">octave</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">octave</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="n">octave</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;,&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">octave</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="normalize_roman_symbol">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.normalize_roman_symbol">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">normalize_roman_symbol</span><span class="p">(</span><span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">stripped</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">lowered</span> <span class="o">=</span> <span class="n">stripped</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;°&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="n">lowered</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;b#sf&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cleaned</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ROMAN_TO_DEGREE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported roman numeral: </span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cleaned</span></div>
+
+
+
+<div class="viewcode-block" id="roman_symbol_accidental">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.roman_symbol_accidental">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">roman_symbol_accidental</span><span class="p">(</span><span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="n">stripped</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">accidental_text</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">stripped</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">char</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">}:</span>
+            <span class="n">accidental_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">break</span>
+    <span class="k">return</span> <span class="n">accidental_value</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">accidental_text</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="roman_symbol_quality">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.roman_symbol_quality">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">roman_symbol_quality</span><span class="p">(</span><span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">stripped</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="s2">&quot;+&quot;</span> <span class="ow">in</span> <span class="n">stripped</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;augmented&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;°&quot;</span> <span class="ow">in</span> <span class="n">stripped</span> <span class="ow">or</span> <span class="s2">&quot;o&quot;</span> <span class="ow">in</span> <span class="n">stripped</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;diminished&quot;</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">char</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="ow">and</span> <span class="n">char</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">stripped</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;major&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;minor&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="split_spelling">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.split_spelling">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_spelling</span><span class="p">(</span><span class="n">spelling</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="n">letter</span> <span class="o">=</span> <span class="n">spelling</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">accidental_text</span> <span class="o">=</span> <span class="n">spelling</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">letter</span><span class="p">,</span> <span class="n">accidental_value</span><span class="p">(</span><span class="n">accidental_text</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Key">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.Key">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Key</span><span class="p">:</span>
+    <span class="n">tonic</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;major&quot;</span>
+    <span class="n">tonic_octave</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">normalized_mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">normalized_mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MODE_INTERVALS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported mode: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">,</span> <span class="n">normalized_mode</span><span class="p">)</span>
+        <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;tonic&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tonic_pitch_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">parse_pitch_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scale_intervals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">MODE_INTERVALS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scale_spellings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="n">tonic_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">tonic_letter</span> <span class="o">=</span> <span class="n">tonic_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">tonic_letter_index</span> <span class="o">=</span> <span class="n">LETTERS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tonic_letter</span><span class="p">)</span>
+        <span class="n">spellings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">degree_index</span><span class="p">,</span> <span class="n">interval</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scale_intervals</span><span class="p">):</span>
+            <span class="n">letter</span> <span class="o">=</span> <span class="n">LETTERS</span><span class="p">[(</span><span class="n">tonic_letter_index</span> <span class="o">+</span> <span class="n">degree_index</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span><span class="p">]</span>
+            <span class="n">target_pitch_class</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic_pitch_class</span> <span class="o">+</span> <span class="n">interval</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+            <span class="n">natural_pitch_class</span> <span class="o">=</span> <span class="n">NATURAL_PITCH_CLASSES</span><span class="p">[</span><span class="n">letter</span><span class="p">]</span>
+            <span class="n">accidental_distance</span> <span class="o">=</span> <span class="p">((</span><span class="n">target_pitch_class</span> <span class="o">-</span> <span class="n">natural_pitch_class</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-</span> <span class="mi">6</span>
+            <span class="k">if</span> <span class="n">accidental_distance</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot spell scale degree </span><span class="si">{</span><span class="n">degree_index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">spellings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">letter</span> <span class="o">+</span> <span class="n">accidental_suffix</span><span class="p">(</span><span class="n">accidental_distance</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">spellings</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Key.lilypond_pitch">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.Key.lilypond_pitch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lilypond_pitch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">degree_index</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span>
+        <span class="n">octave_offset</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">//</span> <span class="mi">7</span>
+        <span class="n">pitch_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_spellings</span><span class="p">[</span><span class="n">degree_index</span><span class="p">]</span>
+        <span class="n">octave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic_octave</span> <span class="o">+</span> <span class="n">octave_offset</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pitch_name</span><span class="si">}{</span><span class="n">lilypond_octave</span><span class="p">(</span><span class="n">octave</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="Key.chromatic_pitch">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.Key.chromatic_pitch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">chromatic_pitch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">chromatic_adjustment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">degree_index</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span>
+        <span class="n">octave_offset</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">//</span> <span class="mi">7</span>
+        <span class="n">pitch_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_spellings</span><span class="p">[</span><span class="n">degree_index</span><span class="p">]</span>
+        <span class="n">letter</span><span class="p">,</span> <span class="n">accidental</span> <span class="o">=</span> <span class="n">split_spelling</span><span class="p">(</span><span class="n">pitch_name</span><span class="p">)</span>
+        <span class="n">octave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic_octave</span> <span class="o">+</span> <span class="n">octave_offset</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">letter</span><span class="si">}{</span><span class="n">accidental_suffix</span><span class="p">(</span><span class="n">accidental</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">chromatic_adjustment</span><span class="p">)</span><span class="si">}{</span><span class="n">lilypond_octave</span><span class="p">(</span><span class="n">octave</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+<div class="viewcode-block" id="Key.absolute_midi">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.Key.absolute_midi">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">absolute_midi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">chromatic_adjustment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">octave_offset</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">//</span> <span class="mi">7</span>
+        <span class="n">degree_index</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span>
+        <span class="n">octave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic_octave</span> <span class="o">+</span> <span class="n">octave_offset</span>
+        <span class="n">pitch_class</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic_pitch_class</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_intervals</span><span class="p">[</span><span class="n">degree_index</span><span class="p">]</span> <span class="o">+</span> <span class="n">chromatic_adjustment</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">octave</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="n">pitch_class</span></div>
+
+
+<div class="viewcode-block" id="Key.scale_pitch_class">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.Key.scale_pitch_class">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scale_pitch_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_step</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">degree_index</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span>
+        <span class="n">octave_offset</span> <span class="o">=</span> <span class="n">scale_step</span> <span class="o">//</span> <span class="mi">7</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic_pitch_class</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_intervals</span><span class="p">[</span><span class="n">degree_index</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="n">octave_offset</span><span class="p">))</span> <span class="o">%</span> <span class="mi">12</span></div>
+
+
+<div class="viewcode-block" id="Key.chord_tones">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.Key.chord_tones">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">chord_tones</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roman_symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="n">root_degree</span> <span class="o">=</span> <span class="n">ROMAN_TO_DEGREE</span><span class="p">[</span><span class="n">normalize_roman_symbol</span><span class="p">(</span><span class="n">roman_symbol</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">root_degree</span> <span class="o">%</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">root_degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">root_degree</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Key.chord_pitch_classes">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.Key.chord_pitch_classes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">chord_pitch_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roman_symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="n">normalized</span> <span class="o">=</span> <span class="n">normalize_roman_symbol</span><span class="p">(</span><span class="n">roman_symbol</span><span class="p">)</span>
+        <span class="n">root_degree</span> <span class="o">=</span> <span class="n">ROMAN_TO_DEGREE</span><span class="p">[</span><span class="n">normalized</span><span class="p">]</span>
+        <span class="n">root_pitch_class</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic_pitch_class</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_intervals</span><span class="p">[</span><span class="n">root_degree</span><span class="p">]</span> <span class="o">+</span> <span class="n">roman_symbol_accidental</span><span class="p">(</span><span class="n">roman_symbol</span><span class="p">))</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="n">quality</span> <span class="o">=</span> <span class="n">roman_symbol_quality</span><span class="p">(</span><span class="n">roman_symbol</span><span class="p">)</span>
+        <span class="n">intervals</span> <span class="o">=</span> <span class="n">TRIAD_QUALITIES</span><span class="p">[</span><span class="n">quality</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">root_pitch_class</span> <span class="o">+</span> <span class="n">interval</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Key.chord_scale_targets">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.theory.Key.chord_scale_targets">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">chord_scale_targets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roman_symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="n">chord_degrees</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chord_tones</span><span class="p">(</span><span class="n">roman_symbol</span><span class="p">)</span>
+        <span class="n">target_pitch_classes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chord_pitch_classes</span><span class="p">(</span><span class="n">roman_symbol</span><span class="p">)</span>
+        <span class="n">targets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">degree</span><span class="p">,</span> <span class="n">target_pitch_class</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">chord_degrees</span><span class="p">,</span> <span class="n">target_pitch_classes</span><span class="p">):</span>
+            <span class="n">diatonic_pitch_class</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic_pitch_class</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale_intervals</span><span class="p">[</span><span class="n">degree</span><span class="p">])</span> <span class="o">%</span> <span class="mi">12</span>
+            <span class="n">adjustment</span> <span class="o">=</span> <span class="p">((</span><span class="n">target_pitch_class</span> <span class="o">-</span> <span class="n">diatonic_pitch_class</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-</span> <span class="mi">6</span>
+            <span class="k">if</span> <span class="n">adjustment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chord symbol requires unsupported chromatic adjustment: </span><span class="si">{</span><span class="n">roman_symbol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">degree</span><span class="p">,</span> <span class="n">adjustment</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>  <span class="c1"># type: ignore[return-value]</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Soft constraints used to guide melodic generation toward singable results."""
+
 from dataclasses import dataclass
 from typing import Protocol
 

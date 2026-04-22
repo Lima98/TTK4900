@@ -191,8 +191,7 @@
 
       .example-card {
         display: grid;
-        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.9fr);
-        gap: 1.25rem;
+        gap: 1rem;
         background: var(--paper);
         border: 1px solid var(--line);
         border-radius: 24px;
@@ -200,21 +199,26 @@
         box-shadow: var(--shadow);
       }
 
-      .example-copy h3 {
-        margin: 0;
-        font-size: 1.25rem;
+      .example-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
       }
 
-      .example-copy p {
-        margin: 0.8rem 0;
-        color: var(--muted);
+      .example-heading {
+        min-width: 0;
+      }
+
+      .example-heading h3 {
+        margin: 0.2rem 0 0;
+        font-size: 1.25rem;
       }
 
       .meta {
         display: flex;
         flex-wrap: wrap;
         gap: 0.6rem;
-        margin-bottom: 0.8rem;
       }
 
       .meta span {
@@ -229,7 +233,6 @@
         display: flex;
         flex-wrap: wrap;
         gap: 0.7rem;
-        margin-top: 1rem;
       }
 
       .example-links a {
@@ -242,35 +245,46 @@
       }
 
       .example-media {
-        display: grid;
-        gap: 0.8rem;
+        width: 100%;
+        min-height: 360px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fbf8f2;
+        overflow: hidden;
       }
 
       .score-frame {
         width: 100%;
-        min-height: 260px;
-        border: 1px solid var(--line);
-        border-radius: 18px;
+        min-height: 360px;
+      }
+
+      .score-frame object {
+        display: block;
+        width: 100%;
+        min-height: 360px;
+        border: 0;
         background: #fbf8f2;
       }
 
-      .score-frame img {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-radius: 18px;
+      .score-fallback {
+        padding: 1rem 1.1rem;
+        color: var(--muted);
+      }
+
+      .example-body {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 1rem;
+        align-items: start;
+      }
+
+      .example-body p {
+        margin: 0;
+        color: var(--muted);
       }
 
       audio {
         width: 100%;
-      }
-
-      .audio-missing {
-        padding: 0.9rem 1rem;
-        border: 1px dashed var(--line);
-        border-radius: 16px;
-        color: var(--muted);
-        background: #fbf8f2;
       }
 
       footer {
@@ -283,12 +297,16 @@
       @media (max-width: 980px) {
         .hero-inner,
         .layout,
-        .example-card {
+        .example-body {
           grid-template-columns: 1fr;
         }
 
         .sidebar {
           position: static;
+        }
+
+        .example-top {
+          flex-direction: column;
         }
       }
     </style>
@@ -304,7 +322,7 @@
           </p>
           <div class="hero-actions">
             <a class="primary" href="thesis/main.pdf">Open Thesis PDF</a>
-            <a href="./docs/_build/html/index.html">Open Technical Documentation</a>
+            <a href="docs/index.html">Open Technical Documentation</a>
             <a href="#example-6-2-1">Jump To Results Examples</a>
           </div>
         </div>
@@ -312,7 +330,7 @@
           <h2>How To Use This Archive</h2>
           <ul>
             <li>Example numbers match the numbering used in the thesis.</li>
-            <li>Each card includes the score preview, a direct PDF link, and audio when available.</li>
+            <li>Each card includes a large score preview and a direct jump into the thesis PDF.</li>
             <li>Theory and iteration examples are grouped by the same larger topics used in the thesis.</li>
           </ul>
         </aside>
@@ -339,24 +357,31 @@
 
           <div class="example-grid">
             <article class="example-card" id="example-2-2-1">
-              <div class="example-copy">
-                <div class="meta">
-                  <span>Example 2.2.1</span>
-                  <span>Scale</span>
-                  <span>Theory</span>
+              <div class="example-top">
+                <div class="example-heading">
+                  <div class="meta">
+                    <span>Example 2.2.1</span>
+                    <span>Scale</span>
+                    <span>Theory</span>
+                  </div>
+                  <h3>The C-major scale written in the treble clef</h3>
                 </div>
-                <h3>The C-major scale written in the treble clef</h3>
-                <p>
-                  Referenced in the thesis discussion of scale degrees and tonal function.
-                </p>
                 <div class="example-links">
-                  <a href="thesis-examples/04theory/01-scale.cropped.pdf">Open Score PDF</a>
+                  <a href="thesis/main.pdf#page=10">Jump In Thesis</a>
                 </div>
               </div>
               <div class="example-media">
                 <div class="score-frame">
-                  <img src="thesis-examples/04theory/01-scale.cropped.pdf" alt="Example 2.2.1 score">
+                  <object data="thesis-examples/04theory/01-scale.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.1 score preview">
+                    <div class="score-fallback">
+                      Preview unavailable in this browser. Open the cropped score directly:
+                      <a href="thesis-examples/04theory/01-scale.cropped.pdf">Example 2.2.1 score</a>
+                    </div>
+                  </object>
                 </div>
+              </div>
+              <div class="example-body">
+                <p>Referenced in the thesis discussion of scale degrees and tonal function.</p>
                 <audio controls>
                   <source src="thesis-examples/04theory/01-scale.wav" type="audio/wav">
                 </audio>
@@ -364,24 +389,31 @@
             </article>
 
             <article class="example-card" id="example-2-2-2">
-              <div class="example-copy">
-                <div class="meta">
-                  <span>Example 2.2.2</span>
-                  <span>Scale</span>
-                  <span>Theory</span>
+              <div class="example-top">
+                <div class="example-heading">
+                  <div class="meta">
+                    <span>Example 2.2.2</span>
+                    <span>Scale</span>
+                    <span>Theory</span>
+                  </div>
+                  <h3>The E-flat major scale written in the treble clef</h3>
                 </div>
-                <h3>The E-flat major scale written in the treble clef</h3>
-                <p>
-                  Companion to Example 2.2.1, showing the same scale structure in a different key.
-                </p>
                 <div class="example-links">
-                  <a href="thesis-examples/04theory/02-scale_eb.cropped.pdf">Open Score PDF</a>
+                  <a href="thesis/main.pdf#page=10">Jump In Thesis</a>
                 </div>
               </div>
               <div class="example-media">
                 <div class="score-frame">
-                  <img src="thesis-examples/04theory/02-scale_eb.cropped.pdf" alt="Example 2.2.2 score">
+                  <object data="thesis-examples/04theory/02-scale_eb.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.2 score preview">
+                    <div class="score-fallback">
+                      Preview unavailable in this browser. Open the cropped score directly:
+                      <a href="thesis-examples/04theory/02-scale_eb.cropped.pdf">Example 2.2.2 score</a>
+                    </div>
+                  </object>
                 </div>
+              </div>
+              <div class="example-body">
+                <p>Companion to Example 2.2.1, showing the same scale structure in a different key.</p>
                 <audio controls>
                   <source src="thesis-examples/04theory/02-scale_eb.wav" type="audio/wav">
                 </audio>
@@ -389,24 +421,31 @@
             </article>
 
             <article class="example-card" id="example-2-2-3">
-              <div class="example-copy">
-                <div class="meta">
-                  <span>Example 2.2.3</span>
-                  <span>Intervals</span>
-                  <span>Theory</span>
+              <div class="example-top">
+                <div class="example-heading">
+                  <div class="meta">
+                    <span>Example 2.2.3</span>
+                    <span>Intervals</span>
+                    <span>Theory</span>
+                  </div>
+                  <h3>All the musical intervals from the unison to the octave including their variants</h3>
                 </div>
-                <h3>All the musical intervals from the unison to the octave including their variants</h3>
-                <p>
-                  Used in the thesis to illustrate the interval system and enharmonic spellings.
-                </p>
                 <div class="example-links">
-                  <a href="thesis-examples/04theory/04-all_intervals.cropped.pdf">Open Score PDF</a>
+                  <a href="thesis/main.pdf#page=11">Jump In Thesis</a>
                 </div>
               </div>
               <div class="example-media">
                 <div class="score-frame">
-                  <img src="thesis-examples/04theory/04-all_intervals.cropped.pdf" alt="Example 2.2.3 score">
+                  <object data="thesis-examples/04theory/04-all_intervals.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.3 score preview">
+                    <div class="score-fallback">
+                      Preview unavailable in this browser. Open the cropped score directly:
+                      <a href="thesis-examples/04theory/04-all_intervals.cropped.pdf">Example 2.2.3 score</a>
+                    </div>
+                  </object>
                 </div>
+              </div>
+              <div class="example-body">
+                <p>Used in the thesis to illustrate the interval system and enharmonic spellings.</p>
                 <audio controls>
                   <source src="thesis-examples/04theory/04-all_intervals.wav" type="audio/wav">
                 </audio>
@@ -426,24 +465,31 @@
 
           <div class="example-grid">
             <article class="example-card" id="example-6-1-1">
-              <div class="example-copy">
-                <div class="meta">
-                  <span>Example 6.1.1</span>
-                  <span>Iteration 1</span>
-                  <span>Range</span>
+              <div class="example-top">
+                <div class="example-heading">
+                  <div class="meta">
+                    <span>Example 6.1.1</span>
+                    <span>Iteration 1</span>
+                    <span>Range</span>
+                  </div>
+                  <h3>Melody showing how the octave is not restricted and ends up in unplayable range</h3>
                 </div>
-                <h3>Melody showing how the octave is not restricted and ends up in unplayable range</h3>
-                <p>
-                  A first-iteration example demonstrating why explicit range handling is necessary.
-                </p>
                 <div class="example-links">
-                  <a href="thesis-examples/iter1/register.cropped.pdf">Open Score PDF</a>
+                  <a href="thesis/main.pdf#page=23">Jump In Thesis</a>
                 </div>
               </div>
               <div class="example-media">
                 <div class="score-frame">
-                  <img src="thesis-examples/iter1/register.cropped.pdf" alt="Example 6.1.1 score">
+                  <object data="thesis-examples/iter1/register.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.1 score preview">
+                    <div class="score-fallback">
+                      Preview unavailable in this browser. Open the cropped score directly:
+                      <a href="thesis-examples/iter1/register.cropped.pdf">Example 6.1.1 score</a>
+                    </div>
+                  </object>
                 </div>
+              </div>
+              <div class="example-body">
+                <p>A first-iteration example demonstrating why explicit range handling is necessary.</p>
                 <audio controls>
                   <source src="thesis-examples/iter1/register.wav" type="audio/wav">
                 </audio>
@@ -451,24 +497,31 @@
             </article>
 
             <article class="example-card" id="example-6-1-2">
-              <div class="example-copy">
-                <div class="meta">
-                  <span>Example 6.1.2</span>
-                  <span>Iteration 1</span>
-                  <span>Multi-Voice</span>
+              <div class="example-top">
+                <div class="example-heading">
+                  <div class="meta">
+                    <span>Example 6.1.2</span>
+                    <span>Iteration 1</span>
+                    <span>Multi-Voice</span>
+                  </div>
+                  <h3>Melody showing how we can generate multiple voices with different rhythmic restrictions</h3>
                 </div>
-                <h3>Melody showing how we can generate multiple voices with different rhythmic restrictions</h3>
-                <p>
-                  An early proof of concept for generating several voices, before harmonic interaction was formalized.
-                </p>
                 <div class="example-links">
-                  <a href="thesis-examples/iter1/voices.cropped.pdf">Open Score PDF</a>
+                  <a href="thesis/main.pdf#page=24">Jump In Thesis</a>
                 </div>
               </div>
               <div class="example-media">
                 <div class="score-frame">
-                  <img src="thesis-examples/iter1/voices.cropped.pdf" alt="Example 6.1.2 score">
+                  <object data="thesis-examples/iter1/voices.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.2 score preview">
+                    <div class="score-fallback">
+                      Preview unavailable in this browser. Open the cropped score directly:
+                      <a href="thesis-examples/iter1/voices.cropped.pdf">Example 6.1.2 score</a>
+                    </div>
+                  </object>
                 </div>
+              </div>
+              <div class="example-body">
+                <p>An early proof of concept for generating several voices, before harmonic interaction was formalized.</p>
                 <audio controls>
                   <source src="thesis-examples/iter1/voices.wav" type="audio/wav">
                 </audio>
@@ -476,24 +529,31 @@
             </article>
 
             <article class="example-card" id="example-6-1-3">
-              <div class="example-copy">
-                <div class="meta">
-                  <span>Example 6.1.3</span>
-                  <span>Iteration 1</span>
-                  <span>Melody</span>
+              <div class="example-top">
+                <div class="example-heading">
+                  <div class="meta">
+                    <span>Example 6.1.3</span>
+                    <span>Iteration 1</span>
+                    <span>Melody</span>
+                  </div>
+                  <h3>Example melody of the first iteration melody generator</h3>
                 </div>
-                <h3>Example melody of the first iteration melody generator</h3>
-                <p>
-                  A compact melody example from the first proof-of-concept generator.
-                </p>
                 <div class="example-links">
-                  <a href="thesis-examples/iter1/melody.cropped.pdf">Open Score PDF</a>
+                  <a href="thesis/main.pdf#page=24">Jump In Thesis</a>
                 </div>
               </div>
               <div class="example-media">
                 <div class="score-frame">
-                  <img src="thesis-examples/iter1/melody.cropped.pdf" alt="Example 6.1.3 score">
+                  <object data="thesis-examples/iter1/melody.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.3 score preview">
+                    <div class="score-fallback">
+                      Preview unavailable in this browser. Open the cropped score directly:
+                      <a href="thesis-examples/iter1/melody.cropped.pdf">Example 6.1.3 score</a>
+                    </div>
+                  </object>
                 </div>
+              </div>
+              <div class="example-body">
+                <p>A compact melody example from the first proof-of-concept generator.</p>
                 <audio controls>
                   <source src="thesis-examples/iter1/melody.wav" type="audio/wav">
                 </audio>
@@ -513,24 +573,31 @@
 
           <div class="example-grid">
             <article class="example-card" id="example-6-2-1">
-              <div class="example-copy">
-                <div class="meta">
-                  <span>Example 6.2.1</span>
-                  <span>Iteration 2</span>
-                  <span>Motivic Structure</span>
+              <div class="example-top">
+                <div class="example-heading">
+                  <div class="meta">
+                    <span>Example 6.2.1</span>
+                    <span>Iteration 2</span>
+                    <span>Motivic Structure</span>
+                  </div>
+                  <h3>Demonstration of a melody generated using the second iteration</h3>
                 </div>
-                <h3>Demonstration of a melody generated using the second iteration</h3>
-                <p>
-                  This example is used in the thesis to show how motif repetition gave the melody a clearer structure.
-                </p>
                 <div class="example-links">
-                  <a href="thesis-examples/iter2/melody.cropped.pdf">Open Score PDF</a>
+                  <a href="thesis/main.pdf#page=26">Jump In Thesis</a>
                 </div>
               </div>
               <div class="example-media">
                 <div class="score-frame">
-                  <img src="thesis-examples/iter2/melody.cropped.pdf" alt="Example 6.2.1 score">
+                  <object data="thesis-examples/iter2/melody.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.2.1 score preview">
+                    <div class="score-fallback">
+                      Preview unavailable in this browser. Open the cropped score directly:
+                      <a href="thesis-examples/iter2/melody.cropped.pdf">Example 6.2.1 score</a>
+                    </div>
+                  </object>
                 </div>
+              </div>
+              <div class="example-body">
+                <p>This example is used in the thesis to show how motif repetition gave the melody a clearer structure.</p>
                 <audio controls>
                   <source src="thesis-examples/iter2/melody.wav" type="audio/wav">
                 </audio>

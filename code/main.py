@@ -1,5 +1,15 @@
 from __future__ import annotations
 
+"""Command-line entry point for melody generation and rerendering.
+
+This module exposes the main user workflow for the project:
+
+- build generation settings from CLI arguments
+- generate a melody with the current engine
+- export LilyPond source and optional rendered assets
+- rerender existing LilyPond files from a seed folder or explicit path
+"""
+
 import argparse
 import sys
 from pathlib import Path
@@ -35,6 +45,7 @@ from melody_engine import (
 
 
 def build_voice_profile(name: str) -> VoiceProfile:
+    """Return a named voice profile used for range, tessitura, and clef defaults."""
     profiles = {
         "melody": VoiceProfile("melody", 0, 9, 1, 8, None),
         "soprano": VoiceProfile("soprano", 0, 9, 1, 8, "treble"),
@@ -65,6 +76,7 @@ def build_voice_profile(name: str) -> VoiceProfile:
 
 
 def build_settings(args: argparse.Namespace) -> GenerationSettings:
+    """Translate parsed CLI arguments into a validated ``GenerationSettings`` object."""
     key = Key(args.key, args.mode, tonic_octave=args.tonic_octave)
     time_signature = TimeSignature.from_string(args.time_signature)
     voice_profile = build_voice_profile(args.voice_profile)
@@ -107,6 +119,7 @@ def build_settings(args: argparse.Namespace) -> GenerationSettings:
 
 
 def build_constraints() -> list:
+    """Construct the weighted soft-constraint stack used by the melody generator."""
     return [
         StepwiseMotionConstraint(weight=1.5),
         LargeLeapConstraint(weight=1.8),
@@ -125,6 +138,7 @@ def build_constraints() -> list:
 
 
 def build_harmony_plan(specification: str, mode: str, form_plan: FormPlan, bars: int) -> HarmonyPlan:
+    """Build either an explicit or automatically derived harmony plan."""
     if specification.strip().lower() in {"", "auto", "none"}:
         return build_default_harmony_plan(mode, form_plan, bars)
 
@@ -151,6 +165,7 @@ def build_harmony_plan(specification: str, mode: str, form_plan: FormPlan, bars:
 
 
 def build_default_harmony_plan(mode: str, form_plan: FormPlan, bars: int) -> HarmonyPlan:
+    """Create a tonal default harmony plan following the thesis progression model."""
     symbols = default_function_symbols(mode)
     bar_symbols: list[str] = []
 
@@ -211,6 +226,7 @@ def build_default_harmony_plan(mode: str, form_plan: FormPlan, bars: int) -> Har
 
 
 def default_function_symbols(mode: str) -> dict[str, str]:
+    """Return the tonic, predominant, dominant, and sequence symbols used in auto harmony."""
     if mode.lower() == "minor":
         return {
             "tonic": "i",
@@ -229,6 +245,7 @@ def default_function_symbols(mode: str) -> dict[str, str]:
 
 
 def build_form_plan(form_name: str, bars: int) -> FormPlan:
+    """Create a form plan such as sentence, period, or a simpler phrase layout."""
     normalized = form_name.lower()
     if normalized == "auto":
         normalized = "sentence" if bars >= 8 else "phrase"
@@ -279,6 +296,7 @@ def build_form_plan(form_name: str, bars: int) -> FormPlan:
 
 
 def build_future_chorale_plan() -> ChoralePlan:
+    """Return the placeholder SATB-oriented plan used for future chorale work."""
     return ChoralePlan(
         voice_profiles=(
             build_voice_profile("soprano"),
@@ -290,6 +308,7 @@ def build_future_chorale_plan() -> ChoralePlan:
 
 
 def build_output_stem(args: argparse.Namespace) -> str:
+    """Create a descriptive filename stem from the most important generation settings."""
     if args.base_name:
         return sanitize_token(args.base_name)
 
@@ -312,11 +331,13 @@ def build_output_stem(args: argparse.Namespace) -> str:
 
 
 def sanitize_token(value: str) -> str:
+    """Normalize a string so it is safe to use in generated filenames."""
     token = value.strip().lower().replace("#", "s").replace("/", "")
     return "".join(char if char.isalnum() or char in {"_", "-"} else "_" for char in token)
 
 
 def build_generate_parser() -> argparse.ArgumentParser:
+    """Build the parser for the normal melody-generation workflow."""
     parser = argparse.ArgumentParser(
         description="Generate a melody, then optionally render cropped PDF and WAV output."
     )
@@ -375,6 +396,7 @@ def build_generate_parser() -> argparse.ArgumentParser:
 
 
 def build_render_parser() -> argparse.ArgumentParser:
+    """Build the parser for rerendering existing LilyPond files."""
     parser = argparse.ArgumentParser(
         description="Render existing LilyPond files from a seed folder, directory, or single .ly file."
     )
@@ -388,6 +410,7 @@ def build_render_parser() -> argparse.ArgumentParser:
 
 
 def describe_melody(settings: GenerationSettings, melody) -> str:
+    """Summarize the generated melody for terminal output."""
     climax_index = int(melody.metadata.get("climax_index", -1))
     climax_step = int(melody.metadata.get("climax_step", 0))
     motif_targets = melody.metadata.get("motif_targets", {})
@@ -407,6 +430,7 @@ def describe_melody(settings: GenerationSettings, melody) -> str:
 
 
 def maybe_render(paths: list[Path], args: argparse.Namespace) -> list[Path]:
+    """Render cropped PDFs and/or WAV files if the relevant CLI flags were provided."""
     if not args.pdf and not args.wav:
         return []
     return render_sources(
@@ -419,6 +443,7 @@ def maybe_render(paths: list[Path], args: argparse.Namespace) -> list[Path]:
 
 
 def resolve_render_target(target: str | None, seed: int | None) -> Path:
+    """Resolve a render-mode seed, directory, or explicit file into a filesystem target."""
     output_root = Path(__file__).resolve().parent / "output"
     if seed is not None:
         return output_root / str(seed)
@@ -430,6 +455,7 @@ def resolve_render_target(target: str | None, seed: int | None) -> Path:
 
 
 def collect_render_sources(target: Path) -> list[Path]:
+    """Collect LilyPond files from a seed directory or validate a single explicit source."""
     if target.is_file():
         if target.suffix != ".ly":
             raise ValueError(f"Expected a .ly file, got {target}")
@@ -443,6 +469,7 @@ def collect_render_sources(target: Path) -> list[Path]:
 
 
 def handle_render_mode(argv: list[str]) -> None:
+    """Handle the ``render`` subcommand without regenerating a melody."""
     args = build_render_parser().parse_args(argv)
     target = resolve_render_target(args.target, args.seed)
     sources = collect_render_sources(target)
@@ -459,6 +486,7 @@ def handle_render_mode(argv: list[str]) -> None:
 
 
 def main() -> None:
+    """Run the CLI entry point."""
     argv = sys.argv[1:]
     if argv and argv[0] == "render":
         handle_render_mode(argv[1:])

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Weighted-search melody generator for the current procedural music engine."""
+
 import random
 from dataclasses import dataclass
 from math import exp

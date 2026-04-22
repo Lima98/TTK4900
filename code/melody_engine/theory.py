@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Pitch, key, and Roman-numeral helpers used by the melody engine."""
+
 from dataclasses import dataclass
 
 LETTERS = ("c", "d", "e", "f", "g", "a", "b")

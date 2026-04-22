@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Helper CLI for rerendering existing LilyPond files outside the main workflow."""
+
 import argparse
 from pathlib import Path
 

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""LilyPond export and rendering utilities for melodies and thesis assets."""
+
 import subprocess
 from pathlib import Path
 

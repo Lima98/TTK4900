@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+"""Core immutable data structures for melody generation, form, harmony, and voice ranges."""
+
 from dataclasses import dataclass, field, replace
 
 from .theory import Key
