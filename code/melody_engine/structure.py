@@ -28,8 +28,11 @@ class NoteEvent:
     scale_step: int
     duration: float
     chromatic_adjustment: int = 0
+    is_rest: bool = False
 
     def transpose_diatonic(self, step_shift: int) -> "NoteEvent":
+        if self.is_rest:
+            return self
         return replace(self, scale_step=self.scale_step + step_shift)
 
 
@@ -37,6 +40,7 @@ class NoteEvent:
 class NoteCandidate:
     scale_step: int
     chromatic_adjustment: int = 0
+    is_rest: bool = False
 
 
 @dataclass(frozen=True)
@@ -46,6 +50,7 @@ class VoiceProfile:
     range_max: int
     tessitura_min: int
     tessitura_max: int
+    clef_hint: str | None = None
 
     @property
     def melodic_span(self) -> int:
@@ -135,6 +140,7 @@ class Melody:
     time_signature: TimeSignature
     events: tuple[NoteEvent, ...]
     harmony_plan: HarmonyPlan = HarmonyPlan()
+    clef: str | None = None
     voice_profile: VoiceProfile = VoiceProfile(
         name="melody",
         range_min=0,
@@ -144,12 +150,17 @@ class Melody:
     )
     metadata: dict[str, object] = field(default_factory=dict)
 
+    @property
+    def pitched_events(self) -> tuple[NoteEvent, ...]:
+        return tuple(event for event in self.events if not event.is_rest)
+
     def transpose_diatonic(self, step_shift: int) -> "Melody":
         return Melody(
             key=self.key,
             time_signature=self.time_signature,
             events=tuple(event.transpose_diatonic(step_shift) for event in self.events),
             harmony_plan=self.harmony_plan,
+            clef=self.clef,
             voice_profile=self.voice_profile,
             metadata=dict(self.metadata),
         )
@@ -160,6 +171,7 @@ class Melody:
             time_signature=self.time_signature,
             events=self.events,
             harmony_plan=self.harmony_plan,
+            clef=self.clef,
             voice_profile=self.voice_profile,
             metadata=dict(self.metadata),
         )
@@ -182,6 +194,7 @@ class GenerationSettings:
     attempts: int = 48
     random_seed: int = 7
     form_plan: FormPlan = FormPlan(kind="free")
+    clef: str | None = None
     voice_profile: VoiceProfile = VoiceProfile(
         name="melody",
         range_min=0,

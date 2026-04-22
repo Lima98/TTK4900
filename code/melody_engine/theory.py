@@ -179,6 +179,13 @@ class Key:
         octave = self.tonic_octave + octave_offset
         return f"{letter}{accidental_suffix(accidental + chromatic_adjustment)}{lilypond_octave(octave)}"
 
+    def absolute_midi(self, scale_step: int, chromatic_adjustment: int = 0) -> int:
+        octave_offset = scale_step // 7
+        degree_index = scale_step % 7
+        octave = self.tonic_octave + octave_offset
+        pitch_class = (self.tonic_pitch_class + self.scale_intervals[degree_index] + chromatic_adjustment) % 12
+        return (octave + 1) * 12 + pitch_class
+
     def scale_pitch_class(self, scale_step: int) -> int:
         degree_index = scale_step % 7
         octave_offset = scale_step // 7

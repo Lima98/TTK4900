@@ -2,17 +2,19 @@ from .constraints import (
     ChordTonePreferenceConstraint,
     DirectionChangeConstraint,
     FormSectionConstraint,
+    LargeLeapConstraint,
     LeapRecoveryConstraint,
     LeadingToneResolutionConstraint,
     MotifPreferenceConstraint,
     PhraseCadenceConstraint,
     RepeatedPitchConstraint,
+    RestConstraint,
     SingleClimaxConstraint,
     StepwiseMotionConstraint,
     StrongBeatStabilityConstraint,
 )
 from .generator import MelodyGenerator
-from .lilypond import export_melody, render_audio_from_midi, render_lilypond_file
+from .lilypond import export_melody, render_audio_from_midi, render_lilypond_file, render_sources
 from .structure import (
     ChoralePlan,
     FormPlan,
@@ -39,6 +41,7 @@ __all__ = [
     "HarmonyPlan",
     "HarmonySpan",
     "Key",
+    "LargeLeapConstraint",
     "LeapRecoveryConstraint",
     "LeadingToneResolutionConstraint",
     "Melody",
@@ -49,6 +52,7 @@ __all__ = [
     "NoteEvent",
     "PhraseCadenceConstraint",
     "RepeatedPitchConstraint",
+    "RestConstraint",
     "SingleClimaxConstraint",
     "StepwiseMotionConstraint",
     "StrongBeatStabilityConstraint",
@@ -58,4 +62,5 @@ __all__ = [
     "export_melody",
     "render_audio_from_midi",
     "render_lilypond_file",
+    "render_sources",
 ]

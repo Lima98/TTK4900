@@ -18,6 +18,7 @@ class CandidateContext:
     climax_index: int
     climax_step: int
     phrase_end_bars: frozenset[int]
+    current_duration: float
     harmony_span: HarmonySpan | None = None
     motif_target_step: int | None = None
     section_role: str = "free"
@@ -34,6 +35,29 @@ class CandidateContext:
         if self.index < 2:
             return None
         return self.events[self.index - 1].scale_step - self.events[self.index - 2].scale_step
+
+    @property
+    def previous_pitched_event(self) -> NoteEvent | None:
+        for event in reversed(self.events):
+            if not event.is_rest:
+                return event
+        return None
+
+    @property
+    def previous_pitched_interval(self) -> int | None:
+        pitched = [event for event in self.events if not event.is_rest]
+        if len(pitched) < 2:
+            return None
+        return pitched[-1].scale_step - pitched[-2].scale_step
+
+    @property
+    def notes_since_last_rest(self) -> int:
+        count = 0
+        for event in reversed(self.events):
+            if event.is_rest:
+                break
+            count += 1
+        return count
 
     @property
     def candidate_is_final(self) -> bool:
@@ -58,7 +82,10 @@ class StepwiseMotionConstraint:
     name: str = "stepwise_motion"
 
     def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
-        previous_event = context.previous_event
+        if candidate.is_rest:
+            return 0.0
+
+        previous_event = context.previous_pitched_event
         candidate_step = candidate.scale_step
         if previous_event is None:
             return 0.6 if candidate_step in {0, 2, 4} else 0.0
@@ -83,13 +110,16 @@ class LeapRecoveryConstraint:
     name: str = "leap_recovery"
 
     def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
-        previous_interval = context.previous_interval
-        previous_event = context.previous_event
+        if candidate.is_rest:
+            return -0.4 if context.previous_pitched_interval is not None and abs(context.previous_pitched_interval) >= 4 else 0.0
+
+        previous_interval = context.previous_pitched_interval
+        previous_event = context.previous_pitched_event
         candidate_step = candidate.scale_step
         if previous_interval is None or previous_event is None:
             return 0.0
 
-        if abs(previous_interval) < 3:
+        if abs(previous_interval) < 4:
             return 0.0
 
         current_interval = candidate_step - previous_event.scale_step
@@ -111,10 +141,13 @@ class LeadingToneResolutionConstraint:
     name: str = "leading_tone_resolution"
 
     def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
-        previous_event = context.previous_event
+        previous_event = context.previous_pitched_event
         candidate_step = candidate.scale_step
         if previous_event is None:
             return 0.0
+
+        if candidate.is_rest:
+            return -1.2 if previous_event.scale_step % 7 == 6 else 0.0
 
         if previous_event.scale_step % 7 != 6:
             return 0.0
@@ -138,6 +171,9 @@ class ChordTonePreferenceConstraint:
         if context.harmony_span is None:
             return 0.0
 
+        if candidate.is_rest:
+            return -0.9 if context.on_strong_beat else -0.1
+
         chord_pitch_classes = context.key.chord_pitch_classes(context.harmony_span.roman_symbol)
         candidate_pitch_class = (
             context.key.scale_pitch_class(candidate.scale_step) + candidate.chromatic_adjustment
@@ -160,6 +196,9 @@ class StrongBeatStabilityConstraint:
         if not context.on_strong_beat:
             return 0.0
 
+        if candidate.is_rest:
+            return -1.2
+
         candidate_step = candidate.scale_step
         degree = candidate_step % 7
         if degree in {0, 2, 4}:
@@ -177,6 +216,13 @@ class PhraseCadenceConstraint:
     def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
         if context.bar_number not in context.phrase_end_bars:
             return 0.0
+
+        if candidate.is_rest:
+            if context.candidate_is_final:
+                return -6.0
+            if context.beat_in_bar >= 2.0 and context.current_duration <= 0.5:
+                return 0.3
+            return -1.0
 
         candidate_step = candidate.scale_step
         if context.candidate_is_final:
@@ -201,6 +247,9 @@ class SingleClimaxConstraint:
     name: str = "single_climax"
 
     def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
+        if candidate.is_rest:
+            return -4.0 if context.index == context.climax_index else -0.2
+
         candidate_step = candidate.scale_step
         if context.index < context.climax_index:
             if candidate_step > context.climax_step:
@@ -231,6 +280,8 @@ class MotifPreferenceConstraint:
     def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
         if context.motif_target_step is None:
             return 0.0
+        if candidate.is_rest:
+            return -2.0
         candidate_step = candidate.scale_step
         if candidate_step == context.motif_target_step:
             return 3.5 if candidate.chromatic_adjustment == 0 else 2.0
@@ -245,7 +296,10 @@ class RepeatedPitchConstraint:
     name: str = "repeated_pitch_control"
 
     def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
-        previous_event = context.previous_event
+        if candidate.is_rest:
+            return 0.0
+
+        previous_event = context.previous_pitched_event
         if previous_event is None:
             return 0.0
 
@@ -256,8 +310,9 @@ class RepeatedPitchConstraint:
         if not same_pitch:
             return 0.0
 
-        if context.index >= 2:
-            second_previous = context.events[context.index - 2]
+        pitched = [event for event in context.events if not event.is_rest]
+        if len(pitched) >= 2:
+            second_previous = pitched[-2]
             if (
                 second_previous.scale_step == candidate.scale_step
                 and second_previous.chromatic_adjustment == candidate.chromatic_adjustment
@@ -272,8 +327,11 @@ class DirectionChangeConstraint:
     name: str = "direction_change"
 
     def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
-        previous_interval = context.previous_interval
-        previous_event = context.previous_event
+        if candidate.is_rest:
+            return 0.0
+
+        previous_interval = context.previous_pitched_interval
+        previous_event = context.previous_pitched_event
         if previous_interval is None or previous_event is None:
             return 0.0
 
@@ -289,6 +347,57 @@ class DirectionChangeConstraint:
         if current_interval * previous_interval > 0 and abs(current_interval) >= 2:
             return -0.7
         return 0.0
+
+
+@dataclass(frozen=True)
+class LargeLeapConstraint:
+    weight: float = 1.0
+    name: str = "large_leap"
+
+    def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
+        if candidate.is_rest:
+            return 0.0
+
+        previous_event = context.previous_pitched_event
+        if previous_event is None:
+            return 0.0
+
+        distance = abs(candidate.scale_step - previous_event.scale_step)
+        if distance <= 3:
+            return 0.0
+        if distance == 4:
+            return -1.5
+        if distance == 5:
+            return -3.5
+        if distance == 6:
+            return -5.0
+        return -7.0
+
+
+@dataclass(frozen=True)
+class RestConstraint:
+    weight: float = 1.0
+    name: str = "rest_usage"
+
+    def evaluate(self, candidate: NoteCandidate, context: CandidateContext) -> float:
+        if not candidate.is_rest:
+            return 0.0
+
+        if context.index == 0 or context.candidate_is_final:
+            return -5.0
+        if context.current_duration > 1.0:
+            return -3.5
+        if context.on_strong_beat:
+            return -1.8
+        if context.previous_event is not None and context.previous_event.is_rest:
+            return -3.0
+
+        score = -0.5
+        if context.notes_since_last_rest >= 6:
+            score += 1.4
+        if context.bar_number in context.phrase_end_bars and context.beat_in_bar >= 2.0:
+            score += 0.7
+        return score
 
 
 @dataclass(frozen=True)

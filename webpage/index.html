@@ -2,337 +2,547 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Procedural Generation: Music – Thesis Examples</title>
+    <title>Procedural Generation: Music – Thesis Example Archive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-  line-height: 1.6;
-}
-
-        header {
-          background: #1e1e2f;
-          color: white;
-          padding: 2rem;
-          text-align: center;
-        }
-
-        header h1 {
-          margin: 0;
-          font-weight: 500;
-        }
-
-        header p {
-          margin-top: 0.5rem;
-          opacity: 0.8;
-        }
-
-        nav {
-          background: white;
-          padding: 1rem;
-          border-bottom: 1px solid #ddd;
-          text-align: center;
-        }
-
-        nav a {
-          margin: 0 1rem;
-          text-decoration: none;
-          color: #1e1e2f;
-          font-weight: 500;
-        }
-
-        nav a:hover {
-          text-decoration: underline;
-        }
-
-        main {
-          position: relative;
-          min-height: 400px;
-          max-width: 900px;
-          margin: 2rem auto;
-          padding: 0 1rem;
-        }
-
-        section {
-          margin-bottom: 3rem;
-        }
-
-        section h2 {
-          border-bottom: 2px solid #1e1e2f;
-          padding-bottom: 0.5rem;
-        }
-
-        .example {
-          background: white;
-          padding: 1rem;
-          margin-top: 1rem;
-          border-radius: 6px;
-          box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .example h3 {
-          margin-top: 0;
-        }
-
-        audio {
-          width: 100%;
-          margin-top: 0.5rem;
-        }
-
-        footer {
-          text-align: center;
-          padding: 2rem;
-          font-size: 0.9rem;
-          color: #777;
-        }
-
-        .doc-link {
-          display: inline-block;
-          margin-top: 1rem;
-          padding: 0.5rem 1rem;
-          background: #1e1e2f;
-          color: white;
-          border-radius: 4px;
-          text-decoration: none;
-        }
-
-        .doc-link:hover {
-          background: #33335a;
-        }
-        nav button {
-          margin: 0 1rem;
-          padding: 0.5rem 1rem;
-          background: none;
-          border: 1px solid #1e1e2f;
-          border-radius: 4px;
-          cursor: pointer;
-          font-weight: 500;
-        }
-
-        nav button:hover {
-          background: #1e1e2f;
-          color: white;
-        }
-
-        nav button.active {
-          background: #1e1e2f;
-          color: white;
-        }
-
-        section {
-          display: none;
-        }
-
-        section.visible {
-          display: block;
-        }
-        
-        .back-to-top {
-          display: block;
-          margin: 2rem auto 0 auto;
-          padding: 0.5rem 1.5rem;
-          background: #1e1e2f;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          font-size: 1rem;
-          cursor: pointer;
-          transition: background 0.2s;
-        }
-
-        .back-to-top:hover {
-          background: #33335a;
-        }
-
-        .score-image {
-          width: 100%;
-          margin-top: 1rem;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-        }
-
-    </style>
-  </head>
-
-  <body>
-
-    <header>
-      <h1>Procedural Generation: Music</h1>
-      <p>Interactive Example Archive</p>
-    </header>
-
-    <nav>
-      <button onclick="showChapter('test', this)">Test</button>
-      <button onclick="showChapter('theory', this)">Theory</button>
-      <button onclick="showChapter('chapter1', this)">Chapter 1</button>
-      <button onclick="showChapter('chapter2', this)">Chapter 2</button>
-      <button onclick="showChapter('chapter3', this)">Chapter 3</button>
-    </nav>
-
-    <main>
-      <!-- ======================= -->
-      <!-- Test -->
-      <!-- ======================= -->
-      <section id="test">
-        <h2>Test-page for proof of concept</h2>
-
-        <div class="example">
-          <h3>Example 1.1 – Testing audio</h3>
-          <p>Random audio to test playback.</p>
-
-          <img src="output/4-part-random/melody.cropped.pdf"
-               alt="Score example"
-               class="score-image">
-
-          <!-- Replace src with generated file -->
-          <audio controls>
-            <source src="output/4-part-random/melody.wav" type="audio/wav">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-
-      </section>
-
-      <!-- ======================= -->
-      <!-- Theory -->
-      <!-- ======================= -->
-      <section id="theory">
-        <h2>Introduction to music theory</h2>
-
-        <div class="example">
-          <h3>Example 1.1 – Basic scale</h3>
-          <p>Basic major scale from c to c.</p>
-
-          <!-- Replace src with generated file -->
-          <audio controls>
-            <source src="audio/ch1_ex1_1.wav" type="audio/wav">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-
-        <div class="example">
-          <h3>Example 1.2 – Voice Leading Constraints</h3>
-          <p>Description of constraint demonstration.</p>
-
-          <audio controls>
-            <source src="audio/ch1_ex1_2.wav" type="audio/wav">
-          </audio>
-        </div>
-
-        <div class="example">
-          <h3>Example 1.3 – Voice Leading Constraints</h3>
-          <p>Description of constraint demonstration.</p>
-
-          <audio controls>
-            <source src="audio/ch1_ex1_2.wav" type="audio/wav">
-          </audio>
-        </div>
-
-      </section>
-
-
-      <!-- ======================= -->
-      <!-- CHAPTER 1 -->
-      <!-- ======================= -->
-      <section id="chapter1">
-        <h2>Chapter 1 – Foundations</h2>
-
-        <div class="example">
-          <h3>Example 1.1 – Basic Four-Part Harmonization</h3>
-          <p>Description of what this example demonstrates.</p>
-
-          <!-- Replace src with generated file -->
-          <audio controls>
-            <source src="audio/ch1_ex1_1.wav" type="audio/wav">
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-
-        <div class="example">
-          <h3>Example 1.2 – Voice Leading Constraints</h3>
-          <p>Description of constraint demonstration.</p>
-
-          <audio controls>
-            <source src="audio/ch1_ex1_2.wav" type="audio/wav">
-          </audio>
-        </div>
-
-      </section>
-
-
-      <!-- ======================= -->
-      <!-- CHAPTER 2 -->
-      <!-- ======================= -->
-      <section id="chapter2">
-        <h2>Chapter 2 – Model Architecture</h2>
-
-        <div class="example">
-          <h3>Example 2.1 – Meta-Model Structure Output</h3>
-          <p>Demonstrates how structural meta-parameters affect output.</p>
-
-          <audio controls>
-            <source src="audio/ch2_ex2_1.wav" type="audio/wav">
-          </audio>
-        </div>
-
-      </section>
-
-
-      <!-- ======================= -->
-      <!-- CHAPTER 3 -->
-      <!-- ======================= -->
-      <section id="chapter3">
-        <h2>Chapter 3 – Evaluation and Results</h2>
-
-        <div class="example">
-          <h3>Example 3.1 – Generated Chorale (Full System)</h3>
-          <p>Example from the final integrated model.</p>
-
-          <audio controls>
-            <source src="audio/ch3_ex3_1.wav" type="audio/wav">
-          </audio>
-        </div>
-
-      </section>
-
-      <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">Back to top</button>
-
-    </main>
-
-    <footer>
-      © 2026 – Jan-Øivind Lima 
-      <br>
-      <a class="doc-link" href="./docs/_build/html/index.html">View Technical Documentation</a>
-    </footer>
-
-    <script>
-      function showChapter(chapterId, button) {
-
-        // Hide all chapters
-        const sections = document.querySelectorAll("main section");
-        sections.forEach(section => {
-          section.classList.remove("visible");
-        });
-
-        // Show selected chapter
-        document.getElementById(chapterId).classList.add("visible");
-
-        // Update active button
-        const buttons = document.querySelectorAll("nav button");
-        buttons.forEach(btn => btn.classList.remove("active"));
-        button.classList.add("active");
+      :root {
+        --bg: #f3efe7;
+        --paper: #fffdf8;
+        --ink: #1f1a17;
+        --muted: #6d625a;
+        --line: #d7c8b8;
+        --accent: #8a4b2a;
+        --accent-soft: #ead6c6;
+        --shadow: 0 18px 40px rgba(64, 42, 27, 0.09);
       }
 
-      // Show theory by default
-      window.onload = function() {
-        const firstButton = document.querySelector("nav button");
-        showChapter("theory", firstButton);
-      };
-    </script>
+      * {
+        box-sizing: border-box;
+      }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(138, 75, 42, 0.08), transparent 30%),
+          linear-gradient(180deg, #f7f2ea 0%, var(--bg) 40%, #efe7da 100%);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .hero {
+        padding: 4rem 1.5rem 2.5rem;
+      }
+
+      .hero-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: 1.4fr 0.9fr;
+        align-items: start;
+      }
+
+      .hero-copy h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 5vw, 4.6rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-copy p {
+        max-width: 60ch;
+        margin: 1.2rem 0 0;
+        font-size: 1.05rem;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .hero-actions a {
+        text-decoration: none;
+        padding: 0.8rem 1.1rem;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        border: 1px solid var(--line);
+        background: rgba(255, 253, 248, 0.85);
+      }
+
+      .hero-actions a.primary {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+
+      .hero-note {
+        background: rgba(255, 253, 248, 0.78);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 1.4rem;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-note h2 {
+        margin-top: 0;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-note ul {
+        margin: 0.8rem 0 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+
+      .layout {
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+        padding: 0 1.5rem;
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 2rem;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 1rem;
+        align-self: start;
+        background: rgba(255, 253, 248, 0.8);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 1rem;
+        box-shadow: var(--shadow);
+      }
+
+      .sidebar h2 {
+        margin: 0 0 0.8rem;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .sidebar a {
+        display: block;
+        text-decoration: none;
+        padding: 0.7rem 0.8rem;
+        border-radius: 14px;
+        color: var(--muted);
+      }
+
+      .sidebar a:hover,
+      .sidebar a:focus {
+        background: var(--accent-soft);
+        color: var(--ink);
+      }
+
+      .content {
+        min-width: 0;
+      }
+
+      .chapter {
+        margin-bottom: 3rem;
+      }
+
+      .chapter-header {
+        margin-bottom: 1rem;
+      }
+
+      .chapter-header span {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .chapter-header h2 {
+        margin: 0;
+        font-size: clamp(1.6rem, 2vw, 2.3rem);
+      }
+
+      .chapter-header p {
+        margin: 0.7rem 0 0;
+        color: var(--muted);
+        max-width: 72ch;
+      }
+
+      .example-grid {
+        display: grid;
+        gap: 1.2rem;
+      }
+
+      .example-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.9fr);
+        gap: 1.25rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 1.2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .example-copy h3 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+
+      .example-copy p {
+        margin: 0.8rem 0;
+        color: var(--muted);
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .meta span {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        background: #f5ece2;
+        color: #5c4335;
+      }
+
+      .example-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 1rem;
+      }
+
+      .example-links a {
+        text-decoration: none;
+        padding: 0.6rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: white;
+        font-size: 0.92rem;
+      }
+
+      .example-media {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .score-frame {
+        width: 100%;
+        min-height: 260px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fbf8f2;
+      }
+
+      .score-frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 18px;
+      }
+
+      audio {
+        width: 100%;
+      }
+
+      .audio-missing {
+        padding: 0.9rem 1rem;
+        border: 1px dashed var(--line);
+        border-radius: 16px;
+        color: var(--muted);
+        background: #fbf8f2;
+      }
+
+      footer {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem 3rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 980px) {
+        .hero-inner,
+        .layout,
+        .example-card {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1>Procedural Generation:<br>Music Thesis Archive</h1>
+          <p>
+            This page mirrors the numbered examples referenced in the thesis PDF so examiners can
+            move between notation, commentary, and playback without hunting through folders.
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href="thesis/main.pdf">Open Thesis PDF</a>
+            <a href="./docs/_build/html/index.html">Open Technical Documentation</a>
+            <a href="#example-6-2-1">Jump To Results Examples</a>
+          </div>
+        </div>
+        <aside class="hero-note">
+          <h2>How To Use This Archive</h2>
+          <ul>
+            <li>Example numbers match the numbering used in the thesis.</li>
+            <li>Each card includes the score preview, a direct PDF link, and audio when available.</li>
+            <li>Theory and iteration examples are grouped by the same larger topics used in the thesis.</li>
+          </ul>
+        </aside>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="sidebar" aria-label="Page sections">
+        <h2>Navigate</h2>
+        <a href="#chapter-2-2">Section 2.2 – Music Theory Examples</a>
+        <a href="#chapter-6-1">Section 6.1 – First Iteration</a>
+        <a href="#chapter-6-2">Section 6.2 – Second Iteration</a>
+      </nav>
+
+      <main class="content">
+        <section class="chapter" id="chapter-2-2">
+          <div class="chapter-header">
+            <span>Section 2.2</span>
+            <h2>Music Theory Examples</h2>
+            <p>
+              These examples support the thesis discussion of scales and interval structure in the music theory section.
+            </p>
+          </div>
+
+          <div class="example-grid">
+            <article class="example-card" id="example-2-2-1">
+              <div class="example-copy">
+                <div class="meta">
+                  <span>Example 2.2.1</span>
+                  <span>Scale</span>
+                  <span>Theory</span>
+                </div>
+                <h3>The C-major scale written in the treble clef</h3>
+                <p>
+                  Referenced in the thesis discussion of scale degrees and tonal function.
+                </p>
+                <div class="example-links">
+                  <a href="thesis-examples/04theory/01-scale.cropped.pdf">Open Score PDF</a>
+                </div>
+              </div>
+              <div class="example-media">
+                <div class="score-frame">
+                  <img src="thesis-examples/04theory/01-scale.cropped.pdf" alt="Example 2.2.1 score">
+                </div>
+                <audio controls>
+                  <source src="thesis-examples/04theory/01-scale.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-2-2-2">
+              <div class="example-copy">
+                <div class="meta">
+                  <span>Example 2.2.2</span>
+                  <span>Scale</span>
+                  <span>Theory</span>
+                </div>
+                <h3>The E-flat major scale written in the treble clef</h3>
+                <p>
+                  Companion to Example 2.2.1, showing the same scale structure in a different key.
+                </p>
+                <div class="example-links">
+                  <a href="thesis-examples/04theory/02-scale_eb.cropped.pdf">Open Score PDF</a>
+                </div>
+              </div>
+              <div class="example-media">
+                <div class="score-frame">
+                  <img src="thesis-examples/04theory/02-scale_eb.cropped.pdf" alt="Example 2.2.2 score">
+                </div>
+                <audio controls>
+                  <source src="thesis-examples/04theory/02-scale_eb.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-2-2-3">
+              <div class="example-copy">
+                <div class="meta">
+                  <span>Example 2.2.3</span>
+                  <span>Intervals</span>
+                  <span>Theory</span>
+                </div>
+                <h3>All the musical intervals from the unison to the octave including their variants</h3>
+                <p>
+                  Used in the thesis to illustrate the interval system and enharmonic spellings.
+                </p>
+                <div class="example-links">
+                  <a href="thesis-examples/04theory/04-all_intervals.cropped.pdf">Open Score PDF</a>
+                </div>
+              </div>
+              <div class="example-media">
+                <div class="score-frame">
+                  <img src="thesis-examples/04theory/04-all_intervals.cropped.pdf" alt="Example 2.2.3 score">
+                </div>
+                <audio controls>
+                  <source src="thesis-examples/04theory/04-all_intervals.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="chapter" id="chapter-6-1">
+          <div class="chapter-header">
+            <span>Section 6.1</span>
+            <h2>First Iteration Results</h2>
+            <p>
+              These examples document the first melody generator, including its range problems and early multi-voice experiments.
+            </p>
+          </div>
+
+          <div class="example-grid">
+            <article class="example-card" id="example-6-1-1">
+              <div class="example-copy">
+                <div class="meta">
+                  <span>Example 6.1.1</span>
+                  <span>Iteration 1</span>
+                  <span>Range</span>
+                </div>
+                <h3>Melody showing how the octave is not restricted and ends up in unplayable range</h3>
+                <p>
+                  A first-iteration example demonstrating why explicit range handling is necessary.
+                </p>
+                <div class="example-links">
+                  <a href="thesis-examples/iter1/register.cropped.pdf">Open Score PDF</a>
+                </div>
+              </div>
+              <div class="example-media">
+                <div class="score-frame">
+                  <img src="thesis-examples/iter1/register.cropped.pdf" alt="Example 6.1.1 score">
+                </div>
+                <audio controls>
+                  <source src="thesis-examples/iter1/register.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-6-1-2">
+              <div class="example-copy">
+                <div class="meta">
+                  <span>Example 6.1.2</span>
+                  <span>Iteration 1</span>
+                  <span>Multi-Voice</span>
+                </div>
+                <h3>Melody showing how we can generate multiple voices with different rhythmic restrictions</h3>
+                <p>
+                  An early proof of concept for generating several voices, before harmonic interaction was formalized.
+                </p>
+                <div class="example-links">
+                  <a href="thesis-examples/iter1/voices.cropped.pdf">Open Score PDF</a>
+                </div>
+              </div>
+              <div class="example-media">
+                <div class="score-frame">
+                  <img src="thesis-examples/iter1/voices.cropped.pdf" alt="Example 6.1.2 score">
+                </div>
+                <audio controls>
+                  <source src="thesis-examples/iter1/voices.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-6-1-3">
+              <div class="example-copy">
+                <div class="meta">
+                  <span>Example 6.1.3</span>
+                  <span>Iteration 1</span>
+                  <span>Melody</span>
+                </div>
+                <h3>Example melody of the first iteration melody generator</h3>
+                <p>
+                  A compact melody example from the first proof-of-concept generator.
+                </p>
+                <div class="example-links">
+                  <a href="thesis-examples/iter1/melody.cropped.pdf">Open Score PDF</a>
+                </div>
+              </div>
+              <div class="example-media">
+                <div class="score-frame">
+                  <img src="thesis-examples/iter1/melody.cropped.pdf" alt="Example 6.1.3 score">
+                </div>
+                <audio controls>
+                  <source src="thesis-examples/iter1/melody.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="chapter" id="chapter-6-2">
+          <div class="chapter-header">
+            <span>Section 6.2</span>
+            <h2>Second Iteration Results</h2>
+            <p>
+              This example shows the second iteration, where motif reuse produced a more coherent melodic outline.
+            </p>
+          </div>
+
+          <div class="example-grid">
+            <article class="example-card" id="example-6-2-1">
+              <div class="example-copy">
+                <div class="meta">
+                  <span>Example 6.2.1</span>
+                  <span>Iteration 2</span>
+                  <span>Motivic Structure</span>
+                </div>
+                <h3>Demonstration of a melody generated using the second iteration</h3>
+                <p>
+                  This example is used in the thesis to show how motif repetition gave the melody a clearer structure.
+                </p>
+                <div class="example-links">
+                  <a href="thesis-examples/iter2/melody.cropped.pdf">Open Score PDF</a>
+                </div>
+              </div>
+              <div class="example-media">
+                <div class="score-frame">
+                  <img src="thesis-examples/iter2/melody.cropped.pdf" alt="Example 6.2.1 score">
+                </div>
+                <audio controls>
+                  <source src="thesis-examples/iter2/melody.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      © 2026 – Jan-Øivind Lima
+    </footer>
   </body>
 </html>

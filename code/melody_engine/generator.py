@@ -44,6 +44,7 @@ class MelodyGenerator:
             time_signature=self.settings.time_signature,
             events=best_attempt.events,
             harmony_plan=self.settings.harmonic_plan,
+            clef=self.settings.clef,
             voice_profile=self.settings.voice_profile,
             metadata=metadata,
         )
@@ -75,6 +76,7 @@ class MelodyGenerator:
                 climax_index=climax_index,
                 climax_step=climax_step,
                 phrase_end_bars=phrase_end_bars,
+                current_duration=duration,
                 harmony_span=harmony_span,
                 motif_target_step=motif_target_step,
                 section_role=section.role if section is not None else "free",
@@ -94,6 +96,7 @@ class MelodyGenerator:
                     scale_step=chosen_note.scale_step,
                     duration=duration,
                     chromatic_adjustment=chosen_note.chromatic_adjustment,
+                    is_rest=chosen_note.is_rest,
                 )
             )
             total_score += chosen_score
@@ -288,23 +291,27 @@ class MelodyGenerator:
         motif_target_step: int | None,
         context: CandidateContext,
     ) -> list[NoteCandidate]:
-        if index == 0:
-            seed_steps = [0, 2, 4]
-        else:
-            previous_step = events[-1].scale_step
+        anchor_step = self._last_pitched_step(events)
+        if anchor_step is None:
+            midpoint = (self.settings.range_min + self.settings.range_max) // 2
             seed_steps = [
-                previous_step + interval
-                for interval in (-4, -3, -2, -1, 0, 1, 2, 3, 4)
+                self._clamp_to_range(step)
+                for step in (self.settings.range_min, midpoint, self.settings.range_max)
+            ]
+        else:
+            seed_steps = [
+                anchor_step + interval
+                for interval in (-3, -2, -1, 0, 1, 2, 3)
             ]
 
         if motif_target_step is not None:
             seed_steps.extend([motif_target_step - 1, motif_target_step, motif_target_step + 1])
 
         if index == climax_index:
-            seed_steps.extend([climax_step - 1, climax_step, climax_step + 1])
+            seed_steps.extend([climax_step - 2, climax_step - 1, climax_step, climax_step + 1])
 
-        seed_steps.append(self.settings.range_min)
-        seed_steps.append(self.settings.range_max)
+        if context.section_role == "cadence":
+            seed_steps.extend([0, 4, 6])
 
         diatonic_steps = sorted({
             step
@@ -314,6 +321,10 @@ class MelodyGenerator:
 
         candidates = {NoteCandidate(scale_step=step, chromatic_adjustment=0) for step in diatonic_steps}
 
+        if self._should_offer_rest(context):
+            rest_anchor = anchor_step if anchor_step is not None else self.settings.range_min
+            candidates.add(NoteCandidate(scale_step=rest_anchor, chromatic_adjustment=0, is_rest=True))
+
         if context.harmony_span is not None:
             chord_targets = self.settings.key.chord_scale_targets(context.harmony_span.roman_symbol)
             for step in diatonic_steps:
@@ -322,7 +333,29 @@ class MelodyGenerator:
                     if step_degree == chord_degree:
                         candidates.add(NoteCandidate(scale_step=step, chromatic_adjustment=adjustment))
 
-        return sorted(candidates, key=lambda candidate: (candidate.scale_step, candidate.chromatic_adjustment))
+        return sorted(candidates, key=lambda candidate: (candidate.is_rest, candidate.scale_step, candidate.chromatic_adjustment))
+
+    def _clamp_to_range(self, step: int) -> int:
+        return min(max(step, self.settings.range_min), self.settings.range_max)
+
+    def _last_pitched_step(self, events: list[NoteEvent]) -> int | None:
+        for event in reversed(events):
+            if not event.is_rest:
+                return event.scale_step
+        return None
+
+    def _should_offer_rest(self, context: CandidateContext) -> bool:
+        if context.index == 0 or context.candidate_is_final:
+            return False
+        if context.current_duration > 1.0:
+            return False
+        if context.on_strong_beat:
+            return False
+        if context.previous_event is not None and context.previous_event.is_rest:
+            return False
+        return context.notes_since_last_rest >= 4 or (
+            context.bar_number in context.phrase_end_bars and context.beat_in_bar >= 2.0
+        )
 
     def _choose_candidate(
         self,

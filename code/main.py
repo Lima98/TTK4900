@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import argparse
+import sys
 from pathlib import Path
 
 from melody_engine import (
@@ -12,6 +15,7 @@ from melody_engine import (
     HarmonyPlan,
     HarmonySpan,
     Key,
+    LargeLeapConstraint,
     LeapRecoveryConstraint,
     LeadingToneResolutionConstraint,
     MelodyGenerator,
@@ -19,28 +23,45 @@ from melody_engine import (
     MotifPreferenceConstraint,
     PhraseCadenceConstraint,
     RepeatedPitchConstraint,
+    RestConstraint,
     SingleClimaxConstraint,
     StepwiseMotionConstraint,
     StrongBeatStabilityConstraint,
     TimeSignature,
     VoiceProfile,
     export_melody,
-    render_audio_from_midi,
-    render_lilypond_file,
+    render_sources,
 )
 
 
 def build_voice_profile(name: str) -> VoiceProfile:
     profiles = {
-        "melody": VoiceProfile("melody", 0, 9, 1, 8),
-        "soprano": VoiceProfile("soprano", 0, 9, 1, 8),
-        "alto": VoiceProfile("alto", -4, 5, -3, 4),
-        "tenor": VoiceProfile("tenor", -8, 1, -7, 0),
-        "bass": VoiceProfile("bass", -12, -3, -11, -4),
+        "melody": VoiceProfile("melody", 0, 9, 1, 8, None),
+        "soprano": VoiceProfile("soprano", 0, 9, 1, 8, "treble"),
+        "soprano1": VoiceProfile("soprano1", 2, 11, 3, 10, "treble"),
+        "soprano2": VoiceProfile("soprano2", 0, 9, 1, 8, "treble"),
+        "s1": VoiceProfile("soprano1", 2, 11, 3, 10, "treble"),
+        "s2": VoiceProfile("soprano2", 0, 9, 1, 8, "treble"),
+        "alto": VoiceProfile("alto", -2, 7, -1, 6, "treble"),
+        "alto1": VoiceProfile("alto1", -1, 8, 0, 7, "treble"),
+        "alto2": VoiceProfile("alto2", -3, 6, -2, 5, "treble"),
+        "a1": VoiceProfile("alto1", -1, 8, 0, 7, "treble"),
+        "a2": VoiceProfile("alto2", -3, 6, -2, 5, "treble"),
+        "tenor": VoiceProfile("tenor", -6, 3, -5, 2, "treble_8"),
+        "tenor1": VoiceProfile("tenor1", -5, 4, -4, 3, "treble_8"),
+        "tenor2": VoiceProfile("tenor2", -7, 2, -6, 1, "treble_8"),
+        "t1": VoiceProfile("tenor1", -5, 4, -4, 3, "treble_8"),
+        "t2": VoiceProfile("tenor2", -7, 2, -6, 1, "treble_8"),
+        "bass": VoiceProfile("bass", -10, -1, -9, -2, "bass"),
+        "bass1": VoiceProfile("bass1", -9, 0, -8, -1, "bass"),
+        "bass2": VoiceProfile("bass2", -12, -3, -11, -4, "bass"),
+        "b1": VoiceProfile("bass1", -9, 0, -8, -1, "bass"),
+        "b2": VoiceProfile("bass2", -12, -3, -11, -4, "bass"),
     }
-    if name not in profiles:
+    normalized = name.lower()
+    if normalized not in profiles:
         raise ValueError(f"Unsupported voice profile: {name}")
-    return profiles[name]
+    return profiles[normalized]
 
 
 def build_settings(args: argparse.Namespace) -> GenerationSettings:
@@ -79,6 +100,7 @@ def build_settings(args: argparse.Namespace) -> GenerationSettings:
         attempts=args.attempts,
         random_seed=args.seed,
         form_plan=form_plan,
+        clef=None if args.clef == "auto" else args.clef,
         voice_profile=voice_profile,
         chorale_plan=build_future_chorale_plan(),
     )
@@ -87,6 +109,7 @@ def build_settings(args: argparse.Namespace) -> GenerationSettings:
 def build_constraints() -> list:
     return [
         StepwiseMotionConstraint(weight=1.5),
+        LargeLeapConstraint(weight=1.8),
         LeapRecoveryConstraint(weight=1.2),
         LeadingToneResolutionConstraint(weight=1.3),
         ChordTonePreferenceConstraint(weight=1.4),
@@ -96,6 +119,7 @@ def build_constraints() -> list:
         MotifPreferenceConstraint(weight=1.0),
         RepeatedPitchConstraint(weight=1.0),
         DirectionChangeConstraint(weight=0.9),
+        RestConstraint(weight=1.2),
         FormSectionConstraint(weight=1.0),
     ]
 
@@ -265,14 +289,42 @@ def build_future_chorale_plan() -> ChoralePlan:
     )
 
 
-def build_parser() -> argparse.ArgumentParser:
+def build_output_stem(args: argparse.Namespace) -> str:
+    if args.base_name:
+        return sanitize_token(args.base_name)
+
+    parts = [
+        sanitize_token(args.key),
+        sanitize_token(args.mode),
+        f"o{args.tonic_octave}",
+        f"{args.bars}bars",
+        sanitize_token(args.voice_profile),
+        sanitize_token(args.form),
+    ]
+    if args.time_signature != "4/4":
+        parts.append(f"ts{sanitize_token(args.time_signature)}")
+    if args.harmony.strip().lower() not in {"", "auto", "none"}:
+        parts.append("manualharmony")
+    if args.allowed_durations != "0.5,1.0,2.0":
+        duration_token = args.allowed_durations.replace(",", "-").replace(".", "")
+        parts.append(f"dur{sanitize_token(duration_token)}")
+    return "_".join(part for part in parts if part)
+
+
+def sanitize_token(value: str) -> str:
+    token = value.strip().lower().replace("#", "s").replace("/", "")
+    return "".join(char if char.isalnum() or char in {"_", "-"} else "_" for char in token)
+
+
+def build_generate_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Generate iteration three melodies and optionally render LilyPond/PDF/MIDI/WAV assets."
+        description="Generate a melody, then optionally render cropped PDF and WAV output."
     )
     parser.add_argument("--key", default="C", help="Tonic note, for example C, Eb, F#.")
     parser.add_argument("--mode", default="major", help="Mode, for example major, minor, dorian.")
     parser.add_argument("--tonic-octave", type=int, default=4, help="Base octave for LilyPond export.")
     parser.add_argument("--voice-profile", default="melody", help="Voice profile: melody, soprano, alto, tenor, bass.")
+    parser.add_argument("--clef", default="auto", help="Clef override: auto, treble, treble_8, bass.")
     parser.add_argument("--time-signature", default="4/4", help="Time signature, for example 4/4 or 3/4.")
     parser.add_argument("--bars", type=int, default=8, help="Number of bars to generate.")
     parser.add_argument(
@@ -313,11 +365,23 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Directory for generated LilyPond and rendered assets. Defaults to code/output/<seed>/.",
     )
-    parser.add_argument("--base-name", default="melody", help="Base filename for exported material.")
+    parser.add_argument("--base-name", default=None, help="Optional base filename override for exported material.")
     parser.add_argument("--with-variants", action="store_true", help="Also export transposed augmentation variants.")
-    parser.add_argument("--render", action="store_true", help="Run LilyPond after exporting .ly files.")
-    parser.add_argument("--audio", action="store_true", help="Run TiMidity++ to produce .wav files.")
-    parser.add_argument("--cropped", action="store_true", help="Ask LilyPond to also emit cropped PDFs.")
+    parser.add_argument("--pdf", action="store_true", help="Render cropped PDF output after generation.")
+    parser.add_argument("--wav", action="store_true", help="Render WAV output after generation.")
+    parser.add_argument("--lilypond-bin", default="lilypond", help="Path or command name for LilyPond.")
+    parser.add_argument("--timidity-bin", default="timidity", help="Path or command name for TiMidity++.")
+    return parser
+
+
+def build_render_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Render existing LilyPond files from a seed folder, directory, or single .ly file."
+    )
+    parser.add_argument("target", nargs="?", help="Seed number, output directory, or a .ly file.")
+    parser.add_argument("--seed", type=int, default=None, help="Render files from code/output/<seed>/.")
+    parser.add_argument("--pdf", action="store_true", help="Render cropped PDF output.")
+    parser.add_argument("--wav", action="store_true", help="Render WAV output.")
     parser.add_argument("--lilypond-bin", default="lilypond", help="Path or command name for LilyPond.")
     parser.add_argument("--timidity-bin", default="timidity", help="Path or command name for TiMidity++.")
     return parser
@@ -343,30 +407,64 @@ def describe_melody(settings: GenerationSettings, melody) -> str:
 
 
 def maybe_render(paths: list[Path], args: argparse.Namespace) -> list[Path]:
-    if not args.render and not args.audio:
+    if not args.pdf and not args.wav:
         return []
+    return render_sources(
+        paths,
+        pdf=args.pdf,
+        wav=args.wav,
+        lilypond_bin=args.lilypond_bin,
+        timidity_bin=args.timidity_bin,
+    )
 
-    generated_assets: list[Path] = []
-    for path in paths:
-        generated_assets.extend(
-            render_lilypond_file(
-                path,
-                output_dir=path.parent,
-                cropped=args.cropped,
-                lilypond_bin=args.lilypond_bin,
-            )
-        )
-        if args.audio:
-            midi_path = path.with_suffix(".midi")
-            if midi_path.exists():
-                generated_assets.append(
-                    render_audio_from_midi(midi_path, timidity_bin=args.timidity_bin)
-                )
-    return generated_assets
+
+def resolve_render_target(target: str | None, seed: int | None) -> Path:
+    output_root = Path(__file__).resolve().parent / "output"
+    if seed is not None:
+        return output_root / str(seed)
+    if target is None:
+        raise ValueError("Provide a seed or target path when using render mode.")
+    if target.isdigit():
+        return output_root / target
+    return Path(target)
+
+
+def collect_render_sources(target: Path) -> list[Path]:
+    if target.is_file():
+        if target.suffix != ".ly":
+            raise ValueError(f"Expected a .ly file, got {target}")
+        return [target]
+    if not target.exists():
+        raise FileNotFoundError(f"Target does not exist: {target}")
+    sources = sorted(target.glob("*.ly"))
+    if not sources:
+        raise FileNotFoundError(f"No LilyPond files found in {target}")
+    return sources
+
+
+def handle_render_mode(argv: list[str]) -> None:
+    args = build_render_parser().parse_args(argv)
+    target = resolve_render_target(args.target, args.seed)
+    sources = collect_render_sources(target)
+    rendered_assets = render_sources(
+        sources,
+        pdf=args.pdf,
+        wav=args.wav,
+        lilypond_bin=args.lilypond_bin,
+        timidity_bin=args.timidity_bin,
+    )
+    print(f"Rendered {len(sources)} LilyPond file(s) from {target.resolve()}")
+    for path in rendered_assets:
+        print(f"  - {path.resolve()}")
 
 
 def main() -> None:
-    args = build_parser().parse_args()
+    argv = sys.argv[1:]
+    if argv and argv[0] == "render":
+        handle_render_mode(argv[1:])
+        return
+
+    args = build_generate_parser().parse_args(argv)
     if args.motif_repetition_bar == 0:
         args.motif_repetition_bar = None
     if args.output_dir is None:
@@ -380,12 +478,13 @@ def main() -> None:
     parallel_in_d = melody.transpose_parallel(Key("D", "major", tonic_octave=4))
 
     output_directory = args.output_dir
-    written_files = [export_melody(melody, output_directory / f"{args.base_name}.ly")]
+    output_stem = build_output_stem(args)
+    written_files = [export_melody(melody, output_directory / f"{output_stem}.ly")]
 
     if args.with_variants:
-        written_files.append(export_melody(transposed_up, output_directory / f"{args.base_name}_diatonic_up.ly"))
+        written_files.append(export_melody(transposed_up, output_directory / f"{output_stem}_diatonic_up.ly"))
         written_files.append(
-            export_melody(parallel_in_d, output_directory / f"{args.base_name}_parallel_in_d.ly")
+            export_melody(parallel_in_d, output_directory / f"{output_stem}_parallel_in_d.ly")
         )
 
     generated_assets = maybe_render(written_files, args)

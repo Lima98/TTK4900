@@ -30,9 +30,16 @@ echo "Done!\n"
 echo "Copying index.html to /Volumes/janoivil/\n"
 cp -f index.html /Volumes/janoivil/
 echo "Done!\n"
+echo "Copying thesis PDF to /Volumes/janoivil/thesis/\n"
+mkdir -p /Volumes/janoivil/thesis/
+cp -f ../thesis/latex/main.pdf /Volumes/janoivil/thesis/main.pdf
+echo "Done!\n"
 echo "Copying docs/ to /Volumes/janoivil/docs/\n"
 rsync -a ../docs/ /Volumes/janoivil/docs/
 echo "Done!\n"
 echo "Copying output/ to /Volumes/janoivil/output/\n"
 rsync -a ../output/ /Volumes/janoivil/output/
+echo "Done!\n"
+echo "Copying thesis examples to /Volumes/janoivil/thesis-examples/\n"
+rsync -a ../thesis/latex/examples/ /Volumes/janoivil/thesis-examples/
 echo "Done!\n"
