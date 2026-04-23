@@ -248,25 +248,25 @@
 
       .example-media {
         width: 100%;
-        aspect-ratio: var(--score-ratio);
-        min-height: 140px;
         border: 1px solid var(--line);
         border-radius: 18px;
         background: #fbf8f2;
         overflow: hidden;
       }
 
-      .score-frame,
-      .score-frame object {
-        display: block;
+      .score-frame {
         width: 100%;
-        height: 100%;
-        border: 0;
       }
 
-      .score-frame a {
+      .score-link {
         display: block;
-        padding: 1rem;
+        width: 100%;
+      }
+
+      .score-link img {
+        display: block;
+        width: 100%;
+        height: auto;
       }
 
       .example-body {
@@ -363,11 +363,11 @@
                   <a href="thesis/main.pdf#page=21" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media" style="--score-ratio: 3.9211;">
+              <div class="example-media">
                 <div class="score-frame">
-                  <object data="thesis-examples/04theory/01-scale.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.1 score preview">
-                    <a href="thesis-examples/04theory/01-scale.cropped.pdf">Open Example 2.2.1 score</a>
-                  </object>
+                  <a class="score-link" href="thesis-examples/04theory/01-scale.cropped.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="thesis-examples/04theory/01-scale.cropped.png" alt="Example 2.2.1 score preview">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
@@ -392,11 +392,11 @@
                   <a href="thesis/main.pdf#page=21" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media" style="--score-ratio: 4.4211;">
+              <div class="example-media">
                 <div class="score-frame">
-                  <object data="thesis-examples/04theory/02-scale_eb.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.2 score preview">
-                    <a href="thesis-examples/04theory/02-scale_eb.cropped.pdf">Open Example 2.2.2 score</a>
-                  </object>
+                  <a class="score-link" href="thesis-examples/04theory/02-scale_eb.cropped.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="thesis-examples/04theory/02-scale_eb.cropped.png" alt="Example 2.2.2 score preview">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
@@ -421,11 +421,11 @@
                   <a href="thesis/main.pdf#page=22" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media" style="--score-ratio: 6.5000;">
+              <div class="example-media">
                 <div class="score-frame">
-                  <object data="thesis-examples/04theory/04-all_intervals.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.3 score preview">
-                    <a href="thesis-examples/04theory/04-all_intervals.cropped.pdf">Open Example 2.2.3 score</a>
-                  </object>
+                  <a class="score-link" href="thesis-examples/04theory/04-all_intervals.cropped.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="thesis-examples/04theory/04-all_intervals.cropped.png" alt="Example 2.2.3 score preview">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
@@ -449,11 +449,11 @@
                   <a href="thesis/main.pdf#page=23" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media" style="--score-ratio: 5.3333;">
+              <div class="example-media">
                 <div class="score-frame">
-                  <object data="thesis-examples/04theory/10-majmin.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.4 score preview">
-                    <a href="thesis-examples/04theory/10-majmin.cropped.pdf">Open Example 2.2.4 score</a>
-                  </object>
+                  <a class="score-link" href="thesis-examples/04theory/10-majmin.cropped.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="thesis-examples/04theory/10-majmin.cropped.png" alt="Example 2.2.4 score preview">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
@@ -488,11 +488,11 @@
                   <a href="thesis/main.pdf#page=34" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media" style="--score-ratio: 2.6650;">
+              <div class="example-media">
                 <div class="score-frame">
-                  <object data="thesis-examples/iter1/register.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.1 score preview">
-                    <a href="thesis-examples/iter1/register.cropped.pdf">Open Example 6.1.1 score</a>
-                  </object>
+                  <a class="score-link" href="thesis-examples/iter1/register.cropped.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="thesis-examples/iter1/register.cropped.png" alt="Example 6.1.1 score preview">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
@@ -517,11 +517,11 @@
                   <a href="thesis/main.pdf#page=35" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media" style="--score-ratio: 1.7898;">
+              <div class="example-media">
                 <div class="score-frame">
-                  <object data="thesis-examples/iter1/voices.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.2 score preview">
-                    <a href="thesis-examples/iter1/voices.cropped.pdf">Open Example 6.1.2 score</a>
-                  </object>
+                  <a class="score-link" href="thesis-examples/iter1/voices.cropped.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="thesis-examples/iter1/voices.cropped.png" alt="Example 6.1.2 score preview">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
@@ -546,11 +546,11 @@
                   <a href="thesis/main.pdf#page=35" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media" style="--score-ratio: 6.5000;">
+              <div class="example-media">
                 <div class="score-frame">
-                  <object data="thesis-examples/iter1/melody.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.3 score preview">
-                    <a href="thesis-examples/iter1/melody.cropped.pdf">Open Example 6.1.3 score</a>
-                  </object>
+                  <a class="score-link" href="thesis-examples/iter1/melody.cropped.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="thesis-examples/iter1/melody.cropped.png" alt="Example 6.1.3 score preview">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
@@ -585,11 +585,11 @@
                   <a href="thesis/main.pdf#page=37" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media" style="--score-ratio: 5.7263;">
+              <div class="example-media">
                 <div class="score-frame">
-                  <object data="thesis-examples/iter2/melody.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.2.1 score preview">
-                    <a href="thesis-examples/iter2/melody.cropped.pdf">Open Example 6.2.1 score</a>
-                  </object>
+                  <a class="score-link" href="thesis-examples/iter2/melody.cropped.pdf" target="_blank" rel="noopener noreferrer">
+                    <img src="thesis-examples/iter2/melody.cropped.png" alt="Example 6.2.1 score preview">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
