@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CLI Reference &#8212; Procedural Music Generation Docs</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=6855551a" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=b09466e7" />
+    <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Architecture" href="architecture.html" />
+    <link rel="prev" title="Getting Started" href="getting-started.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Procedural Music Generation</a></h1>
+
+
+
+<p class="blurb">Documentation for the current procedural music generation engine and CLI.</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CLI Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#generation-command">Generation Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-options">Core Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rendering-options">Rendering Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#render-mode">Render Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-harmony-format">Manual Harmony Format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thesis-workflow.html">Thesis Workflow</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/melody-engine.html">Melody Engine API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/main-module.html">Main CLI Module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="getting-started.html" title="previous chapter">Getting Started</a></li>
+      <li>Next: <a href="architecture.html" title="next chapter">Architecture</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cli-reference">
+<h1>CLI Reference<a class="headerlink" href="#cli-reference" title="Link to this heading">¶</a></h1>
+<section id="generation-command">
+<h2>Generation Command<a class="headerlink" href="#generation-command" title="Link to this heading">¶</a></h2>
+<p>The main command is:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span><span class="o">[</span>options<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="core-options">
+<h2>Core Options<a class="headerlink" href="#core-options" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--key</span></code>: tonic note, for example <code class="docutils literal notranslate"><span class="pre">C</span></code> or <code class="docutils literal notranslate"><span class="pre">Eb</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--mode</span></code>: scale mode such as <code class="docutils literal notranslate"><span class="pre">major</span></code> or <code class="docutils literal notranslate"><span class="pre">minor</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--tonic-octave</span></code>: base octave used for pitch spelling</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--bars</span></code>: number of bars to generate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--form</span></code>: one of <code class="docutils literal notranslate"><span class="pre">auto</span></code>, <code class="docutils literal notranslate"><span class="pre">sentence</span></code>, <code class="docutils literal notranslate"><span class="pre">period</span></code>, or <code class="docutils literal notranslate"><span class="pre">phrase</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--voice-profile</span></code>: voice range preset such as <code class="docutils literal notranslate"><span class="pre">melody</span></code> or <code class="docutils literal notranslate"><span class="pre">tenor1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--clef</span></code>: one of <code class="docutils literal notranslate"><span class="pre">auto</span></code>, <code class="docutils literal notranslate"><span class="pre">treble</span></code>, <code class="docutils literal notranslate"><span class="pre">treble_8</span></code>, or <code class="docutils literal notranslate"><span class="pre">bass</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--harmony</span></code>: explicit harmonic plan or <code class="docutils literal notranslate"><span class="pre">auto</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--seed</span></code>: random seed for reproducible generation</p></li>
+</ul>
+</section>
+<section id="rendering-options">
+<h2>Rendering Options<a class="headerlink" href="#rendering-options" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--pdf</span></code> renders cropped PDF output</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--wav</span></code> renders WAV output through TiMidity++</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--with-variants</span></code> also exports the transposed derivative examples</p></li>
+</ul>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span>--pdf
+python3<span class="w"> </span>code/main.py<span class="w"> </span>--voice-profile<span class="w"> </span>tenor1<span class="w"> </span>--tonic-octave<span class="w"> </span><span class="m">3</span><span class="w"> </span>--pdf
+python3<span class="w"> </span>code/main.py<span class="w"> </span>--key<span class="w"> </span>Eb<span class="w"> </span>--bars<span class="w"> </span><span class="m">16</span><span class="w"> </span>--allowed-durations<span class="w"> </span><span class="m">0</span>.25,0.5,1.0,2.0<span class="w"> </span>--pdf<span class="w"> </span>--wav
+</pre></div>
+</div>
+</section>
+<section id="render-mode">
+<h2>Render Mode<a class="headerlink" href="#render-mode" title="Link to this heading">¶</a></h2>
+<p>You can rerender existing LilyPond files without regenerating the melody:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span>render<span class="w"> </span>--seed<span class="w"> </span><span class="m">11</span><span class="w"> </span>--pdf
+python3<span class="w"> </span>code/main.py<span class="w"> </span>render<span class="w"> </span>--seed<span class="w"> </span><span class="m">11</span><span class="w"> </span>--pdf<span class="w"> </span>--wav
+python3<span class="w"> </span>code/main.py<span class="w"> </span>render<span class="w"> </span>code/output/11/custom_file.ly<span class="w"> </span>--pdf
+</pre></div>
+</div>
+</section>
+<section id="manual-harmony-format">
+<h2>Manual Harmony Format<a class="headerlink" href="#manual-harmony-format" title="Link to this heading">¶</a></h2>
+<p>Explicit harmonic plans use:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>start-end:roman[:weight]
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span>--harmony<span class="w"> </span><span class="s2">&quot;1-2:i,3-4:V,5-6:IV,7-8:i&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/guides/cli-reference.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

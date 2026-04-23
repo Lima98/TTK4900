@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>melody_engine.constraints &#8212; Procedural Music Generation Docs</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=6855551a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=b09466e7" />
+    <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Procedural Music Generation</a></h1>
+
+
+
+<p class="blurb">Documentation for the current procedural music generation engine and CLI.</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/cli-reference.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/thesis-workflow.html">Thesis Workflow</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/melody-engine.html">Melody Engine API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/main-module.html">Main CLI Module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for melody_engine.constraints</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="sd">&quot;&quot;&quot;Soft constraints used to guide melodic generation toward singable results.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Protocol</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.structure</span><span class="w"> </span><span class="kn">import</span> <span class="n">HarmonySpan</span><span class="p">,</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">NoteEvent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.theory</span><span class="w"> </span><span class="kn">import</span> <span class="n">Key</span>
+
+
+<div class="viewcode-block" id="CandidateContext">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.CandidateContext">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CandidateContext</span><span class="p">:</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">Key</span>
+    <span class="n">events</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NoteEvent</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">bar_number</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">beat_in_bar</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">total_events</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">climax_index</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">climax_step</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">phrase_end_bars</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="n">current_duration</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">harmony_span</span><span class="p">:</span> <span class="n">HarmonySpan</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">motif_target_step</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">section_role</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;free&quot;</span>
+    <span class="n">section_transform</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;free&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">previous_event</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoteEvent</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">previous_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scale_step</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">previous_pitched_event</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoteEvent</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">event</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">previous_pitched_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pitched</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="o">.</span><span class="n">is_rest</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitched</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">pitched</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">-</span> <span class="n">pitched</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scale_step</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">notes_since_last_rest</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">count</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">candidate_is_final</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_events</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_strong_beat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beat_in_bar</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">}</span></div>
+
+
+
+<div class="viewcode-block" id="SoftConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.SoftConstraint">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SoftConstraint</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span>
+
+<div class="viewcode-block" id="SoftConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.SoftConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="o">...</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="StepwiseMotionConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.StepwiseMotionConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StepwiseMotionConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;stepwise_motion&quot;</span>
+
+<div class="viewcode-block" id="StepwiseMotionConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.StepwiseMotionConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">previous_event</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_event</span>
+        <span class="n">candidate_step</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="k">if</span> <span class="n">previous_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.6</span> <span class="k">if</span> <span class="n">candidate_step</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+        <span class="n">distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidate_step</span> <span class="o">-</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.2</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">1.5</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">1.0</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.3</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.0</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mf">2.3</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LeapRecoveryConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.LeapRecoveryConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LeapRecoveryConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;leap_recovery&quot;</span>
+
+<div class="viewcode-block" id="LeapRecoveryConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.LeapRecoveryConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.4</span> <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_interval</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+        <span class="n">previous_interval</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_interval</span>
+        <span class="n">previous_event</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_event</span>
+        <span class="n">candidate_step</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="k">if</span> <span class="n">previous_interval</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">previous_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">previous_interval</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">current_interval</span> <span class="o">=</span> <span class="n">candidate_step</span> <span class="o">-</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="k">if</span> <span class="n">current_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">current_interval</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">current_interval</span> <span class="o">*</span> <span class="n">previous_interval</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">2.2</span>
+
+        <span class="k">if</span> <span class="n">current_interval</span> <span class="o">*</span> <span class="n">previous_interval</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">2.0</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="mf">0.6</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LeadingToneResolutionConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.LeadingToneResolutionConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LeadingToneResolutionConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;leading_tone_resolution&quot;</span>
+
+<div class="viewcode-block" id="LeadingToneResolutionConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.LeadingToneResolutionConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">previous_event</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_event</span>
+        <span class="n">candidate_step</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="k">if</span> <span class="n">previous_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.2</span> <span class="k">if</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">6</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">!=</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">==</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">2.5</span>
+
+        <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">==</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.2</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="mf">2.5</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ChordTonePreferenceConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.ChordTonePreferenceConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChordTonePreferenceConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">non_chord_tone_penalty</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.35</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;chord_tone_preference&quot;</span>
+
+<div class="viewcode-block" id="ChordTonePreferenceConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.ChordTonePreferenceConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">harmony_span</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.9</span> <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">on_strong_beat</span> <span class="k">else</span> <span class="o">-</span><span class="mf">0.1</span>
+
+        <span class="n">chord_pitch_classes</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">chord_pitch_classes</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">harmony_span</span><span class="o">.</span><span class="n">roman_symbol</span><span class="p">)</span>
+        <span class="n">candidate_pitch_class</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">scale_pitch_class</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span><span class="p">)</span> <span class="o">+</span> <span class="n">candidate</span><span class="o">.</span><span class="n">chromatic_adjustment</span>
+        <span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="k">if</span> <span class="n">candidate_pitch_class</span> <span class="ow">in</span> <span class="n">chord_pitch_classes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">1.6</span> <span class="o">*</span> <span class="n">context</span><span class="o">.</span><span class="n">harmony_span</span><span class="o">.</span><span class="n">weight</span>
+
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">on_strong_beat</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_chord_tone_penalty</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">context</span><span class="o">.</span><span class="n">harmony_span</span><span class="o">.</span><span class="n">weight</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">non_chord_tone_penalty</span> <span class="o">*</span> <span class="n">context</span><span class="o">.</span><span class="n">harmony_span</span><span class="o">.</span><span class="n">weight</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="StrongBeatStabilityConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.StrongBeatStabilityConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">StrongBeatStabilityConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;strong_beat_stability&quot;</span>
+
+<div class="viewcode-block" id="StrongBeatStabilityConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.StrongBeatStabilityConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">context</span><span class="o">.</span><span class="n">on_strong_beat</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.2</span>
+
+        <span class="n">candidate_step</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="n">degree</span> <span class="o">=</span> <span class="n">candidate_step</span> <span class="o">%</span> <span class="mi">7</span>
+        <span class="k">if</span> <span class="n">degree</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+            <span class="k">return</span> <span class="mf">0.9</span>
+        <span class="k">if</span> <span class="n">degree</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.6</span>
+        <span class="k">return</span> <span class="mf">0.1</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="PhraseCadenceConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.PhraseCadenceConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PhraseCadenceConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;phrase_cadence&quot;</span>
+
+<div class="viewcode-block" id="PhraseCadenceConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.PhraseCadenceConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">bar_number</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">phrase_end_bars</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">candidate_is_final</span><span class="p">:</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mf">6.0</span>
+            <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">beat_in_bar</span> <span class="o">&gt;=</span> <span class="mf">2.0</span> <span class="ow">and</span> <span class="n">context</span><span class="o">.</span><span class="n">current_duration</span> <span class="o">&lt;=</span> <span class="mf">0.5</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">0.3</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.0</span>
+
+        <span class="n">candidate_step</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">candidate_is_final</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">candidate</span><span class="o">.</span><span class="n">chromatic_adjustment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">5.0</span>
+            <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">1.5</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">3.5</span>
+
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">beat_in_bar</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+                <span class="k">return</span> <span class="mf">1.0</span>
+            <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mf">1.4</span>
+
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SingleClimaxConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.SingleClimaxConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SingleClimaxConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;single_climax&quot;</span>
+
+<div class="viewcode-block" id="SingleClimaxConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.SingleClimaxConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">4.0</span> <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_index</span> <span class="k">else</span> <span class="o">-</span><span class="mf">0.2</span>
+
+        <span class="n">candidate_step</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_index</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">&gt;</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_step</span><span class="p">:</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mf">4.5</span>
+            <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">==</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_step</span><span class="p">:</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mf">2.0</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_index</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">==</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_step</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">6.0</span>
+            <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">==</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">1.5</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">3.0</span>
+
+        <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">&gt;=</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_step</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">5.0</span>
+        <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">==</span> <span class="n">context</span><span class="o">.</span><span class="n">climax_step</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.0</span>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MotifPreferenceConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.MotifPreferenceConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MotifPreferenceConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;motif_preference&quot;</span>
+
+<div class="viewcode-block" id="MotifPreferenceConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.MotifPreferenceConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">motif_target_step</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">2.0</span>
+        <span class="n">candidate_step</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="k">if</span> <span class="n">candidate_step</span> <span class="o">==</span> <span class="n">context</span><span class="o">.</span><span class="n">motif_target_step</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">3.5</span> <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">chromatic_adjustment</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">2.0</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidate_step</span> <span class="o">-</span> <span class="n">context</span><span class="o">.</span><span class="n">motif_target_step</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.4</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mf">1.5</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RepeatedPitchConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.RepeatedPitchConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RepeatedPitchConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;repeated_pitch_control&quot;</span>
+
+<div class="viewcode-block" id="RepeatedPitchConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.RepeatedPitchConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">previous_event</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_event</span>
+        <span class="k">if</span> <span class="n">previous_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">same_pitch</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">==</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+            <span class="ow">and</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">chromatic_adjustment</span> <span class="o">==</span> <span class="n">candidate</span><span class="o">.</span><span class="n">chromatic_adjustment</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">same_pitch</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">pitched</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">events</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">event</span><span class="o">.</span><span class="n">is_rest</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitched</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">second_previous</span> <span class="o">=</span> <span class="n">pitched</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">second_previous</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">==</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span>
+                <span class="ow">and</span> <span class="n">second_previous</span><span class="o">.</span><span class="n">chromatic_adjustment</span> <span class="o">==</span> <span class="n">candidate</span><span class="o">.</span><span class="n">chromatic_adjustment</span>
+            <span class="p">):</span>
+                <span class="k">return</span> <span class="o">-</span><span class="mf">2.2</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DirectionChangeConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.DirectionChangeConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DirectionChangeConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;direction_change&quot;</span>
+
+<div class="viewcode-block" id="DirectionChangeConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.DirectionChangeConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">previous_interval</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_interval</span>
+        <span class="n">previous_event</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_event</span>
+        <span class="k">if</span> <span class="n">previous_interval</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">previous_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">current_interval</span> <span class="o">=</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">-</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span>
+        <span class="k">if</span> <span class="n">current_interval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.2</span>
+
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">previous_interval</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">current_interval</span> <span class="o">*</span> <span class="n">previous_interval</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">1.0</span>
+        <span class="k">if</span> <span class="n">current_interval</span> <span class="o">*</span> <span class="n">previous_interval</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">current_interval</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.7</span>
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="LargeLeapConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.LargeLeapConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LargeLeapConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;large_leap&quot;</span>
+
+<div class="viewcode-block" id="LargeLeapConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.LargeLeapConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">previous_event</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_pitched_event</span>
+        <span class="k">if</span> <span class="n">previous_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="n">distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">-</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.5</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">3.5</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">5.0</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mf">7.0</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RestConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.RestConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RestConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rest_usage&quot;</span>
+
+<div class="viewcode-block" id="RestConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.RestConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">candidate</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">index</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">context</span><span class="o">.</span><span class="n">candidate_is_final</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">5.0</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">current_duration</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">3.5</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">on_strong_beat</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">1.8</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_event</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">3.0</span>
+
+        <span class="n">score</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">notes_since_last_rest</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">+=</span> <span class="mf">1.4</span>
+        <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">bar_number</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">phrase_end_bars</span> <span class="ow">and</span> <span class="n">context</span><span class="o">.</span><span class="n">beat_in_bar</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">:</span>
+            <span class="n">score</span> <span class="o">+=</span> <span class="mf">0.7</span>
+        <span class="k">return</span> <span class="n">score</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FormSectionConstraint">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.FormSectionConstraint">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FormSectionConstraint</span><span class="p">:</span>
+    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;form_section&quot;</span>
+
+<div class="viewcode-block" id="FormSectionConstraint.evaluate">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.constraints.FormSectionConstraint.evaluate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">candidate</span><span class="p">:</span> <span class="n">NoteCandidate</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CandidateContext</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">role</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">section_role</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="s2">&quot;basic_idea&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">on_strong_beat</span> <span class="ow">and</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">}:</span>
+                <span class="k">return</span> <span class="mf">0.7</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="s2">&quot;repetition&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">motif_target_step</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">-</span> <span class="n">context</span><span class="o">.</span><span class="n">motif_target_step</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">0.9</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.1</span> <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">on_strong_beat</span> <span class="ow">and</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">6</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="s2">&quot;fragmentation&quot;</span><span class="p">:</span>
+            <span class="n">previous_event</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_event</span>
+            <span class="k">if</span> <span class="n">previous_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">0.0</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">-</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">interval</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">0.8</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mf">0.4</span>
+
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="s2">&quot;continuation&quot;</span><span class="p">:</span>
+            <span class="n">previous_event</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">previous_event</span>
+            <span class="k">if</span> <span class="n">previous_event</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">0.0</span>
+            <span class="n">interval</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">-</span> <span class="n">previous_event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">interval</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}:</span>
+                <span class="k">return</span> <span class="mf">0.5</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="s2">&quot;cadence&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">candidate_is_final</span> <span class="ow">and</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">candidate</span><span class="o">.</span><span class="n">chromatic_adjustment</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="mf">1.5</span>
+            <span class="k">if</span> <span class="n">context</span><span class="o">.</span><span class="n">on_strong_beat</span> <span class="ow">and</span> <span class="n">candidate</span><span class="o">.</span><span class="n">scale_step</span> <span class="o">%</span> <span class="mi">7</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">}:</span>
+                <span class="k">return</span> <span class="mf">0.4</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="k">return</span> <span class="mf">0.0</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

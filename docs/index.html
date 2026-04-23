@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Procedural Music Generation &#8212; Procedural Music Generation Docs</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=6855551a" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=b09466e7" />
+    <script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting Started" href="guides/getting-started.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Procedural Music Generation</a></h1>
+
+
+
+<p class="blurb">Documentation for the current procedural music generation engine and CLI.</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guides/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/cli-reference.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guides/thesis-workflow.html">Thesis Workflow</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/melody-engine.html">Melody Engine API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/main-module.html">Main CLI Module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="guides/getting-started.html" title="next chapter">Getting Started</a></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="procedural-music-generation">
+<h1>Procedural Music Generation<a class="headerlink" href="#procedural-music-generation" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="../index.html">Back to the thesis example archive</a></p>
+<p>This documentation covers the current melody-generation engine, the command-line workflow in
+<code class="docutils literal notranslate"><span class="pre">code/main.py</span></code>, and the internal modules that power form, harmony, notation, and rendering.</p>
+<p>The guides are written to match the current repository layout, while the API reference is
+generated directly from the Python modules and docstrings in <code class="docutils literal notranslate"><span class="pre">code/main.py</span></code> and
+<code class="docutils literal notranslate"><span class="pre">code/melody_engine/</span></code>.</p>
+<p>The goal is to make the codebase easy to navigate whether you want to:</p>
+<ul class="simple">
+<li><p>generate a melody for thesis examples,</p></li>
+<li><p>render cropped PDFs and WAV files,</p></li>
+<li><p>experiment with voice profiles and clefs,</p></li>
+<li><p>or extend the project toward multi-voice and chorale generation.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guides/getting-started.html">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/getting-started.html#repository-structure">Repository Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/getting-started.html#typical-workflow">Typical Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/getting-started.html#naming-and-output">Naming And Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/getting-started.html#voice-profiles-and-clefs">Voice Profiles And Clefs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/cli-reference.html">CLI Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/cli-reference.html#generation-command">Generation Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/cli-reference.html#core-options">Core Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/cli-reference.html#rendering-options">Rendering Options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/cli-reference.html#examples">Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/cli-reference.html#render-mode">Render Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/cli-reference.html#manual-harmony-format">Manual Harmony Format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/architecture.html">Architecture</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/architecture.html#high-level-design">High-Level Design</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/architecture.html#core-modules">Core Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/architecture.html#current-design-priorities">Current Design Priorities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/architecture.html#chorale-direction">Chorale Direction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guides/thesis-workflow.html">Thesis Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#why-this-documentation-exists">Why This Documentation Exists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#main-asset-paths">Main Asset Paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#typical-example-workflow">Typical Example Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#deployment-workflow">Deployment Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#github-pages-deployment">GitHub Pages Deployment</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/melody-engine.html">Melody Engine API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/melody-engine.html#package-overview">Package Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/melody-engine.html#module-melody_engine.structure">Structure Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/melody-engine.html#module-melody_engine.theory">Theory Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/melody-engine.html#module-melody_engine.constraints">Constraints Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/melody-engine.html#module-melody_engine.generator">Generator Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/melody-engine.html#module-melody_engine.lilypond">LilyPond Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/main-module.html">Main CLI Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_voice_profile"><code class="docutils literal notranslate"><span class="pre">build_voice_profile()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_settings"><code class="docutils literal notranslate"><span class="pre">build_settings()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_constraints"><code class="docutils literal notranslate"><span class="pre">build_constraints()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_harmony_plan"><code class="docutils literal notranslate"><span class="pre">build_harmony_plan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_default_harmony_plan"><code class="docutils literal notranslate"><span class="pre">build_default_harmony_plan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.default_function_symbols"><code class="docutils literal notranslate"><span class="pre">default_function_symbols()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_form_plan"><code class="docutils literal notranslate"><span class="pre">build_form_plan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_future_chorale_plan"><code class="docutils literal notranslate"><span class="pre">build_future_chorale_plan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_output_stem"><code class="docutils literal notranslate"><span class="pre">build_output_stem()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.sanitize_token"><code class="docutils literal notranslate"><span class="pre">sanitize_token()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_generate_parser"><code class="docutils literal notranslate"><span class="pre">build_generate_parser()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_render_parser"><code class="docutils literal notranslate"><span class="pre">build_render_parser()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.describe_melody"><code class="docutils literal notranslate"><span class="pre">describe_melody()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.maybe_render"><code class="docutils literal notranslate"><span class="pre">maybe_render()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.resolve_render_target"><code class="docutils literal notranslate"><span class="pre">resolve_render_target()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.collect_render_sources"><code class="docutils literal notranslate"><span class="pre">collect_render_sources()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.handle_render_mode"><code class="docutils literal notranslate"><span class="pre">handle_render_mode()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
+<p>Generate LilyPond only:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py
+</pre></div>
+</div>
+<p>Generate a melody and also render thesis-ready PDF output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span>--pdf
+</pre></div>
+</div>
+<p>Render audio later without regenerating:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span>render<span class="w"> </span>--seed<span class="w"> </span><span class="m">11</span><span class="w"> </span>--wav
+</pre></div>
+</div>
+</section>
+<section id="useful-entry-points">
+<h2>Useful Entry Points<a class="headerlink" href="#useful-entry-points" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">code/main.py</span></code>: primary CLI for generation and rerendering</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">code/melody_engine/</span></code>: reusable engine modules</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webpage/index.html</span></code>: thesis example archive for examiners</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thesis/latex/main.pdf</span></code>: thesis document referenced by the webpage and examples</p></li>
+</ul>
+</section>
+<section id="documentation-workflow">
+<h2>Documentation Workflow<a class="headerlink" href="#documentation-workflow" title="Link to this heading">¶</a></h2>
+<p>Build the HTML documentation locally:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs
+./build_docs.zsh
+</pre></div>
+</div>
+<p>The generated site is written to <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code> and is the same material deployed by
+<code class="docutils literal notranslate"><span class="pre">webpage/deploy.zsh</span></code>.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

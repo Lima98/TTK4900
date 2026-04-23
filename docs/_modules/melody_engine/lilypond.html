@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>melody_engine.lilypond &#8212; Procedural Music Generation Docs</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=6855551a" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=b09466e7" />
+    <script src="../../_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Procedural Music Generation</a></h1>
+
+
+
+<p class="blurb">Documentation for the current procedural music generation engine and CLI.</p>
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Guides</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/getting-started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/cli-reference.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/architecture.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/thesis-workflow.html">Thesis Workflow</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/melody-engine.html">Melody Engine API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/main-module.html">Main CLI Module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for melody_engine.lilypond</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="sd">&quot;&quot;&quot;LilyPond export and rendering utilities for melodies and thesis assets.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.structure</span><span class="w"> </span><span class="kn">import</span> <span class="n">Melody</span>
+
+<span class="n">BEAT_TO_DURATION</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mf">4.0</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+    <span class="mf">2.0</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="mf">1.0</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+    <span class="mf">0.5</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span>
+    <span class="mf">0.25</span><span class="p">:</span> <span class="s2">&quot;16&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="lilypond_duration">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.lilypond_duration">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">lilypond_duration</span><span class="p">(</span><span class="n">duration</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">duration</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">BEAT_TO_DURATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported duration for LilyPond export: </span><span class="si">{</span><span class="n">duration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">BEAT_TO_DURATION</span><span class="p">[</span><span class="n">duration</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="choose_clef">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.choose_clef">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">choose_clef</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">melody</span><span class="o">.</span><span class="n">clef</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">melody</span><span class="o">.</span><span class="n">clef</span>
+
+    <span class="n">voice_name</span> <span class="o">=</span> <span class="n">melody</span><span class="o">.</span><span class="n">voice_profile</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">voice_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;tenor&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;treble_8&quot;</span>
+    <span class="k">if</span> <span class="n">voice_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;bass&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;bass&quot;</span>
+    <span class="k">if</span> <span class="n">voice_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;alto&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">voice_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;soprano&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;treble&quot;</span>
+    <span class="k">if</span> <span class="n">melody</span><span class="o">.</span><span class="n">voice_profile</span><span class="o">.</span><span class="n">clef_hint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">melody</span><span class="o">.</span><span class="n">voice_profile</span><span class="o">.</span><span class="n">clef_hint</span>
+
+    <span class="n">pitched</span> <span class="o">=</span> <span class="n">melody</span><span class="o">.</span><span class="n">pitched_events</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pitched</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;treble&quot;</span>
+
+    <span class="n">midi_values</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">absolute_midi</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">chromatic_adjustment</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pitched</span>
+    <span class="p">]</span>
+    <span class="n">average_midi</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">midi_values</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">midi_values</span><span class="p">)</span>
+    <span class="n">lowest_midi</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">midi_values</span><span class="p">)</span>
+    <span class="n">highest_midi</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">midi_values</span><span class="p">)</span>
+    <span class="n">low_share</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">midi_values</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">midi_values</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">average_midi</span> <span class="o">&lt;</span> <span class="mi">50</span> <span class="ow">or</span> <span class="n">highest_midi</span> <span class="o">&lt;=</span> <span class="mi">59</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;bass&quot;</span>
+    <span class="k">if</span> <span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonic_octave</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">low_share</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="ow">and</span> <span class="n">highest_midi</span> <span class="o">&lt;=</span> <span class="mi">69</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;treble_8&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;treble&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="melody_to_lilypond_source">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.melody_to_lilypond_source">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">melody_to_lilypond_source</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">key_name</span> <span class="o">=</span> <span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonic</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">)</span>
+    <span class="n">note_tokens</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;r</span><span class="si">{</span><span class="n">lilypond_duration</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">is_rest</span>
+            <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">chromatic_pitch</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">chromatic_adjustment</span><span class="p">)</span><span class="si">}{</span><span class="n">lilypond_duration</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">melody</span><span class="o">.</span><span class="n">events</span>
+    <span class="p">]</span>
+
+    <span class="n">bar_length</span> <span class="o">=</span> <span class="n">melody</span><span class="o">.</span><span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+    <span class="n">bars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_bar</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">beat_total</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">note_tokens</span><span class="p">,</span> <span class="n">melody</span><span class="o">.</span><span class="n">events</span><span class="p">):</span>
+        <span class="n">current_bar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="n">beat_total</span> <span class="o">+=</span> <span class="n">event</span><span class="o">.</span><span class="n">duration</span>
+        <span class="k">if</span> <span class="n">beat_total</span> <span class="o">&gt;=</span> <span class="n">bar_length</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">:</span>
+            <span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_bar</span><span class="p">))</span>
+            <span class="n">current_bar</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">beat_total</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">if</span> <span class="n">current_bar</span><span class="p">:</span>
+        <span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_bar</span><span class="p">))</span>
+
+    <span class="n">music_body</span> <span class="o">=</span> <span class="s2">&quot; |</span><span class="se">\n</span><span class="s2">    &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bars</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\\</span><span class="s2">version &quot;2.24.4&quot;</span>
+<span class="se">\\</span><span class="s2">language &quot;english&quot;</span>
+
+<span class="se">\\</span><span class="s2">score </span><span class="se">{{</span>
+<span class="s2">  </span><span class="se">\\</span><span class="s2">new Staff </span><span class="se">{{</span>
+<span class="s2">    </span><span class="se">\\</span><span class="s2">clef &quot;</span><span class="si">{</span><span class="n">choose_clef</span><span class="p">(</span><span class="n">melody</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">    </span><span class="se">\\</span><span class="s2">key </span><span class="si">{</span><span class="n">key_name</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="si">{</span><span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span>
+<span class="s2">    </span><span class="se">\\</span><span class="s2">time </span><span class="si">{</span><span class="n">melody</span><span class="o">.</span><span class="n">time_signature</span><span class="si">}</span>
+<span class="s2">    </span><span class="si">{</span><span class="n">music_body</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="s2">bar &quot;|.&quot;</span>
+<span class="s2">  </span><span class="se">}}</span>
+<span class="s2">  </span><span class="se">\\</span><span class="s2">layout </span><span class="se">{{}}</span>
+<span class="s2">  </span><span class="se">\\</span><span class="s2">midi </span><span class="se">{{}}</span>
+<span class="se">}}</span>
+<span class="s2">&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="export_melody">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.export_melody">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_melody</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">melody_to_lilypond_source</span><span class="p">(</span><span class="n">melody</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span></div>
+
+
+
+<div class="viewcode-block" id="render_lilypond_file">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.render_lilypond_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">render_lilypond_file</span><span class="p">(</span>
+    <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">cropped</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lilypond_bin</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lilypond&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span>
+    <span class="n">render_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">output_dir</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">source</span><span class="o">.</span><span class="n">parent</span>
+    <span class="n">render_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="n">lilypond_bin</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">render_dir</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="n">cropped</span><span class="p">:</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-dcrop&quot;</span><span class="p">)</span>
+    <span class="n">command</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">))</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">command</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Could not find LilyPond binary &#39;</span><span class="si">{</span><span class="n">lilypond_bin</span><span class="si">}</span><span class="s2">&#39;. Install LilyPond or pass --lilypond-bin.&quot;</span>
+        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
+
+    <span class="n">base_name</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">stem</span>
+    <span class="n">generated</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">render_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_name</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">,</span>
+        <span class="n">render_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_name</span><span class="si">}</span><span class="s2">.midi&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">cropped</span><span class="p">:</span>
+        <span class="n">generated</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">render_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">base_name</span><span class="si">}</span><span class="s2">.cropped.pdf&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">path</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">generated</span> <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">()]</span></div>
+
+
+
+<div class="viewcode-block" id="render_audio_from_midi">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.render_audio_from_midi">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">render_audio_from_midi</span><span class="p">(</span>
+    <span class="n">midi_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+    <span class="n">wav_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">timidity_bin</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;timidity&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="n">midi_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">midi_path</span><span class="p">)</span>
+    <span class="n">audio_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">wav_path</span><span class="p">)</span> <span class="k">if</span> <span class="n">wav_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">midi_file</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.wav&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">timidity_bin</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">midi_file</span><span class="p">),</span> <span class="s2">&quot;-Ow&quot;</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">audio_file</span><span class="p">)],</span>
+            <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Could not find TiMidity++ binary &#39;</span><span class="si">{</span><span class="n">timidity_bin</span><span class="si">}</span><span class="s2">&#39;. Install TiMidity++ or pass --timidity-bin.&quot;</span>
+        <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">error</span>
+
+    <span class="k">return</span> <span class="n">audio_file</span></div>
+
+
+
+<div class="viewcode-block" id="render_sources">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.render_sources">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">render_sources</span><span class="p">(</span>
+    <span class="n">sources</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">pdf</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">wav</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">lilypond_bin</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lilypond&quot;</span><span class="p">,</span>
+    <span class="n">timidity_bin</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;timidity&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+    <span class="n">rendered_assets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pdf</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">wav</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rendered_assets</span>
+
+    <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">sources</span><span class="p">:</span>
+        <span class="n">source_output_dir</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="ow">or</span> <span class="n">source</span><span class="o">.</span><span class="n">parent</span>
+        <span class="n">rendered_assets</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+            <span class="n">render_lilypond_file</span><span class="p">(</span>
+                <span class="n">source</span><span class="p">,</span>
+                <span class="n">output_dir</span><span class="o">=</span><span class="n">source_output_dir</span><span class="p">,</span>
+                <span class="n">cropped</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">lilypond_bin</span><span class="o">=</span><span class="n">lilypond_bin</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">wav</span><span class="p">:</span>
+            <span class="n">midi_path</span> <span class="o">=</span> <span class="n">source_output_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">source</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">.midi&quot;</span>
+            <span class="k">if</span> <span class="n">midi_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="n">rendered_assets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">render_audio_from_midi</span><span class="p">(</span><span class="n">midi_path</span><span class="p">,</span> <span class="n">timidity_bin</span><span class="o">=</span><span class="n">timidity_bin</span><span class="p">)</span>
+                <span class="p">)</span>
+    <span class="k">return</span> <span class="n">rendered_assets</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &#169;2026, Jan-Øivind Lima.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
