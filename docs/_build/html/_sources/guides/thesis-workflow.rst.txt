@@ -40,5 +40,29 @@ The deploy script in ``webpage/deploy.zsh`` publishes four things together:
 - the generated documentation in ``docs/_build/html/``
 - the thesis example assets
 
-That means the archive page, thesis PDF, and technical documentation stay synchronized instead
-of drifting apart.
+Before copying files, the deploy script rebuilds the thesis PDF, regenerates the archive page
+from the LaTeX ``example`` environments and ``main.aux`` labels, and rebuilds the documentation.
+That means newly added thesis examples are picked up by the webpage during deployment instead of
+being maintained by hand.
+
+GitHub Pages Deployment
+-----------------------
+
+The GitHub Pages deployment script in ``webpage/deploy_github_pages.zsh`` builds the same archive
+and documentation, copies the static files into a separate ``gh-pages`` worktree, commits them,
+and pushes the branch to GitHub.
+
+Run it from the repository root:
+
+.. code-block:: bash
+
+   ./webpage/deploy_github_pages.zsh
+
+You can also provide the commit message directly:
+
+.. code-block:: bash
+
+   ./webpage/deploy_github_pages.zsh "Deploy updated thesis examples"
+
+The first time this is used, GitHub Pages still needs to be enabled once in the repository
+settings with the source set to the ``gh-pages`` branch root.

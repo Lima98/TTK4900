@@ -5,6 +5,7 @@
 # Then run this script from the webpage/ directory
 
 exec > >(tee -a deploy.log) 2>&1
+set -e
 
 VOLUME_PATH="/Volumes/janoivil/"
 if [ ! -d "$VOLUME_PATH" ]; then
@@ -18,11 +19,19 @@ echo "Activating venv...\n"
 source ../.venv/bin/activate
 echo "Done!\n"
 
-# Updating documentation
-cd ../docs/
-./build_docs.zsh
+echo "Building thesis PDF and LaTeX references...\n"
+cd ../thesis/latex/
+latexmk -pdf -interaction=nonstopmode main.tex
+cd ../../webpage/
+echo "Done!\n"
+
+echo "Building archive page from thesis examples...\n"
+python3 build_archive.py
+echo "Done!\n"
 
 echo "Building documentation...\n"
+cd ../docs/
+./build_docs.zsh
 cd ../webpage/
 echo "Done!\n"
 

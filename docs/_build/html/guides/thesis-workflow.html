@@ -8,7 +8,7 @@
     <title>Thesis Workflow &#8212; Procedural Music Generation Docs</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=6855551a" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=5a5d1aad" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=b09466e7" />
     <script src="../_static/documentation_options.js?v=d45e8c67"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
@@ -50,6 +50,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#main-asset-paths">Main Asset Paths</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#typical-example-workflow">Typical Example Workflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#deployment-workflow">Deployment Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#github-pages-deployment">GitHub Pages Deployment</a></li>
 </ul>
 </li>
 </ul>
@@ -135,8 +136,26 @@ track of the others.</p>
 <li><p>the generated documentation in <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code></p></li>
 <li><p>the thesis example assets</p></li>
 </ul>
-<p>That means the archive page, thesis PDF, and technical documentation stay synchronized instead
-of drifting apart.</p>
+<p>Before copying files, the deploy script rebuilds the thesis PDF, regenerates the archive page
+from the LaTeX <code class="docutils literal notranslate"><span class="pre">example</span></code> environments and <code class="docutils literal notranslate"><span class="pre">main.aux</span></code> labels, and rebuilds the documentation.
+That means newly added thesis examples are picked up by the webpage during deployment instead of
+being maintained by hand.</p>
+</section>
+<section id="github-pages-deployment">
+<h2>GitHub Pages Deployment<a class="headerlink" href="#github-pages-deployment" title="Link to this heading">¶</a></h2>
+<p>The GitHub Pages deployment script in <code class="docutils literal notranslate"><span class="pre">webpage/deploy_github_pages.zsh</span></code> builds the same archive
+and documentation, copies the static files into a separate <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> worktree, commits them,
+and pushes the branch to GitHub.</p>
+<p>Run it from the repository root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./webpage/deploy_github_pages.zsh
+</pre></div>
+</div>
+<p>You can also provide the commit message directly:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./webpage/deploy_github_pages.zsh<span class="w"> </span><span class="s2">&quot;Deploy updated thesis examples&quot;</span>
+</pre></div>
+</div>
+<p>The first time this is used, GitHub Pages still needs to be enabled once in the repository
+settings with the source set to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch root.</p>
 </section>
 </section>
 

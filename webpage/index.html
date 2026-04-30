@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Procedural Generation: Music – Thesis Example Archive</title>
+    <title>Procedural Generation: Music - Thesis Example Archive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       :root {
@@ -16,13 +16,9 @@
         --shadow: 0 18px 40px rgba(64, 42, 27, 0.09);
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
 
-      html {
-        scroll-behavior: smooth;
-      }
+      html { scroll-behavior: smooth; }
 
       body {
         margin: 0;
@@ -34,13 +30,9 @@
         line-height: 1.6;
       }
 
-      a {
-        color: inherit;
-      }
+      a { color: inherit; }
 
-      .hero {
-        padding: 4rem 1.5rem 2.5rem;
-      }
+      .hero { padding: 4rem 1.5rem 2.5rem; }
 
       .hero-inner {
         max-width: 1200px;
@@ -149,17 +141,11 @@
         color: var(--ink);
       }
 
-      .content {
-        min-width: 0;
-      }
+      .content { min-width: 0; }
 
-      .chapter {
-        margin-bottom: 3rem;
-      }
+      .chapter { margin-bottom: 3rem; }
 
-      .chapter-header {
-        margin-bottom: 1rem;
-      }
+      .chapter-header { margin-bottom: 1rem; }
 
       .chapter-header span {
         display: inline-block;
@@ -208,11 +194,22 @@
 
       .example-heading {
         min-width: 0;
+        display: grid;
+        gap: 0.55rem;
       }
 
       .example-heading h3 {
-        margin: 0.2rem 0 0;
-        font-size: 1.25rem;
+        margin: 0;
+        font-size: 1rem;
+        color: var(--muted);
+        font-weight: normal;
+      }
+
+      .example-number {
+        margin: 0;
+        font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
       }
 
       .meta {
@@ -236,17 +233,23 @@
       }
 
       .example-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         text-decoration: none;
-        padding: 0.6rem 0.9rem;
+        min-width: 148px;
+        padding: 0.65rem 1rem;
         border-radius: 999px;
         border: 1px solid var(--line);
         background: white;
         font-size: 0.92rem;
+        white-space: nowrap;
       }
 
       .example-media {
         width: 100%;
-        min-height: 360px;
+        aspect-ratio: var(--score-ratio);
+        min-height: 140px;
         border: 1px solid var(--line);
         border-radius: 18px;
         background: #fbf8f2;
@@ -255,20 +258,24 @@
 
       .score-frame {
         width: 100%;
-        min-height: 360px;
+        height: 100%;
+        overflow: hidden;
       }
 
-      .score-frame object {
+      .score-link {
         display: block;
         width: 100%;
-        min-height: 360px;
-        border: 0;
-        background: #fbf8f2;
+        height: 100%;
       }
 
-      .score-fallback {
-        padding: 1rem 1.1rem;
-        color: var(--muted);
+      .score-pdf {
+        display: block;
+        width: 112%;
+        height: 112%;
+        margin-left: -6%;
+        margin-top: -3%;
+        border: 0;
+        background: white;
       }
 
       .example-body {
@@ -283,8 +290,13 @@
         color: var(--muted);
       }
 
-      audio {
-        width: 100%;
+      audio { width: 100%; }
+
+      .audio-missing {
+        padding: 0.75rem 0.9rem;
+        border: 1px dashed var(--line);
+        border-radius: 14px;
+        background: #fbf8f2;
       }
 
       footer {
@@ -301,13 +313,9 @@
           grid-template-columns: 1fr;
         }
 
-        .sidebar {
-          position: static;
-        }
+        .sidebar { position: static; }
 
-        .example-top {
-          flex-direction: column;
-        }
+        .example-top { flex-direction: column; }
       }
     </style>
   </head>
@@ -316,22 +324,18 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <h1>Procedural Generation:<br>Music Thesis Archive</h1>
-          <p>
-            This page mirrors the numbered examples referenced in the thesis PDF so examiners can
-            move between notation, commentary, and playback without hunting through folders.
-          </p>
+          <p>A browsable collection of the numbered musical examples referenced throughout the thesis.</p>
           <div class="hero-actions">
-            <a class="primary" href="thesis/main.pdf">Open Thesis PDF</a>
+            <a class="primary" href="thesis/main.pdf" target="_blank" rel="noopener noreferrer">Open Thesis PDF</a>
             <a href="docs/index.html">Open Technical Documentation</a>
-            <a href="#example-6-2-1">Jump To Results Examples</a>
           </div>
         </div>
         <aside class="hero-note">
-          <h2>How To Use This Archive</h2>
+          <h2>Archive Overview</h2>
           <ul>
             <li>Example numbers match the numbering used in the thesis.</li>
-            <li>Each card includes a large score preview and a direct jump into the thesis PDF.</li>
-            <li>Theory and iteration examples are grouped by the same larger topics used in the thesis.</li>
+            <li>Each card contains a score preview, a short description, and audio playback when available.</li>
+            <li>Examples are grouped by the same sections used in the written thesis.</li>
           </ul>
         </aside>
       </div>
@@ -340,9 +344,9 @@
     <div class="layout">
       <nav class="sidebar" aria-label="Page sections">
         <h2>Navigate</h2>
-        <a href="#chapter-2-2">Section 2.2 – Music Theory Examples</a>
-        <a href="#chapter-6-1">Section 6.1 – First Iteration</a>
-        <a href="#chapter-6-2">Section 6.2 – Second Iteration</a>
+        <a href="#chapter-2-2">Section 2.2 - Music Theory Examples</a>
+        <a href="#chapter-6-1">Section 6.1 - First Iteration Results</a>
+        <a href="#chapter-6-2">Section 6.2 - Second Iteration Results</a>
       </nav>
 
       <main class="content">
@@ -350,38 +354,33 @@
           <div class="chapter-header">
             <span>Section 2.2</span>
             <h2>Music Theory Examples</h2>
-            <p>
-              These examples support the thesis discussion of scales and interval structure in the music theory section.
-            </p>
+            <p>Examples related to scales, harmony, and interval structure.</p>
           </div>
 
           <div class="example-grid">
             <article class="example-card" id="example-2-2-1">
               <div class="example-top">
                 <div class="example-heading">
-                  <div class="meta">
-                    <span>Example 2.2.1</span>
-                    <span>Scale</span>
-                    <span>Theory</span>
-                  </div>
+                  <p class="example-number">2.2.1</p>
                   <h3>The C-major scale written in the treble clef</h3>
+                  <div class="meta">
+                    <span>Theory</span>
+                    <span>Scale</span>
+                  </div>
                 </div>
                 <div class="example-links">
-                  <a href="thesis/main.pdf#page=10">Jump In Thesis</a>
+                  <a href="thesis/main.pdf#page=21" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media">
+              <div class="example-media" style="--score-ratio: 3.9211;">
                 <div class="score-frame">
-                  <object data="thesis-examples/04theory/01-scale.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.1 score preview">
-                    <div class="score-fallback">
-                      Preview unavailable in this browser. Open the cropped score directly:
-                      <a href="thesis-examples/04theory/01-scale.cropped.pdf">Example 2.2.1 score</a>
-                    </div>
-                  </object>
+                  <a class="score-link" href="thesis-examples/04theory/01-scale.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 2.2.1 score PDF">
+                    <embed class="score-pdf" src="thesis-examples/04theory/01-scale.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width" type="application/pdf">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
-                <p>Referenced in the thesis discussion of scale degrees and tonal function.</p>
+                <p>The C-major scale written in the treble clef.</p>
                 <audio controls>
                   <source src="thesis-examples/04theory/01-scale.wav" type="audio/wav">
                 </audio>
@@ -391,29 +390,26 @@
             <article class="example-card" id="example-2-2-2">
               <div class="example-top">
                 <div class="example-heading">
+                  <p class="example-number">2.2.2</p>
+                  <h3>The Eflat -major scale written in the treble clef</h3>
                   <div class="meta">
-                    <span>Example 2.2.2</span>
-                    <span>Scale</span>
                     <span>Theory</span>
+                    <span>Scale</span>
                   </div>
-                  <h3>The E-flat major scale written in the treble clef</h3>
                 </div>
                 <div class="example-links">
-                  <a href="thesis/main.pdf#page=10">Jump In Thesis</a>
+                  <a href="thesis/main.pdf#page=21" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media">
+              <div class="example-media" style="--score-ratio: 4.4211;">
                 <div class="score-frame">
-                  <object data="thesis-examples/04theory/02-scale_eb.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.2 score preview">
-                    <div class="score-fallback">
-                      Preview unavailable in this browser. Open the cropped score directly:
-                      <a href="thesis-examples/04theory/02-scale_eb.cropped.pdf">Example 2.2.2 score</a>
-                    </div>
-                  </object>
+                  <a class="score-link" href="thesis-examples/04theory/02-scale_eb.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 2.2.2 score PDF">
+                    <embed class="score-pdf" src="thesis-examples/04theory/02-scale_eb.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width" type="application/pdf">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
-                <p>Companion to Example 2.2.1, showing the same scale structure in a different key.</p>
+                <p>The Eflat -major scale written in the treble clef.</p>
                 <audio controls>
                   <source src="thesis-examples/04theory/02-scale_eb.wav" type="audio/wav">
                 </audio>
@@ -423,31 +419,56 @@
             <article class="example-card" id="example-2-2-3">
               <div class="example-top">
                 <div class="example-heading">
-                  <div class="meta">
-                    <span>Example 2.2.3</span>
-                    <span>Intervals</span>
-                    <span>Theory</span>
-                  </div>
+                  <p class="example-number">2.2.3</p>
                   <h3>All the musical intervals from the unison to the octave including their variants</h3>
+                  <div class="meta">
+                    <span>Theory</span>
+                    <span>Intervals</span>
+                  </div>
                 </div>
                 <div class="example-links">
-                  <a href="thesis/main.pdf#page=11">Jump In Thesis</a>
+                  <a href="thesis/main.pdf#page=22" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media">
+              <div class="example-media" style="--score-ratio: 6.5000;">
                 <div class="score-frame">
-                  <object data="thesis-examples/04theory/04-all_intervals.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 2.2.3 score preview">
-                    <div class="score-fallback">
-                      Preview unavailable in this browser. Open the cropped score directly:
-                      <a href="thesis-examples/04theory/04-all_intervals.cropped.pdf">Example 2.2.3 score</a>
-                    </div>
-                  </object>
+                  <a class="score-link" href="thesis-examples/04theory/04-all_intervals.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 2.2.3 score PDF">
+                    <embed class="score-pdf" src="thesis-examples/04theory/04-all_intervals.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width" type="application/pdf">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
-                <p>Used in the thesis to illustrate the interval system and enharmonic spellings.</p>
+                <p>All the musical intervals from the unison to the octave including their variants.</p>
                 <audio controls>
                   <source src="thesis-examples/04theory/04-all_intervals.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-2-2-4">
+              <div class="example-top">
+                <div class="example-heading">
+                  <p class="example-number">2.2.4</p>
+                  <h3>The four main triads(chords with three notes), major, minor, diminished and augmented</h3>
+                  <div class="meta">
+                    <span>Theory</span>
+                  </div>
+                </div>
+                <div class="example-links">
+                  <a href="thesis/main.pdf#page=23" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
+                </div>
+              </div>
+              <div class="example-media" style="--score-ratio: 5.3333;">
+                <div class="score-frame">
+                  <a class="score-link" href="thesis-examples/04theory/10-majmin.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 2.2.4 score PDF">
+                    <embed class="score-pdf" src="thesis-examples/04theory/10-majmin.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width" type="application/pdf">
+                  </a>
+                </div>
+              </div>
+              <div class="example-body">
+                <p>The four main triads(chords with three notes), major, minor, diminished and augmented.</p>
+                <audio controls>
+                  <source src="thesis-examples/04theory/10-majmin.wav" type="audio/wav">
                 </audio>
               </div>
             </article>
@@ -458,38 +479,33 @@
           <div class="chapter-header">
             <span>Section 6.1</span>
             <h2>First Iteration Results</h2>
-            <p>
-              These examples document the first melody generator, including its range problems and early multi-voice experiments.
-            </p>
+            <p>Examples from the first melody-generation iteration.</p>
           </div>
 
           <div class="example-grid">
             <article class="example-card" id="example-6-1-1">
               <div class="example-top">
                 <div class="example-heading">
+                  <p class="example-number">6.1.1</p>
+                  <h3>Melody showing how the octave is not restricted and ends up in unplayable range</h3>
                   <div class="meta">
-                    <span>Example 6.1.1</span>
                     <span>Iteration 1</span>
                     <span>Range</span>
                   </div>
-                  <h3>Melody showing how the octave is not restricted and ends up in unplayable range</h3>
                 </div>
                 <div class="example-links">
-                  <a href="thesis/main.pdf#page=23">Jump In Thesis</a>
+                  <a href="thesis/main.pdf#page=34" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media">
+              <div class="example-media" style="--score-ratio: 2.6650;">
                 <div class="score-frame">
-                  <object data="thesis-examples/iter1/register.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.1 score preview">
-                    <div class="score-fallback">
-                      Preview unavailable in this browser. Open the cropped score directly:
-                      <a href="thesis-examples/iter1/register.cropped.pdf">Example 6.1.1 score</a>
-                    </div>
-                  </object>
+                  <a class="score-link" href="thesis-examples/iter1/register.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 6.1.1 score PDF">
+                    <embed class="score-pdf" src="thesis-examples/iter1/register.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width" type="application/pdf">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
-                <p>A first-iteration example demonstrating why explicit range handling is necessary.</p>
+                <p>Melody showing how the octave is not restricted and ends up in unplayable range.</p>
                 <audio controls>
                   <source src="thesis-examples/iter1/register.wav" type="audio/wav">
                 </audio>
@@ -499,29 +515,26 @@
             <article class="example-card" id="example-6-1-2">
               <div class="example-top">
                 <div class="example-heading">
+                  <p class="example-number">6.1.2</p>
+                  <h3>Melody showing how we can generate multiple voices with different rhythmic restrictions</h3>
                   <div class="meta">
-                    <span>Example 6.1.2</span>
                     <span>Iteration 1</span>
                     <span>Multi-Voice</span>
                   </div>
-                  <h3>Melody showing how we can generate multiple voices with different rhythmic restrictions</h3>
                 </div>
                 <div class="example-links">
-                  <a href="thesis/main.pdf#page=24">Jump In Thesis</a>
+                  <a href="thesis/main.pdf#page=35" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media">
+              <div class="example-media" style="--score-ratio: 1.7898;">
                 <div class="score-frame">
-                  <object data="thesis-examples/iter1/voices.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.2 score preview">
-                    <div class="score-fallback">
-                      Preview unavailable in this browser. Open the cropped score directly:
-                      <a href="thesis-examples/iter1/voices.cropped.pdf">Example 6.1.2 score</a>
-                    </div>
-                  </object>
+                  <a class="score-link" href="thesis-examples/iter1/voices.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 6.1.2 score PDF">
+                    <embed class="score-pdf" src="thesis-examples/iter1/voices.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width" type="application/pdf">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
-                <p>An early proof of concept for generating several voices, before harmonic interaction was formalized.</p>
+                <p>Melody showing how we can generate multiple voices with different rhythmic restrictions.</p>
                 <audio controls>
                   <source src="thesis-examples/iter1/voices.wav" type="audio/wav">
                 </audio>
@@ -531,29 +544,26 @@
             <article class="example-card" id="example-6-1-3">
               <div class="example-top">
                 <div class="example-heading">
+                  <p class="example-number">6.1.3</p>
+                  <h3>Example melody of the first iteration melody generator</h3>
                   <div class="meta">
-                    <span>Example 6.1.3</span>
                     <span>Iteration 1</span>
                     <span>Melody</span>
                   </div>
-                  <h3>Example melody of the first iteration melody generator</h3>
                 </div>
                 <div class="example-links">
-                  <a href="thesis/main.pdf#page=24">Jump In Thesis</a>
+                  <a href="thesis/main.pdf#page=35" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media">
+              <div class="example-media" style="--score-ratio: 6.5000;">
                 <div class="score-frame">
-                  <object data="thesis-examples/iter1/melody.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.1.3 score preview">
-                    <div class="score-fallback">
-                      Preview unavailable in this browser. Open the cropped score directly:
-                      <a href="thesis-examples/iter1/melody.cropped.pdf">Example 6.1.3 score</a>
-                    </div>
-                  </object>
+                  <a class="score-link" href="thesis-examples/iter1/melody.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 6.1.3 score PDF">
+                    <embed class="score-pdf" src="thesis-examples/iter1/melody.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width" type="application/pdf">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
-                <p>A compact melody example from the first proof-of-concept generator.</p>
+                <p>Example melody of the first iteration melody generator.</p>
                 <audio controls>
                   <source src="thesis-examples/iter1/melody.wav" type="audio/wav">
                 </audio>
@@ -566,38 +576,33 @@
           <div class="chapter-header">
             <span>Section 6.2</span>
             <h2>Second Iteration Results</h2>
-            <p>
-              This example shows the second iteration, where motif reuse produced a more coherent melodic outline.
-            </p>
+            <p>Examples from the second melody-generation iteration.</p>
           </div>
 
           <div class="example-grid">
             <article class="example-card" id="example-6-2-1">
               <div class="example-top">
                 <div class="example-heading">
-                  <div class="meta">
-                    <span>Example 6.2.1</span>
-                    <span>Iteration 2</span>
-                    <span>Motivic Structure</span>
-                  </div>
+                  <p class="example-number">6.2.1</p>
                   <h3>Demonstration of a melody generated using the second iteration</h3>
+                  <div class="meta">
+                    <span>Iteration 2</span>
+                    <span>Melody</span>
+                  </div>
                 </div>
                 <div class="example-links">
-                  <a href="thesis/main.pdf#page=26">Jump In Thesis</a>
+                  <a href="thesis/main.pdf#page=37" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
                 </div>
               </div>
-              <div class="example-media">
+              <div class="example-media" style="--score-ratio: 5.7263;">
                 <div class="score-frame">
-                  <object data="thesis-examples/iter2/melody.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" aria-label="Example 6.2.1 score preview">
-                    <div class="score-fallback">
-                      Preview unavailable in this browser. Open the cropped score directly:
-                      <a href="thesis-examples/iter2/melody.cropped.pdf">Example 6.2.1 score</a>
-                    </div>
-                  </object>
+                  <a class="score-link" href="thesis-examples/iter2/melody.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 6.2.1 score PDF">
+                    <embed class="score-pdf" src="thesis-examples/iter2/melody.cropped.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH&zoom=page-width" type="application/pdf">
+                  </a>
                 </div>
               </div>
               <div class="example-body">
-                <p>This example is used in the thesis to show how motif repetition gave the melody a clearer structure.</p>
+                <p>Demonstration of a melody generated using the second iteration.</p>
                 <audio controls>
                   <source src="thesis-examples/iter2/melody.wav" type="audio/wav">
                 </audio>
@@ -608,8 +613,6 @@
       </main>
     </div>
 
-    <footer>
-      © 2026 – Jan-Øivind Lima
-    </footer>
+    <footer>© 2026 - Jan-Øivind Lima</footer>
   </body>
 </html>

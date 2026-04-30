@@ -23,3 +23,5 @@ main.bbl
 main.synctex.gz
 *.toc
 *.synctex(busy)
+*.bbl-SAVE-ERROR
+*.bcf-SAVE-ERROR

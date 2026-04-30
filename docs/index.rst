@@ -1,6 +1,8 @@
 Procedural Music Generation
 ===========================
 
+`Back to the thesis example archive <../index.html>`_
+
 This documentation covers the current melody-generation engine, the command-line workflow in
 ``code/main.py``, and the internal modules that power form, harmony, notation, and rendering.
 

@@ -1,0 +1,87 @@
+\section{Third iteration}
+  For the third iteration the use of \ac{AI} was implemented. 
+
+  \subsection{Software architecture}
+
+    In Figure~\ref{fig:iter3_architecture} we can see how the system is built and how the different modules interact. As we can see this is a much bigger and complicated system than the first two iterations already.  
+
+
+    \begin{figure}[htbp] % Architecture
+      \centering
+      \resizebox{\textwidth}{!}{%
+      \begin{tikzpicture}[
+        >=Latex,
+        font=\small,
+        node distance=8mm and 10mm,
+        stage/.style={
+          draw,
+          rounded corners=3pt,
+          align=center,
+          minimum width=0.42\textwidth,
+          minimum height=10mm,
+          fill=gray!8
+        },
+        support/.style={
+          draw,
+          rounded corners=3pt,
+          align=center,
+          minimum width=0.24\textwidth,
+          minimum height=9mm,
+          fill=blue!6
+        },
+        output/.style={
+          draw,
+          rounded corners=3pt,
+          align=center,
+          minimum width=0.24\textwidth,
+          minimum height=9mm,
+          fill=green!8
+        },
+        arrow/.style={
+          -{Latex[length=2.3mm]},
+          thick
+        }
+      ]
+
+        % Main vertical pipeline
+        \node[stage] (input) {User input\\key, mode, bars, seed, voice profile, harmony, form};
+        \node[stage, below=of input] (cli) {\texttt{code/main.py}\\parses CLI arguments and render mode};
+        \node[stage, below=of cli] (settings) {\texttt{GenerationSettings}\\with \texttt{Key}, \texttt{Motif}, \texttt{FormPlan},\\\texttt{HarmonyPlan} and \texttt{VoiceProfile}};
+        \node[stage, below=of settings] (generator) {\texttt{MelodyGenerator}\\candidate generation, motif reuse,\\weighted search and best-attempt selection};
+        \node[stage, below=of generator] (melody) {\texttt{Melody}\\events, durations, metadata, selected clef};
+        \node[stage, below=of melody] (render) {\texttt{lilypond.py}\\notation export and optional rendering};
+
+        % Side modules
+        \node[support, left=18mm of settings] (structure) {\texttt{structure.py}\\core data model};
+        \node[support, right=18mm of settings] (theory) {\texttt{theory.py}\\pitch spelling, Roman numerals,\\transposition and chord tones};
+        \node[support, left=18mm of generator] (constraints) {\texttt{constraints.py}\\stepwise motion, leaps, cadence,\\climax, rests, motif and form scoring};
+        \node[support, right=18mm of generator] (chorale) {\texttt{ChoralePlan}\\future SATB-compatible\\extension point};
+
+        % Outputs
+        \node[output, below left=10mm and 10mm of render] (ly) {\texttt{.ly} source};
+        \node[output, below=10mm of render] (pdf) {cropped \texttt{.pdf}};
+        \node[output, below right=10mm and 10mm of render] (audio) {\texttt{.midi} and \texttt{.wav}};
+
+        % Pipeline arrows
+        \draw[arrow] (input) -- (cli);
+        \draw[arrow] (cli) -- (settings);
+        \draw[arrow] (settings) -- (generator);
+        \draw[arrow] (generator) -- (melody);
+        \draw[arrow] (melody) -- (render);
+
+        % Support arrows
+        \draw[arrow] (structure.east) -- (settings.west);
+        \draw[arrow] (theory.west) -- (settings.east);
+        \draw[arrow] (constraints.east) -- (generator.west);
+        \draw[arrow] (chorale.west) -- (generator.east);
+
+        % Output arrows
+        \draw[arrow] (render) -- (ly);
+        \draw[arrow] (render) -- (pdf);
+        \draw[arrow] (render) -- (audio);
+
+      \end{tikzpicture}%
+      }
+      \caption{Architecture of the third iteration melody generator. The command-line layer builds a structured settings object, the generator combines theory-aware candidate generation with a soft-constraint stack, and the resulting melody is exported through LilyPond into notation and audio assets.}\label{fig:iter3_architecture}
+    \end{figure}
+
