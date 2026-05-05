@@ -16,6 +16,7 @@ from pathlib import Path
 
 from melody_engine import (
     ChordTonePreferenceConstraint,
+    ChoraleHarmonizer,
     ChoralePlan,
     DirectionChangeConstraint,
     FormPlan,
@@ -39,6 +40,7 @@ from melody_engine import (
     StrongBeatStabilityConstraint,
     TimeSignature,
     VoiceProfile,
+    export_chorale,
     export_melody,
     render_sources,
 )
@@ -79,7 +81,8 @@ def build_settings(args: argparse.Namespace) -> GenerationSettings:
     """Translate parsed CLI arguments into a validated ``GenerationSettings`` object."""
     key = Key(args.key, args.mode, tonic_octave=args.tonic_octave)
     time_signature = TimeSignature.from_string(args.time_signature)
-    voice_profile = build_voice_profile(args.voice_profile)
+    lead_profile_name = args.soprano_profile if args.texture.lower() == "chorale" else args.voice_profile
+    voice_profile = build_voice_profile(lead_profile_name)
 
     range_min = voice_profile.range_min if args.range_min is None else args.range_min
     range_max = voice_profile.range_max if args.range_max is None else args.range_max
@@ -113,8 +116,9 @@ def build_settings(args: argparse.Namespace) -> GenerationSettings:
         random_seed=args.seed,
         form_plan=form_plan,
         clef=None if args.clef == "auto" else args.clef,
+        texture=args.texture,
         voice_profile=voice_profile,
-        chorale_plan=build_future_chorale_plan(),
+        chorale_plan=build_chorale_plan(args),
     )
 
 
@@ -295,14 +299,14 @@ def build_form_plan(form_name: str, bars: int) -> FormPlan:
     )
 
 
-def build_future_chorale_plan() -> ChoralePlan:
-    """Return the placeholder SATB-oriented plan used for future chorale work."""
+def build_chorale_plan(args: argparse.Namespace) -> ChoralePlan:
+    """Return the SATB voice plan used by chorale generation."""
     return ChoralePlan(
         voice_profiles=(
-            build_voice_profile("soprano"),
-            build_voice_profile("alto"),
-            build_voice_profile("tenor"),
-            build_voice_profile("bass"),
+            build_voice_profile(args.soprano_profile),
+            build_voice_profile(args.alto_profile),
+            build_voice_profile(args.tenor_profile),
+            build_voice_profile(args.bass_profile),
         )
     )
 
@@ -317,7 +321,8 @@ def build_output_stem(args: argparse.Namespace) -> str:
         sanitize_token(args.mode),
         f"o{args.tonic_octave}",
         f"{args.bars}bars",
-        sanitize_token(args.voice_profile),
+        sanitize_token(args.texture),
+        sanitize_token(args.voice_profile if args.texture == "melody" else args.soprano_profile),
         sanitize_token(args.form),
     ]
     if args.time_signature != "4/4":
@@ -344,7 +349,12 @@ def build_generate_parser() -> argparse.ArgumentParser:
     parser.add_argument("--key", default="C", help="Tonic note, for example C, Eb, F#.")
     parser.add_argument("--mode", default="major", help="Mode, for example major, minor, dorian.")
     parser.add_argument("--tonic-octave", type=int, default=4, help="Base octave for LilyPond export.")
+    parser.add_argument("--texture", default="melody", help="Output texture: melody or chorale.")
     parser.add_argument("--voice-profile", default="melody", help="Voice profile: melody, soprano, alto, tenor, bass.")
+    parser.add_argument("--soprano-profile", default="soprano1", help="Soprano profile used for chorale generation.")
+    parser.add_argument("--alto-profile", default="alto1", help="Alto profile used for chorale generation.")
+    parser.add_argument("--tenor-profile", default="tenor1", help="Tenor profile used for chorale generation.")
+    parser.add_argument("--bass-profile", default="bass1", help="Bass profile used for chorale generation.")
     parser.add_argument("--clef", default="auto", help="Clef override: auto, treble, treble_8, bass.")
     parser.add_argument("--time-signature", default="4/4", help="Time signature, for example 4/4 or 3/4.")
     parser.add_argument("--bars", type=int, default=8, help="Number of bars to generate.")
@@ -429,6 +439,19 @@ def describe_melody(settings: GenerationSettings, melody) -> str:
     )
 
 
+def describe_chorale(settings: GenerationSettings, score) -> str:
+    """Summarize the generated chorale for terminal output."""
+    harmony = ", ".join(span.roman_symbol for span in settings.harmonic_plan.spans)
+    voices = ", ".join(profile.name for profile in settings.chorale_plan.voice_profiles)
+    return (
+        f"Generated SATB chorale across {settings.bars} bars in "
+        f"{settings.key.tonic} {settings.key.mode} ({settings.time_signature}).\n"
+        f"Seed {settings.random_seed}, attempts {settings.attempts}, form '{settings.form_plan.kind}', "
+        f"voices: {voices}.\n"
+        f"Harmony plan: {harmony}."
+    )
+
+
 def maybe_render(paths: list[Path], args: argparse.Namespace) -> list[Path]:
     """Render cropped PDFs and/or WAV files if the relevant CLI flags were provided."""
     if not args.pdf and not args.wav:
@@ -502,22 +525,29 @@ def main() -> None:
     generator = MelodyGenerator(settings=settings, constraints=build_constraints())
     melody = generator.generate()
 
-    transposed_up = melody.transpose_diatonic(1)
-    parallel_in_d = melody.transpose_parallel(Key("D", "major", tonic_octave=4))
-
     output_directory = args.output_dir
     output_stem = build_output_stem(args)
-    written_files = [export_melody(melody, output_directory / f"{output_stem}.ly")]
+    if args.texture.lower() == "chorale":
+        harmonizer = ChoraleHarmonizer(settings=settings)
+        chorale = harmonizer.harmonize(melody)
+        written_files = [export_chorale(chorale, output_directory / f"{output_stem}.ly")]
+    else:
+        transposed_up = melody.transpose_diatonic(1)
+        parallel_in_d = melody.transpose_parallel(Key("D", "major", tonic_octave=4))
+        written_files = [export_melody(melody, output_directory / f"{output_stem}.ly")]
 
-    if args.with_variants:
-        written_files.append(export_melody(transposed_up, output_directory / f"{output_stem}_diatonic_up.ly"))
-        written_files.append(
-            export_melody(parallel_in_d, output_directory / f"{output_stem}_parallel_in_d.ly")
-        )
+        if args.with_variants:
+            written_files.append(export_melody(transposed_up, output_directory / f"{output_stem}_diatonic_up.ly"))
+            written_files.append(
+                export_melody(parallel_in_d, output_directory / f"{output_stem}_parallel_in_d.ly")
+            )
 
     generated_assets = maybe_render(written_files, args)
 
-    print(describe_melody(settings, melody))
+    if args.texture.lower() == "chorale":
+        print(describe_chorale(settings, chorale))
+    else:
+        print(describe_melody(settings, melody))
     print(f"Output written to {output_directory.resolve()}")
     print("LilyPond sources:")
     for path in written_files:

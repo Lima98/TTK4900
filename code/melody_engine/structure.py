@@ -180,6 +180,22 @@ class Melody:
 
 
 @dataclass(frozen=True)
+class ChoraleScore:
+    key: Key
+    time_signature: TimeSignature
+    soprano: Melody
+    alto: Melody
+    tenor: Melody
+    bass: Melody
+    harmony_plan: HarmonyPlan = field(default_factory=HarmonyPlan)
+    metadata: dict[str, object] = field(default_factory=dict)
+
+    @property
+    def voices(self) -> tuple[Melody, Melody, Melody, Melody]:
+        return (self.soprano, self.alto, self.tenor, self.bass)
+
+
+@dataclass(frozen=True)
 class GenerationSettings:
     key: Key
     time_signature: TimeSignature
@@ -197,6 +213,7 @@ class GenerationSettings:
     random_seed: int = 7
     form_plan: FormPlan = FormPlan(kind="free")
     clef: str | None = None
+    texture: str = "melody"
     voice_profile: VoiceProfile = VoiceProfile(
         name="melody",
         range_min=0,

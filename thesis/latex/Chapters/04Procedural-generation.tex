@@ -43,9 +43,6 @@
       \caption{Final generated map satisfying all constraints.}\label{fig:cs_solution}
     \end{figure}
     
-    
-    
-
   \subsection{L-systems (Lindenmayer systems)}
   \textbf{\color{red}WIP section}\\
     Lindenmayer systems are a method of \ac{PG} based around the idea of creating rules for the generation which lead to self-similarity and fractal-like forms. This kind of \ac{PG} is often used in generating organic structures such as trees or other plant-like structures.
@@ -93,11 +90,60 @@
     
   \subsection{Binary space partitioning}
   \textbf{\color{red}WIP section}\\
-    By partitioning the given space in smaller spaces recursively we are able to find a subdivision small enough to generate something that propagates to the higher space with certain characteristics.
+    \ac{BSP} can be used to generate map layouts like indoor environments, in the following figures you can see an example of how we can divide the entire domain into sections and used that to generate rooms.
+  
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/04theory/01_bsp_partitions.pdf}
+      \end{center}
+      \caption{}\label{fig:bsp_partitions}
+    \end{figure}
+    
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/04theory/02_rooms_and_corridors.pdf}
+      \end{center}
+      \caption{}\label{fig:rooms_and_corridors}
+    \end{figure}
+
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/04theory/03_final_bsp_dungeon.pdf}
+      \end{center}
+      \caption{}\label{fig:final_bsp_dungeoun}
+    \end{figure}
+
 
   \subsection{Random noise and seeds}
   \textbf{\color{red}WIP section}\\
     Perlin noise is a very common way to generate structures like worlds etc... It is very good at creating smooth transitions from one state to another, like height maps.
+    This is demonstrated in the following figures below with some different techniques.
+    
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/04theory/01_seed_variation.pdf}
+      \end{center}
+      \caption{}\label{fig:seed_variations}
+    \end{figure}
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/04theory/02_noise_octaves.pdf}
+      \end{center}
+      \caption{}\label{fig:noise_octaves}
+    \end{figure}
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/04theory/03_noise_to_terrain.pdf}
+      \end{center}
+      \caption{}\label{fig:noise_to_terrain}
+    \end{figure}
+    \begin{figure}
+      \begin{center}
+        \includegraphics[width=0.95\textwidth]{figures/04theory/04_parameter_control.pdf}
+      \end{center}
+      \caption{}\label{fig:parameter_control}
+    \end{figure}
+    
 
   \subsection{Random walks}
     Random walk procedural generation method that can be used to organic looking structures like maps and textures. It can also be used to describe natural phenomena like bacterial movement. It has been applied in financial economics and computer science

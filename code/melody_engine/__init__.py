@@ -15,9 +15,11 @@ from .constraints import (
     StepwiseMotionConstraint,
     StrongBeatStabilityConstraint,
 )
+from .chorale import ChoraleHarmonizer
 from .generator import MelodyGenerator
-from .lilypond import export_melody, render_audio_from_midi, render_lilypond_file, render_sources
+from .lilypond import export_chorale, export_melody, render_audio_from_midi, render_lilypond_file, render_sources
 from .structure import (
+    ChoraleScore,
     ChoralePlan,
     FormPlan,
     FormSection,
@@ -35,6 +37,8 @@ from .theory import Key
 
 __all__ = [
     "ChordTonePreferenceConstraint",
+    "ChoraleHarmonizer",
+    "ChoraleScore",
     "DirectionChangeConstraint",
     "FormPlan",
     "FormSection",
@@ -61,6 +65,7 @@ __all__ = [
     "TimeSignature",
     "VoiceProfile",
     "ChoralePlan",
+    "export_chorale",
     "export_melody",
     "render_audio_from_midi",
     "render_lilypond_file",

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-"""LilyPond export and rendering utilities for melodies and thesis assets."""
+"""LilyPond export and rendering utilities for melodies, chorales, and thesis assets."""
 
 import subprocess
 from pathlib import Path
 
-from .structure import Melody
+from .structure import ChoraleScore, Melody
 
 BEAT_TO_DURATION = {
     4.0: "1",
@@ -58,32 +58,7 @@ def choose_clef(melody: Melody) -> str:
 
 def melody_to_lilypond_source(melody: Melody) -> str:
     key_name = melody.key.tonic.lower().replace("b", "f")
-    note_tokens = [
-        (
-            f"r{lilypond_duration(event.duration)}"
-            if event.is_rest
-            else f"{melody.key.chromatic_pitch(event.scale_step, event.chromatic_adjustment)}{lilypond_duration(event.duration)}"
-        )
-        for event in melody.events
-    ]
-
-    bar_length = melody.time_signature.bar_length
-    bars: list[str] = []
-    current_bar: list[str] = []
-    beat_total = 0.0
-
-    for token, event in zip(note_tokens, melody.events):
-        current_bar.append(token)
-        beat_total += event.duration
-        if beat_total >= bar_length - 1e-9:
-            bars.append(" ".join(current_bar))
-            current_bar = []
-            beat_total = 0.0
-
-    if current_bar:
-        bars.append(" ".join(current_bar))
-
-    music_body = " |\n    ".join(bars)
+    music_body = voice_music_body(melody)
 
     return f"""\\version "2.24.4"
 \\language "english"
@@ -101,10 +76,85 @@ def melody_to_lilypond_source(melody: Melody) -> str:
 """
 
 
+def note_token(melody: Melody, event) -> str:
+    if event.is_rest:
+        return f"r{lilypond_duration(event.duration)}"
+    return f"{melody.key.chromatic_pitch(event.scale_step, event.chromatic_adjustment)}{lilypond_duration(event.duration)}"
+
+
+def voice_music_body(melody: Melody) -> str:
+    note_tokens = [note_token(melody, event) for event in melody.events]
+    bar_length = melody.time_signature.bar_length
+    bars: list[str] = []
+    current_bar: list[str] = []
+    beat_total = 0.0
+
+    for token, event in zip(note_tokens, melody.events):
+        current_bar.append(token)
+        beat_total += event.duration
+        if beat_total >= bar_length - 1e-9:
+            bars.append(" ".join(current_bar))
+            current_bar = []
+            beat_total = 0.0
+
+    if current_bar:
+        bars.append(" ".join(current_bar))
+
+    return " |\n      ".join(bars)
+
+
 def export_melody(melody: Melody, output_path: str | Path) -> Path:
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(melody_to_lilypond_source(melody), encoding="utf-8")
+    return path
+
+
+def chorale_to_lilypond_source(score: ChoraleScore) -> str:
+    key_name = score.key.tonic.lower().replace("b", "f")
+    soprano_body = voice_music_body(score.soprano)
+    alto_body = voice_music_body(score.alto)
+    tenor_body = voice_music_body(score.tenor)
+    bass_body = voice_music_body(score.bass)
+
+    return f"""\\version "2.24.4"
+\\language "english"
+
+\\score {{
+  \\new ChoirStaff <<
+    \\new Staff <<
+      \\clef "{choose_clef(score.soprano)}"
+      \\key {key_name} \\{score.key.mode}
+      \\time {score.time_signature}
+      \\new Voice = "soprano" {{ \\voiceOne
+      {soprano_body} \\bar "|."
+      }}
+      \\new Voice = "alto" {{ \\voiceTwo
+      {alto_body}
+      }}
+    >>
+    \\new Staff <<
+      \\clef "bass"
+      \\key {key_name} \\{score.key.mode}
+      \\time {score.time_signature}
+      \\new Voice = "tenor" {{ \\voiceOne
+      {tenor_body}
+      }}
+      \\new Voice = "bass" {{ \\voiceTwo
+      {bass_body}
+      }}
+    >>
+  >>
+  \\layout {{}}
+  \\midi {{}}
+}}
+"""
+
+
+def export_chorale(score: ChoraleScore, output_path: str | Path) -> Path:
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(chorale_to_lilypond_source(score), encoding="utf-8")
     return path
 
 
