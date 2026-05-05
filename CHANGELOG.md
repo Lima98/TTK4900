@@ -1,3 +1,14 @@
+## 0.14.0 (2026-05-05)
+
+### Feat
+
+- **thesis-chorale-module**: lots of new figues in thesis and code now can generate chorale
+
+### Fix
+
+- **thesis**: updated conclusion and theory chapter with examples of constraint based procedural generation
+- **thesis-and-plan**: updated thesis and added ganttchart for the plan for finishing the procjet
+
 ## 0.13.0 (2026-04-22)
 
 ### BREAKING CHANGE
