@@ -60,6 +60,16 @@ LABELS = {
     "path": "P",
 }
 
+DOMAIN_SIZE_COLORS = {
+    1: "#f7df4f",
+    2: "#99d45a",
+    3: "#42bf83",
+    4: "#2199a8",
+    5: "#2f6fa3",
+    6: "#473b8f",
+    7: "#2b185f",
+}
+
 # Local compatibility relation. These are intentionally simple, because the
 # figures are meant to explain CSP mechanics rather than optimize map quality.
 ALLOWED_NEIGHBORS = {
@@ -336,6 +346,14 @@ def draw_adjacency_rules(output_dir: Path) -> None:
     save_figure(fig, output_dir, "01_adjacency_constraints")
 
 
+def domain_text_color(hex_color: str) -> str:
+    red = int(hex_color[1:3], 16) / 255
+    green = int(hex_color[3:5], 16) / 255
+    blue = int(hex_color[5:7], 16) / 255
+    luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+    return "white" if luminance < 0.45 else "#181818"
+
+
 def draw_domain_grid(
     problem: Problem,
     before: dict[tuple[int, int], set[str]],
@@ -356,7 +374,7 @@ def draw_domain_grid(
             for x in range(problem.width):
                 cell = (x, y)
                 size = len(domains[cell])
-                color = plt.cm.viridis_r((size - 1) / (len(TILES) - 1))
+                color = DOMAIN_SIZE_COLORS[size]
                 ax.add_patch(Rectangle((x, y), 1, 1, facecolor=color, edgecolor="white", linewidth=1.4))
                 if size == 1:
                     label = LABELS[next(iter(domains[cell]))]
@@ -373,19 +391,19 @@ def draw_domain_grid(
                     ha="center",
                     va="center",
                     fontsize=label_size,
-                    color="#181818",
+                    color=domain_text_color(color),
                     weight=weight,
                 )
 
-    fig.suptitle("Constraint propagation reduces the search space", fontsize=13, weight="bold", y=1.02)
-    fig.text(
-        0.5,
-        0.02,
-        "Cell number = remaining domain size; letters mark fixed cells",
-        ha="center",
-        fontsize=9,
-        color="#333333",
-    )
+    # fig.suptitle("Constraint propagation reduces the search space", fontsize=13, weight="bold", y=1.02)
+    # fig.text(
+    #     0.5,
+    #     0.02,
+    #     "Cell number = remaining domain size; letters mark fixed cells",
+    #     ha="center",
+    #     fontsize=9,
+    #     color="#333333",
+    # )
     fig.subplots_adjust(bottom=0.12, wspace=0.2)
     save_figure(fig, output_dir, "02_domain_propagation")
 
@@ -426,7 +444,7 @@ def draw_solution(
         frameon=False,
         fontsize=8.5,
     )
-    ax.set_title("Generated map satisfying local and global constraints", fontsize=12, weight="bold", pad=10)
+    # ax.set_title("Generated map satisfying local and global constraints", fontsize=12, weight="bold", pad=10)
     save_figure(fig, output_dir, "03_generated_solution")
 
 

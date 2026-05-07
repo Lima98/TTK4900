@@ -225,17 +225,15 @@ def draw_partition_tree(root: Node, output_dir: Path) -> None:
     ax.invert_yaxis()
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("Binary space partitioning recursively divides the map", fontsize=13, weight="bold", pad=12)
+    # ax.set_title("Binary space partitioning recursively divides the map", fontsize=13, weight="bold", pad=12)
 
-    palette = ["#e9c46a", "#90be6d", "#43aa8b", "#577590", "#f4a261", "#b56576"]
     for leaf in leaves(root):
-        color = palette[leaf.depth % len(palette)]
         ax.add_patch(
             Rectangle(
                 (leaf.rect.x, leaf.rect.y),
                 leaf.rect.w,
                 leaf.rect.h,
-                facecolor=color,
+                facecolor="#f4c69f",
                 edgecolor="#202020",
                 linewidth=1.2,
                 alpha=0.58,
@@ -258,13 +256,13 @@ def draw_partition_tree(root: Node, output_dir: Path) -> None:
 
     ax.set_xlim(0, root.rect.w)
     ax.set_ylim(root.rect.h, 0)
-    ax.text(
-        0,
-        root.rect.h + 2,
-        "Each leaf partition becomes a local design space for a room.",
-        fontsize=9.5,
-        color="#333333",
-    )
+    # ax.text(
+    #     0,
+    #     root.rect.h + 2,
+    #     "Each leaf partition becomes a local design space for a room.",
+    #     fontsize=9.5,
+    #     color="#333333",
+    # )
     save_figure(fig, output_dir, "01_bsp_partitions")
 
 
@@ -279,7 +277,7 @@ def draw_rooms_and_corridors(
     ax.invert_yaxis()
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("Rooms are placed in leaves and sibling regions are connected", fontsize=13, weight="bold", pad=12)
+    # ax.set_title("Rooms are placed in leaves and sibling regions are connected", fontsize=13, weight="bold", pad=12)
 
     for leaf in leaves(root):
         ax.add_patch(
@@ -313,13 +311,13 @@ def draw_rooms_and_corridors(
 
     ax.set_xlim(0, root.rect.w)
     ax.set_ylim(root.rect.h, 0)
-    ax.text(
-        0,
-        root.rect.h + 2,
-        "The hierarchy gives a simple recipe for connectivity: connect rooms across each split.",
-        fontsize=9.5,
-        color="#333333",
-    )
+    # ax.text(
+    #     0,
+    #     root.rect.h + 2,
+    #     "The hierarchy gives a simple recipe for connectivity: connect rooms across each split.",
+    #     fontsize=9.5,
+    #     color="#333333",
+    # )
     save_figure(fig, output_dir, "02_rooms_and_corridors")
 
 
@@ -331,7 +329,7 @@ def draw_final_dungeon(grid: List[List[int]], output_dir: Path) -> None:
     ax.imshow(grid, cmap=cmap, vmin=0, vmax=3, interpolation="nearest")
     ax.set_xticks([])
     ax.set_yticks([])
-    ax.set_title("Rasterized BSP dungeon layout", fontsize=13, weight="bold", pad=12)
+    # ax.set_title("Rasterized BSP dungeon layout", fontsize=13, weight="bold", pad=12)
 
     legend = [
         Rectangle((0, 0), 1, 1, facecolor=colors[0], edgecolor="#111111", label="solid wall"),
