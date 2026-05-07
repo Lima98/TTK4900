@@ -9,7 +9,7 @@
 
     If we observe Figure~\ref{fig:l_systems} we can see how two different L-systems can create both very rigid results in the form of the sierpinsky triangle and more organic structures like the fractal plant on the second line.
 
-    \begin{figure} % Sierpinksy and plant
+    \begin{figure}[h] % Sierpinksy and plant
       \begin{tabular}{ccc}
 
         \includegraphics[width=0.3\textwidth]{figures/04theory/sierpinski1.png} &
@@ -32,7 +32,7 @@
       \caption{Demonstration of the sierpinski triangle, a fractal plant and bush after one, three and five iterations repsectively.}\label{fig:l_systems}
     \end{figure}
 
-    \begin{figure} % Arrowhead sierpinski
+    \begin{figure}[h] % Arrowhead sierpinski
       \begin{tabular}{ccc}
 
         \includegraphics[width=0.3\textwidth]{figures/04theory/arrowhead1.png} &
@@ -84,18 +84,23 @@
     The rules for how the tiling should propagate are derived from an example input. In Figure~\ref{fig:exemplar_and_rules} we see how from the simple input image the algorithm determines some local tiling rules for the different states and uses this as a basis for generating the new content. These generated rules are what make the output consistently similar and ensures we are outputting something that resembles the original input.
 
     \begin{figure}[h]
-      \begin{center}
+      \centering
         \includegraphics[width=0.95\textwidth]{figures/04theory/01_exemplar_and_rules.pdf}
-      \end{center}
       \caption{Given the exemplar on the left the \ac{WFC} algorithm learns the local tile rules shown on the right.}\label{fig:exemplar_and_rules}
     \end{figure}
 
     In Figure~\ref{fig:observe_propagate_steps} we can see how the number of possible states reduces as soon as a state is collapsed. This propagets outward and the process of assigning states continues until the entire domain has collapsed.
 
     \begin{figure}[h]
-      \begin{center}
-        \includegraphics[width=0.95\textwidth]{figures/04theory/02_observe_propagate_steps.pdf}
-      \end{center}
+      \centering
+        \begin{tabular}{cc}
+          \includegraphics[width=0.4\textwidth]{figures/04theory/02_initial_wave.pdf} &
+          \includegraphics[width=0.4\textwidth]{figures/04theory/02_after_first_collapse.pdf} \\
+          (a) initial wave & (b) after first collapse \\
+          \includegraphics[width=0.4\textwidth]{figures/04theory/02_after_propagation.pdf} &
+          \includegraphics[width=0.4\textwidth]{figures/04theory/02_complete_collapse.pdf} \\
+          (c) after propagation & (d) compete collapse
+        \end{tabular}
       \caption{Shows how collapsing/observing a state propagates. An observation reduces the local uncertainty.}\label{fig:observe_propagate_steps}
     \end{figure}
 
@@ -118,28 +123,27 @@
       \caption{Illustration that the learned rules stay consistend while the seed changes the output.}\label{fig:wfc_seed_variations}
     \end{figure}
   
-    
   \subsection{Binary space partitioning}
   \textbf{\color{red}WIP section}\\
     \ac{BSP} can be used to generate map layouts like indoor environments, in the following figures you can see an example of how we can divide the entire domain into sections and used that to generate rooms.
   
-    \begin{figure} % Initial partitioning
+    \begin{figure}[h] % Initial partitioning
       \begin{center}
-        \includegraphics[width=0.95\textwidth]{figures/04theory/01_bsp_partitions.pdf}
+        \includegraphics[width=0.5\textwidth]{figures/04theory/01_bsp_partitions.pdf}
       \end{center}
       \caption{Initial domain partitioning, made by recursively divinging the domain in two.}\label{fig:bsp_partitions}
     \end{figure}
     
-    \begin{figure} % Rooms and corridors
+    \begin{figure}[h] % Rooms and corridors
       \begin{center}
-        \includegraphics[width=0.95\textwidth]{figures/04theory/02_rooms_and_corridors.pdf}
+        \includegraphics[width=0.5\textwidth]{figures/04theory/02_rooms_and_corridors.pdf}
       \end{center}
       \caption{Generated rooms inside the partitions and connected them with corridors between rooms.}\label{fig:rooms_and_corridors}
     \end{figure}
 
-    \begin{figure}
+    \begin{figure}[h]
       \begin{center}
-        \includegraphics[width=0.95\textwidth]{figures/04theory/03_final_bsp_dungeon.pdf}
+        \includegraphics[width=0.5\textwidth]{figures/04theory/03_final_bsp_dungeon.pdf}
       \end{center}
       \caption{Rasterization of the generated dungeoun to show "final product".}\label{fig:final_bsp_dungeoun}
     \end{figure}
@@ -149,25 +153,25 @@
     Perlin noise is a very common way to generate structures like worlds etc... It is very good at creating smooth transitions from one state to another, like height maps.
     This is demonstrated in the following figures below with some different techniques.
     
-    \begin{figure}
+    \begin{figure}[h]
       \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/04theory/01_seed_variation.pdf}
       \end{center}
       \caption{}\label{fig:seed_variations}
     \end{figure}
-    \begin{figure}
+    \begin{figure}[h]
       \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/04theory/02_noise_octaves.pdf}
       \end{center}
       \caption{}\label{fig:noise_octaves}
     \end{figure}
-    \begin{figure}
+    \begin{figure}[h]
       \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/04theory/03_noise_to_terrain.pdf}
       \end{center}
       \caption{}\label{fig:noise_to_terrain}
     \end{figure}
-    \begin{figure}
+    \begin{figure}[h]
       \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/04theory/04_parameter_control.pdf}
       \end{center}
@@ -181,7 +185,7 @@
 
     The same technique can be used to create textures as well, in Figure~\ref{fig:random_walks} we can see how changing the colours and directional bias we can generate textures that imitate real life. In the tree and sand example the directional bias is vertical for the tree texture and diagonal for the sand texture. For the map texture it is uniform directional bias, but colouring to indicate water, land and mountains. The least traveled to square get more blue, and the more frequent it goes to green and brown/white to indicate mountains.
 
-    \begin{figure}
+    \begin{figure}[h]
       \centering
         \includegraphics[width=0.32\textwidth]{figures/04theory/ex_wood.png}
         \includegraphics[width=0.32\textwidth]{figures/04theory/ex_sand.png}

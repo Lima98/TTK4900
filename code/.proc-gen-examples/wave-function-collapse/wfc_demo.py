@@ -334,36 +334,63 @@ def readable_text_color(value: float, cmap_name: str = "viridis_r", vmin: float 
     return "#111111"
 
 
-def draw_wfc_steps(state: WFCState, output_dir: Path) -> None:
+def selected_wfc_snapshots(state: WFCState) -> List[Tuple[str, Dict[Tuple[int, int], Set[str]]]]:
     if len(state.history) < 4:
-        snapshots = state.history
-    else:
-        snapshots = [state.history[0], state.history[1], state.history[min(4, len(state.history) - 2)], state.history[-1]]
+        labels = ["initial_wave", "after_first_collapse", "after_propagation", "complete_collapse"]
+        return list(zip(labels[: len(state.history)], state.history))
 
-    titles = ["initial wave", "after first collapse", "after propagation", "complete collapse"]
-    fig, axes = plt.subplots(1, len(snapshots), figsize=(11.0, 3.5))
-    # fig.suptitle("Observation and propagation reduce local uncertainty", fontsize=13, weight="bold", y=0.98)
+    return [
+        ("initial_wave", state.history[0]),
+        ("after_first_collapse", state.history[1]),
+        ("after_propagation", state.history[min(4, len(state.history) - 2)]),
+        ("complete_collapse", state.history[-1]),
+    ]
 
-    for ax, domains, title in zip(axes, snapshots, titles):
-        sizes = domain_snapshot_array(state, domains)
-        ax.imshow(sizes, cmap="viridis_r", vmin=1, vmax=len(TILES), interpolation="nearest")
-        ax.set_title(title, fontsize=10.5, pad=6)
-        ax.set_xticks([])
-        ax.set_yticks([])
 
-        for y in range(state.height):
-            for x in range(state.width):
-                domain = domains[(x, y)]
-                text_color = readable_text_color(len(domain))
-                if len(domain) == 1:
-                    tile = next(iter(domain))
-                    ax.text(x, y, tile, ha="center", va="center", fontsize=7.5, color=text_color, weight="bold")
-                else:
-                    ax.text(x, y, str(len(domain)), ha="center", va="center", fontsize=6.8, color=text_color)
+def draw_wfc_snapshot(
+    ax: plt.Axes,
+    state: WFCState,
+    domains: Dict[Tuple[int, int], Set[str]],
+    text_scale: float = 1.0,
+) -> None:
+    sizes = domain_snapshot_array(state, domains)
+    ax.imshow(sizes, cmap="viridis_r", vmin=1, vmax=len(TILES), interpolation="nearest")
+    ax.set_xticks([])
+    ax.set_yticks([])
 
-    fig.text(0.5, 0.02, "Numbers show remaining possible tiles; letters show cells that have collapsed to one tile.", ha="center", fontsize=9.2, color="#333333")
-    fig.subplots_adjust(top=0.78, bottom=0.16, wspace=0.18)
-    save_figure(fig, output_dir, "02_observe_propagate_steps")
+    for y in range(state.height):
+        for x in range(state.width):
+            domain = domains[(x, y)]
+            text_color = readable_text_color(len(domain))
+            if len(domain) == 1:
+                tile = next(iter(domain))
+                ax.text(
+                    x,
+                    y,
+                    tile,
+                    ha="center",
+                    va="center",
+                    fontsize=8.7 * text_scale,
+                    color=text_color,
+                    weight="bold",
+                )
+            else:
+                ax.text(
+                    x,
+                    y,
+                    str(len(domain)),
+                    ha="center",
+                    va="center",
+                    fontsize=7.8 * text_scale,
+                    color=text_color,
+                )
+
+
+def draw_wfc_steps(state: WFCState, output_dir: Path) -> None:
+    for label, domains in selected_wfc_snapshots(state):
+        fig, ax = plt.subplots(figsize=(4.8, 3.5))
+        draw_wfc_snapshot(ax, state, domains, text_scale=1.08)
+        save_figure(fig, output_dir, f"02_{label}")
 
 
 def draw_final_output(state: WFCState, output_dir: Path, stem: str = "03_generated_wfc_map") -> None:
