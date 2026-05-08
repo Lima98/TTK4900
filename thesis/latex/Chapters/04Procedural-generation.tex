@@ -48,12 +48,14 @@
       \caption{Approximation of the sierpinski triangle using the sierpinski arrowhead curve.}\label{fig:arrowhead_sierpinski}
     \end{figure}
 
-  \subsection{PG using constraint satisfaction}
+    \subsection{\ac{CS}}
   \textbf{\color{red}WIP section}\\
-    Similar to \ac{WFC} we have \ac{PG} using constraint satisfaction. This method uses given constraints for influencing the generation. It usually works by randomly generating something in the given domain, then iterates over the generated data and enforces constraints in order to make it adhere to a model designed by the programmer or end user. After several iteration over the domain we end up with a domain where the constraints are satisfied for all the objects in the domain.
+  Similar to \ac{WFC} we have \ac{PG} using \ac{CS}. This method uses given constraints for influencing the generation. It usually works by randomly generating something in the given domain, then iterates over the generated data and enforces constraints in order to make it adhere to a model designed by the programmer or end user. After several iteration over the domain we end up with a domain where the constraints are satisfied for all the objects in the domain.
 
 
     In Figure~\ref{fig:cons_adjacent} you can see how the constraints are set up for this example, and Figure~\ref{fig:domain_prop} shows the initial domain with how many different states are left for each cell in the domain as well as the domain after AC-3 propagation. Finally Figure~\ref{fig:cs_solution} shows the final domain that satisfies both the local and the global constraints. 
+
+    The \ac{AC}-3 algorithm reduces the search space by removing the states that are not possible \cite{ArcConsistencyAlgorithmOverview}. If we look at the nodes in Figure~\ref{fig:domain_prop} and imagine that for a cell it can be either \textit{water} or \textit{sand}. Then the neigbours can be either \textit{water}, \textit{sand}, \textit{grass} or \textit{path}. It can never be \textit{forest}, \textit{settlement} or \textit{mountains}. This is what you can see has changed between the two domains in the figure.
 
     \begin{figure}[h] % Nodes
       \begin{center}
@@ -76,12 +78,13 @@
       \caption{Final generated map satisfying all constraints.}\label{fig:cs_solution}
     \end{figure}
 
-  \subsection{Wave function collapse}
+  \subsection{\ac{WFC}}
     \ac{WFC} is a method used to procedurally generate using either given constraints, or it can also use some input that it analyses and generates the constraints procedurally which are then used to generate something in the same style as the input. 
 
     It works by initializing the entire space in a superposition which means that the state is yet to be determined. We call this an \textit{unobserved} state, meaning we don't know what state it is in yet. These unobserved states are not complex numbers like they are in \ac{QM}, but the process is similar which is why it gets its name inspired by the field of \ac{QM}. Randomly assigning parts of the space we are able to collapse\footnote{collapsing a superposition means that we decide the actual state of the given position in the space} some of the \textit{wave function}\footnote{the wave function is simply the constraints what decide what the state of the object should be dependent on external factors}.
     
     The rules for how the tiling should propagate are derived from an example input. In Figure~\ref{fig:exemplar_and_rules} we see how from the simple input image the algorithm determines some local tiling rules for the different states and uses this as a basis for generating the new content. These generated rules are what make the output consistently similar and ensures we are outputting something that resembles the original input.
+    This is the main difference between \ac{WFC} and \ac{CS}, for \ac{CS} problems we need to design the constraints ourselves, but for \ac{WFC} we only give an input and the algorithm derives the rules from the input.
 
     \begin{figure}[h]
       \centering
@@ -123,7 +126,7 @@
       \caption{Illustration that the learned rules stay consistend while the seed changes the output.}\label{fig:wfc_seed_variations}
     \end{figure}
   
-  \subsection{Binary space partitioning}
+  \subsection{\ac{BSP}}
   \textbf{\color{red}WIP section}\\
     \ac{BSP} can be used to generate map layouts like indoor environments, in the following figures you can see an example of how we can divide the entire domain into sections and used that to generate rooms.
   
@@ -157,25 +160,24 @@
       \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/04theory/01_seed_variation.pdf}
       \end{center}
-      \caption{}\label{fig:seed_variations}
+      \caption{A seed makes random generation reproducible.}\label{fig:seed_variations}
     \end{figure}
+
     \begin{figure}[h]
-      \begin{center}
-        \includegraphics[width=0.95\textwidth]{figures/04theory/02_noise_octaves.pdf}
-      \end{center}
-      \caption{}\label{fig:noise_octaves}
-    \end{figure}
-    \begin{figure}[h]
-      \begin{center}
+      \begin{tabular}{c}
+        \textit{layering different octaves} \\
+        \includegraphics[width=0.95\textwidth]{figures/04theory/02_noise_octaves.pdf} \\
+        \textit{classifying the noise} \\
         \includegraphics[width=0.95\textwidth]{figures/04theory/03_noise_to_terrain.pdf}
-      \end{center}
-      \caption{}\label{fig:noise_to_terrain}
+      \end{tabular}
+      \caption{Using different octaves we can combine lower and higher frequency textures to create something more complex. Using this layered noise we can classify the noise and make it into terrain.}\label{fig:noise_to_terrain}
     \end{figure}
+
     \begin{figure}[h]
       \begin{center}
         \includegraphics[width=0.95\textwidth]{figures/04theory/04_parameter_control.pdf}
       \end{center}
-      \caption{}\label{fig:parameter_control}
+      \caption{Using the same seed with different parameters we can control the identity of the output like style and scale.}\label{fig:parameter_control}
     \end{figure}
 
   \subsection{Random walks}

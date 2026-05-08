@@ -1,12 +1,14 @@
+% ////// INTRODUCTION
 For hundreds of years composers have been creating music using external tools like dice to help them generate something new.
 As early as the 18th century the idea of using randomness to help the composing process has been used.
-The musical dice game, "Musikalisches Würfelspiel", was used to randomly generate music based on precomposed parts. \cite{MusikalischesWurfelspiel2025}
+The musical dice game, "Musikalisches Würfelspiel", was used to randomly generate music based on pre composed parts. \cite{MusikalischesWurfelspiel2025}
 This is a very basic way of generating music, however by the random nature of the dice it will not be able to create anything coherent and meaningful like a human composer can.
-Additionally this process only used precomposed parts which were designed to work together.
+Additionally this process only used pre composed parts which were designed to work together.
 If we want to generate everything from scratch we need a way more sophisticated system. 
-This is where procedural generation comes into the picute.
-If we base the meldoy on something random and then use the conventions and "rules" for melodic composition we might be able to generate music that sounds somewhat coherent.
+This is where procedural generation comes into the picture.
+If we base the melody on something random and then use the conventions and "rules" for melodic composition we might be able to generate music that sounds somewhat coherent.
 \\
+
 Getting external help has not only been used by composers, but also by programmers. In recent years the use of \ac{AI} in software development has become more and more widespread. As an experiment in this thesis I will compare "old-school" development and \ac{AI}. I will start with normal development without using \ac{AI}. Then after I have build up some knowledge with the system I will try to improve upon it using \ac{AI} tools and evaluate both the output of the code and code itself. 
 \\
 
@@ -16,7 +18,7 @@ Today the most common way to go about generating music is using \ac{AI} and \ac{
 This enables anyone to create music, however these models are trained on large data sets and imitates what has come before. 
 For this thesis the focus is on the craft of creating music, breaking it down to its very primitive form, only pitches and durations.
 This will enable the user to have more control over exactly what is being generated.
-However this requires us to create a system and models that capture the essence of how exactly we are to go about contructing the very basic musical ideas. 
+However this requires us to create a system and models that capture the essence of how exactly we are to go about constructing the very basic musical ideas. 
 It will not depend on large data sets and will create a musical ideas that can be processed into a fully fledged musical idea.
 
 If we are able to solve this problem of creating a good structure and model for this kind of generation we will not only have a solution for musical ideas, but this kind of system can solve many kinds of problems.
@@ -24,13 +26,17 @@ If we are able to solve this problem of creating a good structure and model for 
 
 % ////////// PROBLEM DESCRIPTION
 
-The problem we want to solve is the problem of creating a coherent system that will be able to generate music that adheres to certain musical principles. In order to do this we need to consider many things, and system design is a big part of this.
-When buidling such a program we need to consider what parts it should consist of as well as how they are supposed to interact. \ac{OOP} is a solid way to approach this system design.
+The problem we want to solve is the problem of creating a coherent system that will be able to generate music that adheres to certain musical principles.
+In order to do this we need to consider many things, and system design is a big part of this.
+When building such a program we need to consider what parts it should consist of as well as how they are supposed to interact. \ac{OOP} is a solid way to approach this system design.
+Additionally I will explore how the use of \ac{AI} in software development can aid in solving problems and speeding up the process.
 \\
+
 % ////////// PROBLEM SOLUTION
+The ideal solution to this problem would be a system that not only is able to solve this problem of creating music that is self similar and coherent, but is constructed in such a way that the solution can easily be generalized in order to solve other problems. The problem of generating something coherent is not special to only music, but has applications for many other domains.
 
-The solution will be a system that is modular, easy to modify and generate new music using newly defined constraints or inputs on structure, motifs etc... 
-
+% /////// Thesis structure
+The thesis is structured as follows. Firstly there is some background to give some context. This background includes music theory, this section is just to give the reader a basic insight in how music is constructed and how notation works in order to understand figures and examples that show up throughout the thesis. Following is a section about procedural generation, this section explains a few methods of procedural generation briefly to give context about how a few methods work as well as some illustrative examples on how they can be utilized. After this there are a few brief sections about object oriented programming and the use of \ac{AI} in software development. Then comes the bulk of the thesis with the iterations of the software. The three iterations are presented as their own complete system. 
 
 
 

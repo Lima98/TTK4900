@@ -159,8 +159,7 @@ def draw_octave_layers(width: int, height: int, seed: int, output_dir: Path) -> 
         ("6 octaves", fbm_noise(width, height, seed=seed, octaves=6, base_frequency=3)),
     ]
 
-    fig, axes = plt.subplots(1, 3, figsize=(9.6, 3.0))
-    fig.suptitle("Layering noise adds detail at multiple scales", fontsize=13, weight="bold", y=0.96)
+    fig, axes = plt.subplots(1, 3, figsize=(9.6, 2.5))
 
     for ax, (title, layer) in zip(axes, layers):
         ax.imshow(layer, cmap="viridis", interpolation="nearest")
@@ -168,15 +167,7 @@ def draw_octave_layers(width: int, height: int, seed: int, output_dir: Path) -> 
         ax.set_xticks([])
         ax.set_yticks([])
 
-    fig.text(
-        0.5,
-        0.02,
-        "fBm combines low-frequency shape with higher-frequency texture.",
-        ha="center",
-        fontsize=9.5,
-        color="#333333",
-    )
-    fig.subplots_adjust(top=0.78, bottom=0.16, wspace=0.2)
+    fig.subplots_adjust(top=0.95, bottom=0.06, left=0.03, right=0.97, wspace=0.12)
     save_figure(fig, output_dir, "02_noise_octaves")
 
 
@@ -186,8 +177,7 @@ def draw_terrain_pipeline(width: int, height: int, seed: int, output_dir: Path) 
     heightmap = normalize(noise * 0.74 + falloff * 0.42)
     terrain = classify_terrain(heightmap)
 
-    fig, axes = plt.subplots(1, 3, figsize=(10.4, 3.5))
-    fig.suptitle("Noise can be transformed into structured terrain", fontsize=13, weight="bold", y=0.98)
+    fig, axes = plt.subplots(1, 3, figsize=(10.4, 3.2))
 
     axes[0].imshow(noise, cmap="viridis", interpolation="nearest")
     axes[0].set_title("layered noise", fontsize=11)
@@ -216,7 +206,7 @@ def draw_terrain_pipeline(width: int, height: int, seed: int, output_dir: Path) 
         fontsize=7.8,
     )
 
-    fig.subplots_adjust(top=0.82, bottom=0.12, wspace=0.2)
+    fig.subplots_adjust(top=0.95, bottom=0.12, left=0.03, right=0.97, wspace=0.16)
     save_figure(fig, output_dir, "03_noise_to_terrain")
 
 
@@ -227,8 +217,7 @@ def draw_parameter_control(width: int, height: int, seed: int, output_dir: Path)
         ("rugged", {"octaves": 7, "base_frequency": 5, "persistence": 0.68}),
     ]
 
-    fig, axes = plt.subplots(1, 3, figsize=(9.6, 3.0))
-    fig.suptitle("Parameters control the character of generated terrain", fontsize=13, weight="bold", y=0.96)
+    fig, axes = plt.subplots(1, 3, figsize=(9.6, 2.5))
 
     for ax, (title, kwargs) in zip(axes, configs):
         noise = fbm_noise(width, height, seed=seed, **kwargs)
@@ -238,15 +227,7 @@ def draw_parameter_control(width: int, height: int, seed: int, output_dir: Path)
         ax.set_xticks([])
         ax.set_yticks([])
 
-    fig.text(
-        0.5,
-        0.02,
-        "Seed controls identity; parameters control style and scale.",
-        ha="center",
-        fontsize=9.5,
-        color="#333333",
-    )
-    fig.subplots_adjust(top=0.78, bottom=0.16, wspace=0.2)
+    fig.subplots_adjust(top=0.95, bottom=0.06, left=0.03, right=0.97, wspace=0.12)
     save_figure(fig, output_dir, "04_parameter_control")
 
 
