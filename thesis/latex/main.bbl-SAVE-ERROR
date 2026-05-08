@@ -50,9 +50,28 @@
       \verb https://en.wikipedia.org/w/index.php?title=Musikalisches_W%C3%BCrfelspiel&oldid=1313693497
       \endverb
     \endentry
-    \entry{SentenceMusic2023}{inreference}{}{}
+    \entry{ArcConsistencyAlgorithmOverview}{online}{}{}
       \field{sortinit}{3}
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{title}{Arc-{{Consistency Algorithm}} - an Overview | {{ScienceDirect Topics}}}
+      \field{urlday}{8}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/ZR6T9FLB/arc-consistency-algorithm.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/topics/computer-science/arc-consistency-algorithm
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/topics/computer-science/arc-consistency-algorithm
+      \endverb
+    \endentry
+    \entry{SentenceMusic2023}{inreference}{}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{abstract}{In Western music theory, the term sentence is analogous to the way the term is used in linguistics, in that it usually refers to a complete, somewhat self-contained statement. Usually a sentence refers to musical spans towards the lower end of the durational scale; i.e. melodic or thematic entities well below the level of movement or section, but above the level of motif or measure. The term is usually encountered in discussions of thematic construction. In the last fifty years, an increasing number of theorists such as William Caplin have used the term to refer to a specific theme-type involving repetition and development.}
       \field{annotation}{Page Version ID: 1161220566}
@@ -82,8 +101,8 @@
       \endverb
     \endentry
     \entry{ObjectorientedProgramming2026}{inreference}{}{}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labeltitlesource}{title}
       \field{abstract}{Object-oriented programming (OOP) is a programming paradigm based on objects – software entities that encapsulate data and function(s). An OOP computer program consists of objects that interact with one another. An OOP language is one that provides object-oriented programming features, but as the set of features that contribute to OOP is contested, classifying a language as OOP – and the degree to which it supports OOP – is debatable. As paradigms are not mutually exclusive, a language can be multi-paradigm (i.e. categorized as more than only OOP). Notable languages with OOP support include Ada, ActionScript, C++, Common Lisp, C\#, Dart, Eiffel, Fortran 2003, Haxe, Java, JavaScript, Kotlin, Logo, MATLAB, Objective-C, Object Pascal, Perl, PHP, Python, R, Raku, Ruby, Scala, SIMSCRIPT, Simula, Smalltalk, Swift, Vala and Visual Basic (.NET).}
       \field{annotation}{Page Version ID: 1344935717}
@@ -133,8 +152,8 @@
       \strng{authornamehash}{7bb4e12a3345de1659b9fde55b86658d}
       \strng{authorfullhash}{7bb4e12a3345de1659b9fde55b86658d}
       \strng{authorfullhashraw}{7bb4e12a3345de1659b9fde55b86658d}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The paper presents a method of modelling a computer system design as it evolves, so that evaluation can be made an integral part of the design process. The paper introduces the concept of concurrent existence, within a single model, of several representations of the system being modelled, at differing levels of abstraction. Thus important design decisions are expressed directly in terms of appropriately abstract quantities, facilitating understanding, validation, and modification of the system design. The paper includes brief details of an experimental implementation of the modelling technique and of the use of the technique to model both hardware and software components of a multi-processing system.}
@@ -147,6 +166,1282 @@
       \range{pages}{5}
       \verb{file}
       \verb /Users/jan-oivindlima/Zotero/storage/Q9NQNK5E/Zurcher and Randell - 1968 - Iterative Multi-Level Modeling - A Methodology for Computer System Design.pdf
+      \endverb
+    \endentry
+    \entry{180904281MusicTransformer}{online}{}{}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labeltitlesource}{title}
+      \field{title}{[1809.04281] {{Music Transformer}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/6M7Y8FEZ/1809.html
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1809.04281
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1809.04281
+      \endverb
+    \endentry
+    \entry{aguileraAutomatedGenerationContrapuntal2010}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=d462c43357e1bb239ea52091ea0033dc}{%
+           family={Aguilera},
+           familyi={A\bibinitperiod},
+           given={Gabriel},
+           giveni={G\bibinitperiod}}}%
+        {{hash=60f610c6bbaa05e933f426285cffacfb}{%
+           family={Luis\bibnamedelima Galán},
+           familyi={L\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={José},
+           giveni={J\bibinitperiod}}}%
+        {{hash=66431aa1084a054ad5b282bf96cc1e3c}{%
+           family={Madrid},
+           familyi={M\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod}}}%
+        {{hash=bc56556249e2fd6320213ac16837cdba}{%
+           family={Martínez},
+           familyi={M\bibinitperiod},
+           given={Antonio\bibnamedelima Manuel},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=e0a7e5d444059cd17241fa654978164c}{%
+           family={Padilla},
+           familyi={P\bibinitperiod},
+           given={Yolanda},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=9a9d04b3325e286d8c25dd5362b72fd5}{%
+           family={Rodríguez},
+           familyi={R\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{437ff79630525199b7e77fd9d7ff4f46}
+      \strng{fullhash}{44320aad96c27c6fbd2334d6ec499d91}
+      \strng{fullhashraw}{44320aad96c27c6fbd2334d6ec499d91}
+      \strng{bibnamehash}{437ff79630525199b7e77fd9d7ff4f46}
+      \strng{authorbibnamehash}{437ff79630525199b7e77fd9d7ff4f46}
+      \strng{authornamehash}{437ff79630525199b7e77fd9d7ff4f46}
+      \strng{authorfullhash}{44320aad96c27c6fbd2334d6ec499d91}
+      \strng{authorfullhashraw}{44320aad96c27c6fbd2334d6ec499d91}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this work, we present a new application developed in Derive 6 to compose counterpoint for a given melody (“cantus firmus”). The result is non-deterministic, so different counterpoints can be generated for a fixed melody, all of them obeying classical rules of counterpoint. In the case where the counterpoint cannot be generated in a first step, backtracking techniques have been implemented in order to improve the likelihood of obtaining a result. The contrapuntal rules are specified in Derive using probabilistic rules of a probabilistic logic, and the result can be generated for both voices (above and below) of first species counterpoint. The main goal of this work is not to obtain a “professional” counterpoint generator but to show an application of a probabilistic logic using a CAS tool. Thus, the algorithm developed does not take into account stylistic melodic characteristics of species counterpoint, but rather focuses on the harmonic aspect. The work developed can be summarized in the following steps: (1)Development of a probabilistic algorithm in order to obtain a non-deterministic counterpoint for a given melody.(2)Implementation of the algorithm in Derive 6 using probabilistic Logic.(3)Implementation in Java of a program to deal with the input (“cantus firmus”) and with the output (counterpoint) through inter-communication with the module developed in Derive. This program also allows users to listen to the result obtained.}
+      \field{day}{1}
+      \field{issn}{0378-4754}
+      \field{journaltitle}{Mathematics and Computers in Simulation}
+      \field{month}{2}
+      \field{number}{6}
+      \field{series}{Fifth {{IMACS Seminar}} on {{Monte Carlo Methods}}}
+      \field{shortjournal}{Mathematics and Computers in Simulation}
+      \field{title}{Automated Generation of Contrapuntal Musical Compositions Using Probabilistic Logic in {{Derive}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{80}
+      \field{year}{2010}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{1200\bibrangedash 1211}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1016/j.matcom.2009.04.012
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/IBJPPFWK/S0378475409001165.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0378475409001165
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0378475409001165
+      \endverb
+      \keyw{Automated compositions,CAS,Contrapuntal musical compositions,Probabilistic logic}
+    \endentry
+    \entry{andersConstraintProgrammingSystems2011}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=7a0da404873533df2414e197b756c82a}{%
+           family={Anders},
+           familyi={A\bibinitperiod},
+           given={Torsten},
+           giveni={T\bibinitperiod}}}%
+        {{hash=2ff1aadff07b018b25feb9cac8ad9c7a}{%
+           family={Miranda},
+           familyi={M\bibinitperiod},
+           given={Eduardo\bibnamedelima R.},
+           giveni={E\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{fullhash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{fullhashraw}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{bibnamehash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{authorbibnamehash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{authornamehash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{authorfullhash}{cc43f47b9f0499ca1babddf37012fd11}
+      \strng{authorfullhashraw}{cc43f47b9f0499ca1babddf37012fd11}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Constraint programming is well suited for the computational modeling of music theories and composition: its declarative and modular approach shares similarities with the way music theory is traditionally expressed, namely by a set of rules which describe the intended result. Various music theory disciplines have been modeled, including counterpoint, harmony, rhythm, form, and instrumentation. Because modeling music theories “from scratch” is a complex task, generic music constraint programming systems have been proposed that predefine the required building blocks for modeling a range of music theories. After introducing the field and its problems in general, this survey compares these generic systems according to a number of criteria such as the range of music theories these systems support.}
+      \field{day}{18}
+      \field{issn}{0360-0300}
+      \field{journaltitle}{ACM Comput. Surv.}
+      \field{month}{10}
+      \field{number}{4}
+      \field{title}{Constraint Programming Systems for Modeling Music Theories and Composition}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{43}
+      \field{year}{2011}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{30:1\bibrangedash 30:38}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1145/1978802.1978809
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/NC6MYALT/Anders and Miranda - 2011 - Constraint programming systems for modeling music theories and composition.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://dl.acm.org/doi/10.1145/1978802.1978809
+      \endverb
+      \verb{url}
+      \verb https://dl.acm.org/doi/10.1145/1978802.1978809
+      \endverb
+    \endentry
+    \entry{baiSeedMusicUnifiedFramework2024}{online}{}{}
+      \name{author}{38}{}{%
+        {{hash=c48c0fadc73abe7dbb186ce085b6de50}{%
+           family={Bai},
+           familyi={B\bibinitperiod},
+           given={Ye},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=5aaf76b42312672cce68f13a4b42e59d}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Haonan},
+           giveni={H\bibinitperiod}}}%
+        {{hash=802e815ed5fcef558fc2d859ea49149b}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Jitong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=48c731464964d6c671b8384c3e00652c}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Zhuo},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=7052b04ddae22859687202cf642e8ffa}{%
+           family={Deng},
+           familyi={D\bibinitperiod},
+           given={Yi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=531097d0ef992b0f7f76d8bef41596a6}{%
+           family={Dong},
+           familyi={D\bibinitperiod},
+           given={Xiaohong},
+           giveni={X\bibinitperiod}}}%
+        {{hash=8dc16b9d586b232d182c7c96f5c20eb1}{%
+           family={Hantrakul},
+           familyi={H\bibinitperiod},
+           given={Lamtharn},
+           giveni={L\bibinitperiod}}}%
+        {{hash=84fb5f9dec80adfc24f68d50c14d5fee}{%
+           family={Hao},
+           familyi={H\bibinitperiod},
+           given={Weituo},
+           giveni={W\bibinitperiod}}}%
+        {{hash=f4f4dbe5f2d34eedea917a20e241a373}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Qingqing},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=bc6b6bff176e16fc29e4f18f0f181f13}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Zhongyi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=4af02043ec921d1c86506a41b20098ef}{%
+           family={Jia},
+           familyi={J\bibinitperiod},
+           given={Dongya},
+           giveni={D\bibinitperiod}}}%
+        {{hash=12e877f211bf040c0a6cb9921188ea7a}{%
+           family={La},
+           familyi={L\bibinitperiod},
+           given={Feihu},
+           giveni={F\bibinitperiod}}}%
+        {{hash=8c94a3f45f138176d92596819219883c}{%
+           family={Le},
+           familyi={L\bibinitperiod},
+           given={Duc},
+           giveni={D\bibinitperiod}}}%
+        {{hash=18935e8a60e488e0bd6e232a7b3dce64}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Bochen},
+           giveni={B\bibinitperiod}}}%
+        {{hash=c2850423733c80fbab8a7e138875cb35}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Chumin},
+           giveni={C\bibinitperiod}}}%
+        {{hash=9b1528d0b6c9bc88bfd8c569f290bcec}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Hui},
+           giveni={H\bibinitperiod}}}%
+        {{hash=2e95a6190f3bf4945f017349523ce16c}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Xingxing},
+           giveni={X\bibinitperiod}}}%
+        {{hash=12ec8f0f7deae919895ffcabb39b7178}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Shouda},
+           giveni={S\bibinitperiod}}}%
+        {{hash=c6d6c57f80093a985b646109a5bd6c7c}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Wei-Tsung},
+           giveni={W\bibinithyphendelim T\bibinitperiod}}}%
+        {{hash=9047ccdb3067fdf4b16cc5bd66f314de}{%
+           family={Lu},
+           familyi={L\bibinitperiod},
+           given={Yiqing},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=596e22840c4ff62e06a42f8afb1ec5bb}{%
+           family={Shaw},
+           familyi={S\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b758aa866f147f69df7e26dbc0ab2fba}{%
+           family={Spijkervet},
+           familyi={S\bibinitperiod},
+           given={Janne},
+           giveni={J\bibinitperiod}}}%
+        {{hash=cb32288191c1515910afbcff6bf1d2be}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Yakun},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=2938deb5048323c6e1bfdd80975d5b28}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=f0f763ff340d5931cec66f877b353286}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Ju-Chiang},
+           giveni={J\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=c78503aaa49a656724e2cb1160afaf62}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Yuping},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=fc399f85ccdd18f7c16d2cd99a42d132}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Yuxuan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=d1af6eb99bff39fc1bf0cd8071fb3b1e}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Ling},
+           giveni={L\bibinitperiod}}}%
+        {{hash=23c44d37aa2e1630d43f527dd78cca10}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yifeng},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=dc5fd0ab4a6eabfff3ef135b134f2578}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Chao},
+           giveni={C\bibinitperiod}}}%
+        {{hash=7e1eaaf146a647a72a69d324b8168b8b}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Shuo},
+           giveni={S\bibinitperiod}}}%
+        {{hash=e760d38078aff4a5b24c867aa5178c26}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=8a3b8dcf7b5b2a6961827725ee30c8bc}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yilin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=0db445256963546f26ac7dc0d929265b}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Hang},
+           giveni={H\bibinitperiod}}}%
+        {{hash=2a75579ee788f5f9fde4204d1106e303}{%
+           family={Zhao},
+           familyi={Z\bibinitperiod},
+           given={Ziyi},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=53732d4725cd9227f64aa0a197bab4c9}{%
+           family={Zhong},
+           familyi={Z\bibinitperiod},
+           given={Dejian},
+           giveni={D\bibinitperiod}}}%
+        {{hash=292dbec1a3444be0e42b30a473ee592d}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Shicen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=86c972c8e5c8cc149b48ff78f35ab6c5}{%
+           family={Zou},
+           familyi={Z\bibinitperiod},
+           given={Pei},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{c8798bf91c2c5a0c650a8cba41eb701d}
+      \strng{fullhash}{e0622f74d77378cead0ba6db62449a3a}
+      \strng{fullhashraw}{e0622f74d77378cead0ba6db62449a3a}
+      \strng{bibnamehash}{c8798bf91c2c5a0c650a8cba41eb701d}
+      \strng{authorbibnamehash}{c8798bf91c2c5a0c650a8cba41eb701d}
+      \strng{authornamehash}{c8798bf91c2c5a0c650a8cba41eb701d}
+      \strng{authorfullhash}{e0622f74d77378cead0ba6db62449a3a}
+      \strng{authorfullhashraw}{e0622f74d77378cead0ba6db62449a3a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{We introduce Seed-Music, a suite of music generation systems capable of producing high-quality music with fine-grained style control. Our unified framework leverages both auto-regressive language modeling and diffusion approaches to support two key music creation workflows: controlled music generation and post-production editing. For controlled music generation, our system enables vocal music generation with performance controls from multi-modal inputs, including style descriptions, audio references, musical scores, and voice prompts. For post-production editing, it offers interactive tools for editing lyrics and vocal melodies directly in the generated audio. We encourage readers to listen to demo audio examples at https://team.doubao.com/seed-music "https://team.doubao.com/seed-music".}
+      \field{day}{19}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{9}
+      \field{pubstate}{prepublished}
+      \field{shorttitle}{Seed-{{Music}}}
+      \field{title}{Seed-{{Music}}: {{A Unified Framework}} for {{High Quality}} and {{Controlled Music Generation}}}
+      \field{urlday}{24}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2024}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2409.09214
+      \endverb
+      \verb{eprint}
+      \verb 2409.09214
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/NPYHUHFJ/Bai et al. - 2024 - Seed-Music A Unified Framework for High Quality and Controlled Music Generation.pdf;/Users/jan-oivindlima/Zotero/storage/GKXEVAXG/2409.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2409.09214
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2409.09214
+      \endverb
+      \keyw{Computer Science - Sound,Electrical Engineering and Systems Science - Audio and Speech Processing}
+    \endentry
+    \entry{dhariwalJukeboxGenerativeModel2020}{online}{}{}
+      \name{author}{6}{}{%
+        {{hash=4164e43d8cf919f5e3f8d80f5ea23f36}{%
+           family={Dhariwal},
+           familyi={D\bibinitperiod},
+           given={Prafulla},
+           giveni={P\bibinitperiod}}}%
+        {{hash=3dd736ee38ff1cbcc6f0d05487b9950b}{%
+           family={Jun},
+           familyi={J\bibinitperiod},
+           given={Heewoo},
+           giveni={H\bibinitperiod}}}%
+        {{hash=abd07c8b248e2a710d672bd6e50db3e0}{%
+           family={Payne},
+           familyi={P\bibinitperiod},
+           given={Christine},
+           giveni={C\bibinitperiod}}}%
+        {{hash=37a96525bc70870f8509160f7eccf4b7}{%
+           family={Kim},
+           familyi={K\bibinitperiod},
+           given={Jong\bibnamedelima Wook},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=a812c46caad94fc8701be37871f303ba}{%
+           family={Radford},
+           familyi={R\bibinitperiod},
+           given={Alec},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8d569d1d5b8b5a7836017a98b430f959}{%
+           family={Sutskever},
+           familyi={S\bibinitperiod},
+           given={Ilya},
+           giveni={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{a60ca3788b074bab6f1a53117099dea8}
+      \strng{fullhash}{7936612a06bd050ee5f68e6703854477}
+      \strng{fullhashraw}{7936612a06bd050ee5f68e6703854477}
+      \strng{bibnamehash}{a60ca3788b074bab6f1a53117099dea8}
+      \strng{authorbibnamehash}{a60ca3788b074bab6f1a53117099dea8}
+      \strng{authornamehash}{a60ca3788b074bab6f1a53117099dea8}
+      \strng{authorfullhash}{7936612a06bd050ee5f68e6703854477}
+      \strng{authorfullhashraw}{7936612a06bd050ee5f68e6703854477}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{We introduce Jukebox, a model that generates music with singing in the raw audio domain. We tackle the long context of raw audio using a multi-scale VQ-VAE to compress it to discrete codes, and modeling those using autoregressive Transformers. We show that the combined model at scale can generate high-fidelity and diverse songs with coherence up to multiple minutes. We can condition on artist and genre to steer the musical and vocal style, and on unaligned lyrics to make the singing more controllable. We are releasing thousands of non cherry-picked samples at https://jukebox.openai.com, along with model weights and code at https://github.com/openai/jukebox}
+      \field{day}{30}
+      \field{eprintclass}{eess}
+      \field{eprinttype}{arXiv}
+      \field{month}{4}
+      \field{pubstate}{prepublished}
+      \field{shorttitle}{Jukebox}
+      \field{title}{Jukebox: {{A Generative Model}} for {{Music}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2005.00341
+      \endverb
+      \verb{eprint}
+      \verb 2005.00341
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/RLFPFU4Z/Dhariwal et al. - 2020 - Jukebox A Generative Model for Music.pdf;/Users/jan-oivindlima/Zotero/storage/AT2LAZPD/2005.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2005.00341
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2005.00341
+      \endverb
+      \keyw{Computer Science - Machine Learning,Computer Science - Sound,Electrical Engineering and Systems Science - Audio and Speech Processing,Statistics - Machine Learning}
+    \endentry
+    \entry{ferreiraLearningGenerateMusic2021}{online}{}{}
+      \name{author}{2}{}{%
+        {{hash=211d5a6a12a362a9f1f428b9ff9105a6}{%
+           family={Ferreira},
+           familyi={F\bibinitperiod},
+           given={Lucas\bibnamedelima N.},
+           giveni={L\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=193f2ecc666539c69e994edc932a116c}{%
+           family={Whitehead},
+           familyi={W\bibinitperiod},
+           given={Jim},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e40e76723e8610133918043fc77cef6}
+      \strng{fullhash}{7e40e76723e8610133918043fc77cef6}
+      \strng{fullhashraw}{7e40e76723e8610133918043fc77cef6}
+      \strng{bibnamehash}{7e40e76723e8610133918043fc77cef6}
+      \strng{authorbibnamehash}{7e40e76723e8610133918043fc77cef6}
+      \strng{authornamehash}{7e40e76723e8610133918043fc77cef6}
+      \strng{authorfullhash}{7e40e76723e8610133918043fc77cef6}
+      \strng{authorfullhashraw}{7e40e76723e8610133918043fc77cef6}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Deep Learning models have shown very promising results in automatically composing polyphonic music pieces. However, it is very hard to control such models in order to guide the compositions towards a desired goal. We are interested in controlling a model to automatically generate music with a given sentiment. This paper presents a generative Deep Learning model that can be directed to compose music with a given sentiment. Besides music generation, the same model can be used for sentiment analysis of symbolic music. We evaluate the accuracy of the model in classifying sentiment of symbolic music using a new dataset of video game soundtracks. Results show that our model is able to obtain good prediction accuracy. A user study shows that human subjects agreed that the generated music has the intended sentiment, however negative pieces can be ambiguous.}
+      \field{day}{9}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{3}
+      \field{pubstate}{prepublished}
+      \field{title}{Learning to {{Generate Music With Sentiment}}}
+      \field{urlday}{24}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.2103.06125
+      \endverb
+      \verb{eprint}
+      \verb 2103.06125
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/6F4LED7M/Ferreira and Whitehead - 2021 - Learning to Generate Music With Sentiment.pdf;/Users/jan-oivindlima/Zotero/storage/5CWTE5U2/2103.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/2103.06125
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/2103.06125
+      \endverb
+      \keyw{Computer Science - Information Retrieval,Computer Science - Machine Learning,Computer Science - Sound,Electrical Engineering and Systems Science - Audio and Speech Processing}
+    \endentry
+    \entry{galinProceduralGenerationRoads2010}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=3e72db1b05ba9ebbfdc7d5a32b3ec2db}{%
+           family={Galin},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+        {{hash=93c0a6f65066ccaa0ea8dc0fbb6fbbaf}{%
+           family={Peytavie},
+           familyi={P\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod}}}%
+        {{hash=7cb9d5f7613f5b4f171068af3df2f6c9}{%
+           family={Maréchal},
+           familyi={M\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+        {{hash=87271453b4433bae5a2e53eed8817178}{%
+           family={Guérin},
+           familyi={G\bibinitperiod},
+           given={E.},
+           giveni={E\bibinitperiod}}}%
+      }
+      \strng{namehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{fullhash}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{fullhashraw}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{bibnamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authorbibnamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authornamehash}{390a67f1a76771431ea9eb670290536d}
+      \strng{authorfullhash}{bd53d1f420e5849f6ce8de20414353e9}
+      \strng{authorfullhashraw}{bd53d1f420e5849f6ce8de20414353e9}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In this paper, we propose an automatic method for generating roads based on a weighted anisotropic shortest path algorithm. Given an input scene, we automatically create a path connecting an initial and a final point. The trajectory of the road minimizes a cost function that takes into account the different parameters of the scene including the slope of the terrain, natural obstacles such as rivers, lakes, mountains and forests. The road is generated by excavating the terrain along the path and instantiating generic parameterized models.}
+      \field{issn}{1467-8659}
+      \field{journaltitle}{Computer Graphics Forum}
+      \field{langid}{english}
+      \field{number}{2}
+      \field{title}{Procedural {{Generation}} of {{Roads}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{29}
+      \field{year}{2010}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{429\bibrangedash 438}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/4VSNNCTK/Galin et al. - 2010 - Procedural Generation of Roads.pdf;/Users/jan-oivindlima/Zotero/storage/QGNFN2VM/j.1467-8659.2009.01612.html
+      \endverb
+      \verb{urlraw}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \verb{url}
+      \verb https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8659.2009.01612.x
+      \endverb
+      \keyw{Computer Graphics: Three-Dimensional Graphics and Realism,discrete anisotropic shortest path,Procedural modeling,road generation}
+    \endentry
+    \entry{garayacevedoFugueCompositionCounterpoint2005}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=51d7d1f1b2d7b2c2d62047d373eca8e7}{%
+           family={Garay\bibnamedelima Acevedo},
+           familyi={G\bibinitperiod\bibinitdelim A\bibinitperiod},
+           given={Andres},
+           giveni={A\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=c1a4f2ac58bb5fb4b650886713b0ca6d}{%
+           family={Wiil},
+           familyi={W\bibinitperiod},
+           given={Uffe\bibnamedelima Kock},
+           giveni={U\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{51d7d1f1b2d7b2c2d62047d373eca8e7}
+      \strng{fullhash}{51d7d1f1b2d7b2c2d62047d373eca8e7}
+      \strng{fullhashraw}{51d7d1f1b2d7b2c2d62047d373eca8e7}
+      \strng{bibnamehash}{51d7d1f1b2d7b2c2d62047d373eca8e7}
+      \strng{authorbibnamehash}{51d7d1f1b2d7b2c2d62047d373eca8e7}
+      \strng{authornamehash}{51d7d1f1b2d7b2c2d62047d373eca8e7}
+      \strng{authorfullhash}{51d7d1f1b2d7b2c2d62047d373eca8e7}
+      \strng{authorfullhashraw}{51d7d1f1b2d7b2c2d62047d373eca8e7}
+      \strng{editorbibnamehash}{c1a4f2ac58bb5fb4b650886713b0ca6d}
+      \strng{editornamehash}{c1a4f2ac58bb5fb4b650886713b0ca6d}
+      \strng{editorfullhash}{c1a4f2ac58bb5fb4b650886713b0ca6d}
+      \strng{editorfullhashraw}{c1a4f2ac58bb5fb4b650886713b0ca6d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This paper presents the results of implementing and evaluating a genetic algorithm to assist in the task of automatic counterpoint generation. In particular, a fugue subject was used as an input for the system, while the generated counterpoint melody was to act as the countersubject. The genetic algorithm was tested with two different input melodies, and a basic set of rules for fitness evaluation. Within this domain, the results were satisfactory. Finally, the suitability of genetic algorithms for the task of rule-based melody generation, as well as possible future work and enhancements to the implemented system, are also reviewed and discussed.}
+      \field{booktitle}{Computer {{Music Modeling}} and {{Retrieval}}}
+      \field{isbn}{978-3-540-31807-1}
+      \field{langid}{english}
+      \field{title}{Fugue {{Composition}} with {{Counterpoint Melody Generation Using Genetic Algorithms}}}
+      \field{year}{2005}
+      \field{dateera}{ce}
+      \field{pages}{96\bibrangedash 106}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1007/978-3-540-31807-1_7
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/D8VVHW7G/Garay Acevedo - 2005 - Fugue Composition with Counterpoint Melody Generation Using Genetic Algorithms.pdf
+      \endverb
+      \keyw{Algorithmic Composition,Computer Music,Fitness Evaluation,Genetic Algorithm,Music Composition}
+    \endentry
+    \entry{guminWaveFunctionCollapse2016}{software}{}{}
+      \name{author}{1}{}{%
+        {{hash=46c2caad2d1433d5a224bdbf82de6ffb}{%
+           family={Gumin},
+           familyi={G\bibinitperiod},
+           given={Maxim},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{46c2caad2d1433d5a224bdbf82de6ffb}
+      \strng{fullhash}{46c2caad2d1433d5a224bdbf82de6ffb}
+      \strng{fullhashraw}{46c2caad2d1433d5a224bdbf82de6ffb}
+      \strng{bibnamehash}{46c2caad2d1433d5a224bdbf82de6ffb}
+      \strng{authorbibnamehash}{46c2caad2d1433d5a224bdbf82de6ffb}
+      \strng{authornamehash}{46c2caad2d1433d5a224bdbf82de6ffb}
+      \strng{authorfullhash}{46c2caad2d1433d5a224bdbf82de6ffb}
+      \strng{authorfullhashraw}{46c2caad2d1433d5a224bdbf82de6ffb}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Bitmap \& tilemap generation from a single example with the help of ideas from quantum mechanics}
+      \field{month}{9}
+      \field{origday}{30}
+      \field{orighour}{11}
+      \field{origminute}{53}
+      \field{origmonth}{9}
+      \field{origsecond}{17}
+      \field{origtimezone}{Z}
+      \field{origyear}{2016}
+      \field{title}{Wave {{Function Collapse Algorithm}}}
+      \field{urlday}{24}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{version}{1.0}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{origdateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://github.com/mxgmn/WaveFunctionCollapse
+      \endverb
+      \verb{url}
+      \verb https://github.com/mxgmn/WaveFunctionCollapse
+      \endverb
+    \endentry
+    \entry{hawthorneEnablingFactorizedPiano2019}{online}{}{}
+      \name{author}{9}{}{%
+        {{hash=4102bf268c4922002c51584dbb63c959}{%
+           family={Hawthorne},
+           familyi={H\bibinitperiod},
+           given={Curtis},
+           giveni={C\bibinitperiod}}}%
+        {{hash=bd9ccff49b29cb00d6855ab66232a1ab}{%
+           family={Stasyuk},
+           familyi={S\bibinitperiod},
+           given={Andriy},
+           giveni={A\bibinitperiod}}}%
+        {{hash=243c03e5ae8031582d6af9fcbc70f629}{%
+           family={Roberts},
+           familyi={R\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0b461ec7764bb41a6287a8d0716006a0}{%
+           family={Simon},
+           familyi={S\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod}}}%
+        {{hash=9406d3118ff06a9e9b1fc218f4106061}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Cheng-Zhi\bibnamedelima Anna},
+           giveni={C\bibinithyphendelim Z\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=a133b469b21b870786119a47b1b691eb}{%
+           family={Dieleman},
+           familyi={D\bibinitperiod},
+           given={Sander},
+           giveni={S\bibinitperiod}}}%
+        {{hash=6aa92a937d4d30dd0b5ec0eecbad1bf1}{%
+           family={Elsen},
+           familyi={E\bibinitperiod},
+           given={Erich},
+           giveni={E\bibinitperiod}}}%
+        {{hash=84488af703576ab131f87436b63aeef0}{%
+           family={Engel},
+           familyi={E\bibinitperiod},
+           given={Jesse},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b2c4631ad93e93115d9b3ceea6587550}{%
+           family={Eck},
+           familyi={E\bibinitperiod},
+           given={Douglas},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{dc875fb44266eb3f98e6aa2c898eaf27}
+      \strng{fullhash}{d7b3447bf817650a9fae3d8e5c821a04}
+      \strng{fullhashraw}{d7b3447bf817650a9fae3d8e5c821a04}
+      \strng{bibnamehash}{dc875fb44266eb3f98e6aa2c898eaf27}
+      \strng{authorbibnamehash}{dc875fb44266eb3f98e6aa2c898eaf27}
+      \strng{authornamehash}{dc875fb44266eb3f98e6aa2c898eaf27}
+      \strng{authorfullhash}{d7b3447bf817650a9fae3d8e5c821a04}
+      \strng{authorfullhashraw}{d7b3447bf817650a9fae3d8e5c821a04}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Generating musical audio directly with neural networks is notoriously difficult because it requires coherently modeling structure at many different timescales. Fortunately, most music is also highly structured and can be represented as discrete note events played on musical instruments. Herein, we show that by using notes as an intermediate representation, we can train a suite of models capable of transcribing, composing, and synthesizing audio waveforms with coherent musical structure on timescales spanning six orders of magnitude (\textasciitilde 0.1 ms to \textasciitilde 100 s), a process we call Wave2Midi2Wave. This large advance in the state of the art is enabled by our release of the new MAESTRO (MIDI and Audio Edited for Synchronous TRacks and Organization) dataset, composed of over 172 hours of virtuosic piano performances captured with fine alignment (\textasciitilde 3 ms) between note labels and audio waveforms. The networks and the dataset together present a promising approach toward creating new expressive and interpretable neural models of music.}
+      \field{day}{17}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{1}
+      \field{pubstate}{prepublished}
+      \field{title}{Enabling {{Factorized Piano Music Modeling}} and {{Generation}} with the {{MAESTRO Dataset}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1810.12247
+      \endverb
+      \verb{eprint}
+      \verb 1810.12247
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/CTA5XPZ4/Hawthorne et al. - 2019 - Enabling Factorized Piano Music Modeling and Generation with the MAESTRO Dataset.pdf;/Users/jan-oivindlima/Zotero/storage/6EVP6GCM/1810.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1810.12247
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1810.12247
+      \endverb
+      \keyw{Computer Science - Machine Learning,Computer Science - Sound,Electrical Engineering and Systems Science - Audio and Speech Processing,Statistics - Machine Learning}
+    \endentry
+    \entry{holeAutomaticSpeciesCounterpoint}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=81b8c2063d7b923c9fba931bbe98bf1b}{%
+           family={Hole},
+           familyi={H\bibinitperiod},
+           given={Johan\bibnamedelima Gangsås},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{fullhash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{fullhashraw}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{bibnamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorbibnamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authornamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorfullhash}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \strng{authorfullhashraw}{81b8c2063d7b923c9fba931bbe98bf1b}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Master Thesis at NTNU}
+      \field{langid}{english}
+      \field{title}{Automatic {{Species Counterpoint}}}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/B2EFSX9P/Hole - Automatic Species Counterpoint.pdf
+      \endverb
+    \endentry
+    \entry{huaBiDirectionalProceduralModel2016}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=d8ad9a4acde47a45557a319e198ccf45}{%
+           family={Hua},
+           familyi={H\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{d8ad9a4acde47a45557a319e198ccf45}
+      \strng{fullhash}{d8ad9a4acde47a45557a319e198ccf45}
+      \strng{fullhashraw}{d8ad9a4acde47a45557a319e198ccf45}
+      \strng{bibnamehash}{d8ad9a4acde47a45557a319e198ccf45}
+      \strng{authorbibnamehash}{d8ad9a4acde47a45557a319e198ccf45}
+      \strng{authornamehash}{d8ad9a4acde47a45557a319e198ccf45}
+      \strng{authorfullhash}{d8ad9a4acde47a45557a319e198ccf45}
+      \strng{authorfullhashraw}{d8ad9a4acde47a45557a319e198ccf45}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{It is a challenge for shape grammars to incorporate spatial hierarchy and interior connectivity of buildings in early design stages. To resolve this difficulty, we developed a bi-directional procedural model: the forward process constructs the derivation tree with production rules, while the backward process realizes the tree with shapes in a stepwise manner (from leaves to the root). Each inverse-derivation step involves essential geometric-topological reasoning. With this bi-directional framework, design constraints and objectives are encoded in the grammar-shape translation. We conducted two applications. The first employs geometric primitives as terminals and the other uses previous designs as terminals. Both approaches lead to consistent interior connectivity and a rich spatial hierarchy. The results imply that bespoke geometric-topological processing helps shape grammar to create plausible, novel compositions. Our model is more productive than hand-coded shape grammars, while it is less computation-intensive than evolutionary treatment of shape grammars.}
+      \field{day}{1}
+      \field{journaltitle}{Computer Graphics Forum}
+      \field{month}{12}
+      \field{shortjournal}{Computer Graphics Forum}
+      \field{title}{A {{Bi-Directional Procedural Model}} for {{Architectural Design}}}
+      \field{volume}{36}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \verb{doi}
+      \verb 10.1111/cgf.13074
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/LS5MIJ6T/Hua - 2016 - A Bi-Directional Procedural Model for Architectural Design.pdf
+      \endverb
+    \endentry
+    \entry{JacobsonOOSE}{book}{}{}
+      \name{author}{4}{}{%
+        {{hash=3e8f03cc324f52193ab00c1fab4df61a}{%
+           family={Jacobson},
+           familyi={J\bibinitperiod},
+           given={Ivar},
+           giveni={I\bibinitperiod}}}%
+        {{hash=87410fac27f1f7aeede0a0788c733cd9}{%
+           family={Christerson},
+           familyi={C\bibinitperiod},
+           given={Magnus},
+           giveni={M\bibinitperiod}}}%
+        {{hash=184b8b22a7b910ba6f8b465a8d75cc1f}{%
+           family={Jonsson},
+           familyi={J\bibinitperiod},
+           given={Patrik},
+           giveni={P\bibinitperiod}}}%
+        {{hash=8ce074478a8018f22f0a21b59d373946}{%
+           family={Övergaard},
+           familyi={Ö\bibinitperiod},
+           given={Gunnar},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{4efdf840f59e9f84adf0e1a992e1b69d}
+      \strng{fullhash}{df3ce082930bb0893b6cc3de4b4ecfaf}
+      \strng{fullhashraw}{df3ce082930bb0893b6cc3de4b4ecfaf}
+      \strng{bibnamehash}{4efdf840f59e9f84adf0e1a992e1b69d}
+      \strng{authorbibnamehash}{4efdf840f59e9f84adf0e1a992e1b69d}
+      \strng{authornamehash}{4efdf840f59e9f84adf0e1a992e1b69d}
+      \strng{authorfullhash}{df3ce082930bb0893b6cc3de4b4ecfaf}
+      \strng{authorfullhashraw}{df3ce082930bb0893b6cc3de4b4ecfaf}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{0-201-54435-0}
+      \field{title}{Object-{{Oriented Software Engineering}}}
+      \field{year}{1992}
+      \field{dateera}{ce}
+    \endentry
+    \entry{mcdonoughFractalPatternsMusic2023}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=8b0709b59ea076eaf238cd1b04b8a3b7}{%
+           family={McDonough},
+           familyi={M\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=6504050eb3aa7c8ba38c5f680f6ed6ff}{%
+           family={Herczyński},
+           familyi={H\bibinitperiod},
+           given={Andrzej},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{0e7bc317741f71f2fb11b4f340b1536f}
+      \strng{fullhash}{0e7bc317741f71f2fb11b4f340b1536f}
+      \strng{fullhashraw}{0e7bc317741f71f2fb11b4f340b1536f}
+      \strng{bibnamehash}{0e7bc317741f71f2fb11b4f340b1536f}
+      \strng{authorbibnamehash}{0e7bc317741f71f2fb11b4f340b1536f}
+      \strng{authornamehash}{0e7bc317741f71f2fb11b4f340b1536f}
+      \strng{authorfullhash}{0e7bc317741f71f2fb11b4f340b1536f}
+      \strng{authorfullhashraw}{0e7bc317741f71f2fb11b4f340b1536f}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{If aesthetic preferences are affected by the fractal geometry of nature, scaling regularities would be expected to appear in all art forms, including music. While a variety of statistical tools have been proposed to analyze time series in sound, no consensus has yet emerged regarding the most meaningful measure of complexity in music or how to discern fractal patterns in compositions in the first place. Here, we offer a new approach based on the self-similarity of melodic lines recurring at various temporal scales. In contrast to the statistical analyses advanced in recent literature, the proposed method does not depend on averaging within time-windows and is distinctively local. The corresponding definition of the fractal dimension is based on the temporal scaling hierarchy and depends on the tonal contours of musical motifs. The new concepts are tested on musical “renditions” of the Cantor Set and the Koch Curve, and then applied to a number of carefully selected masterful compositions spanning five centuries of music making.}
+      \field{day}{1}
+      \field{issn}{0960-0779}
+      \field{journaltitle}{Chaos, Solitons \& Fractals}
+      \field{month}{5}
+      \field{shortjournal}{Chaos, Solitons \& Fractals}
+      \field{title}{Fractal Patterns in Music}
+      \field{urlday}{7}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{volume}{170}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{113315}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.chaos.2023.113315
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/KH5NQQ4A/McDonough and Herczyński - 2023 - Fractal patterns in music.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0960077923002163
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0960077923002163
+      \endverb
+      \keyw{Fractal dimension,Fractals,Music,Scaling,Self-similarity,Time series}
+    \endentry
+    \entry{ooreThisTimeFeeling2020}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=619ca3d01db1d2673993591ddf761dbb}{%
+           family={Oore},
+           familyi={O\bibinitperiod},
+           given={Sageev},
+           giveni={S\bibinitperiod}}}%
+        {{hash=0b461ec7764bb41a6287a8d0716006a0}{%
+           family={Simon},
+           familyi={S\bibinitperiod},
+           given={Ian},
+           giveni={I\bibinitperiod}}}%
+        {{hash=a133b469b21b870786119a47b1b691eb}{%
+           family={Dieleman},
+           familyi={D\bibinitperiod},
+           given={Sander},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b2c4631ad93e93115d9b3ceea6587550}{%
+           family={Eck},
+           familyi={E\bibinitperiod},
+           given={Douglas},
+           giveni={D\bibinitperiod}}}%
+        {{hash=9d16b7284df92c9adaee86c37ab992df}{%
+           family={Simonyan},
+           familyi={S\bibinitperiod},
+           given={Karen},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{95e0389a2ef20185a53af3f3aff56d9e}
+      \strng{fullhash}{3e15321d84ad8216c5e40f2dd041132c}
+      \strng{fullhashraw}{3e15321d84ad8216c5e40f2dd041132c}
+      \strng{bibnamehash}{95e0389a2ef20185a53af3f3aff56d9e}
+      \strng{authorbibnamehash}{95e0389a2ef20185a53af3f3aff56d9e}
+      \strng{authornamehash}{95e0389a2ef20185a53af3f3aff56d9e}
+      \strng{authorfullhash}{3e15321d84ad8216c5e40f2dd041132c}
+      \strng{authorfullhashraw}{3e15321d84ad8216c5e40f2dd041132c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{Music generation has generally been focused on either creating scores or interpreting them. We discuss differences between these two problems and propose that, in fact, it may be valuable to work in the space of direct performance generation: jointly predicting the notes and also their expressive timing and dynamics. We consider the significance and qualities of the dataset needed for this. Having identified both a problem domain and characteristics of an appropriate dataset, we show an LSTM-based recurrent network model that subjectively performs quite well on this task. Critically, we provide generated examples. We also include feedback from professional composers and musicians about some of these examples.}
+      \field{day}{1}
+      \field{issn}{1433-3058}
+      \field{journaltitle}{Neural Computing and Applications}
+      \field{langid}{english}
+      \field{month}{2}
+      \field{number}{4}
+      \field{shortjournal}{Neural Comput \& Applic}
+      \field{shorttitle}{This Time with Feeling}
+      \field{title}{This Time with Feeling: Learning Expressive Musical Performance}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{32}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{955\bibrangedash 967}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1007/s00521-018-3758-9
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/2BIRNK5W/Oore et al. - 2020 - This time with feeling learning expressive musical performance.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s00521-018-3758-9
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s00521-018-3758-9
+      \endverb
+      \keyw{Artificial intelligence,Deep learning,Music generation,Recurrent neural networks}
+    \endentry
+    \entry{PeriodMusic2025}{inreference}{}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In music theory, the term period refers to forms of repetition and contrast between adjacent small-scale formal structures such as phrases. In twentieth-century music scholarship, the term is usually used similarly to the definition in the Oxford Companion to Music: "a period consists of two phrases, antecedent and consequent, each of which begins with the same basic motif." Earlier and later usages vary somewhat, but usually refer to notions of symmetry, difference, and an open section followed by a closure. The concept of a musical period originates in comparisons between music structure and rhetoric at least as early as the 16th century.}
+      \field{annotation}{Page Version ID: 1272601348}
+      \field{booktitle}{Wikipedia}
+      \field{day}{29}
+      \field{hour}{13}
+      \field{langid}{english}
+      \field{minute}{14}
+      \field{month}{1}
+      \field{second}{26}
+      \field{timezone}{Z}
+      \field{title}{Period (Music)}
+      \field{urlday}{26}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2025}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Period_(music)&oldid=1272601348
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Period_(music)&oldid=1272601348
+      \endverb
+    \endentry
+    \entry{RandomWalk2026}{inreference}{}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In mathematics, a random walk, is a stochastic process that describes a path that consists of a succession of random steps on some mathematical space. An elementary example of a rw is the random walk on the integer number line Z \{\textbackslash displaystyle \textbackslash mathbb \{Z\} \} which starts at 0, and at each step moves +1 or −1 with equal probability. Other examples include the path traced by a molecule as it travels in a liquid or a gas (see Brownian motion), the search path of a foraging animal, or the price of a fluctuating stock and the financial status of a gambler. Random walks have applications to engineering and many scientific fields including ecology, psychology, computer science, physics, chemistry, biology, economics, and sociology. The term random walk was first introduced by Karl Pearson in 1905. Realizations of random walks can be obtained by Monte Carlo simulation. In certain contexts random walk is sometimes known as a drunkard's walk.}
+      \field{annotation}{Page Version ID: 1347336606}
+      \field{booktitle}{Wikipedia}
+      \field{day}{6}
+      \field{hour}{2}
+      \field{langid}{english}
+      \field{minute}{41}
+      \field{month}{4}
+      \field{second}{13}
+      \field{timezone}{Z}
+      \field{title}{Random Walk}
+      \field{urlday}{9}
+      \field{urlmonth}{4}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/SR5KZABE/index.html
+      \endverb
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/w/index.php?title=Random_walk&oldid=1347336606#Applications
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/w/index.php?title=Random_walk&oldid=1347336606#Applications
+      \endverb
+    \endentry
+    \entry{shoenbergComposition}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=15672b30228d27126b3b024441a1325c}{%
+           family={Schoenberg},
+           familyi={S\bibinitperiod},
+           given={Arnold},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {faber and faber}%
+      }
+      \strng{namehash}{15672b30228d27126b3b024441a1325c}
+      \strng{fullhash}{15672b30228d27126b3b024441a1325c}
+      \strng{fullhashraw}{15672b30228d27126b3b024441a1325c}
+      \strng{bibnamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorbibnamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authornamehash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorfullhash}{15672b30228d27126b3b024441a1325c}
+      \strng{authorfullhashraw}{15672b30228d27126b3b024441a1325c}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{1}
+      \field{isbn}{0-571-19658-6}
+      \field{pagetotal}{224}
+      \field{title}{Fudamentals of {{Musical Composition}}}
+      \field{year}{1967}
+      \field{dateera}{ce}
+    \endentry
+    \entry{summervilleProceduralContentGeneration2018}{online}{}{}
+      \name{author}{8}{}{%
+        {{hash=198982c57c855e20171a0d57488800c6}{%
+           family={Summerville},
+           familyi={S\bibinitperiod},
+           given={Adam},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b76cd99c7d9f136d105a5b9ef54cd023}{%
+           family={Snodgrass},
+           familyi={S\bibinitperiod},
+           given={Sam},
+           giveni={S\bibinitperiod}}}%
+        {{hash=8e135527091b0f84e96d6573052d149b}{%
+           family={Guzdial},
+           familyi={G\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=36d10fc86048a38b49af3fada5db7c52}{%
+           family={Holmgård},
+           familyi={H\bibinitperiod},
+           given={Christoffer},
+           giveni={C\bibinitperiod}}}%
+        {{hash=993b84f2da72478a96a6ddccf1db4953}{%
+           family={Hoover},
+           familyi={H\bibinitperiod},
+           given={Amy\bibnamedelima K.},
+           giveni={A\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+        {{hash=5c2dfe32580e160e14b6a6838e0f77c9}{%
+           family={Isaksen},
+           familyi={I\bibinitperiod},
+           given={Aaron},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b42b016dc19b9d5aaa8679d8a1506a52}{%
+           family={Nealen},
+           familyi={N\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod}}}%
+        {{hash=cbd110b21df9b90cd72ce148aa04de7f}{%
+           family={Togelius},
+           familyi={T\bibinitperiod},
+           given={Julian},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{980472e054c4b0a4d53d1c00a3e68019}
+      \strng{fullhash}{6e2076797d39e4d4274a6633911e3284}
+      \strng{fullhashraw}{6e2076797d39e4d4274a6633911e3284}
+      \strng{bibnamehash}{980472e054c4b0a4d53d1c00a3e68019}
+      \strng{authorbibnamehash}{980472e054c4b0a4d53d1c00a3e68019}
+      \strng{authornamehash}{980472e054c4b0a4d53d1c00a3e68019}
+      \strng{authorfullhash}{6e2076797d39e4d4274a6633911e3284}
+      \strng{authorfullhashraw}{6e2076797d39e4d4274a6633911e3284}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This survey explores Procedural Content Generation via Machine Learning (PCGML), defined as the generation of game content using machine learning models trained on existing content. As the importance of PCG for game development increases, researchers explore new avenues for generating high-quality content with or without human involvement; this paper addresses the relatively new paradigm of using machine learning (in contrast with search-based, solver-based, and constructive methods). We focus on what is most often considered functional game content such as platformer levels, game maps, interactive fiction stories, and cards in collectible card games, as opposed to cosmetic content such as sprites and sound effects. In addition to using PCG for autonomous generation, co-creativity, mixed-initiative design, and compression, PCGML is suited for repair, critique, and content analysis because of its focus on modeling existing content. We discuss various data sources and representations that affect the resulting generated content. Multiple PCGML methods are covered, including neural networks, long short-term memory (LSTM) networks, autoencoders, and deep convolutional networks; Markov models, \$n\$-grams, and multi-dimensional Markov chains; clustering; and matrix factorization. Finally, we discuss open problems in the application of PCGML, including learning from small datasets, lack of training data, multi-layered learning, style-transfer, parameter tuning, and PCG as a game mechanic.}
+      \field{day}{7}
+      \field{eprintclass}{cs}
+      \field{eprinttype}{arXiv}
+      \field{month}{5}
+      \field{pubstate}{prepublished}
+      \field{title}{Procedural {{Content Generation}} via {{Machine Learning}} ({{PCGML}})}
+      \field{urlday}{24}
+      \field{urlmonth}{3}
+      \field{urlyear}{2026}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{doi}
+      \verb 10.48550/arXiv.1702.00539
+      \endverb
+      \verb{eprint}
+      \verb 1702.00539
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/QFHLI7GA/Summerville et al. - 2018 - Procedural Content Generation via Machine Learning (PCGML).pdf;/Users/jan-oivindlima/Zotero/storage/MESN9SAV/1702.html
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1702.00539
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1702.00539
+      \endverb
+      \keyw{Computer Science - Artificial Intelligence}
+    \endentry
+    \entry{vanderlindenProceduralGenerationDungeons2014}{article}{}{}
+      \name{author}{3}{}{%
+        {{useprefix=true,hash=1aafc72dd11442dc130beacb4e86c499}{%
+           family={Linden},
+           familyi={L\bibinitperiod},
+           given={Roland},
+           giveni={R\bibinitperiod},
+           prefix={van\bibnamedelima der},
+           prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod}}}%
+        {{hash=88d33934e10fd64a746702e0c4172d1a}{%
+           family={Lopes},
+           familyi={L\bibinitperiod},
+           given={Ricardo},
+           giveni={R\bibinitperiod}}}%
+        {{hash=1d3f4766060649d522cb73a599ad27c5}{%
+           family={Bidarra},
+           familyi={B\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{fullhash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{fullhashraw}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{bibnamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorbibnamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authornamehash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorfullhash}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \strng{authorfullhashraw}{7c9ff97145cb14c4b1c0f8d33f679755}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The use of procedural content generation (PCG) techniques in game development has been mostly restricted to very specific types of game elements. PCG has seldom been deployed for generating entire game levels, a notable exception to this being dungeons: a specific type of game level often encountered in adventure and role playing games. Due to their peculiar combination of pace, gameplay, and game spaces, dungeon levels are among the most suited to showcase the benefits of PCG. This paper surveys research on procedural methods to generate dungeon game levels. We summarize common practices, discuss pros and cons of different approaches, and identify a few promising challenges ahead. In general, what current procedural dungeon generation methods are missing is not performance, but more powerful, accurate, and richer control over the generation process. Recent research results seem to indicate that gameplay-related criteria can provide this high-level control. However, this area is still in its infancy, and many research challenges still lie ahead, e.g., improving the intuitiveness and accessibility of such methods for designers. We also observe that more research is needed into generic mechanisms for automating the generation of the actual dungeon-geometric models. We conclude that the foundations for enabling gameplay-based control of dungeon-level generation are worth being researched, and that its promising results may be instrumental in bringing PCG into mainstream game development.}
+      \field{issn}{1943-0698}
+      \field{journaltitle}{IEEE Transactions on Computational Intelligence and AI in Games}
+      \field{month}{3}
+      \field{number}{1}
+      \field{title}{Procedural {{Generation}} of {{Dungeons}}}
+      \field{urlday}{26}
+      \field{urlmonth}{2}
+      \field{urlyear}{2026}
+      \field{volume}{6}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \field{pages}{78\bibrangedash 89}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/TCIAIG.2013.2290371
+      \endverb
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/HUERQ77M/van der Linden et al. - 2014 - Procedural Generation of Dungeons.pdf
+      \endverb
+      \verb{urlraw}
+      \verb https://ieeexplore.ieee.org/abstract/document/6661386
+      \endverb
+      \verb{url}
+      \verb https://ieeexplore.ieee.org/abstract/document/6661386
+      \endverb
+      \keyw{Abstracts,Aerospace electronics,Automata,Gameplay semantics,Games,Geometry,procedural content generation,procedural level generation,Process control,Rocks,role playing games}
+    \endentry
+    \entry{vargaProceduralMixedinitiativeMusic2023}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=f585522b0aff5aef5da8ee51adfe8fd1}{%
+           family={Varga},
+           familyi={V\bibinitperiod},
+           given={Pal},
+           giveni={P\bibinitperiod}}}%
+        {{hash=1d3f4766060649d522cb73a599ad27c5}{%
+           family={Bidarra},
+           familyi={B\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{6fb34fa1eef2a4abcf82ee51eb208f6a}
+      \strng{fullhash}{6fb34fa1eef2a4abcf82ee51eb208f6a}
+      \strng{fullhashraw}{6fb34fa1eef2a4abcf82ee51eb208f6a}
+      \strng{bibnamehash}{6fb34fa1eef2a4abcf82ee51eb208f6a}
+      \strng{authorbibnamehash}{6fb34fa1eef2a4abcf82ee51eb208f6a}
+      \strng{authornamehash}{6fb34fa1eef2a4abcf82ee51eb208f6a}
+      \strng{authorfullhash}{6fb34fa1eef2a4abcf82ee51eb208f6a}
+      \strng{authorfullhashraw}{6fb34fa1eef2a4abcf82ee51eb208f6a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Mixed-initiative music composition systems are sought after by both amateur and professional musicians. A well-known PCG algorithm is Wave Function Collapse (WFC), which has recently been extended with various mixed-initiative capabilities [6]. So far, WFC has mainly been used for generating video game levels, textures and graphical patterns. This demo presents and illustrates an approach for an interactive WFC-based music composition editor. CCS CONCEPTS • Applied computing → Sound and music computing.}
+      \field{day}{26}
+      \field{month}{3}
+      \field{title}{Procedural Mixed-Initiative Music Composition with Hierarchical {{Wave Function Collapse}}}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/S8YPI5UY/Varga and Bidarra - 2023 - Procedural mixed-initiative music composition with hierarchical Wave Function Collapse.pdf
       \endverb
     \endentry
   \enddatalist
