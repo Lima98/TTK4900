@@ -1,3 +1,17 @@
+## 0.15.0 (2026-05-10)
+
+### Feat
+
+- **thesis**: updated introduction and new example in the proc-gen section
+- **thesis**: new figures and illustrations for the procedural generation part, also started finishing up the introduction
+- **thesis**: updated discussion with some comparisons between the iterations
+- **thesis**: new figures and updated sections
+
+### Fix
+
+- **thesis-figures**: more updates on figures
+- **thesis**: lots of figure cleanup in the proc-gen section
+
 ## 0.14.0 (2026-05-05)
 
 ### Feat
