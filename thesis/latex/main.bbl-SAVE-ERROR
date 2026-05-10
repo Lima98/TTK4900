@@ -20,8 +20,8 @@
 \refsection{0}
   \datalist[entry]{none/global//global/global/global}
     \entry{MusikalischesWurfelspiel2025}{inreference}{}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{abstract}{A Musikalisches Würfelspiel (German for "musical dice game") was a system for using dice to randomly generate music from precomposed options. These games were quite popular throughout Western Europe in the 18th century. Several different games were devised, some of which did not require the use of dice but merely choosing a random number. The earliest example is Johann Kirnberger's Der allezeit fertige Menuetten- und Polonaisencomponist (German for "The Ever-Ready Minuet and Polonaise Composer") (1757 [1st edition; revised 2nd 1783]). Examples by well known composers include C. P. E. Bach's Einfall, einen doppelten Contrapunct in der Octave von sechs Tacten zu machen, ohne die Regeln davon zu wissen (German for "A method for making six bars of double counterpoint at the octave without knowing the rules") (1758) and Maximilian Stadler's Table pour composer des minuets et des Trios à la infinie; avec deux dez à jouer (French for "A table for composing minuets and trios to infinity, by playing with two dice") (1780). In the early 20th century the Kaleidacousticon System, using arbitrarily combinable playing cards, was unsuccessfully marketed in the Boston area as a parlour game.}
       \field{annotation}{Page Version ID: 1313693497}
@@ -50,9 +50,28 @@
       \verb https://en.wikipedia.org/w/index.php?title=Musikalisches_W%C3%BCrfelspiel&oldid=1313693497
       \endverb
     \endentry
+    \entry{PressNoMans}{online}{}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labeltitlesource}{title}
+      \field{title}{Press - {{No Man}}'s {{Sky}}}
+      \field{urlday}{10}
+      \field{urlmonth}{5}
+      \field{urlyear}{2026}
+      \field{urldateera}{ce}
+      \verb{file}
+      \verb /Users/jan-oivindlima/Zotero/storage/3SAM6MB5/press.html
+      \endverb
+      \verb{urlraw}
+      \verb https://www.nomanssky.com/press/
+      \endverb
+      \verb{url}
+      \verb https://www.nomanssky.com/press/
+      \endverb
+    \endentry
     \entry{ArcConsistencyAlgorithmOverview}{online}{}{}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labeltitlesource}{title}
       \field{title}{Arc-{{Consistency Algorithm}} - an Overview | {{ScienceDirect Topics}}}
       \field{urlday}{8}
@@ -70,8 +89,8 @@
       \endverb
     \endentry
     \entry{SentenceMusic2023}{inreference}{}{}
-      \field{sortinit}{4}
-      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labeltitlesource}{title}
       \field{abstract}{In Western music theory, the term sentence is analogous to the way the term is used in linguistics, in that it usually refers to a complete, somewhat self-contained statement. Usually a sentence refers to musical spans towards the lower end of the durational scale; i.e. melodic or thematic entities well below the level of movement or section, but above the level of motif or measure. The term is usually encountered in discussions of thematic construction. In the last fifty years, an increasing number of theorists such as William Caplin have used the term to refer to a specific theme-type involving repetition and development.}
       \field{annotation}{Page Version ID: 1161220566}
@@ -101,8 +120,8 @@
       \endverb
     \endentry
     \entry{ObjectorientedProgramming2026}{inreference}{}{}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labeltitlesource}{title}
       \field{abstract}{Object-oriented programming (OOP) is a programming paradigm based on objects – software entities that encapsulate data and function(s). An OOP computer program consists of objects that interact with one another. An OOP language is one that provides object-oriented programming features, but as the set of features that contribute to OOP is contested, classifying a language as OOP – and the degree to which it supports OOP – is debatable. As paradigms are not mutually exclusive, a language can be multi-paradigm (i.e. categorized as more than only OOP). Notable languages with OOP support include Ada, ActionScript, C++, Common Lisp, C\#, Dart, Eiffel, Fortran 2003, Haxe, Java, JavaScript, Kotlin, Logo, MATLAB, Objective-C, Object Pascal, Perl, PHP, Python, R, Raku, Ruby, Scala, SIMSCRIPT, Simula, Smalltalk, Swift, Vala and Visual Basic (.NET).}
       \field{annotation}{Page Version ID: 1344935717}
@@ -152,8 +171,8 @@
       \strng{authornamehash}{7bb4e12a3345de1659b9fde55b86658d}
       \strng{authorfullhash}{7bb4e12a3345de1659b9fde55b86658d}
       \strng{authorfullhashraw}{7bb4e12a3345de1659b9fde55b86658d}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{The paper presents a method of modelling a computer system design as it evolves, so that evaluation can be made an integral part of the design process. The paper introduces the concept of concurrent existence, within a single model, of several representations of the system being modelled, at differing levels of abstraction. Thus important design decisions are expressed directly in terms of appropriately abstract quantities, facilitating understanding, validation, and modification of the system design. The paper includes brief details of an experimental implementation of the modelling technique and of the use of the technique to model both hardware and software components of a multi-processing system.}
@@ -169,8 +188,8 @@
       \endverb
     \endentry
     \entry{180904281MusicTransformer}{online}{}{}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labeltitlesource}{title}
       \field{title}{[1809.04281] {{Music Transformer}}}
       \field{urlday}{26}
@@ -228,8 +247,8 @@
       \strng{authornamehash}{437ff79630525199b7e77fd9d7ff4f46}
       \strng{authorfullhash}{44320aad96c27c6fbd2334d6ec499d91}
       \strng{authorfullhashraw}{44320aad96c27c6fbd2334d6ec499d91}
-      \field{sortinit}{9}
-      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{In this work, we present a new application developed in Derive 6 to compose counterpoint for a given melody (“cantus firmus”). The result is non-deterministic, so different counterpoints can be generated for a fixed melody, all of them obeying classical rules of counterpoint. In the case where the counterpoint cannot be generated in a first step, backtracking techniques have been implemented in order to improve the likelihood of obtaining a result. The contrapuntal rules are specified in Derive using probabilistic rules of a probabilistic logic, and the result can be generated for both voices (above and below) of first species counterpoint. The main goal of this work is not to obtain a “professional” counterpoint generator but to show an application of a probabilistic logic using a CAS tool. Thus, the algorithm developed does not take into account stylistic melodic characteristics of species counterpoint, but rather focuses on the harmonic aspect. The work developed can be summarized in the following steps: (1)Development of a probabilistic algorithm in order to obtain a non-deterministic counterpoint for a given melody.(2)Implementation of the algorithm in Derive 6 using probabilistic Logic.(3)Implementation in Java of a program to deal with the input (“cantus firmus”) and with the output (counterpoint) through inter-communication with the module developed in Derive. This program also allows users to listen to the result obtained.}
@@ -819,8 +838,8 @@
       \strng{authornamehash}{46c2caad2d1433d5a224bdbf82de6ffb}
       \strng{authorfullhash}{46c2caad2d1433d5a224bdbf82de6ffb}
       \strng{authorfullhashraw}{46c2caad2d1433d5a224bdbf82de6ffb}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Bitmap \& tilemap generation from a single example with the help of ideas from quantum mechanics}
@@ -904,8 +923,8 @@
       \strng{authornamehash}{dc875fb44266eb3f98e6aa2c898eaf27}
       \strng{authorfullhash}{d7b3447bf817650a9fae3d8e5c821a04}
       \strng{authorfullhashraw}{d7b3447bf817650a9fae3d8e5c821a04}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Generating musical audio directly with neural networks is notoriously difficult because it requires coherently modeling structure at many different timescales. Fortunately, most music is also highly structured and can be represented as discrete note events played on musical instruments. Herein, we show that by using notes as an intermediate representation, we can train a suite of models capable of transcribing, composing, and synthesizing audio waveforms with coherent musical structure on timescales spanning six orders of magnitude (\textasciitilde 0.1 ms to \textasciitilde 100 s), a process we call Wave2Midi2Wave. This large advance in the state of the art is enabled by our release of the new MAESTRO (MIDI and Audio Edited for Synchronous TRacks and Organization) dataset, composed of over 172 hours of virtuosic piano performances captured with fine alignment (\textasciitilde 3 ms) between note labels and audio waveforms. The networks and the dataset together present a promising approach toward creating new expressive and interpretable neural models of music.}
@@ -954,8 +973,8 @@
       \strng{authornamehash}{81b8c2063d7b923c9fba931bbe98bf1b}
       \strng{authorfullhash}{81b8c2063d7b923c9fba931bbe98bf1b}
       \strng{authorfullhashraw}{81b8c2063d7b923c9fba931bbe98bf1b}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Master Thesis at NTNU}
@@ -983,8 +1002,8 @@
       \strng{authornamehash}{d8ad9a4acde47a45557a319e198ccf45}
       \strng{authorfullhash}{d8ad9a4acde47a45557a319e198ccf45}
       \strng{authorfullhashraw}{d8ad9a4acde47a45557a319e198ccf45}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{It is a challenge for shape grammars to incorporate spatial hierarchy and interior connectivity of buildings in early design stages. To resolve this difficulty, we developed a bi-directional procedural model: the forward process constructs the derivation tree with production rules, while the backward process realizes the tree with shapes in a stepwise manner (from leaves to the root). Each inverse-derivation step involves essential geometric-topological reasoning. With this bi-directional framework, design constraints and objectives are encoded in the grammar-shape translation. We conducted two applications. The first employs geometric primitives as terminals and the other uses previous designs as terminals. Both approaches lead to consistent interior connectivity and a rich spatial hierarchy. The results imply that bespoke geometric-topological processing helps shape grammar to create plausible, novel compositions. Our model is more productive than hand-coded shape grammars, while it is less computation-intensive than evolutionary treatment of shape grammars.}
@@ -1203,8 +1222,8 @@
       \endverb
     \endentry
     \entry{RandomWalk2026}{inreference}{}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{abstract}{In mathematics, a random walk, is a stochastic process that describes a path that consists of a succession of random steps on some mathematical space. An elementary example of a rw is the random walk on the integer number line Z \{\textbackslash displaystyle \textbackslash mathbb \{Z\} \} which starts at 0, and at each step moves +1 or −1 with equal probability. Other examples include the path traced by a molecule as it travels in a liquid or a gas (see Brownian motion), the search path of a foraging animal, or the price of a fluctuating stock and the financial status of a gambler. Random walks have applications to engineering and many scientific fields including ecology, psychology, computer science, physics, chemistry, biology, economics, and sociology. The term random walk was first introduced by Karl Pearson in 1905. Realizations of random walks can be obtained by Monte Carlo simulation. In certain contexts random walk is sometimes known as a drunkard's walk.}
       \field{annotation}{Page Version ID: 1347336606}
@@ -1252,8 +1271,8 @@
       \strng{authornamehash}{15672b30228d27126b3b024441a1325c}
       \strng{authorfullhash}{15672b30228d27126b3b024441a1325c}
       \strng{authorfullhashraw}{15672b30228d27126b3b024441a1325c}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{edition}{1}
@@ -1314,8 +1333,8 @@
       \strng{authornamehash}{980472e054c4b0a4d53d1c00a3e68019}
       \strng{authorfullhash}{6e2076797d39e4d4274a6633911e3284}
       \strng{authorfullhashraw}{6e2076797d39e4d4274a6633911e3284}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{This survey explores Procedural Content Generation via Machine Learning (PCGML), defined as the generation of game content using machine learning models trained on existing content. As the importance of PCG for game development increases, researchers explore new avenues for generating high-quality content with or without human involvement; this paper addresses the relatively new paradigm of using machine learning (in contrast with search-based, solver-based, and constructive methods). We focus on what is most often considered functional game content such as platformer levels, game maps, interactive fiction stories, and cards in collectible card games, as opposed to cosmetic content such as sprites and sound effects. In addition to using PCG for autonomous generation, co-creativity, mixed-initiative design, and compression, PCGML is suited for repair, critique, and content analysis because of its focus on modeling existing content. We discuss various data sources and representations that affect the resulting generated content. Multiple PCGML methods are covered, including neural networks, long short-term memory (LSTM) networks, autoencoders, and deep convolutional networks; Markov models, \$n\$-grams, and multi-dimensional Markov chains; clustering; and matrix factorization. Finally, we discuss open problems in the application of PCGML, including learning from small datasets, lack of training data, multi-layered learning, style-transfer, parameter tuning, and PCG as a game mechanic.}

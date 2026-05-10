@@ -1,15 +1,17 @@
 # TTK4900
-Master Project Cybernetics and Robotics at NTNU, the WIP [thesis](thesis/latex/main.pdf) can be found in the `thesis/` directory. 
+Master Project Cybernetics and Robotics at NTNU, the [thesis](thesis/latex/main.pdf) is located in the `thesis/` directory. 
 
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Scripts](#scripts)
+- [Workflow using the program](#workflow)
 
 ## Project Overview
-This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on _[TBD: The project is in a very early stage and the scope of the project is yet to be defined.]_
-To listen to generated audio files and view documentation you can visit my [NTNU-webpage](https://janoivil.folk.ntnu.no).
+This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on development of software to generate music procedurally.
+
+To listen to generated audio files and view documentation you can visit my [github.io page](htts://lima98.github.io/TTK4900).
 
 ## Project Structure
 The repository is organized as follows:
@@ -32,8 +34,8 @@ There are a few scripts in the repository which to different things.
 - `code/main.py`: Generates the current melody-engine iteration and can optionally call LilyPond and TiMidity++ directly.
 - `code/melody_engine/render_outputs.py`: Optional helper for re-rendering existing `.ly` files.
 
-## Iteration Three Workflow
-From the project root you can now use the current iteration directly from the terminal:
+## Workflow using the program
+From the project root you can now use the program from the terminal:
 
 ```bash
 python3 code/main.py

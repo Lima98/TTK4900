@@ -1,7 +1,7 @@
 % ////// INTRODUCTION
 For hundreds of years composers have been creating music using external tools like dice to help them generate something new.
 As early as the 18th century the idea of using randomness to help the composing process has been used.
-The musical dice game, "Musikalisches Würfelspiel", was used to randomly generate music based on pre composed parts. \cite{MusikalischesWurfelspiel2025}
+The musical dice game, "Musikalisches Würfelspiel", was used to randomly generate music based on pre composed parts \cite{MusikalischesWurfelspiel2025}.
 This is a very basic way of generating music, however by the random nature of the dice it will not be able to create anything coherent and meaningful like a human composer can.
 Additionally this process only used pre composed parts which were designed to work together.
 If we want to generate everything from scratch we need a way more sophisticated system. 
@@ -9,11 +9,12 @@ This is where procedural generation comes into the picture.
 If we base the melody on something random and then use the conventions and "rules" for melodic composition we might be able to generate music that sounds somewhat coherent.
 \\
 
-Getting external help has not only been used by composers, but also by programmers. In recent years the use of \ac{AI} in software development has become more and more widespread. As an experiment in this thesis I will compare "old-school" development and \ac{AI}. I will start with normal development without using \ac{AI}. Then after I have build up some knowledge with the system I will try to improve upon it using \ac{AI} tools and evaluate both the output of the code and code itself. 
+Getting external help has not only been used by composers, but also by programmers. In recent years the use of \ac{AI} in software development has become more and more widespread. As an experiment in this thesis I will compare "old-school" development and \ac{AI}. I will start with normal development without using \ac{AI}. Then after I have build up some knowledge with the domain and system I will try to improve upon it using \ac{AI} tools and evaluate both the output of the code and code itself. 
 \\
 
 % ////////// CONTEXT and MOTIVATION
-
+\ac{PCG} is today widespread and used in many different applications. Generating content for video games is a common example of \ac{PCG} being used in an artistic process. However the use of content using \ac{PG} is not straightforward, there is a big difference balance between hand crafting content. \ac{PCG} enables us to create more content faster, however it will be at the expense of the quality unless we have a highly sophisticated generator \cite{freiknechtSurveyProceduralGeneration2017}. However the use of \ac{PG} is not only for artistic purposes, it can have many other uses, a few examples are city planning and simulating vascular trees for medicinal purposes.
+The program \textit{ArcGIS CityEngine} is an example of \ac{PG} being used for assisting city planners in creating sketches, ideas or finished plans for cities \cite{ProceduralCityGenerator}. And \textit{VascuSynth} is used to generate volumetric image data used for vascular health analysis \cite{hamarnehVascuSynthSimulatingVascular2010}.
 Today the most common way to go about generating music is using \ac{AI} and \ac{LLM}, but what goes on inside these large models is not easy to understand and tweaking them for a specific use case is not trivial.
 Using such models enables anyone to create music, however these models are trained on large data sets and imitates what has come before not generating something truly new.
 For this thesis the focus is on the craft of creating music, breaking it down to its very primitive form, only pitches and durations.

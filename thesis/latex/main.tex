@@ -55,7 +55,20 @@
 \numberwithin{example}{section}
 \usepackage{xfrac}
 \usepackage{epigraph}
-%\usepackage{refcheck} % Enable this to ensure all imporant things have references.
+\makeatletter
+     \renewcommand*\l@figure{\@dottedtocline{1}{1em}{3.2em}}
+     \renewcommand*\l@table{\@dottedtocline{1}{1em}{3.2em}}
+     \renewcommand*{\listof}[2]{%
+          \@ifundefined{ext@#1}{\float@error{#1}}{%
+               \@namedef{l@#1}{\@dottedtocline{1}{1em}{3.2em}}%
+               \float@listhead{#2}%
+               \begingroup\setlength{\parskip}{\z@}%
+                    \@starttoc{\@nameuse{ext@#1}}%
+               \endgroup}}
+\makeatother
+\newfloat{examples}{htbp}{loe}
+
+% \usepackage{refcheck} % Enable this to ensure all imporant things have references.
 
 
 

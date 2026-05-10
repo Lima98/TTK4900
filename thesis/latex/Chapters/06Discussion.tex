@@ -1,18 +1,17 @@
 
 \section{Iterative development}
--------------------- re-read all of this ---------------
-  The iterative development process has been very useful. It has enabled me to use a few iterations to get to know the problem before trying to create the final solution. If I had started trying to solve the problem completely straight away I would have ended up with a very hap hazard solution.
-
-  Figure~\ref{fig:iteration_loc_history} shows how the three iterations grew over time. The first iteration reached a moderate code size quickly because it solved a small but concrete proof-of-concept problem: generate notes, render them in LilyPond, and optionally generate several independent voices. The second iteration started from a much smaller base and stayed smaller overall because it focused on improving the internal representation and introducing motif-based generation rather than adding many new subsystems. The third iteration grows much more rapidly because it combines a richer data model, explicit constraint handling, harmony support, form planning, rendering workflows, and later SATB-compatible extensions.
-
+  % The iterative development process has been very useful. It has enabled me to use a few iterations to get to know the problem before trying to create the final solution. If I had started trying to solve the problem completely straight away I would have ended up with a very hap hazard solution.
+  %
+  % Figure~\ref{fig:iteration_loc_history} shows how the three iterations grew over time. The first iteration reached a moderate code size quickly because it solved a small but concrete proof-of-concept problem: generate notes, render them in LilyPond, and optionally generate several independent voices. The second iteration started from a much smaller base and stayed smaller overall because it focused on improving the internal representation and introducing motif-based generation rather than adding many new subsystems. The third iteration grows much more rapidly because it combines a richer data model, explicit constraint handling, harmony support, form planning, rendering workflows, and later SATB-compatible extensions.
+  %
   \begin{figure}[h]
     \centering
       \includegraphics[width=0.95\textwidth]{Figures/05iterations/iteration_loc_history.pdf}
     \caption{Growth of the three iterations over time measured as non-empty Python source lines in the iteration-specific code. Dashed segments indicate that an iteration had been frozen while the thesis work continued.}\label{fig:iteration_loc_history}
   \end{figure}
 
-  This development pattern is important because it shows that the final system did not appear fully formed. Instead, each iteration solved a narrower version of the problem and exposed the next set of weaknesses. The first iteration showed that note generation and rendering were feasible, the second showed that musical reuse required better abstractions, and the third was where the musical rules and architectural structure were finally formalized in a way that could support a larger system.
-
+  % This development pattern is important because it shows that the final system did not appear fully formed. Instead, each iteration solved a narrower version of the problem and exposed the next set of weaknesses. The first iteration showed that note generation and rendering were feasible, the second showed that musical reuse required better abstractions, and the third was where the musical rules and architectural structure were finally formalized in a way that could support a larger system.
+  %
   \begin{table}[h]
     \centering
     \small
@@ -35,16 +34,16 @@
     \end{tabular}
     \caption{Comparison of the main musical and technical capabilities across the three iterations.}\label{tab:iteration_feature_matrix}
   \end{table}
-
-  Table~\ref{tab:iteration_feature_matrix} summarizes the practical differences between the iterations. The main observation is that the first two iterations each solved only part of the problem. Iteration one had rendering and even rudimentary multi-voice support, but the generated melodies were musically weak. Iteration two improved motivic handling and made the code structure easier to reason about, but it still lacked explicit theory-aware constraints. Only the third iteration combines musical structure, reusable abstractions, harmony handling, and a workflow that is robust enough to support the thesis examples.
-
+  %
+  % Table~\ref{tab:iteration_feature_matrix} summarizes the practical differences between the iterations. The main observation is that the first two iterations each solved only part of the problem. Iteration one had rendering and even rudimentary multi-voice support, but the generated melodies were musically weak. Iteration two improved motivic handling and made the code structure easier to reason about, but it still lacked explicit theory-aware constraints. Only the third iteration combines musical structure, reusable abstractions, harmony handling, and a workflow that is robust enough to support the thesis examples.
+  %
 \section{\ac{AI} development}
   After the first few iterations I had build up a better understanding of not only the problem, but also how I should go about solving it. Having this in the back of my mind when prompt engineering for the \ac{AI} to help me solve it make the end result a lot better than if I tried to solve it using \ac{AI} from the very beginning. 
 
 \section{The system structure}
-
-  The architectural progression is also visible when comparing the system diagrams from the three iteration chapters. Figures~\ref{fig:iter1_architecture}, \ref{fig:iter2_architecture}, and \ref{fig:iter3_architecture} show a clear movement from script-driven generation toward a more modular and theory-aware design.
-
+  %
+  % The architectural progression is also visible when comparing the system diagrams from the three iteration chapters. Figures~\ref{fig:iter1_architecture}, \ref{fig:iter2_architecture}, and \ref{fig:iter3_architecture} show a clear movement from script-driven generation toward a more modular and theory-aware design.
+  %
   \begin{table}[h]
     \centering
     \small
@@ -61,9 +60,9 @@
     \end{tabular}
     \caption{Architectural comparison of the three iterations.}\label{tab:iteration_architecture_comparison}
   \end{table}
-
-  Table~\ref{tab:iteration_architecture_comparison} complements the architecture figures by showing what changed conceptually between the iterations. The most important difference is not just that the third iteration has more modules, but that it has more explicit musical objects and clearer boundaries between responsibilities. This makes it possible to reason about melodic constraints, harmony, rendering, and future extensions separately rather than treating the generator as one monolithic script.
-
+  %
+  % Table~\ref{tab:iteration_architecture_comparison} complements the architecture figures by showing what changed conceptually between the iterations. The most important difference is not just that the third iteration has more modules, but that it has more explicit musical objects and clearer boundaries between responsibilities. This makes it possible to reason about melodic constraints, harmony, rendering, and future extensions separately rather than treating the generator as one monolithic script.
+  %
 \section{Modules? Different module discussions.}
 
 \section{The generated music}
