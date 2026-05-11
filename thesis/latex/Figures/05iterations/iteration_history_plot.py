@@ -207,27 +207,17 @@ def plot_iteration_history() -> None:
                 linestyle="--",
             )
 
-        ax.annotate(
-            name,
-            xy=(xs[-1], ys[-1]),
-            xytext=(8, 0),
-            textcoords="offset points",
-            va="center",
-            color=color,
-            fontsize=9,
-            weight="bold",
-        )
-
-    ax.set_title("Growth of the three iterations over time", fontsize=12, pad=10)
-    ax.set_ylabel("Non-empty Python LOC")
-    ax.set_xlabel("Date")
+    # ax.set_title("Growth of the three iterations over time", fontsize=12, pad=10)
+    ax.set_ylabel("Non-empty Python LOC",fontsize=14)
+    ax.set_xlabel("Date", fontsize=14)
     ax.grid(axis="y", color="#d9d9d9", linewidth=0.8)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.xaxis.set_major_locator(mdates.WeekdayLocator(interval=1))
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%d %b"))
+    ax.legend(loc="center left", bbox_to_anchor=(1.02, 0.5), frameon=False, fontsize=14)
     fig.autofmt_xdate()
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0, 0.86, 1))
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     fig.savefig(OUTPUT_DIR / "iteration_loc_history.pdf", bbox_inches="tight")

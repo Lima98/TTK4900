@@ -240,7 +240,7 @@ def draw_partition_tree(root: Node, output_dir: Path) -> None:
             )
         )
         cx, cy = leaf.rect.center
-        ax.text(cx, cy, f"{leaf.rect.w}x{leaf.rect.h}", ha="center", va="center", fontsize=8.5)
+        ax.text(cx, cy, f"{leaf.rect.w}x{leaf.rect.h}", ha="center", va="center", fontsize=14)
 
     for node in internal_nodes(root):
         ax.add_patch(
@@ -337,7 +337,7 @@ def draw_final_dungeon(grid: List[List[int]], output_dir: Path) -> None:
         Rectangle((0, 0), 1, 1, facecolor=colors[2], edgecolor="#111111", label="room"),
         Rectangle((0, 0), 1, 1, facecolor=colors[3], edgecolor="#111111", label="corridor"),
     ]
-    ax.legend(handles=legend, loc="upper center", bbox_to_anchor=(0.5, -0.04), ncol=4, frameon=False, fontsize=8.5)
+    ax.legend(handles=legend, loc="upper center", bbox_to_anchor=(0.5, -0.04), ncol=4, frameon=False, fontsize=14)
     save_figure(fig, output_dir, "03_final_bsp_dungeon")
 
 

@@ -32,6 +32,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.colors import ListedColormap
+from matplotlib.gridspec import GridSpec
 from matplotlib.patches import Rectangle
 
 
@@ -203,11 +204,103 @@ def draw_terrain_pipeline(width: int, height: int, seed: int, output_dir: Path) 
         bbox_to_anchor=(0.5, -0.08),
         ncol=2,
         frameon=False,
-        fontsize=7.8,
+        fontsize=14,
     )
 
     fig.subplots_adjust(top=0.95, bottom=0.12, left=0.03, right=0.97, wspace=0.16)
     save_figure(fig, output_dir, "03_noise_to_terrain")
+
+
+def draw_octaves_to_terrain_story(width: int, height: int, seed: int, output_dir: Path) -> None:
+    """Recreate the full octave-layering and terrain-classification thesis figure."""
+
+    octave_layers = [
+        ("1 octave", fbm_noise(width, height, seed=seed, octaves=1, base_frequency=3)),
+        ("3 octaves", fbm_noise(width, height, seed=seed, octaves=3, base_frequency=3)),
+        ("6 octaves", fbm_noise(width, height, seed=seed, octaves=6, base_frequency=3)),
+    ]
+
+    noise = octave_layers[-1][1]
+    falloff = radial_falloff(width, height)
+    heightmap = normalize(noise * 0.74 + falloff * 0.42)
+    terrain = classify_terrain(heightmap)
+    terrain_cmap = ListedColormap([color for _, color in TERRAIN])
+
+    fig = plt.figure(figsize=(10.6, 7.0))
+    grid = GridSpec(
+        5,
+        3,
+        figure=fig,
+        height_ratios=[0.35, 2.35, 0.35, 2.55, 0.9],
+        hspace=0.22,
+        wspace=0.08,
+    )
+
+    title_ax_top = fig.add_subplot(grid[0, :])
+    title_ax_top.axis("off")
+    title_ax_top.text(
+        0.5,
+        0.4,
+        "layering different octaves",
+        ha="center",
+        va="center",
+        fontsize=12,
+        style="italic",
+    )
+
+    for column, (title, layer) in enumerate(octave_layers):
+        ax = fig.add_subplot(grid[1, column])
+        ax.imshow(layer, cmap="viridis", interpolation="nearest")
+        ax.set_title(title, fontsize=11, pad=6)
+        ax.set_xticks([])
+        ax.set_yticks([])
+
+    title_ax_bottom = fig.add_subplot(grid[2, :])
+    title_ax_bottom.axis("off")
+    title_ax_bottom.text(
+        0.5,
+        0.4,
+        "classifying the noise",
+        ha="center",
+        va="center",
+        fontsize=12,
+        style="italic",
+    )
+
+    pipeline_titles = ["layered noise", "height map + falloff", "classified terrain"]
+    pipeline_data = [
+        (noise, {"cmap": "viridis"}),
+        (heightmap, {"cmap": "terrain"}),
+        (terrain, {"cmap": terrain_cmap, "vmin": 0, "vmax": len(TERRAIN) - 1}),
+    ]
+
+    for column, (title, (data, kwargs)) in enumerate(zip(pipeline_titles, pipeline_data)):
+        ax = fig.add_subplot(grid[3, column])
+        ax.imshow(data, interpolation="nearest", **kwargs)
+        ax.set_title(title, fontsize=11, pad=6)
+        ax.set_xticks([])
+        ax.set_yticks([])
+
+    legend_ax = fig.add_subplot(grid[4, :])
+    legend_ax.axis("off")
+    legend_handles = [
+        Rectangle((0, 0), 1, 1, facecolor=color, edgecolor="#222222", label=name)
+        for name, color in TERRAIN
+    ]
+    legend_ax.legend(
+        handles=legend_handles,
+        loc="center",
+        ncol=4,
+        frameon=False,
+        fontsize=14,
+        columnspacing=1.4,
+        handlelength=1.4,
+        handletextpad=0.55,
+        borderaxespad=0.0,
+    )
+
+    fig.subplots_adjust(left=0.04, right=0.96, top=0.97, bottom=0.05)
+    save_figure(fig, output_dir, "03_noise_to_terrain_story")
 
 
 def draw_parameter_control(width: int, height: int, seed: int, output_dir: Path) -> None:
@@ -242,6 +335,7 @@ def main() -> None:
     draw_seed_comparison(args.width, args.height, [12, 42, 77], args.output_dir)
     draw_octave_layers(args.width, args.height, args.seed, args.output_dir)
     draw_terrain_pipeline(args.width, args.height, args.seed, args.output_dir)
+    draw_octaves_to_terrain_story(args.width, args.height, args.seed, args.output_dir)
     draw_parameter_control(args.width, args.height, args.seed, args.output_dir)
 
     print(f"Wrote figures to {args.output_dir}")
