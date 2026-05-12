@@ -14,6 +14,7 @@ import re
 import subprocess
 import sys
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 
 
@@ -27,22 +28,9 @@ THESIS_DIR = ROOT / "thesis" / "latex"
 THESIS_SOURCE_EXAMPLES = ROOT / "thesis" / "examples"
 CHAPTER_DIR = THESIS_DIR / "Chapters"
 MAIN_AUX = THESIS_DIR / "main.aux"
+MAIN_TOC = THESIS_DIR / "main.toc"
+MAIN_PDF = THESIS_DIR / "main.pdf"
 OUTPUT = WEBPAGE_DIR / "index.html"
-PDF_PAGE_OFFSET = 11
-
-
-SECTION_TITLES = {
-    "2.2": "Music Theory Examples",
-    "6.1": "First Iteration Results",
-    "6.2": "Second Iteration Results",
-}
-
-
-SECTION_DESCRIPTIONS = {
-    "2.2": "Examples related to scales, harmony, and interval structure.",
-    "6.1": "Examples from the first melody-generation iteration.",
-    "6.2": "Examples from the second melody-generation iteration.",
-}
 
 
 @dataclass(frozen=True)
@@ -53,28 +41,34 @@ class AuxLabel:
 
 
 @dataclass(frozen=True)
+class SectionMeta:
+    chapter_title: str
+    section_title: str
+
+
+@dataclass(frozen=True)
 class Example:
     number: str
     printed_page: int
+    pdf_page: int
     title: str
     label: str
     pdf: Path
     wav: Path | None
     ratio: float
     tags: tuple[str, ...]
+    chapter_title: str
+    section_title: str
 
     @property
     def section(self) -> str:
         return ".".join(self.number.split(".")[:2])
 
-    @property
-    def pdf_page(self) -> int:
-        return self.printed_page + PDF_PAGE_OFFSET
-
 
 def main() -> None:
     labels = read_aux_labels(MAIN_AUX)
-    examples = collect_examples(labels)
+    sections = read_section_meta(MAIN_TOC)
+    examples = collect_examples(labels, sections)
     OUTPUT.write_text(render_page(examples), encoding="utf-8")
     print(f"Wrote {OUTPUT.relative_to(ROOT)} with {len(examples)} example(s).")
     missing_audio = [example.number for example in examples if example.wav is None]
@@ -99,7 +93,7 @@ def read_aux_labels(path: Path) -> dict[str, AuxLabel]:
     return labels
 
 
-def collect_examples(labels: dict[str, AuxLabel]) -> list[Example]:
+def collect_examples(labels: dict[str, AuxLabel], sections: dict[str, SectionMeta]) -> list[Example]:
     examples: list[Example] = []
     for chapter in sorted(CHAPTER_DIR.glob("*.tex")):
         text = chapter.read_text(encoding="utf-8")
@@ -119,19 +113,48 @@ def collect_examples(labels: dict[str, AuxLabel]) -> list[Example]:
             aux = labels[label]
             title = aux.caption or caption_from_body(body)
             wav = find_audio_for_score(pdf)
+            section_number = ".".join(aux.number.split(".")[:2])
+            section_meta = sections.get(section_number, SectionMeta(chapter_title=f"Section {section_number}", section_title="Examples"))
             examples.append(
                 Example(
                     number=aux.number,
                     printed_page=aux.printed_page,
+                    pdf_page=find_pdf_page_for_example(aux.number, aux.printed_page),
                     title=title.rstrip("."),
                     label=label,
                     pdf=pdf,
                     wav=wav,
                     ratio=pdf_aspect_ratio(pdf),
-                    tags=tags_for(pdf, aux.number),
+                    tags=tags_for(pdf, aux.number, title, section_meta.chapter_title, section_meta.section_title),
+                    chapter_title=section_meta.chapter_title,
+                    section_title=section_meta.section_title,
                 )
             )
     return sorted(examples, key=lambda example: tuple(int(part) for part in example.number.split(".")))
+
+
+def read_section_meta(path: Path) -> dict[str, SectionMeta]:
+    sections: dict[str, SectionMeta] = {}
+    current_chapter = ""
+    chapter_pattern = re.compile(
+        r"\\contentsline \{chapter\}\{\s*\\numberline \{(?P<number>\d+)\}(?P<title>.*?)\}\{"
+    )
+    section_pattern = re.compile(
+        r"\\contentsline \{section\}\{\s*\\numberline \{(?P<number>\d+\.\d+)\}(?P<title>.*?)\}\{"
+    )
+    for line in path.read_text(encoding="utf-8").splitlines():
+        chapter_match = chapter_pattern.search(line)
+        if chapter_match:
+            current_chapter = clean_latex(chapter_match.group("title"))
+            continue
+        section_match = section_pattern.search(line)
+        if section_match and current_chapter:
+            number = section_match.group("number")
+            sections[number] = SectionMeta(
+                chapter_title=current_chapter,
+                section_title=clean_latex(section_match.group("title")),
+            )
+    return sections
 
 
 def caption_from_body(body: str) -> str:
@@ -140,6 +163,9 @@ def caption_from_body(body: str) -> str:
 
 
 def clean_latex(value: str) -> str:
+    cleaned = re.sub(r"\\blx@tocontentsinit\s*\{[^}]*\}", "", value)
+    cleaned = re.sub(r"\\cite[a-zA-Z]*\*?(?:\[[^\]]*\])?\s*\{[^}]*\}", "", cleaned)
+    cleaned = re.sub(r"\\examplelink(?:\[[^\]]*\])?", "", cleaned)
     replacements = {
         r"\musPitch": "",
         r"\musFlat": "flat",
@@ -147,13 +173,13 @@ def clean_latex(value: str) -> str:
         r"\textit": "",
         r"\textbf": "",
     }
-    cleaned = value
     for source, target in replacements.items():
         cleaned = cleaned.replace(source, target)
     cleaned = re.sub(r"\\[a-zA-Z]+\*?", "", cleaned)
     cleaned = cleaned.replace("{", "").replace("}", "")
     cleaned = cleaned.replace("~", " ")
     cleaned = re.sub(r"\s+", " ", cleaned)
+    cleaned = re.sub(r"\s+([.,;:!?])", r"\1", cleaned)
     return cleaned.strip()
 
 
@@ -176,6 +202,44 @@ def pdf_aspect_ratio(path: Path) -> float:
     if height <= 0:
         return 3.0
     return max(1.4, min(width / height, 6.5))
+
+
+@lru_cache(maxsize=1)
+def thesis_pdf_page_count() -> int:
+    try:
+        result = subprocess.run(
+            ["mutool", "info", str(MAIN_PDF)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return 0
+    match = re.search(r"Pages:\s+(?P<count>\d+)", result.stdout)
+    return int(match.group("count")) if match else 0
+
+
+@lru_cache(maxsize=None)
+def thesis_pdf_page_text(page_number: int) -> str:
+    try:
+        result = subprocess.run(
+            ["mutool", "draw", "-F", "txt", "-o", "-", str(MAIN_PDF), str(page_number)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return ""
+    return result.stdout
+
+
+def find_pdf_page_for_example(number: str, printed_page: int) -> int:
+    needle = f"Example {number}:"
+    page_count = thesis_pdf_page_count()
+    for page_number in range(1, page_count + 1):
+        if needle in thesis_pdf_page_text(page_number):
+            return page_number
+    return printed_page
 
 
 def find_audio_for_score(pdf: Path) -> Path | None:
@@ -231,28 +295,50 @@ def find_existing_audio(pdf: Path) -> Path | None:
     return None
 
 
-def tags_for(pdf: Path, number: str) -> tuple[str, ...]:
+def normalize_tag(tag: str) -> str:
+    normalized = clean_latex(tag).strip()
+    if normalized.lower() == "music theory":
+        return "Music Theory"
+    if normalized.lower() == "results":
+        return "Results"
+    return normalized.title()
+
+
+def tags_for(pdf: Path, number: str, title: str, chapter_title: str, section_title: str) -> tuple[str, ...]:
     path_text = pdf.as_posix().lower()
+    title_text = title.lower()
     tags: list[str] = []
+    if chapter_title and chapter_title.lower() != "background":
+        tags.append(normalize_tag(chapter_title.removeprefix("The ")))
+    if section_title:
+        tags.append(normalize_tag(section_title))
     if "04theory" in path_text:
-        tags.append("Theory")
+        tags.append("Music Theory")
     if "iter1" in path_text:
         tags.append("Iteration 1")
     if "iter2" in path_text:
         tags.append("Iteration 2")
-    if "scale" in path_text:
+    if "scale" in path_text or "scale" in title_text:
         tags.append("Scale")
-    if "interval" in path_text:
+    if "interval" in path_text or "interval" in title_text:
         tags.append("Intervals")
-    if "register" in path_text:
+    if "triad" in title_text or "chord" in title_text or "majmin" in path_text:
+        tags.append("Harmony")
+    if "timesig" in path_text or "time signature" in title_text:
+        tags.append("Rhythm")
+    if "register" in path_text or "range" in title_text:
         tags.append("Range")
-    if "voices" in path_text:
+    if "voices" in path_text or "multi" in title_text:
         tags.append("Multi-Voice")
-    if "melody" in path_text:
+    if "melody" in path_text or "melody" in title_text:
         tags.append("Melody")
     if not tags:
         tags.append(f"Section {'.'.join(number.split('.')[:2])}")
-    return tuple(tags)
+    unique_tags: list[str] = []
+    for tag in tags:
+        if tag.lower() not in [existing.lower() for existing in unique_tags]:
+            unique_tags.append(tag)
+    return tuple(unique_tags)
 
 
 def rel(path: Path) -> str:
@@ -262,7 +348,7 @@ def rel(path: Path) -> str:
 def render_page(examples: list[Example]) -> str:
     sections = group_by_section(examples)
     nav = "\n".join(
-        f'        <a href="#chapter-{section.replace(".", "-")}">Section {section} - {html.escape(section_title(section))}</a>'
+        f'        <a href="#chapter-{section.replace(".", "-")}">Section {section} - {html.escape(section_title(section, sections[section]))}</a>'
         for section in sections
     )
     section_html = "\n\n".join(render_section(section, items) for section, items in sections.items())
@@ -277,6 +363,7 @@ def render_page(examples: list[Example]) -> str:
     </style>
   </head>
   <body>
+    <div id="top"></div>
     <header class="hero">
       <div class="hero-inner">
         <div class="hero-copy">
@@ -302,6 +389,7 @@ def render_page(examples: list[Example]) -> str:
       <nav class="sidebar" aria-label="Page sections">
         <h2>Navigate</h2>
 {nav}
+        <a class="back-to-top" href="#top">Back to top</a>
       </nav>
 
       <main class="content">
@@ -322,12 +410,20 @@ def group_by_section(examples: list[Example]) -> dict[str, list[Example]]:
     return grouped
 
 
-def section_title(section: str) -> str:
-    return SECTION_TITLES.get(section, f"Section {section} Examples")
+def section_title(section: str, examples: list[Example] | None = None) -> str:
+    if examples:
+        if section == "2.2":
+            return f"{examples[0].section_title} Examples"
+        return f"{examples[0].chapter_title} Examples"
+    return f"Section {section} Examples"
 
 
-def section_description(section: str) -> str:
-    return SECTION_DESCRIPTIONS.get(section, "Examples referenced in this thesis section.")
+def section_description(section: str, examples: list[Example] | None = None) -> str:
+    if examples:
+        chapter_title = examples[0].chapter_title
+        section_name = examples[0].section_title.lower()
+        return f"Examples referenced in the {section_name} section of {chapter_title.lower()}."
+    return "Examples referenced in this thesis section."
 
 
 def render_section(section: str, examples: list[Example]) -> str:
@@ -336,8 +432,8 @@ def render_section(section: str, examples: list[Example]) -> str:
     return f"""        <section class="chapter" id="chapter-{section_id}">
           <div class="chapter-header">
             <span>Section {html.escape(section)}</span>
-            <h2>{html.escape(section_title(section))}</h2>
-            <p>{html.escape(section_description(section))}</p>
+            <h2>{html.escape(section_title(section, examples))}</h2>
+            <p>{html.escape(section_description(section, examples))}</p>
           </div>
 
           <div class="example-grid">
@@ -359,7 +455,6 @@ def render_card(example: Example) -> str:
               <div class="example-top">
                 <div class="example-heading">
                   <p class="example-number">{html.escape(example.number)}</p>
-                  <h3>{html.escape(example.title)}</h3>
                   <div class="meta">
 {tags}
                   </div>

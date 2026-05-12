@@ -1,0 +1,34 @@
+\section{Iterative development}
+
+  \epigraph{
+A major problem in the design of a computer system is that many aspects of system behaviour and performance are not discovered until the system has been built...\cite{zurcherIterativeMultiLevelModeling1968}}{\textit{F.W. Zurcher \\ B. Randell}}
+
+  Iterative development is a way of building a system through repeated cycles of implementation, evaluation, and revision. Instead of trying to design the entire system perfectly from the beginning, a smaller version is built first, then examined to identify weaknesses, missing functionality, or new opportunities. The next version is then developed using the knowledge gained from the previous one.
+
+  This approach is especially useful when the problem is only partly understood at the beginning, or when the behaviour of the system cannot be fully predicted from planning alone. In such cases, implementation itself becomes a way of learning about the problem.
+
+  \input{Figures/04theory/iterative_cycle}
+
+\subsection{Prototype and evaluation}
+
+  A central part of iterative development is the use of prototypes. A prototype does not need to solve the whole problem well, but it should be useful for exposing important properties of the system. By building something early, it becomes possible to observe practical issues that may not be visible in an abstract design.
+
+  This means that evaluation is not only something that happens at the end of a project. Instead, evaluation becomes part of the development method itself. After each version, the developer can ask what works, what fails, what is missing, and which assumptions need to be changed before the next version is attempted.
+
+\subsection{Why iterative development is useful}
+
+  The main strength of iterative development is that it allows the design to improve in response to concrete observations. This can reduce the risk of spending a large amount of time refining an initial plan that turns out to be based on poor assumptions. It also makes the process more adaptable, since new requirements or insights can be incorporated between iterations instead of forcing them into an unsuitable original structure.
+
+  Another strength is that the process naturally produces intermediate results. Even if early versions are limited, they often reveal which parts of the system are easiest to solve, which parts are hardest, and which abstractions are most useful. This knowledge can then guide the next design decisions.
+
+\subsection{Limitations}
+
+  Iterative development is not without drawbacks. Repeated redesign can lead to extra work, especially if an early version is built on assumptions that later prove to be incompatible with the desired final system. There is also a risk that the project becomes a sequence of local fixes rather than a coherent whole if the lessons from one iteration are not properly summarized and carried forward.
+
+  For this reason an iterative process still requires reflection and planning. The value of the method does not come from rewriting the system repeatedly for its own sake, but from using each revision to make the next version better informed than the last.
+
+\subsection{Relevance to the thesis}
+
+  Iterative development is relevant to this thesis because the project concerns a creative and technically uncertain problem. A melody generator is not only a software system, but also a musical one, meaning that its quality cannot be judged solely by whether it runs correctly. It must also be evaluated according to how coherent, singable, and useful the generated musical output is.
+
+  Because of this, a purely top-down design would have been difficult. Many of the important requirements become visible only after hearing and inspecting generated examples. An iterative process is therefore a suitable background method for the project: it supports prototyping, evaluation of musical output, and revision of both the code structure and the musical rules between versions.

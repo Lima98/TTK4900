@@ -327,6 +327,25 @@
 
 
 
+<div class="viewcode-block" id="ChoraleScore">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.structure.ChoraleScore">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChoraleScore</span><span class="p">:</span>
+    <span class="n">key</span><span class="p">:</span> <span class="n">Key</span>
+    <span class="n">time_signature</span><span class="p">:</span> <span class="n">TimeSignature</span>
+    <span class="n">soprano</span><span class="p">:</span> <span class="n">Melody</span>
+    <span class="n">alto</span><span class="p">:</span> <span class="n">Melody</span>
+    <span class="n">tenor</span><span class="p">:</span> <span class="n">Melody</span>
+    <span class="n">bass</span><span class="p">:</span> <span class="n">Melody</span>
+    <span class="n">harmony_plan</span><span class="p">:</span> <span class="n">HarmonyPlan</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">HarmonyPlan</span><span class="p">)</span>
+    <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">voices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Melody</span><span class="p">,</span> <span class="n">Melody</span><span class="p">,</span> <span class="n">Melody</span><span class="p">,</span> <span class="n">Melody</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soprano</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alto</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tenor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bass</span><span class="p">)</span></div>
+
+
+
 <div class="viewcode-block" id="GenerationSettings">
 <a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.structure.GenerationSettings">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -347,6 +366,7 @@
     <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">7</span>
     <span class="n">form_plan</span><span class="p">:</span> <span class="n">FormPlan</span> <span class="o">=</span> <span class="n">FormPlan</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;free&quot;</span><span class="p">)</span>
     <span class="n">clef</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">texture</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;melody&quot;</span>
     <span class="n">voice_profile</span><span class="p">:</span> <span class="n">VoiceProfile</span> <span class="o">=</span> <span class="n">VoiceProfile</span><span class="p">(</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;melody&quot;</span><span class="p">,</span>
         <span class="n">range_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>

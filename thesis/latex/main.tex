@@ -38,7 +38,18 @@
     } %sets new page command to insert an empty page without adding to the page counter or having a page number
 
 
-% MY OWN PACKAGES
+% MY OWN COMMANDS AND PACKAGES
+\makeatletter
+\newcommand{\master@linktext}{Listen in the online archive}
+\newcommand{\examplelink}[1][\master@linktext]{%
+  \begingroup
+  \edef\master@rawexample{\theexample}%
+  \StrSubstitute{\master@rawexample}{.}{-}[\master@anchorexample]%
+  \xdef\master@currentlink{\noexpand\href{https://lima98.github.io/TTK4900/\#example-\master@anchorexample}{#1}}%
+  \endgroup
+  \master@currentlink
+}
+\makeatother
 \usepackage{tikz}
 \usetikzlibrary{positioning,arrows.meta,fit}
 \usepackage[colorlinks=true,
@@ -173,6 +184,7 @@ Department of Engineering Cybernetics\\
 %main content 
 
 \pagenumbering{arabic}
+
 \chapter{Introduction}
 \input{Chapters/03Introduction}
 \cleardoublepage
@@ -197,9 +209,9 @@ Department of Engineering Cybernetics\\
 \input{Chapters/05-Third-iteration}
 \cleardoublepage
 
-\chapter{Results}
-\input{Chapters/05Results}
-\cleardoublepage
+% \chapter{Results}
+% \input{Chapters/05Results}
+% \cleardoublepage
 
 \chapter{Discussion}
 \input{Chapters/06Discussion}

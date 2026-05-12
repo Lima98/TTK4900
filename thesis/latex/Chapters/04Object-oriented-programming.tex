@@ -1,7 +1,41 @@
 \section{Object oriented programming}
 
-  \ac{OOP} had its inception in the sixties with the \textit{aritficial intelligence} group at \ac{MIT}. Here the term "object" was used in the language family \ac{LISP} to refer to \ac{LISP} atoms\footnote{a \ac{LISP} atom is an indivisible entity in the language. \ac{LISP} consist of two data types, atoms and lists. And a list can only contain atoms or other lists} with with certain attributes or properties \cite{ObjectorientedProgramming2026}.
+\subsection{Basic idea}
 
-  \subsection{Features of OOP}
+  \ac{OOP} is a way of structuring software around \textit{objects}. An object combines data and behaviour, meaning that it stores information and also provides operations that can act on that information. Instead of treating a program as one long sequence of instructions, the program is divided into units that represent meaningful concepts in the problem domain \cite{ObjectorientedProgramming2026,JacobsonOOSE}.
 
-  Some of the useful features of \ac{OOP} are that we can achieve using \ac{OOP} is ...
+  In practical terms this usually means that the programmer defines a \textit{class}, which acts as a template, and then creates \textit{objects} from that class. Figure~\ref{fig:oop_class_object} illustrates this idea using a simple melody example. The class describes what information a melody should contain and what operations are available, while the object is one concrete melody with specific values.
+
+  \input{Figures/04theory/oop_class_object}
+
+\subsection{Encapsulation and abstraction}
+
+  Two central ideas in \ac{OOP} are encapsulation and abstraction. Encapsulation means that related data and behaviour are grouped together. For example, instead of storing note events in one place and melody-related operations in another, they can be kept together in a single object. This makes the program easier to reason about because the responsibilities of each object become clearer.
+
+  Abstraction means that a class can expose the parts of the system that are important for the user of the class, while hiding unnecessary implementation details. In a well-structured program this reduces complexity, because a developer can interact with a class through a small set of meaningful operations instead of having to understand every internal detail immediately.
+
+\subsection{Composition and inheritance}
+
+  Another important idea in \ac{OOP} is the relationship between objects. One common relationship is \textit{composition}, where one object consists of one or more other objects. A simple example is that a melody can consist of several note objects. This is often a natural way to model structured data.
+
+  A second common relationship is \textit{inheritance}, where a class derives behaviour from a more general parent class. Inheritance can be useful when several classes share a lot of common structure. However, inheritance is not always the best solution. In many cases it is simpler and clearer to combine several smaller objects instead of building a deep hierarchy of subclasses.
+
+\subsection{Polymorphism}
+
+  Polymorphism means that several different classes can be used through the same interface. This allows a program to treat them uniformly even though their internal behaviour differs. Figure~\ref{fig:oop_iter3_model} shows a simple example of this idea. Different constraint classes can implement the same operation, for instance checking whether a musical candidate satisfies a certain rule, while each class applies a different criterion.
+
+  \input{Figures/04theory/oop_iter3_model}
+
+  This is useful because it allows a system to be extended without rewriting the code that uses the interface. New rules or behaviours can be introduced by defining a new class that follows the same pattern as the existing ones.
+
+\subsection{Relevance to the thesis}
+
+  In this thesis \ac{OOP} is relevant because the project works with structured musical concepts rather than only raw numbers. Notes, melodies, motifs, harmonic structures, and constraints are easier to reason about when they are represented as explicit objects. This does not mean that \ac{OOP} alone solves the problem of generating good music, but it provides a useful way of organising the software such that the program structure can reflect the musical structure being discussed.
+
+  For this reason \ac{OOP} is part of the theoretical background of the project. Later in the thesis, when the actual iterations and software architecture are discussed, these ideas become relevant in a more concrete way. The purpose of this section is therefore only to introduce the central concepts so that the design decisions in the later chapters are easier to follow.
+
+\subsection{Strengths and limitations}
+
+  The main strength of \ac{OOP} is that it can make a large program easier to structure, understand, and extend. By giving different responsibilities to different classes, the code can be decomposed into smaller and more meaningful parts. This is especially useful when the problem domain itself has many distinguishable entities.
+
+  At the same time, \ac{OOP} is not automatically a good design. Poorly chosen classes can make the program more confusing rather than less. Too much abstraction can make the code difficult to inspect, while unnecessary inheritance can create rigid structures that are hard to modify. Therefore the value of \ac{OOP} depends on whether the object model matches the actual problem being solved.

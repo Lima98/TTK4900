@@ -1,0 +1,47 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.92\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=12mm and 14mm,
+    classbox/.style={
+      draw,
+      rounded corners=3pt,
+      minimum width=58mm,
+      align=left,
+      fill=blue!6
+    },
+    objectbox/.style={
+      draw,
+      rounded corners=3pt,
+      minimum width=58mm,
+      align=left,
+      fill=green!7
+    },
+    arrow/.style={-{Latex[length=2.3mm]}, thick}
+  ]
+    \node[classbox] (class) {
+      \textbf{Class: Melody}\\[1mm]
+      Attributes:\\
+      \quad title\\
+      \quad events\\
+      \quad key\\[1mm]
+      Methods:\\
+      \quad add\_event()\\
+      \quad get\_length()
+    };
+
+    \node[objectbox, right=28mm of class] (object) {
+      \textbf{Object: melody\_a}\\[1mm]
+      title = ``Example theme''\\
+      events = (c4, d4, e4, g4, \ldots)\\
+      key = C major
+    };
+
+    \draw[arrow] (class) -- node[above, align=center] {instantiated as\\a concrete melody} (object);
+  \end{tikzpicture}%
+  }
+  \caption{A simple illustration of the difference between a class and an object. A class describes what kind of data and behaviour an object has, while an object stores one concrete instance.}
+  \label{fig:oop_class_object}
+\end{figure}

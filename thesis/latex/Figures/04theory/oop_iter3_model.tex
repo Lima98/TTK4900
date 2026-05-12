@@ -1,0 +1,68 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=10mm and 14mm,
+    class/.style={
+      draw,
+      rounded corners=3pt,
+      align=left,
+      fill=gray!8,
+      minimum width=42mm
+    },
+    support/.style={
+      draw,
+      rounded corners=3pt,
+      align=left,
+      fill=blue!6,
+      minimum width=34mm
+    },
+    arrow/.style={-{Latex[length=2.3mm]}, thick}
+  ]
+    \node[class] (generator) {
+      \textbf{Generator}\\
+      create()\\
+      evaluate()\\
+      export()
+    };
+
+    \node[class, left=24mm of generator] (melody) {
+      \textbf{Melody}\\
+      title\\
+      key\\
+      events: Note[]
+    };
+
+    \node[support, below=of melody] (note) {
+      \textbf{Note}\\
+      pitch\\
+      duration
+    };
+
+    \node[support, right=24mm of generator] (constraint) {
+      \textbf{Constraint}\\
+      check(candidate)
+    };
+
+    \node[support, above right=of constraint] (range) {
+      \textbf{RangeConstraint}\\
+      checks pitch range
+    };
+
+    \node[support, below right=of constraint] (cadence) {
+      \textbf{CadenceConstraint}\\
+      checks phrase ending
+    };
+
+    \draw[arrow] (generator) -- node[above] {creates} (melody);
+    \draw[arrow] (note) -- node[left] {contained in} (melody);
+    \draw[arrow] (constraint) -- node[above] {used by} (generator);
+    \draw[arrow] (range) -- (constraint);
+    \draw[arrow] (cadence) -- (constraint);
+  \end{tikzpicture}%
+  }
+  \caption{A simple object-oriented example showing two important ideas. Composition is used when a melody consists of note objects, while polymorphism is used when different constraint classes can be treated through one shared interface.}
+  \label{fig:oop_iter3_model}
+\end{figure}

@@ -1,0 +1,44 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.9\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    stage/.style={
+      draw,
+      rounded corners=4pt,
+      minimum width=38mm,
+      minimum height=12mm,
+      align=center,
+      fill=blue!6
+    },
+    core/.style={
+      draw,
+      circle,
+      minimum size=26mm,
+      align=center,
+      fill=green!10
+    },
+    arrow/.style={-{Latex[length=2.3mm]}, thick}
+  ]
+    \node[core] (center) at (0,0) {knowledge\\gained};
+
+    \node[stage] (idea) at (0,2.8) {idea or\\specification};
+    \node[stage] (build) at (4.6,0) {prototype or\\implementation};
+    \node[stage] (eval) at (0,-2.8) {evaluate\\result};
+    \node[stage] (revise) at (-4.6,0) {revise model\\and requirements};
+
+    \draw[arrow] (idea.east) .. controls +(15:14mm) and +(90:10mm) .. (build.north);
+    \draw[arrow] (build.south) .. controls +(-90:10mm) and +(0:14mm) .. (eval.east);
+    \draw[arrow] (eval.west) .. controls +(180:14mm) and +(-90:10mm) .. (revise.south);
+    \draw[arrow] (revise.north) .. controls +(90:10mm) and +(165:14mm) .. (idea.west);
+
+    % \draw[arrow] (idea) -- (center);
+    % \draw[arrow] (build) -- (center);
+    \draw[arrow] (eval) -- (center);
+    % \draw[arrow] (revise) -- (center);
+  \end{tikzpicture}%
+  }
+  \caption{A simplified iterative development cycle. Each cycle begins with an idea, produces a prototype, evaluates the result, and revises the design before the next cycle begins. The knowledge gained from each stage informs the overall process.}
+  \label{fig:iterative_cycle}
+\end{figure}

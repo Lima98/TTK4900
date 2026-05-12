@@ -116,11 +116,13 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.theory.accidental_suffix">accidental_suffix() (in module melody_engine.theory)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.theory.accidental_value">accidental_value() (in module melody_engine.theory)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.allowed_durations">allowed_durations (melody_engine.structure.GenerationSettings attribute)</a>
+</li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.alto">alto (melody_engine.structure.ChoraleScore attribute)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.attempts">attempts (melody_engine.structure.GenerationSettings attribute)</a>
 </li>
@@ -136,21 +138,23 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.bars">bars (melody_engine.structure.GenerationSettings attribute)</a>
 </li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.bass">bass (melody_engine.structure.ChoraleScore attribute)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.CandidateContext.beat_in_bar">beat_in_bar (melody_engine.constraints.CandidateContext attribute)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.TimeSignature.beat_unit">beat_unit (melody_engine.structure.TimeSignature attribute)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.TimeSignature.beats_per_bar">beats_per_bar (melody_engine.structure.TimeSignature attribute)</a>
 </li>
+      <li><a href="api/main-module.html#main.build_chorale_plan">build_chorale_plan() (in module main)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/main-module.html#main.build_constraints">build_constraints() (in module main)</a>
 </li>
       <li><a href="api/main-module.html#main.build_default_harmony_plan">build_default_harmony_plan() (in module main)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/main-module.html#main.build_form_plan">build_form_plan() (in module main)</a>
-</li>
-      <li><a href="api/main-module.html#main.build_future_chorale_plan">build_future_chorale_plan() (in module main)</a>
 </li>
       <li><a href="api/main-module.html#main.build_generate_parser">build_generate_parser() (in module main)</a>
 </li>
@@ -180,7 +184,11 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.chorale_plan">chorale_plan (melody_engine.structure.GenerationSettings attribute)</a>
 </li>
+      <li><a href="api/melody-engine.html#melody_engine.lilypond.chorale_to_lilypond_source">chorale_to_lilypond_source() (in module melody_engine.lilypond)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.structure.ChoralePlan">ChoralePlan (class in melody_engine.structure)</a>
+</li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore">ChoraleScore (class in melody_engine.structure)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.HarmonyPlan.chord_for_bar">chord_for_bar() (melody_engine.structure.HarmonyPlan method)</a>
 </li>
@@ -190,10 +198,10 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.theory.Key.chord_tones">chord_tones() (melody_engine.theory.Key method)</a>
 </li>
-      <li><a href="api/melody-engine.html#melody_engine.constraints.ChordTonePreferenceConstraint">ChordTonePreferenceConstraint (class in melody_engine.constraints)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/melody-engine.html#melody_engine.constraints.ChordTonePreferenceConstraint">ChordTonePreferenceConstraint (class in melody_engine.constraints)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.structure.NoteCandidate.chromatic_adjustment">chromatic_adjustment (melody_engine.structure.NoteCandidate attribute)</a>
 
       <ul>
@@ -228,10 +236,12 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/main-module.html#main.default_function_symbols">default_function_symbols() (in module main)</a>
 </li>
-      <li><a href="api/main-module.html#main.describe_melody">describe_melody() (in module main)</a>
+      <li><a href="api/main-module.html#main.describe_chorale">describe_chorale() (in module main)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/main-module.html#main.describe_melody">describe_melody() (in module main)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.DirectionChangeConstraint">DirectionChangeConstraint (class in melody_engine.constraints)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.NoteEvent.duration">duration (melody_engine.structure.NoteEvent attribute)</a>
@@ -290,6 +300,8 @@
         <li><a href="api/melody-engine.html#melody_engine.structure.Motif.events">(melody_engine.structure.Motif attribute)</a>
 </li>
       </ul></li>
+      <li><a href="api/melody-engine.html#melody_engine.lilypond.export_chorale">export_chorale() (in module melody_engine.lilypond)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.lilypond.export_melody">export_melody() (in module melody_engine.lilypond)</a>
 </li>
   </ul></td>
@@ -336,8 +348,12 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.harmonic_plan">harmonic_plan (melody_engine.structure.GenerationSettings attribute)</a>
 </li>
-      <li><a href="api/melody-engine.html#melody_engine.structure.Melody.harmony_plan">harmony_plan (melody_engine.structure.Melody attribute)</a>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.harmony_plan">harmony_plan (melody_engine.structure.ChoraleScore attribute)</a>
+
+      <ul>
+        <li><a href="api/melody-engine.html#melody_engine.structure.Melody.harmony_plan">(melody_engine.structure.Melody attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.constraints.CandidateContext.harmony_span">harmony_span (melody_engine.constraints.CandidateContext attribute)</a>
@@ -373,6 +389,8 @@
       <li><a href="api/melody-engine.html#melody_engine.constraints.CandidateContext.key">key (melody_engine.constraints.CandidateContext attribute)</a>
 
       <ul>
+        <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.key">(melody_engine.structure.ChoraleScore attribute)</a>
+</li>
         <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.key">(melody_engine.structure.GenerationSettings attribute)</a>
 </li>
         <li><a href="api/melody-engine.html#melody_engine.structure.Melody.key">(melody_engine.structure.Melody attribute)</a>
@@ -462,14 +480,18 @@
         <li><a href="api/melody-engine.html#module-melody_engine.theory">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.lilypond.melody_to_lilypond_source">melody_to_lilypond_source() (in module melody_engine.lilypond)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.generator.MelodyGenerator">MelodyGenerator (class in melody_engine.generator)</a>
 </li>
-      <li><a href="api/melody-engine.html#melody_engine.structure.Melody.metadata">metadata (melody_engine.structure.Melody attribute)</a>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.metadata">metadata (melody_engine.structure.ChoraleScore attribute)</a>
+
+      <ul>
+        <li><a href="api/melody-engine.html#melody_engine.structure.Melody.metadata">(melody_engine.structure.Melody attribute)</a>
 </li>
+      </ul></li>
       <li><a href="api/melody-engine.html#melody_engine.theory.Key.mode">mode (melody_engine.theory.Key attribute)</a>
 </li>
       <li>
@@ -546,6 +568,8 @@
       <li><a href="api/melody-engine.html#melody_engine.constraints.ChordTonePreferenceConstraint.non_chord_tone_penalty">non_chord_tone_penalty (melody_engine.constraints.ChordTonePreferenceConstraint attribute)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.theory.normalize_roman_symbol">normalize_roman_symbol() (in module melody_engine.theory)</a>
+</li>
+      <li><a href="api/melody-engine.html#melody_engine.lilypond.note_token">note_token() (in module melody_engine.lilypond)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.NoteCandidate">NoteCandidate (class in melody_engine.structure)</a>
 </li>
@@ -665,6 +689,8 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.SoftConstraint">SoftConstraint (class in melody_engine.constraints)</a>
 </li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.soprano">soprano (melody_engine.structure.ChoraleScore attribute)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.structure.FormSection.source_bar">source_bar (melody_engine.structure.FormSection attribute)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.HarmonyPlan.spans">spans (melody_engine.structure.HarmonyPlan attribute)</a>
@@ -687,24 +713,30 @@
 <h2 id="T">T</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.tenor">tenor (melody_engine.structure.ChoraleScore attribute)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.structure.VoiceProfile.tessitura_max">tessitura_max (melody_engine.structure.VoiceProfile attribute)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.VoiceProfile.tessitura_min">tessitura_min (melody_engine.structure.VoiceProfile attribute)</a>
 </li>
-      <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.time_signature">time_signature (melody_engine.structure.GenerationSettings attribute)</a>
+      <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.texture">texture (melody_engine.structure.GenerationSettings attribute)</a>
+</li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.time_signature">time_signature (melody_engine.structure.ChoraleScore attribute)</a>
 
       <ul>
+        <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.time_signature">(melody_engine.structure.GenerationSettings attribute)</a>
+</li>
         <li><a href="api/melody-engine.html#melody_engine.structure.Melody.time_signature">(melody_engine.structure.Melody attribute)</a>
 </li>
       </ul></li>
       <li><a href="api/melody-engine.html#melody_engine.structure.TimeSignature">TimeSignature (class in melody_engine.structure)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.theory.Key.tonic">tonic (melody_engine.theory.Key attribute)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.theory.Key.tonic_octave">tonic_octave (melody_engine.theory.Key attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.theory.Key.tonic_pitch_class">tonic_pitch_class (melody_engine.theory.Key property)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.CandidateContext.total_events">total_events (melody_engine.constraints.CandidateContext attribute)</a>
@@ -727,6 +759,8 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/melody-engine.html#melody_engine.lilypond.voice_music_body">voice_music_body() (in module melody_engine.lilypond)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.structure.GenerationSettings.voice_profile">voice_profile (melody_engine.structure.GenerationSettings attribute)</a>
 
       <ul>
@@ -738,6 +772,8 @@
       <li><a href="api/melody-engine.html#melody_engine.structure.ChoralePlan.voice_profiles">voice_profiles (melody_engine.structure.ChoralePlan attribute)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.VoiceProfile">VoiceProfile (class in melody_engine.structure)</a>
+</li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.ChoraleScore.voices">voices (melody_engine.structure.ChoraleScore property)</a>
 </li>
   </ul></td>
 </tr></table>
