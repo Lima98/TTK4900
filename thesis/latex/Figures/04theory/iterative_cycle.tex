@@ -23,15 +23,15 @@
   ]
     \node[core] (center) at (0,0) {knowledge\\gained};
 
-    \node[stage] (idea) at (0,2.8) {idea or\\specification};
+    \node[stage] (idea) at (0,3) {idea or\\specification};
     \node[stage] (build) at (4.6,0) {prototype or\\implementation};
     \node[stage] (eval) at (0,-2.8) {evaluate\\result};
     \node[stage] (revise) at (-4.6,0) {revise model\\and requirements};
 
-    \draw[arrow] (idea.east) .. controls +(15:14mm) and +(90:10mm) .. (build.north);
-    \draw[arrow] (build.south) .. controls +(-90:10mm) and +(0:14mm) .. (eval.east);
-    \draw[arrow] (eval.west) .. controls +(180:14mm) and +(-90:10mm) .. (revise.south);
-    \draw[arrow] (revise.north) .. controls +(90:10mm) and +(165:14mm) .. (idea.west);
+    \draw[arrow] (idea.east) to[out=0, in=90] (build.north);
+    \draw[arrow] (build.south) to[out=-90, in=0] (eval.east);
+    \draw[arrow] (eval.west) to[out=180, in=270] (revise.south);
+    \draw[arrow] (revise.north) to[out=90, in=180] (idea.west);
 
     % \draw[arrow] (idea) -- (center);
     % \draw[arrow] (build) -- (center);

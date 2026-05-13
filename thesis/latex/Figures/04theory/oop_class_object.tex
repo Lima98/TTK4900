@@ -8,7 +8,7 @@
     classbox/.style={
       draw,
       rounded corners=3pt,
-      minimum width=58mm,
+      minimum width=40mm,
       align=left,
       fill=blue!6
     },
@@ -32,14 +32,14 @@
       \quad get\_length()
     };
 
-    \node[objectbox, right=28mm of class] (object) {
+    \node[objectbox, right=35mm of class] (object) {
       \textbf{Object: melody\_a}\\[1mm]
       title = ``Example theme''\\
       events = (c4, d4, e4, g4, \ldots)\\
       key = C major
     };
 
-    \draw[arrow] (class) -- node[above, align=center] {instantiated as\\a concrete melody} (object);
+    \draw[arrow] (class) -- node[above, align=center] {instantiated as a\\concrete melody} (object);
   \end{tikzpicture}%
   }
   \caption{A simple illustration of the difference between a class and an object. A class describes what kind of data and behaviour an object has, while an object stores one concrete instance.}

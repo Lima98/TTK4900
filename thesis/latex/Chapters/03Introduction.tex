@@ -1,9 +1,10 @@
 % ////// INTRODUCTION
 For hundreds of years composers have been creating music using external tools like dice to help them generate something new.
 As early as the 18th century the idea of using randomness to help the composing process has been used.
-The musical dice game, "Musikalisches Würfelspiel", was used to randomly generate music based on pre composed parts \cite{MusikalischesWurfelspiel2025}.
-This is a very basic way of generating music, however by the random nature of the dice it will not be able to create anything coherent and meaningful like a human composer can.
-Additionally this process only used pre composed parts which were designed to work together.
+The musical dice game, "Musikalisches Würfelspiel", was used to randomly generate music based on pre composed parts by rolling a set of dice \cite{MusikalischesWurfelspiel2025}.
+The most popular example of this is the \textit{Musikalisches Würfelspiel} by Mozart, which was published in 1787 \cite{MusikalischesWurfespielK516f}.
+This is a very basic way of generating music, however by the random nature of the dice it will not be able to create a larger overarching musical idea. The output is highly dependent on the pre composed parts made by the author.
+
 If we want to generate everything from scratch we need a way more sophisticated system. 
 This is where procedural generation comes into the picture.
 If we base the melody on something random and then use the conventions and "rules" for melodic composition we might be able to generate music that sounds somewhat coherent.
@@ -16,7 +17,8 @@ Getting external help has not only been used by composers, but also by programme
 \ac{PCG} is today widespread and used in many different applications. Generating content for video games is a common example of \ac{PCG} being used in an artistic process. However the use of content using \ac{PG} is not straightforward, there is a big difference between hand crafting content and automatically generated content. \ac{PCG} enables us to create more content faster, however it will be at the expense of the quality unless we have a highly sophisticated generator \cite{freiknechtSurveyProceduralGeneration2017}. However the use of \ac{PG} is not only for artistic purposes, it can have many other uses, a few examples are city planning and simulating vascular trees for medicinal purposes.
 The program \textit{ArcGIS CityEngine} is an example of \ac{PG} being used for assisting city planners in creating sketches, ideas or finished plans for cities \cite{ProceduralCityGenerator}. And \textit{VascuSynth} is used to generate volumetric image data used for vascular health analysis \cite{hamarnehVascuSynthSimulatingVascular2010}. \\
 
-Today the most common way to go about generating music is using \ac{AI} and \ac{LLM}, but what goes on inside these large models is not easy to understand and tweaking them for a specific use case is not trivial.
+Today a very common way to go about generating music is using \ac{AI} and \ac{LLM}, but what goes on inside these large models is not easy to understand and tweaking them for a specific use case is not trivial.
+Several state of the art music generation models are using these kinds of models to generate the music \cite{180904281MusicTransformer, hawthorneEnablingFactorizedPiano2019, ooreThisTimeFeeling2020, dhariwalJukeboxGenerativeModel2020, baiSeedMusicUnifiedFramework2024, ferreiraLearningGenerateMusic2021}
 Using such models enables anyone to create music, however these models are trained on large data sets and imitates what has come before not generating something truly new.
 For this thesis the focus is on the craft of creating music, breaking it down to its very primitive form, only pitches and durations.
 This will enable the user to have more control over exactly what is being generated.
