@@ -4,9 +4,10 @@
   \subsection{Notes}
     The very core of music is composed of notes. Notes are vibration in air which we interpret as pitches. In the western system we agree upon the standard of pitches is based around \musPitch{A}{4} which is $440Hz$. All other pitches are tuned in relation to this reference.
 
-  \subsection{Note values}
+    The musical note is represented on the staff by a circular symbol called the note-head. The vertical placement of the note-head on the staff determines which pitch it represents. The horizontal placement is not directly an indication of time or duration, the temporal aspect is rather defined symbolically. The note can also have a stem, which is a vertical line attached to the note-head. The direction of the stem (up or down) does not change the pitch, but it can affect the visual layout of the music. When multiple notes are close together, stems can be directed in opposite directions to make the differentiation of voices clearer.
+
     The same musical pitch can be written in several different ways in order to dictate the duration of the note. This is done by using variations of the note. This can be by 
-    Refering to Figure~\ref{fig:note-value} we can see the different parts of the note highlighted with colour. The note-head is coloured red and the placement of this decides which note is represented. The stem can go either up or down, this does not change the meaning it just makes it more compact to make it go down if the note placement is high on the staff. The direction of the stem can carry meaning if there are two notes simultaneously on a staff, then it usually indicates two different voices. Meaning one player playes the melody with stem up and one with the stem down. 
+    Refering to Figure~\ref{fig:note-value} we can see the different parts of the note highlighted with colour. The note-head is black and the placement of this decides which musical pitch is represented. The stem is coloured in green and can go either up or down, this does not change the meaning it just makes it more compact to make it go down if the note placement is high on the staff. The direction of the stem can carry meaning if there are two notes simultaneously on a staff, then it usually indicates two different voices. Meaning one player playes the melody with stem up and one with the stem down. 
     Next we have the beams and the flags coloured in purple and blue respectively. These two carry the same meaning, one flag is the same as one beam, meaning they have the same duration. The beam simply makes it less visually crowded when reading. The omitting of beams and only using flags \textit{can} mean that the notes are more separated, but this is not neccessarily the case.
 
     \begin{figure}[h] % Note values
@@ -101,7 +102,7 @@
       \caption{Tree sctructure showing how you can divide the whole note into the smaller note values. Here each level in the tree takes the same amount of time, meaning the whole note at the top takes as long as the eight eigth-notes at the bottom.}
     \end{figure}
 
-  \subsection{Scales}
+  \subsection{Scales and Keys}
     The musical scale is building block for creating not only melodies but also harmony, which we will cover a bit later.
     Firstly the musical scale is, for the most part, constructed using seven notes. In the western canon this is usually seven notes. You can see the basic c-major scale in Figure~\ref{fig:c-major-scale}, it is comprised of the notes c d e f g a b c. The tones of the scale can be named according to their function within the scale. We often label the notes \musDegree{1}, \musDegree{2}, \musDegree{3}, \musDegree{4}, \musDegree{5}, \musDegree{6}, \musDegree{7},  and then starting back at \musDegree{1}. The use of the carets are called the Nashville Number System, this is used to differentiate the scale degrees from the chord tones which will be discussed in Section~\ref{sec:harmony} When we consider chord structures we use the numbers but usually count above from 8 to signify harmonic functions, but when considering only scales and melodies we usually only use 1 through 7 
     \newline
@@ -130,11 +131,10 @@
       \label{fig:eb-major-scale}
     \end{example}
 
-  \subsection{Keys}
     The concept of a musical key is simply shifting around where the tonic note is. For instance in Example~\ref{fig:c-major-scale} you can see the major scale in \musPitch{C}{}. And in Example~\ref{fig:eb-major-scale} you can see the major scale in \musPitch{E\musFlat}{}. In todays tuning system there are no differences between the keys, meaning that the sound the same, just higher and lower. This was not the case earlier in history, where the temperament(how the tones were tunes in relation to each other) of the keys differed. Today it just sounds higher or lower depending on the key.
 
-  \subsection{Melodies}
-    Melodies is the horizontal component of music, meaning we look at it as a time-series. We have a given note at a given length followed by another note or rest of a given length etc... This means that you can look at a melody as a series of intervals as well. If we do this on known melodies we will observe that they are mainly composed of steps and skips. This means that the distance between one note and the next is one or two tones. Large leaps are usually leaping to important tones like the tonic or the root of the current chord. 
+  % \subsection{Melodies}
+  %   Melodies is the horizontal component of music, meaning we look at it as a time-series. We have a given note at a given length followed by another note or rest of a given length etc... This means that you can look at a melody as a series of intervals as well. If we do this on known melodies we will observe that they are mainly composed of steps and skips. This means that the distance between one note and the next is one or two tones. Large leaps are usually leaping to important tones like the tonic or the root of the current chord. 
 
   \subsection{Intervals}
     Before discussing harmony we need to consider the different types of distances between notes. The musical distance between two notes are called an \textit{interval}. Intervals can be identified by the number of semitones between the notes. Additionally we have special names for all the intervals, these names can be seen in Table~\ref{tab:intervals}. The list also provides the number of semitones between the notes.
@@ -275,7 +275,7 @@
 
     \begin{example}[h]
       \begin{center}
-        \includegraphics[width=1\textwidth]{examples/04theory/musical_sentence.pdf}
+        \includegraphics[width=1\textwidth]{examples/04theory/musical_sentence.cropped.pdf}
       \end{center}
       \caption{A classical example of the musical sentence form. These are the opening bars of Beethovens piano sonata in F-minor \cite{SentenceMusic2023}. \examplelink}\label{fig:sentence}
     \end{example}
@@ -283,7 +283,7 @@
     In Example~\ref{fig:period} we see an example of the musical period. This example is from the British folk song \textit{Greensleves}. The period is a form that is very similar to the sentence, but it has a more balanced structure. It consists of two phrases, the first one is called the \textit{antecedent} and the second one is called the \textit{consequent}. The antecedent phrase ends with a half cadence, which creates tension and leads us to the consequent phrase which ends with a perfect authentic cadence, which resolves the tension and gives us a sense of closure.
     \begin{example}[h]
       \begin{center}
-        \includegraphics[width=1\textwidth]{examples/04theory/musical_period.pdf}
+        \includegraphics[width=1\textwidth]{examples/04theory/musical_period.cropped.pdf}
       \end{center}
       \caption{A classical example of the musical period form. This is the melody of the British folk song \textit{Greensleves} \cite{PeriodMusic2025}. \examplelink}\label{fig:period}
     \end{example}
