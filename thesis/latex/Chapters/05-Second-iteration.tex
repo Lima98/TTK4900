@@ -75,9 +75,15 @@ As mentioned the code structure has been improved in this iteration, below you c
 \lstinputlisting[language=Python, firstline=22, lastline=49]{../../code/.old/.old_iter2/music.py}
 Comparing to the first iteration this has a more defined structure and easier to read, however it needs improvement.
 
+Figure~\ref{fig:iter2_object_model} shows the same development at a slightly higher level. The important step is that the melody is no longer treated only as a flat stream of notes. By introducing objects such as \texttt{Motif}, \texttt{Bar}, and \texttt{Phrase}, the code starts to reflect the way a melody is grouped in actual music.
+
+\input{Figures/05iterations/iter2_object_model}
+
 The second iteration improved upon the structure of the melody. By using a motif we forced some self-similarity in the generated melody which helped generating something more musical, however this generation is very dependent on the generated motif being musical. 
 
-Structurally the second iteration is quite similar to the first iteration however, the objects used for handling the melodies and such are more robust and easier to understand. However they are not in a final state where we will re-use it in its entirety for the next iteration. 
+Structurally the second iteration is quite similar to the first iteration however, the objects used for handling the melodies and such are more robust and easier to understand. The most important improvement is therefore not a large increase in theoretical correctness, but that the representation now makes it possible to talk about repeated material and phrase structure in the code itself.
+
+At the same time, the objects are still quite lightweight. A \texttt{Note} stores a MIDI number and a duration, but there is still no explicit harmonic plan, no voice profile, and no event metadata for things such as rests or chromatic adjustments. This means that the representation is better than in the first iteration, but still too limited to support the kinds of transformations and constraints that are needed in the final system.
 
 \section{Results}
 We can see in Example~\ref{fig:iter2_melody} that we have a more defined structure. The generator works by generating a motif which is then re-used in every measure in the piece. The rest of the measures are filled with random notes moving by 2nds or 3rds to make a somewhat coherent and singable melody.

@@ -73,7 +73,17 @@ The goal of the first iteration was to get a "proof of concept" working. I wante
 \section{Implementation}
   This first iteration was a very primitive handling of generating music. It had very few constraints on the melody and contained little to no metadata on the music which made it unsuitable for actual music.
 
+  \input{Figures/05iterations/iter1_object_model}
+
+  Figure~\ref{fig:iter1_object_model} shows that the first iteration really only has the minimum amount of musical structure needed to get notes onto a staff. A note knows its scale degree and pitch, and a melody is mainly a list of notes tied to a key. This is enough for rendering, but it does not yet give the program any good way to reason about motifs, phrase endings, harmonic context, or the usable range of a voice.
+
+  A good example of this can be seen in the note generator itself. The code below shows that the melody is made by moving randomly through a small list of intervals, while keeping track only of the current position in the scale.
+
+  \lstinputlisting[language=Python, firstline=28, lastline=40]{../../code/.old/.old_iter1/generators/generator.py}
+
   The code generated the notes within a given scale and restricted the distance (called interval in music theory) to only 2nds and 3rds. However this meant that the melody meandered without any other restrictions. If the generated music was long it would have a tendency to go beyond the range of an instrument or the human voice.
+
+  This small function captures both the strength and weakness of the first iteration. It is simple and easy to understand, and it does produce notes that stay inside the chosen key. At the same time, the generator has no memory of larger musical structure. It does not know whether it is at the beginning or end of a phrase, it does not aim for a cadence, and it does not attempt to re-use material in a meaningful way.
 
 \section{Results}
   The melody generation works fine for smaller melodies, however there is no self-similarity and no rests. This means that the melodies we generate are not particularly musical or interesting, but it is a great starting point to getting to a fully fledged melody generator. In Example~\ref{fig:iter1_melody} we can see how a short melody using the first iteration looks. 

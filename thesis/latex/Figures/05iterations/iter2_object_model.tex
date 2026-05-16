@@ -1,0 +1,48 @@
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=12mm and 12mm,
+    class/.style={
+      draw,
+      rounded corners=3pt,
+      align=left,
+      fill=gray!8,
+      minimum width=36mm
+    },
+    arrow/.style={-{Latex[length=2.3mm]}, thick}
+  ]
+    \node[class] (note) {
+      \textbf{Note}\\
+      degree\\
+      key\\
+      midiNum\\
+      duration
+    };
+
+    \node[class, right=of note] (motif) {
+      \textbf{Motif}\\
+      beats\\
+      notes: Note[]
+    };
+
+    \node[class, right=of motif] (bar) {
+      \textbf{Bar}\\
+      beats\\
+      notes: Note[]
+    };
+
+    \node[class, below=of motif] (phrase) {
+      \textbf{Phrase}\\
+      bars: Bar[]\\
+      key
+    };
+
+    \draw[arrow] (note) -- node[above] {reused in} (motif);
+    \draw[arrow] (motif) -- node[above] {fills or shapes} (bar);
+    \draw[arrow] (bar) -- node[right] {contained in} (phrase);
+  \end{tikzpicture}
+  \caption{Simplified object model of the second iteration. The important change is the introduction of explicit musical groupings such as motifs, bars, and phrases, which makes repetition and phrase-level planning possible.}
+  \label{fig:iter2_object_model}
+\end{figure}

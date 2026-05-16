@@ -1,0 +1,84 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=11mm and 12mm,
+    class/.style={
+      draw,
+      rounded corners=3pt,
+      align=left,
+      fill=gray!8,
+      minimum width=38mm
+    },
+    support/.style={
+      draw,
+      rounded corners=3pt,
+      align=left,
+      fill=blue!6,
+      minimum width=34mm
+    },
+    arrow/.style={-{Latex[length=2.3mm]}, thick}
+  ]
+    \node[class] (settings) {
+      \textbf{GenerationSettings}\\
+      key\\
+      bars\\
+      allowed durations\\
+      range\\
+      form plan\\
+      harmony plan\\
+      voice profile
+    };
+
+    \node[support, left=of settings] (motif) {
+      \textbf{Motif}\\
+      events: NoteEvent[]
+    };
+
+    \node[support, above right=of settings] (form) {
+      \textbf{FormPlan}\\
+      sections: FormSection[]
+    };
+
+    \node[support, below right=of settings] (harmony) {
+      \textbf{HarmonyPlan}\\
+      spans: HarmonySpan[]
+    };
+
+    \node[support, below left=of settings] (voice) {
+      \textbf{VoiceProfile}\\
+      range\\
+      tessitura\\
+      clef hint
+    };
+
+    \node[class, below=24mm of settings] (melody) {
+      \textbf{Melody}\\
+      events: NoteEvent[]\\
+      key\\
+      metadata\\
+      clef
+    };
+
+    \node[support, left=of melody] (event) {
+      \textbf{NoteEvent}\\
+      scale step\\
+      duration\\
+      chromatic adjustment\\
+      rest flag
+    };
+
+    \draw[arrow] (motif) -- (settings);
+    \draw[arrow] (form) -- (settings);
+    \draw[arrow] (harmony) -- (settings);
+    \draw[arrow] (voice) -- (settings);
+    \draw[arrow] (settings) -- node[right] {guides generation of} (melody);
+    \draw[arrow] (event) -- node[above] {contained in} (melody);
+    \draw[arrow] (motif) to[bend right=16] node[left] {reused as} (event);
+  \end{tikzpicture}%
+  }
+  \caption{Simplified object model of the third iteration. Compared with the earlier iterations, musical information is no longer limited to notes and phrases, but also includes form, harmony, voice range, rests, and event-level metadata.}
+  \label{fig:iter3_object_model}
+\end{figure}

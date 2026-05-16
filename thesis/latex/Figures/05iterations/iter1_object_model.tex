@@ -1,0 +1,42 @@
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=12mm and 12mm,
+    class/.style={
+      draw,
+      rounded corners=3pt,
+      align=left,
+      fill=gray!8,
+      minimum width=38mm
+    },
+    arrow/.style={-{Latex[length=2.3mm]}, thick}
+  ]
+    \node[class] (key) {
+      \textbf{Key}\\
+      tonic\\
+      mode\\
+      scale helper methods
+    };
+
+    \node[class, right=of key] (note) {
+      \textbf{Note}\\
+      degree\\
+      pitch
+    };
+
+    \node[class, right=of note] (melody) {
+      \textbf{Melody}\\
+      notes: Note[]\\
+      key\\
+      rhythm
+    };
+
+    \draw[arrow] (key) -- node[above] {defines scale} (note);
+    \draw[arrow] (note) -- node[above] {contained in} (melody);
+    \draw[arrow] (key) to[bend left=18] node[below] {attached to} (melody);
+  \end{tikzpicture}
+  \caption{Simplified object model of the first iteration. The representation is enough to store notes in a key and export a melody, but it does not yet describe motifs, bars, phrases, harmony, or form.}
+  \label{fig:iter1_object_model}
+\end{figure}
