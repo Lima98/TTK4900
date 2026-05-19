@@ -401,7 +401,7 @@ def draw_final_output(state: WFCState, output_dir: Path, stem: str = "03_generat
         Rectangle((0, 0), 1, 1, facecolor=COLORS[tile], edgecolor="#222222", label=f"{tile} {NAMES[tile]}")
         for tile in TILES
     ]
-    ax.legend(handles=legend, loc="upper center", bbox_to_anchor=(0.5, -0.04), ncol=3, frameon=False, fontsize=14)
+    ax.legend(handles=legend, loc="upper center", bbox_to_anchor=(0.5, -0.04), ncol=3, frameon=False, fontsize=8.4)
     save_figure(fig, output_dir, stem)
 
 

@@ -1,17 +1,16 @@
-
 \section{Iterative development}
-  % The iterative development process has been very useful. It has enabled me to use a few iterations to get to know the problem before trying to create the final solution. If I had started trying to solve the problem completely straight away I would have ended up with a very hap hazard solution.
-  %
-  % Figure~\ref{fig:iteration_loc_history} shows how the three iterations grew over time. The first iteration reached a moderate code size quickly because it solved a small but concrete proof-of-concept problem: generate notes, render them in LilyPond, and optionally generate several independent voices. The second iteration started from a much smaller base and stayed smaller overall because it focused on improving the internal representation and introducing motif-based generation rather than adding many new subsystems. The third iteration grows much more rapidly because it combines a richer data model, explicit constraint handling, harmony support, form planning, rendering workflows, and later SATB-compatible extensions.
-  %
+  The iterative development process has been very useful in this project. Rather than trying to solve the entire problem at once, each iteration solved a narrower version of it and made the weaknesses of that solution easier to see. This was especially important in a project like this one, where the quality of the system is not only a question of whether the code runs, but also whether the generated music is usable and convincing.
+
   \begin{figure}[h]
     \centering
       \includegraphics[width=0.95\textwidth]{Figures/05iterations/iteration_loc_history.pdf}
     \caption{Growth of the three iterations over time measured as non-empty Python source lines in the iteration-specific code. Dashed segments indicate that an iteration had been frozen while the thesis work continued.}\label{fig:iteration_loc_history}
   \end{figure}
 
-  % This development pattern is important because it shows that the final system did not appear fully formed. Instead, each iteration solved a narrower version of the problem and exposed the next set of weaknesses. The first iteration showed that note generation and rendering were feasible, the second showed that musical reuse required better abstractions, and the third was where the musical rules and architectural structure were finally formalized in a way that could support a larger system.
-  %
+  Figure~\ref{fig:iteration_loc_history} gives one view of how the three iterations developed over time. The first iteration reached a moderate size quickly because it was focused on a small proof of concept. Once it could generate notes, render LilyPond output, and produce audio, it had already answered its main question. The second iteration grew more slowly and remained smaller overall, because its main purpose was not to add many new subsystems, but to improve the internal handling of musical material. The third iteration grew much more rapidly because it brought together a richer data model, explicit constraint handling, harmony support, form planning, rendering workflows, and later SATB-compatible extensions.
+
+  This growth pattern is important because it shows that the final system did not appear fully formed. The first iteration established that automatic generation and rendering were feasible. The second iteration showed that more musical output required better abstractions and some form of self-similarity. The third iteration was where those lessons were formalized into a larger system. In that sense, the value of the early iterations is not only the code they produced, but also the questions they made visible.
+
   \begin{table}[h]
     \centering
     \small
@@ -34,16 +33,21 @@
     \end{tabular}
     \caption{Comparison of the main musical and technical capabilities across the three iterations.}\label{tab:iteration_feature_matrix}
   \end{table}
-  %
-  % Table~\ref{tab:iteration_feature_matrix} summarizes the practical differences between the iterations. The main observation is that the first two iterations each solved only part of the problem. Iteration one had rendering and even rudimentary multi-voice support, but the generated melodies were musically weak. Iteration two improved motivic handling and made the code structure easier to reason about, but it still lacked explicit theory-aware constraints. Only the third iteration combines musical structure, reusable abstractions, harmony handling, and a workflow that is robust enough to support the thesis examples.
-  %
-\section{\ac{AI} development}
-  After the first few iterations I had build up a better understanding of not only the problem, but also how I should go about solving it. Having this in the back of my mind when prompt engineering for the \ac{AI} to help me solve it make the end result a lot better than if I tried to solve it using \ac{AI} from the very beginning. 
+
+  Table~\ref{tab:iteration_feature_matrix} summarizes the practical differences between the iterations. The main observation is that the first two iterations each solved only part of the problem. The first iteration had rendering and even rudimentary multi-voice support, but the melodies themselves were musically weak. The second iteration improved motivic handling and made the code easier to reason about, but it still lacked explicit theory-aware constraints. Only the third iteration combines musical structure, reusable abstractions, harmony handling, and a workflow that is robust enough to support the thesis examples in a reliable way.
+
+\section{\ac{AI} in development}
+  The use of \ac{AI} had a clear influence on the development process, but that influence was strongest when it was used after a good understanding of the problem had already been established. By the time the third iteration started, the earlier iterations had already shown which parts of the generator were weak, which musical ideas were difficult to encode, and which parts of the software structure needed to change. This made it possible to use \ac{AI} more critically and with better prompts than would have been possible at the start of the project.
+
+  In practice, \ac{AI} was most useful when it was treated as a development aid rather than as a source of complete solutions. It was helpful for refactoring, for exploring alternative implementations, for surfacing edge cases, and for speeding up repetitive tasks that would otherwise take a disproportionate amount of time. This aligns well with the broader picture described in the software-development literature, where \ac{AI} tools are increasingly common, but still require human oversight and validation \cite{AI2024Stack,staffSurveyAIWave2024,DORAAccelerateState,cuiEffectsGenerativeAI2025,wangInvestigatingDesigningTrust2023}.
+
+  At the same time, the project also showed some of the limitations of using \ac{AI} in this kind of work. A generator for music is not only a software problem, but also a domain problem. It is therefore not enough that the code compiles or that the architecture looks reasonable. The generated melodies must also make musical sense. This means that the usefulness of \ac{AI} depends strongly on the developer being able to evaluate both the software and the musical result. If that understanding is missing, it becomes difficult to distinguish between code that is merely plausible and code that actually improves the system.
+
+  For this reason, the use of Codex in this project was most valuable when it accelerated work that was already framed by the developer, not when it attempted to replace the framing itself. The thesis therefore supports a fairly balanced view of \ac{AI} in development: it can be an effective tool for implementation and iteration, but it does not remove the need for understanding, evaluation, and responsibility on the part of the developer.
 
 \section{The system structure}
-  %
-  % The architectural progression is also visible when comparing the system diagrams from the three iteration chapters. Figures~\ref{fig:iter1_architecture}, \ref{fig:iter2_architecture}, and \ref{fig:iter3_architecture} show a clear movement from script-driven generation toward a more modular and theory-aware design.
-  %
+  The progression between the iterations is not only visible in the generated output, but also in the internal structure of the software. Figures~\ref{fig:iter1_architecture}, \ref{fig:iter2_architecture}, and \ref{fig:iter3_architecture} show a clear movement from a small script-driven pipeline toward a more modular and theory-aware design.
+
   \begin{table}[h]
     \centering
     \small
@@ -60,11 +64,29 @@
     \end{tabular}
     \caption{Architectural comparison of the three iterations.}\label{tab:iteration_architecture_comparison}
   \end{table}
-  %
-  % Table~\ref{tab:iteration_architecture_comparison} complements the architecture figures by showing what changed conceptually between the iterations. The most important difference is not just that the third iteration has more modules, but that it has more explicit musical objects and clearer boundaries between responsibilities. This makes it possible to reason about melodic constraints, harmony, rendering, and future extensions separately rather than treating the generator as one monolithic script.
-  %
-\section{Modules? Different module discussions.}
+
+  Table~\ref{tab:iteration_architecture_comparison} shows that the main architectural improvement is not simply that the third iteration has more files or more code. The important change is that it has clearer boundaries between responsibilities and more explicit musical objects. In the first iteration, the generator was close to a single procedural script. In the second iteration, the introduction of motifs, bars, and phrases made the code more understandable, but the structure was still too narrow to support many kinds of extension. In the third iteration, melody generation, theory handling, constraint scoring, rendering, and user input are separated more clearly.
+
+  This separation matters because it changes what kinds of improvements are possible. When the generator is too tightly coupled, even small musical changes can require rewriting large parts of the code. When the representation is more explicit, it becomes possible to work on one problem at a time. For example, clef selection, harmony parsing, or form planning can be improved without changing the entire generation pipeline. That makes the third iteration much more suitable as a foundation for future work.
+
+  Another important structural change is the development of the musical objects themselves. In the first iteration, the code mainly needed to store notes in a key and send them to LilyPond. In the second iteration, the representation became more phrase-oriented through motifs, bars, and phrases. In the third iteration, the object model became rich enough to describe not only notes, but also rests, chromatic adjustments, harmony spans, voice range, and formal sections. This is one of the main reasons the third iteration can support more musical reasoning than the earlier versions.
 
 \section{The generated music}
+  The quality of the generated music improved significantly between the iterations, but the improvement did not happen all at once. The first iteration showed that the system could generate notes and render them correctly, but the melodies were mostly streams of scale motion with very little larger structure. They often drifted out of a useful register and had little to hold them together beyond staying inside the same key.
+
+  The second iteration improved this by introducing a motif-based approach. This gave the melodies more identity, because some material was repeated instead of every note being generated independently. Even so, the result still depended heavily on whether the original motif happened to be good. Since the melodic rules were still only lightly encoded, the generator could create something that looked more structured on the page without necessarily becoming much stronger musically.
+
+  The third iteration is where the output becomes more consistently usable. This is mainly because the generator no longer relies only on local interval restrictions or literal repetition. Instead, it can take several kinds of information into account at once: melodic range, harmonic context, phrase role, cadence shape, motif reuse, and soft constraints on motion. This does not make the system perfect, and it does not remove the subjective side of musical evaluation, but it does make the results more controlled and more explainable.
+
+  One of the more important observations from the examples is that musical quality in this project is closely tied to representation. When the internal objects are too weak, the output also becomes weak, because the generator simply has too little meaningful information to work with. As the musical objects become richer, the system gains more ways to shape the output in musically relevant directions. This makes the progression between the iterations not only a technical story, but also a musical one.
+
+  At the same time, the system still has clear limits. It can generate passable melodies and it can harmonize more than before, but it does not evaluate music in the way a human musician would. The weighting of constraints is still heuristic, and some examples will inevitably work better than others. In that sense, the system should be understood as a structured procedural generator rather than as a complete model of musical composition.
 
 \section{Future work}
+  There are several natural directions for extending the system. The most obvious is more complete four-part writing. The current third iteration already has some SATB-compatible foundations, such as voice profiles, clef handling, harmony-aware generation, and a first chorale path. However, a more mature four-part system would require stronger handling of voice leading, non-chord tones, suspensions, spacing, doubling, and cadence treatment across all voices.
+
+  Another useful direction would be stronger evaluation and comparison of outputs. The thesis has mainly assessed results through musical inspection and by checking whether the generated examples follow a set of recognizable melodic and harmonic principles. This is appropriate for the scope of the project, but future work could introduce more systematic evaluation, for example by comparing generated outputs against rule-based checklists, reference corpora, or user assessments by musicians.
+
+  A third direction is more interactive use. The current workflow is already much better than in the first two iterations, especially through reproducible seeds, clearer command-line arguments, and automatic rendering. Even so, the generator is still mainly operated as a batch tool. It would be interesting to develop a more interactive interface where a user can guide harmony, motif transformation, or phrase structure more directly and then immediately listen to the result. This would move the system closer to a compositional aid rather than only a generator.
+
+  Finally, the use of \ac{AI} itself could be explored further. In this thesis, \ac{AI} was mainly used as a development tool rather than as part of the musical generator. Future work could investigate whether \ac{AI} could also contribute inside the musical workflow, for example in evaluating outputs, suggesting constraints, or supporting mixed-initiative composition. At the same time, the lessons from this project suggest that such use should still be approached carefully, since the main value lies in supporting informed musical and technical decisions rather than replacing them.
