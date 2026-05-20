@@ -12,10 +12,10 @@ generated directly from the Python modules and docstrings in ``code/main.py`` an
 
 The goal is to make the codebase easy to navigate whether you want to:
 
-- generate a melody for thesis examples,
+- generate melodies or chorales,
 - render cropped PDFs and WAV files,
-- experiment with voice profiles and clefs,
-- or extend the project toward multi-voice and chorale generation.
+- experiment with form, harmony, voice profiles, and clefs,
+- or extend the project toward richer multi-voice generation.
 
 .. toctree::
    :maxdepth: 2
@@ -24,7 +24,6 @@ The goal is to make the codebase easy to navigate whether you want to:
    guides/getting-started
    guides/cli-reference
    guides/architecture
-   guides/thesis-workflow
 
 .. toctree::
    :maxdepth: 2
@@ -32,6 +31,11 @@ The goal is to make the codebase easy to navigate whether you want to:
 
    api/melody-engine
    api/main-module
+
+.. toctree::
+   :hidden:
+
+   guides/thesis-workflow
 
 Quick Start
 -----------
@@ -42,7 +46,7 @@ Generate LilyPond only:
 
    python3 code/main.py
 
-Generate a melody and also render thesis-ready PDF output:
+Generate a melody and also render cropped PDF output:
 
 .. code-block:: bash
 
@@ -59,8 +63,8 @@ Useful Entry Points
 
 - ``code/main.py``: primary CLI for generation and rerendering
 - ``code/melody_engine/``: reusable engine modules
-- ``webpage/index.html``: thesis example archive for examiners
-- ``thesis/latex/main.pdf``: thesis document referenced by the webpage and examples
+- ``docs/``: documentation source
+- ``webpage/index.html``: static example archive and project page
 
 Documentation Workflow
 ----------------------
@@ -74,3 +78,11 @@ Build the HTML documentation locally:
 
 The generated site is written to ``docs/_build/html/`` and is the same material deployed by
 ``webpage/deploy.zsh``.
+
+Author Reference
+----------------
+
+`Open author-only workflow notes <guides/thesis-workflow.html>`_
+
+This material covers thesis-specific example curation and deployment details that are useful
+for maintaining the project, but not required for normal program usage.

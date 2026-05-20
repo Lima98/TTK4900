@@ -53,7 +53,23 @@ You can rerender existing LilyPond files without regenerating the melody:
 Manual Harmony Format
 ---------------------
 
-Explicit harmonic plans use:
+Explicit harmonic plans can use one of three formats:
+
+Compact beat format:
+
+.. code-block:: text
+
+   2I,2V,4I,2IV,2iv
+
+Here the number is the duration in beats and the Roman numeral is the chord.
+
+Alternating chord-and-dash format:
+
+.. code-block:: text
+
+   I -- V -- vi ----
+
+Range format:
 
 .. code-block:: text
 
@@ -63,4 +79,7 @@ Example:
 
 .. code-block:: bash
 
-   python3 code/main.py --harmony "1-2:i,3-4:V,5-6:IV,7-8:i"
+   python3 code/main.py --harmony "2I,2V,4I,2IV,2iv"
+
+If the explicit harmony is longer than the generated piece, it is truncated. If it is shorter,
+the remaining bars are filled automatically using the default tonal progression.

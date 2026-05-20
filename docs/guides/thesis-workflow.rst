@@ -1,8 +1,8 @@
-Thesis Workflow
-===============
+Author Documentation
+====================
 
-Why This Documentation Exists
------------------------------
+Why This Exists
+---------------
 
 The project has two public-facing entry points:
 
@@ -21,8 +21,8 @@ Main Asset Paths
 - ``thesis/latex/main.pdf`` is the thesis document itself
 - ``webpage/index.html`` links examples back into the thesis by page number
 
-Typical Example Workflow
-------------------------
+Typical Thesis Example Workflow
+-------------------------------
 
 1. Generate a melody or example asset with ``code/main.py``.
 2. Render the cropped PDF and optional WAV output.

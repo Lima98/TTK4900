@@ -25,18 +25,7 @@ def generate_random_notes(length=8, key: Key = Key("c", "major")) -> Melody:
     
     return Melody(notes = notes, key = key, rhythm=None)
 
-# Generate a melody by randomly moving in 2nds and 3rds within the scale
 def generate_notes(num_notes=4, key: Key = Key("c", "major")) -> Melody:
-    """
-    Generate a melody by randomly moving in 2nds and 3rds within the scale.
-
-    Args:
-        num_notes (int): Number of notes to generate in the melody.
-        key: Key object representing the key of the melody.
-
-    Returns:
-        
-    """
     intervals = [-2, -1, 0, 1, 2]  # only 2nds and 3rds
     melody_notes = []
     current_idx = 0

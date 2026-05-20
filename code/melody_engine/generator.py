@@ -65,7 +65,11 @@ class MelodyGenerator:
 
         for index, duration in enumerate(rhythm):
             bar_number, beat_in_bar = beat_positions[index]
-            harmony_span = self.settings.harmonic_plan.chord_for_bar(bar_number)
+            harmony_span = self.settings.harmonic_plan.chord_for_position(
+                bar_number,
+                beat_in_bar,
+                self.settings.time_signature.bar_length,
+            )
             motif_target_step = motif_targets.get(index)
             section = self.settings.form_plan.section_for_bar(bar_number)
             context = CandidateContext(

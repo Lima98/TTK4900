@@ -4,7 +4,11 @@
 set -e
 
 echo "Activating venv..."
-source ../.venv/bin/activate
+if [[ -f ../.venv/bin/activate ]]; then
+  source ../.venv/bin/activate
+else
+  echo "No local venv found, using current environment."
+fi
 
 echo "Building documentation..."
 make clean html

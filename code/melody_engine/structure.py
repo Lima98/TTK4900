@@ -120,8 +120,18 @@ class HarmonySpan:
     end_bar: int
     roman_symbol: str
     weight: float = 1.0
+    start_beat: float = 0.0
+    end_beat: float | None = None
 
-    def covers(self, bar_number: int) -> bool:
+    def covers(self, bar_number: int, beat_in_bar: float, bar_length: float) -> bool:
+        start_position = (self.start_bar - 1) * bar_length + self.start_beat
+        end_position = (self.end_bar - 1) * bar_length + (
+            self.end_beat if self.end_beat is not None else bar_length
+        )
+        current_position = (bar_number - 1) * bar_length + beat_in_bar
+        return start_position <= current_position < end_position - 1e-9
+
+    def overlaps_bar(self, bar_number: int) -> bool:
         return self.start_bar <= bar_number <= self.end_bar
 
 
@@ -131,7 +141,13 @@ class HarmonyPlan:
 
     def chord_for_bar(self, bar_number: int) -> HarmonySpan | None:
         for span in self.spans:
-            if span.covers(bar_number):
+            if span.overlaps_bar(bar_number):
+                return span
+        return None
+
+    def chord_for_position(self, bar_number: int, beat_in_bar: float, bar_length: float) -> HarmonySpan | None:
+        for span in self.spans:
+            if span.covers(bar_number, beat_in_bar, bar_length):
                 return span
         return None
 

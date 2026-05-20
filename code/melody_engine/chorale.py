@@ -51,7 +51,11 @@ class ChoraleHarmonizer:
                 continue
 
             bar_number, beat_in_bar = self._locate_event(soprano.events, index)
-            harmony_span = soprano.harmony_plan.chord_for_bar(bar_number)
+            harmony_span = soprano.harmony_plan.chord_for_position(
+                bar_number,
+                beat_in_bar,
+                soprano.time_signature.bar_length,
+            )
             roman_symbol = harmony_span.roman_symbol if harmony_span is not None else ("I" if self.settings.key.mode == "major" else "i")
 
             voicing = self._choose_voicing(

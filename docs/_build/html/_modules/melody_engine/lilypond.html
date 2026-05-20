@@ -42,12 +42,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../guides/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../guides/cli-reference.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../guides/architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../guides/thesis-workflow.html">Thesis Workflow</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/melody-engine.html">Melody Engine API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/main-module.html">Main CLI Module</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/thesis-workflow.html">Author Documentation</a></li>
 </ul>
 
 <div class="relations">
@@ -88,12 +90,12 @@
   <h1>Source code for melody_engine.lilypond</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="sd">&quot;&quot;&quot;LilyPond export and rendering utilities for melodies and thesis assets.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;LilyPond export and rendering utilities for melodies, chorales, and thesis assets.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">.structure</span><span class="w"> </span><span class="kn">import</span> <span class="n">Melody</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.structure</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChoraleScore</span><span class="p">,</span> <span class="n">Melody</span>
 
 <span class="n">BEAT_TO_DURATION</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mf">4.0</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
@@ -154,32 +156,7 @@
 <a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.melody_to_lilypond_source">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">melody_to_lilypond_source</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="n">key_name</span> <span class="o">=</span> <span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonic</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">)</span>
-    <span class="n">note_tokens</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;r</span><span class="si">{</span><span class="n">lilypond_duration</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">is_rest</span>
-            <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">chromatic_pitch</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">chromatic_adjustment</span><span class="p">)</span><span class="si">}{</span><span class="n">lilypond_duration</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="p">)</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">melody</span><span class="o">.</span><span class="n">events</span>
-    <span class="p">]</span>
-
-    <span class="n">bar_length</span> <span class="o">=</span> <span class="n">melody</span><span class="o">.</span><span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
-    <span class="n">bars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">current_bar</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">beat_total</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-    <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">note_tokens</span><span class="p">,</span> <span class="n">melody</span><span class="o">.</span><span class="n">events</span><span class="p">):</span>
-        <span class="n">current_bar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
-        <span class="n">beat_total</span> <span class="o">+=</span> <span class="n">event</span><span class="o">.</span><span class="n">duration</span>
-        <span class="k">if</span> <span class="n">beat_total</span> <span class="o">&gt;=</span> <span class="n">bar_length</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">:</span>
-            <span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_bar</span><span class="p">))</span>
-            <span class="n">current_bar</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">beat_total</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-    <span class="k">if</span> <span class="n">current_bar</span><span class="p">:</span>
-        <span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_bar</span><span class="p">))</span>
-
-    <span class="n">music_body</span> <span class="o">=</span> <span class="s2">&quot; |</span><span class="se">\n</span><span class="s2">    &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bars</span><span class="p">)</span>
+    <span class="n">music_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">melody</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\\</span><span class="s2">version &quot;2.24.4&quot;</span>
 <span class="se">\\</span><span class="s2">language &quot;english&quot;</span>
@@ -198,12 +175,99 @@
 
 
 
+<div class="viewcode-block" id="note_token">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.note_token">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">note_token</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">is_rest</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;r</span><span class="si">{</span><span class="n">lilypond_duration</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">chromatic_pitch</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">scale_step</span><span class="p">,</span><span class="w"> </span><span class="n">event</span><span class="o">.</span><span class="n">chromatic_adjustment</span><span class="p">)</span><span class="si">}{</span><span class="n">lilypond_duration</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="voice_music_body">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.voice_music_body">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">voice_music_body</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">note_tokens</span> <span class="o">=</span> <span class="p">[</span><span class="n">note_token</span><span class="p">(</span><span class="n">melody</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">melody</span><span class="o">.</span><span class="n">events</span><span class="p">]</span>
+    <span class="n">bar_length</span> <span class="o">=</span> <span class="n">melody</span><span class="o">.</span><span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+    <span class="n">bars</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_bar</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">beat_total</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">note_tokens</span><span class="p">,</span> <span class="n">melody</span><span class="o">.</span><span class="n">events</span><span class="p">):</span>
+        <span class="n">current_bar</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="n">beat_total</span> <span class="o">+=</span> <span class="n">event</span><span class="o">.</span><span class="n">duration</span>
+        <span class="k">if</span> <span class="n">beat_total</span> <span class="o">&gt;=</span> <span class="n">bar_length</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">:</span>
+            <span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_bar</span><span class="p">))</span>
+            <span class="n">current_bar</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">beat_total</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">if</span> <span class="n">current_bar</span><span class="p">:</span>
+        <span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_bar</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="s2">&quot; |</span><span class="se">\n</span><span class="s2">      &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bars</span><span class="p">)</span></div>
+
+
+
 <div class="viewcode-block" id="export_melody">
 <a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.export_melody">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">export_melody</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
     <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">melody_to_lilypond_source</span><span class="p">(</span><span class="n">melody</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span></div>
+
+
+
+<div class="viewcode-block" id="chorale_to_lilypond_source">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.chorale_to_lilypond_source">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">chorale_to_lilypond_source</span><span class="p">(</span><span class="n">score</span><span class="p">:</span> <span class="n">ChoraleScore</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">key_name</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonic</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">)</span>
+    <span class="n">soprano_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">soprano</span><span class="p">)</span>
+    <span class="n">alto_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">alto</span><span class="p">)</span>
+    <span class="n">tenor_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">tenor</span><span class="p">)</span>
+    <span class="n">bass_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">bass</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\\</span><span class="s2">version &quot;2.24.4&quot;</span>
+<span class="se">\\</span><span class="s2">language &quot;english&quot;</span>
+
+<span class="se">\\</span><span class="s2">score </span><span class="se">{{</span>
+<span class="s2">  </span><span class="se">\\</span><span class="s2">new ChoirStaff &lt;&lt;</span>
+<span class="s2">    </span><span class="se">\\</span><span class="s2">new Staff &lt;&lt;</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">clef &quot;</span><span class="si">{</span><span class="n">choose_clef</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">soprano</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">key </span><span class="si">{</span><span class="n">key_name</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="si">{</span><span class="n">score</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">time </span><span class="si">{</span><span class="n">score</span><span class="o">.</span><span class="n">time_signature</span><span class="si">}</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">new Voice = &quot;soprano&quot; </span><span class="se">{{</span><span class="s2"> </span><span class="se">\\</span><span class="s2">voiceOne</span>
+<span class="s2">      </span><span class="si">{</span><span class="n">soprano_body</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="s2">bar &quot;|.&quot;</span>
+<span class="s2">      </span><span class="se">}}</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">new Voice = &quot;alto&quot; </span><span class="se">{{</span><span class="s2"> </span><span class="se">\\</span><span class="s2">voiceTwo</span>
+<span class="s2">      </span><span class="si">{</span><span class="n">alto_body</span><span class="si">}</span>
+<span class="s2">      </span><span class="se">}}</span>
+<span class="s2">    &gt;&gt;</span>
+<span class="s2">    </span><span class="se">\\</span><span class="s2">new Staff &lt;&lt;</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">clef &quot;bass&quot;</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">key </span><span class="si">{</span><span class="n">key_name</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="si">{</span><span class="n">score</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">time </span><span class="si">{</span><span class="n">score</span><span class="o">.</span><span class="n">time_signature</span><span class="si">}</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">new Voice = &quot;tenor&quot; </span><span class="se">{{</span><span class="s2"> </span><span class="se">\\</span><span class="s2">voiceOne</span>
+<span class="s2">      </span><span class="si">{</span><span class="n">tenor_body</span><span class="si">}</span>
+<span class="s2">      </span><span class="se">}}</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">new Voice = &quot;bass&quot; </span><span class="se">{{</span><span class="s2"> </span><span class="se">\\</span><span class="s2">voiceTwo</span>
+<span class="s2">      </span><span class="si">{</span><span class="n">bass_body</span><span class="si">}</span>
+<span class="s2">      </span><span class="se">}}</span>
+<span class="s2">    &gt;&gt;</span>
+<span class="s2">  &gt;&gt;</span>
+<span class="s2">  </span><span class="se">\\</span><span class="s2">layout </span><span class="se">{{}}</span>
+<span class="s2">  </span><span class="se">\\</span><span class="s2">midi </span><span class="se">{{}}</span>
+<span class="se">}}</span>
+<span class="s2">&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="export_chorale">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.export_chorale">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_chorale</span><span class="p">(</span><span class="n">score</span><span class="p">:</span> <span class="n">ChoraleScore</span><span class="p">,</span> <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">chorale_to_lilypond_source</span><span class="p">(</span><span class="n">score</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">path</span></div>
 
 

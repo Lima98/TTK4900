@@ -31,17 +31,27 @@ OUTPUT = WEBPAGE_DIR / "index.html"
 PDF_PAGE_OFFSET = 11
 
 
-SECTION_TITLES = {
-    "2.2": "Music Theory Examples",
-    "6.1": "First Iteration Results",
-    "6.2": "Second Iteration Results",
-}
-
-
-SECTION_DESCRIPTIONS = {
-    "2.2": "Examples related to scales, harmony, and interval structure.",
-    "6.1": "Examples from the first melody-generation iteration.",
-    "6.2": "Examples from the second melody-generation iteration.",
+SECTION_METADATA = {
+    "2.2": {
+        "display_label": "Section 2.2",
+        "title": "Music Theory Examples",
+        "description": "Examples related to scales, harmony, and interval structure.",
+    },
+    "3.4": {
+        "display_label": "Section 3.4",
+        "title": "First Iteration Examples",
+        "description": "Examples from the first melody-generation iteration.",
+    },
+    "4.3": {
+        "display_label": "Section 4.3",
+        "title": "Second Iteration Examples",
+        "description": "Examples from the second melody-generation iteration.",
+    },
+    "5.4": {
+        "display_label": "Section 5.4",
+        "title": "Third Iteration Examples",
+        "description": "Examples from the third melody-generation iteration.",
+    },
 }
 
 
@@ -150,9 +160,13 @@ def clean_latex(value: str) -> str:
     cleaned = value
     for source, target in replacements.items():
         cleaned = cleaned.replace(source, target)
+    cleaned = re.sub(r"\\cite[a-zA-Z]*\{[^}]*\}", "", cleaned)
+    cleaned = re.sub(r"\\ref\{[^}]*\}", "", cleaned)
+    cleaned = re.sub(r"\\examplelink(?:\[[^\]]*\])?", "", cleaned)
     cleaned = re.sub(r"\\[a-zA-Z]+\*?", "", cleaned)
     cleaned = cleaned.replace("{", "").replace("}", "")
     cleaned = cleaned.replace("~", " ")
+    cleaned = re.sub(r"\s+\.", ".", cleaned)
     cleaned = re.sub(r"\s+", " ", cleaned)
     return cleaned.strip()
 
@@ -234,24 +248,48 @@ def find_existing_audio(pdf: Path) -> Path | None:
 def tags_for(pdf: Path, number: str) -> tuple[str, ...]:
     path_text = pdf.as_posix().lower()
     tags: list[str] = []
-    if "04theory" in path_text:
+    stem = pdf.name.lower()
+    section = ".".join(number.split(".")[:2])
+
+    if section == "2.2":
         tags.append("Theory")
-    if "iter1" in path_text:
+        if "scale" in stem:
+            tags.append("Scale")
+        elif "interval" in stem:
+            tags.append("Intervals")
+        elif "majmin" in stem:
+            tags.append("Harmony")
+        elif "sentence" in stem:
+            tags.append("Sentence Form")
+        elif "period" in stem:
+            tags.append("Period Form")
+        else:
+            tags.append("Notation")
+    elif section == "3.4":
         tags.append("Iteration 1")
-    if "iter2" in path_text:
+        if "register" in stem:
+            tags.append("Range")
+        elif "voices" in stem:
+            tags.append("Multi-Voice")
+        else:
+            tags.append("Melody")
+    elif section == "4.3":
         tags.append("Iteration 2")
-    if "scale" in path_text:
-        tags.append("Scale")
-    if "interval" in path_text:
-        tags.append("Intervals")
-    if "register" in path_text:
-        tags.append("Range")
-    if "voices" in path_text:
-        tags.append("Multi-Voice")
-    if "melody" in path_text:
+        tags.append("Motif Reuse")
         tags.append("Melody")
-    if not tags:
-        tags.append(f"Section {'.'.join(number.split('.')[:2])}")
+    elif section == "5.4":
+        tags.append("Iteration 3")
+        if "chorale" in stem:
+            tags.append("Chorale")
+            tags.append("SATB")
+        elif "explicit_harmony" in stem:
+            tags.append("Explicit Harmony")
+            tags.append("Melody")
+        else:
+            tags.append("Melody")
+            tags.append("Form")
+    else:
+        tags.append(f"Section {section}")
     return tuple(tags)
 
 
@@ -261,10 +299,12 @@ def rel(path: Path) -> str:
 
 def render_page(examples: list[Example]) -> str:
     sections = group_by_section(examples)
-    nav = "\n".join(
-        f'        <a href="#chapter-{section.replace(".", "-")}">Section {section} - {html.escape(section_title(section))}</a>'
+    nav_links = [
+        f'        <a href="#chapter-{section.replace(".", "-")}">{html.escape(section_display_label(section))} - {html.escape(section_title(section))}</a>'
         for section in sections
-    )
+    ]
+    nav_links.append('        <a href="#top">Back to top</a>')
+    nav = "\n".join(nav_links)
     section_html = "\n\n".join(render_section(section, items) for section, items in sections.items())
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -276,7 +316,7 @@ def render_page(examples: list[Example]) -> str:
 {STYLE}
     </style>
   </head>
-  <body>
+  <body id="top">
     <header class="hero">
       <div class="hero-inner">
         <div class="hero-copy">
@@ -323,11 +363,24 @@ def group_by_section(examples: list[Example]) -> dict[str, list[Example]]:
 
 
 def section_title(section: str) -> str:
-    return SECTION_TITLES.get(section, f"Section {section} Examples")
+    metadata = SECTION_METADATA.get(section)
+    if metadata is not None:
+        return metadata["title"]
+    return f"Section {section} Examples"
 
 
 def section_description(section: str) -> str:
-    return SECTION_DESCRIPTIONS.get(section, "Examples referenced in this thesis section.")
+    metadata = SECTION_METADATA.get(section)
+    if metadata is not None:
+        return metadata["description"]
+    return "Examples referenced in this thesis section."
+
+
+def section_display_label(section: str) -> str:
+    metadata = SECTION_METADATA.get(section)
+    if metadata is not None:
+        return metadata["display_label"]
+    return f"Section {section}"
 
 
 def render_section(section: str, examples: list[Example]) -> str:
@@ -335,7 +388,7 @@ def render_section(section: str, examples: list[Example]) -> str:
     section_id = section.replace(".", "-")
     return f"""        <section class="chapter" id="chapter-{section_id}">
           <div class="chapter-header">
-            <span>Section {html.escape(section)}</span>
+            <span>{html.escape(section_display_label(section))}</span>
             <h2>{html.escape(section_title(section))}</h2>
             <p>{html.escape(section_description(section))}</p>
           </div>
@@ -359,7 +412,6 @@ def render_card(example: Example) -> str:
               <div class="example-top">
                 <div class="example-heading">
                   <p class="example-number">{html.escape(example.number)}</p>
-                  <h3>{html.escape(example.title)}</h3>
                   <div class="meta">
 {tags}
                   </div>

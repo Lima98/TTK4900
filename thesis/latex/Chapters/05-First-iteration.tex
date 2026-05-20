@@ -79,7 +79,7 @@ The goal of the first iteration was to get a "proof of concept" working. I wante
 
   A good example of this can be seen in the note generator itself. The code below shows that the melody is made by moving randomly through a small list of intervals, while keeping track only of the current position in the scale.
 
-  \lstinputlisting[language=Python, firstline=28, lastline=40]{../../code/.old/.old_iter1/generators/generator.py}
+  \lstinputlisting[language=Python, firstline=28, lastline=40, breaklines=true, breakatwhitespace=true]{../../code/.old/.old_iter1/generators/generator.py}
 
   The code generated the notes within a given scale and restricted the distance (called interval in music theory) to only 2nds and 3rds. However this meant that the melody meandered without any other restrictions. If the generated music was long it would have a tendency to go beyond the range of an instrument or the human voice.
 

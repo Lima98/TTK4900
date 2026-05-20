@@ -98,7 +98,7 @@ def build_settings(args: argparse.Namespace) -> GenerationSettings:
         raise ValueError("Motif must contain at least one note.")
 
     form_plan = build_form_plan(args.form, args.bars)
-    harmony_plan = build_harmony_plan(args.harmony, args.mode, form_plan, args.bars)
+    harmony_plan = build_harmony_plan(args.harmony, args.mode, form_plan, args.bars, time_signature)
     return GenerationSettings(
         key=key,
         time_signature=time_signature,
@@ -141,10 +141,22 @@ def build_constraints() -> list:
     ]
 
 
-def build_harmony_plan(specification: str, mode: str, form_plan: FormPlan, bars: int) -> HarmonyPlan:
+def build_harmony_plan(
+    specification: str,
+    mode: str,
+    form_plan: FormPlan,
+    bars: int,
+    time_signature: TimeSignature,
+) -> HarmonyPlan:
     """Build either an explicit or automatically derived harmony plan."""
     if specification.strip().lower() in {"", "auto", "none"}:
         return build_default_harmony_plan(mode, form_plan, bars)
+
+    if ":" not in specification:
+        if "," in specification:
+            return build_compact_beat_plan(specification, mode, form_plan, bars, time_signature)
+        if "-" in specification:
+            return build_beat_progression_plan(specification, mode, form_plan, bars, time_signature)
 
     spans: list[HarmonySpan] = []
     for raw_span in specification.split(","):
@@ -165,6 +177,112 @@ def build_harmony_plan(specification: str, mode: str, form_plan: FormPlan, bars:
         )
     if not spans:
         raise ValueError("Harmony plan must contain at least one span.")
+    return HarmonyPlan(spans=tuple(spans))
+
+
+def build_compact_beat_plan(
+    specification: str,
+    mode: str,
+    form_plan: FormPlan,
+    bars: int,
+    time_signature: TimeSignature,
+) -> HarmonyPlan:
+    """Build a harmony plan from compact beat tokens such as ``2I,2V,4I``."""
+    timed_spans: list[tuple[str, float]] = []
+    for raw_chunk in specification.split(","):
+        chunk = raw_chunk.strip()
+        if not chunk:
+            continue
+        index = 0
+        while index < len(chunk) and chunk[index].isdigit():
+            index += 1
+        if index == 0 or index == len(chunk):
+            raise ValueError("Compact harmony chunks must look like '2I' or '4iv'.")
+        duration = float(int(chunk[:index]))
+        roman_symbol = chunk[index:]
+        timed_spans.append((roman_symbol, duration))
+    return build_timed_harmony_plan(timed_spans, mode, form_plan, bars, time_signature)
+
+
+def build_beat_progression_plan(
+    specification: str,
+    mode: str,
+    form_plan: FormPlan,
+    bars: int,
+    time_signature: TimeSignature,
+) -> HarmonyPlan:
+    """Build a harmony plan from alternating chord and dash tokens, where each dash equals one beat."""
+    tokens = specification.split()
+    if len(tokens) % 2 != 0:
+        raise ValueError("Beat progression harmony must alternate chord tokens and dash-count tokens.")
+
+    timed_spans: list[tuple[str, float]] = []
+    for index in range(0, len(tokens), 2):
+        chord = tokens[index].strip()
+        dash_token = tokens[index + 1].strip()
+        if not dash_token or any(character != "-" for character in dash_token):
+            raise ValueError("Beat progression duration tokens must contain only dashes.")
+        timed_spans.append((chord, float(len(dash_token))))
+
+    return build_timed_harmony_plan(timed_spans, mode, form_plan, bars, time_signature)
+
+
+def build_timed_harmony_plan(
+    timed_spans: list[tuple[str, float]],
+    mode: str,
+    form_plan: FormPlan,
+    bars: int,
+    time_signature: TimeSignature,
+) -> HarmonyPlan:
+    """Build a beat-resolved harmony plan, truncating overflow and filling gaps from the auto plan."""
+    total_beats = bars * time_signature.bar_length
+    running_beats = 0.0
+    spans: list[HarmonySpan] = []
+
+    for roman_symbol, duration in timed_spans:
+        if duration <= 0 or running_beats >= total_beats - 1e-9:
+            continue
+        usable_duration = min(duration, total_beats - running_beats)
+        start_bar = int(running_beats // time_signature.bar_length) + 1
+        start_beat = running_beats % time_signature.bar_length
+        running_beats += usable_duration
+        end_bar = int((running_beats - 1e-9) // time_signature.bar_length) + 1
+        end_beat = running_beats - (end_bar - 1) * time_signature.bar_length
+        if abs(end_beat) < 1e-9:
+            end_beat = time_signature.bar_length
+        spans.append(
+            HarmonySpan(
+                start_bar=start_bar,
+                end_bar=end_bar,
+                roman_symbol=roman_symbol,
+                start_beat=start_beat,
+                end_beat=end_beat,
+            )
+        )
+
+    if running_beats < total_beats - 1e-9:
+        auto_plan = build_default_harmony_plan(mode, form_plan, bars)
+        while running_beats < total_beats - 1e-9:
+            start_bar = int(running_beats // time_signature.bar_length) + 1
+            start_beat = running_beats % time_signature.bar_length
+            auto_span = auto_plan.chord_for_position(start_bar, start_beat, time_signature.bar_length)
+            roman_symbol = auto_span.roman_symbol if auto_span is not None else ("I" if mode.lower() == "major" else "i")
+            next_bar_boundary = start_bar * time_signature.bar_length
+            running_beats = min(next_bar_boundary, total_beats)
+            end_bar = int((running_beats - 1e-9) // time_signature.bar_length) + 1
+            end_beat = running_beats - (end_bar - 1) * time_signature.bar_length
+            if abs(end_beat) < 1e-9:
+                end_beat = time_signature.bar_length
+            spans.append(
+                HarmonySpan(
+                    start_bar=start_bar,
+                    end_bar=end_bar,
+                    roman_symbol=roman_symbol,
+                    start_beat=start_beat,
+                    end_beat=end_beat,
+                )
+            )
+
     return HarmonyPlan(spans=tuple(spans))
 
 
@@ -388,7 +506,10 @@ def build_generate_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--harmony",
         default="auto",
-        help="Harmony plan as start-end:roman[:weight], separated by commas, or 'auto' for thesis-based progression.",
+        help=(
+            "Harmony plan as start-end:roman[:weight], compact beat tokens like 2I,2V,4I, "
+            "or alternating chord/dash tokens such as 'I -- V --'. Use 'auto' for the default progression."
+        ),
     )
     parser.add_argument(
         "--output-dir",

@@ -44,12 +44,14 @@
 <li class="toctree-l1"><a class="reference internal" href="guides/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/cli-reference.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guides/thesis-workflow.html">Thesis Workflow</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/melody-engine.html">Melody Engine API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/main-module.html">Main CLI Module</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guides/thesis-workflow.html">Author Documentation</a></li>
 </ul>
 
 <div class="relations">
@@ -96,10 +98,10 @@ generated directly from the Python modules and docstrings in <code class="docuti
 <code class="docutils literal notranslate"><span class="pre">code/melody_engine/</span></code>.</p>
 <p>The goal is to make the codebase easy to navigate whether you want to:</p>
 <ul class="simple">
-<li><p>generate a melody for thesis examples,</p></li>
+<li><p>generate melodies or chorales,</p></li>
 <li><p>render cropped PDFs and WAV files,</p></li>
-<li><p>experiment with voice profiles and clefs,</p></li>
-<li><p>or extend the project toward multi-voice and chorale generation.</p></li>
+<li><p>experiment with form, harmony, voice profiles, and clefs,</p></li>
+<li><p>or extend the project toward richer multi-voice generation.</p></li>
 </ul>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
@@ -127,14 +129,6 @@ generated directly from the Python modules and docstrings in <code class="docuti
 <li class="toctree-l2"><a class="reference internal" href="guides/architecture.html#chorale-direction">Chorale Direction</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="guides/thesis-workflow.html">Thesis Workflow</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#why-this-documentation-exists">Why This Documentation Exists</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#main-asset-paths">Main Asset Paths</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#typical-example-workflow">Typical Example Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#deployment-workflow">Deployment Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="guides/thesis-workflow.html#github-pages-deployment">GitHub Pages Deployment</a></li>
-</ul>
-</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -154,15 +148,19 @@ generated directly from the Python modules and docstrings in <code class="docuti
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_settings"><code class="docutils literal notranslate"><span class="pre">build_settings()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_constraints"><code class="docutils literal notranslate"><span class="pre">build_constraints()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_harmony_plan"><code class="docutils literal notranslate"><span class="pre">build_harmony_plan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_compact_beat_plan"><code class="docutils literal notranslate"><span class="pre">build_compact_beat_plan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_beat_progression_plan"><code class="docutils literal notranslate"><span class="pre">build_beat_progression_plan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_timed_harmony_plan"><code class="docutils literal notranslate"><span class="pre">build_timed_harmony_plan()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_default_harmony_plan"><code class="docutils literal notranslate"><span class="pre">build_default_harmony_plan()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.default_function_symbols"><code class="docutils literal notranslate"><span class="pre">default_function_symbols()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_form_plan"><code class="docutils literal notranslate"><span class="pre">build_form_plan()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_future_chorale_plan"><code class="docutils literal notranslate"><span class="pre">build_future_chorale_plan()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_chorale_plan"><code class="docutils literal notranslate"><span class="pre">build_chorale_plan()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_output_stem"><code class="docutils literal notranslate"><span class="pre">build_output_stem()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.sanitize_token"><code class="docutils literal notranslate"><span class="pre">sanitize_token()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_generate_parser"><code class="docutils literal notranslate"><span class="pre">build_generate_parser()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_render_parser"><code class="docutils literal notranslate"><span class="pre">build_render_parser()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.describe_melody"><code class="docutils literal notranslate"><span class="pre">describe_melody()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.describe_chorale"><code class="docutils literal notranslate"><span class="pre">describe_chorale()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.maybe_render"><code class="docutils literal notranslate"><span class="pre">maybe_render()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.resolve_render_target"><code class="docutils literal notranslate"><span class="pre">resolve_render_target()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.collect_render_sources"><code class="docutils literal notranslate"><span class="pre">collect_render_sources()</span></code></a></li>
@@ -172,13 +170,15 @@ generated directly from the Python modules and docstrings in <code class="docuti
 </li>
 </ul>
 </div>
+<div class="toctree-wrapper compound">
+</div>
 <section id="quick-start">
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h2>
 <p>Generate LilyPond only:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py
 </pre></div>
 </div>
-<p>Generate a melody and also render thesis-ready PDF output:</p>
+<p>Generate a melody and also render cropped PDF output:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span>--pdf
 </pre></div>
 </div>
@@ -192,8 +192,8 @@ generated directly from the Python modules and docstrings in <code class="docuti
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">code/main.py</span></code>: primary CLI for generation and rerendering</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">code/melody_engine/</span></code>: reusable engine modules</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">webpage/index.html</span></code>: thesis example archive for examiners</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">thesis/latex/main.pdf</span></code>: thesis document referenced by the webpage and examples</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: documentation source</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">webpage/index.html</span></code>: static example archive and project page</p></li>
 </ul>
 </section>
 <section id="documentation-workflow">
@@ -205,6 +205,12 @@ generated directly from the Python modules and docstrings in <code class="docuti
 </div>
 <p>The generated site is written to <code class="docutils literal notranslate"><span class="pre">docs/_build/html/</span></code> and is the same material deployed by
 <code class="docutils literal notranslate"><span class="pre">webpage/deploy.zsh</span></code>.</p>
+</section>
+<section id="author-reference">
+<h2>Author Reference<a class="headerlink" href="#author-reference" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="guides/thesis-workflow.html">Open author-only workflow notes</a></p>
+<p>This material covers thesis-specific example curation and deployment details that are useful
+for maintaining the project, but not required for normal program usage.</p>
 </section>
 </section>
 

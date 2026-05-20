@@ -7,8 +7,7 @@ Repository Structure
 - ``code/main.py`` is the main user-facing entry point.
 - ``code/melody_engine/`` contains the reusable engine modules.
 - ``code/output/<seed>/`` stores generated LilyPond, PDF, MIDI, and WAV files.
-- ``thesis/latex/examples/`` stores thesis example assets used by the webpage.
-- ``webpage/index.html`` presents the thesis examples with matching numbering.
+- ``webpage/index.html`` contains the static archive and companion project page.
 
 Typical Workflow
 ----------------

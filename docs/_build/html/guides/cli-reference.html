@@ -53,12 +53,14 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="thesis-workflow.html">Thesis Workflow</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../api/melody-engine.html">Melody Engine API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/main-module.html">Main CLI Module</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="thesis-workflow.html">Author Documentation</a></li>
 </ul>
 
 <div class="relations">
@@ -146,14 +148,26 @@ python3<span class="w"> </span>code/main.py<span class="w"> </span>render<span c
 </section>
 <section id="manual-harmony-format">
 <h2>Manual Harmony Format<a class="headerlink" href="#manual-harmony-format" title="Link to this heading">¶</a></h2>
-<p>Explicit harmonic plans use:</p>
+<p>Explicit harmonic plans can use one of three formats:</p>
+<p>Compact beat format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>2I,2V,4I,2IV,2iv
+</pre></div>
+</div>
+<p>Here the number is the duration in beats and the Roman numeral is the chord.</p>
+<p>Alternating chord-and-dash format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>I -- V -- vi ----
+</pre></div>
+</div>
+<p>Range format:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>start-end:roman[:weight]
 </pre></div>
 </div>
 <p>Example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span>--harmony<span class="w"> </span><span class="s2">&quot;1-2:i,3-4:V,5-6:IV,7-8:i&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>code/main.py<span class="w"> </span>--harmony<span class="w"> </span><span class="s2">&quot;2I,2V,4I,2IV,2iv&quot;</span>
 </pre></div>
 </div>
+<p>If the explicit harmony is longer than the generated piece, it is truncated. If it is shorter,
+the remaining bars are filled automatically using the default tonal progression.</p>
 </section>
 </section>
 
