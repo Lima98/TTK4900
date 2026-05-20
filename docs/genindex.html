@@ -42,12 +42,14 @@
 <li class="toctree-l1"><a class="reference internal" href="guides/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/cli-reference.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guides/architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guides/thesis-workflow.html">Thesis Workflow</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/melody-engine.html">Melody Engine API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/main-module.html">Main CLI Module</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guides/thesis-workflow.html">Author Documentation</a></li>
 </ul>
 
 <div class="relations">
@@ -146,7 +148,11 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.TimeSignature.beats_per_bar">beats_per_bar (melody_engine.structure.TimeSignature attribute)</a>
 </li>
+      <li><a href="api/main-module.html#main.build_beat_progression_plan">build_beat_progression_plan() (in module main)</a>
+</li>
       <li><a href="api/main-module.html#main.build_chorale_plan">build_chorale_plan() (in module main)</a>
+</li>
+      <li><a href="api/main-module.html#main.build_compact_beat_plan">build_compact_beat_plan() (in module main)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -165,6 +171,8 @@
       <li><a href="api/main-module.html#main.build_render_parser">build_render_parser() (in module main)</a>
 </li>
       <li><a href="api/main-module.html#main.build_settings">build_settings() (in module main)</a>
+</li>
+      <li><a href="api/main-module.html#main.build_timed_harmony_plan">build_timed_harmony_plan() (in module main)</a>
 </li>
       <li><a href="api/main-module.html#main.build_voice_profile">build_voice_profile() (in module main)</a>
 </li>
@@ -192,14 +200,16 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.HarmonyPlan.chord_for_bar">chord_for_bar() (melody_engine.structure.HarmonyPlan method)</a>
 </li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.HarmonyPlan.chord_for_position">chord_for_position() (melody_engine.structure.HarmonyPlan method)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.theory.Key.chord_pitch_classes">chord_pitch_classes() (melody_engine.theory.Key method)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.theory.Key.chord_scale_targets">chord_scale_targets() (melody_engine.theory.Key method)</a>
 </li>
-      <li><a href="api/melody-engine.html#melody_engine.theory.Key.chord_tones">chord_tones() (melody_engine.theory.Key method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/melody-engine.html#melody_engine.theory.Key.chord_tones">chord_tones() (melody_engine.theory.Key method)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.ChordTonePreferenceConstraint">ChordTonePreferenceConstraint (class in melody_engine.constraints)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.structure.NoteCandidate.chromatic_adjustment">chromatic_adjustment (melody_engine.structure.NoteCandidate attribute)</a>
@@ -258,6 +268,8 @@
         <li><a href="api/melody-engine.html#melody_engine.structure.HarmonySpan.end_bar">(melody_engine.structure.HarmonySpan attribute)</a>
 </li>
       </ul></li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.HarmonySpan.end_beat">end_beat (melody_engine.structure.HarmonySpan attribute)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.ChordTonePreferenceConstraint.evaluate">evaluate() (melody_engine.constraints.ChordTonePreferenceConstraint method)</a>
 
       <ul>
@@ -586,6 +598,10 @@
       <li><a href="api/melody-engine.html#melody_engine.constraints.CandidateContext.on_strong_beat">on_strong_beat (melody_engine.constraints.CandidateContext property)</a>
 </li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/melody-engine.html#melody_engine.structure.HarmonySpan.overlaps_bar">overlaps_bar() (melody_engine.structure.HarmonySpan method)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="P">P</h2>
@@ -681,10 +697,10 @@
 </li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.CandidateContext.section_transform">section_transform (melody_engine.constraints.CandidateContext attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.structure.FormPlan.sections">sections (melody_engine.structure.FormPlan attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/melody-engine.html#melody_engine.constraints.SingleClimaxConstraint">SingleClimaxConstraint (class in melody_engine.constraints)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.SoftConstraint">SoftConstraint (class in melody_engine.constraints)</a>
@@ -703,6 +719,8 @@
         <li><a href="api/melody-engine.html#melody_engine.structure.HarmonySpan.start_bar">(melody_engine.structure.HarmonySpan attribute)</a>
 </li>
       </ul></li>
+      <li><a href="api/melody-engine.html#melody_engine.structure.HarmonySpan.start_beat">start_beat (melody_engine.structure.HarmonySpan attribute)</a>
+</li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.StepwiseMotionConstraint">StepwiseMotionConstraint (class in melody_engine.constraints)</a>
 </li>
       <li><a href="api/melody-engine.html#melody_engine.constraints.StrongBeatStabilityConstraint">StrongBeatStabilityConstraint (class in melody_engine.constraints)</a>

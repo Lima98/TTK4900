@@ -42,12 +42,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/cli-reference.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/thesis-workflow.html">Thesis Workflow</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../api/melody-engine.html">Melody Engine API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api/main-module.html">Main CLI Module</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/thesis-workflow.html">Author Documentation</a></li>
 </ul>
 
 <div class="relations">
@@ -191,7 +193,7 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Motif must contain at least one note.&quot;</span><span class="p">)</span>
 
     <span class="n">form_plan</span> <span class="o">=</span> <span class="n">build_form_plan</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">form</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">bars</span><span class="p">)</span>
-    <span class="n">harmony_plan</span> <span class="o">=</span> <span class="n">build_harmony_plan</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">harmony</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">bars</span><span class="p">)</span>
+    <span class="n">harmony_plan</span> <span class="o">=</span> <span class="n">build_harmony_plan</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">harmony</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">bars</span><span class="p">,</span> <span class="n">time_signature</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">GenerationSettings</span><span class="p">(</span>
         <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
         <span class="n">time_signature</span><span class="o">=</span><span class="n">time_signature</span><span class="p">,</span>
@@ -240,10 +242,22 @@
 
 <div class="viewcode-block" id="build_harmony_plan">
 <a class="viewcode-back" href="../api/main-module.html#main.build_harmony_plan">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">build_harmony_plan</span><span class="p">(</span><span class="n">specification</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">:</span> <span class="n">FormPlan</span><span class="p">,</span> <span class="n">bars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HarmonyPlan</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_harmony_plan</span><span class="p">(</span>
+    <span class="n">specification</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">form_plan</span><span class="p">:</span> <span class="n">FormPlan</span><span class="p">,</span>
+    <span class="n">bars</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">time_signature</span><span class="p">:</span> <span class="n">TimeSignature</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HarmonyPlan</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Build either an explicit or automatically derived harmony plan.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">specification</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">}:</span>
         <span class="k">return</span> <span class="n">build_default_harmony_plan</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">,</span> <span class="n">bars</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">specification</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;,&quot;</span> <span class="ow">in</span> <span class="n">specification</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">build_compact_beat_plan</span><span class="p">(</span><span class="n">specification</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">,</span> <span class="n">bars</span><span class="p">,</span> <span class="n">time_signature</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;-&quot;</span> <span class="ow">in</span> <span class="n">specification</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">build_beat_progression_plan</span><span class="p">(</span><span class="n">specification</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">,</span> <span class="n">bars</span><span class="p">,</span> <span class="n">time_signature</span><span class="p">)</span>
 
     <span class="n">spans</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">HarmonySpan</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">raw_span</span> <span class="ow">in</span> <span class="n">specification</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
@@ -264,6 +278,121 @@
         <span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">spans</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Harmony plan must contain at least one span.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HarmonyPlan</span><span class="p">(</span><span class="n">spans</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">spans</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="build_compact_beat_plan">
+<a class="viewcode-back" href="../api/main-module.html#main.build_compact_beat_plan">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_compact_beat_plan</span><span class="p">(</span>
+    <span class="n">specification</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">form_plan</span><span class="p">:</span> <span class="n">FormPlan</span><span class="p">,</span>
+    <span class="n">bars</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">time_signature</span><span class="p">:</span> <span class="n">TimeSignature</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HarmonyPlan</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a harmony plan from compact beat tokens such as ``2I,2V,4I``.&quot;&quot;&quot;</span>
+    <span class="n">timed_spans</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">raw_chunk</span> <span class="ow">in</span> <span class="n">specification</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
+        <span class="n">chunk</span> <span class="o">=</span> <span class="n">raw_chunk</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="ow">and</span> <span class="n">chunk</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Compact harmony chunks must look like &#39;2I&#39; or &#39;4iv&#39;.&quot;</span><span class="p">)</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">chunk</span><span class="p">[:</span><span class="n">index</span><span class="p">]))</span>
+        <span class="n">roman_symbol</span> <span class="o">=</span> <span class="n">chunk</span><span class="p">[</span><span class="n">index</span><span class="p">:]</span>
+        <span class="n">timed_spans</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">roman_symbol</span><span class="p">,</span> <span class="n">duration</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">build_timed_harmony_plan</span><span class="p">(</span><span class="n">timed_spans</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">,</span> <span class="n">bars</span><span class="p">,</span> <span class="n">time_signature</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="build_beat_progression_plan">
+<a class="viewcode-back" href="../api/main-module.html#main.build_beat_progression_plan">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_beat_progression_plan</span><span class="p">(</span>
+    <span class="n">specification</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">form_plan</span><span class="p">:</span> <span class="n">FormPlan</span><span class="p">,</span>
+    <span class="n">bars</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">time_signature</span><span class="p">:</span> <span class="n">TimeSignature</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HarmonyPlan</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a harmony plan from alternating chord and dash tokens, where each dash equals one beat.&quot;&quot;&quot;</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">specification</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Beat progression harmony must alternate chord tokens and dash-count tokens.&quot;</span><span class="p">)</span>
+
+    <span class="n">timed_spans</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">chord</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">dash_token</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">dash_token</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="n">character</span> <span class="o">!=</span> <span class="s2">&quot;-&quot;</span> <span class="k">for</span> <span class="n">character</span> <span class="ow">in</span> <span class="n">dash_token</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Beat progression duration tokens must contain only dashes.&quot;</span><span class="p">)</span>
+        <span class="n">timed_spans</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">chord</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dash_token</span><span class="p">))))</span>
+
+    <span class="k">return</span> <span class="n">build_timed_harmony_plan</span><span class="p">(</span><span class="n">timed_spans</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">,</span> <span class="n">bars</span><span class="p">,</span> <span class="n">time_signature</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="build_timed_harmony_plan">
+<a class="viewcode-back" href="../api/main-module.html#main.build_timed_harmony_plan">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_timed_harmony_plan</span><span class="p">(</span>
+    <span class="n">timed_spans</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">form_plan</span><span class="p">:</span> <span class="n">FormPlan</span><span class="p">,</span>
+    <span class="n">bars</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">time_signature</span><span class="p">:</span> <span class="n">TimeSignature</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HarmonyPlan</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a beat-resolved harmony plan, truncating overflow and filling gaps from the auto plan.&quot;&quot;&quot;</span>
+    <span class="n">total_beats</span> <span class="o">=</span> <span class="n">bars</span> <span class="o">*</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+    <span class="n">running_beats</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">spans</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">HarmonySpan</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">roman_symbol</span><span class="p">,</span> <span class="n">duration</span> <span class="ow">in</span> <span class="n">timed_spans</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">duration</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">running_beats</span> <span class="o">&gt;=</span> <span class="n">total_beats</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">usable_duration</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">total_beats</span> <span class="o">-</span> <span class="n">running_beats</span><span class="p">)</span>
+        <span class="n">start_bar</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">running_beats</span> <span class="o">//</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">start_beat</span> <span class="o">=</span> <span class="n">running_beats</span> <span class="o">%</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+        <span class="n">running_beats</span> <span class="o">+=</span> <span class="n">usable_duration</span>
+        <span class="n">end_bar</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">running_beats</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">//</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">end_beat</span> <span class="o">=</span> <span class="n">running_beats</span> <span class="o">-</span> <span class="p">(</span><span class="n">end_bar</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">end_beat</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-9</span><span class="p">:</span>
+            <span class="n">end_beat</span> <span class="o">=</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+        <span class="n">spans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">HarmonySpan</span><span class="p">(</span>
+                <span class="n">start_bar</span><span class="o">=</span><span class="n">start_bar</span><span class="p">,</span>
+                <span class="n">end_bar</span><span class="o">=</span><span class="n">end_bar</span><span class="p">,</span>
+                <span class="n">roman_symbol</span><span class="o">=</span><span class="n">roman_symbol</span><span class="p">,</span>
+                <span class="n">start_beat</span><span class="o">=</span><span class="n">start_beat</span><span class="p">,</span>
+                <span class="n">end_beat</span><span class="o">=</span><span class="n">end_beat</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">running_beats</span> <span class="o">&lt;</span> <span class="n">total_beats</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">:</span>
+        <span class="n">auto_plan</span> <span class="o">=</span> <span class="n">build_default_harmony_plan</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">form_plan</span><span class="p">,</span> <span class="n">bars</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">running_beats</span> <span class="o">&lt;</span> <span class="n">total_beats</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">:</span>
+            <span class="n">start_bar</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">running_beats</span> <span class="o">//</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">start_beat</span> <span class="o">=</span> <span class="n">running_beats</span> <span class="o">%</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+            <span class="n">auto_span</span> <span class="o">=</span> <span class="n">auto_plan</span><span class="o">.</span><span class="n">chord_for_position</span><span class="p">(</span><span class="n">start_bar</span><span class="p">,</span> <span class="n">start_beat</span><span class="p">,</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span><span class="p">)</span>
+            <span class="n">roman_symbol</span> <span class="o">=</span> <span class="n">auto_span</span><span class="o">.</span><span class="n">roman_symbol</span> <span class="k">if</span> <span class="n">auto_span</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">(</span><span class="s2">&quot;I&quot;</span> <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;major&quot;</span> <span class="k">else</span> <span class="s2">&quot;i&quot;</span><span class="p">)</span>
+            <span class="n">next_bar_boundary</span> <span class="o">=</span> <span class="n">start_bar</span> <span class="o">*</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+            <span class="n">running_beats</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">next_bar_boundary</span><span class="p">,</span> <span class="n">total_beats</span><span class="p">)</span>
+            <span class="n">end_bar</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">running_beats</span> <span class="o">-</span> <span class="mf">1e-9</span><span class="p">)</span> <span class="o">//</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">end_beat</span> <span class="o">=</span> <span class="n">running_beats</span> <span class="o">-</span> <span class="p">(</span><span class="n">end_bar</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">end_beat</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-9</span><span class="p">:</span>
+                <span class="n">end_beat</span> <span class="o">=</span> <span class="n">time_signature</span><span class="o">.</span><span class="n">bar_length</span>
+            <span class="n">spans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">HarmonySpan</span><span class="p">(</span>
+                    <span class="n">start_bar</span><span class="o">=</span><span class="n">start_bar</span><span class="p">,</span>
+                    <span class="n">end_bar</span><span class="o">=</span><span class="n">end_bar</span><span class="p">,</span>
+                    <span class="n">roman_symbol</span><span class="o">=</span><span class="n">roman_symbol</span><span class="p">,</span>
+                    <span class="n">start_beat</span><span class="o">=</span><span class="n">start_beat</span><span class="p">,</span>
+                    <span class="n">end_beat</span><span class="o">=</span><span class="n">end_beat</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
     <span class="k">return</span> <span class="n">HarmonyPlan</span><span class="p">(</span><span class="n">spans</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">spans</span><span class="p">))</span></div>
 
 
@@ -508,7 +637,10 @@
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--harmony&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Harmony plan as start-end:roman[:weight], separated by commas, or &#39;auto&#39; for thesis-based progression.&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Harmony plan as start-end:roman[:weight], compact beat tokens like 2I,2V,4I, &quot;</span>
+            <span class="s2">&quot;or alternating chord/dash tokens such as &#39;I -- V --&#39;. Use &#39;auto&#39; for the default progression.&quot;</span>
+        <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--output-dir&quot;</span><span class="p">,</span>

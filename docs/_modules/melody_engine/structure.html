@@ -42,12 +42,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../guides/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../guides/cli-reference.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../guides/architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../guides/thesis-workflow.html">Thesis Workflow</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../api/melody-engine.html">Melody Engine API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api/main-module.html">Main CLI Module</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../guides/thesis-workflow.html">Author Documentation</a></li>
 </ul>
 
 <div class="relations">
@@ -249,10 +251,23 @@
     <span class="n">end_bar</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">roman_symbol</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">start_beat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">end_beat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="HarmonySpan.covers">
 <a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.structure.HarmonySpan.covers">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">covers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">covers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">beat_in_bar</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bar_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">start_position</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_bar</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">bar_length</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_beat</span>
+        <span class="n">end_position</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end_bar</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">bar_length</span> <span class="o">+</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">end_beat</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_beat</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">bar_length</span>
+        <span class="p">)</span>
+        <span class="n">current_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">bar_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">bar_length</span> <span class="o">+</span> <span class="n">beat_in_bar</span>
+        <span class="k">return</span> <span class="n">start_position</span> <span class="o">&lt;=</span> <span class="n">current_position</span> <span class="o">&lt;</span> <span class="n">end_position</span> <span class="o">-</span> <span class="mf">1e-9</span></div>
+
+
+<div class="viewcode-block" id="HarmonySpan.overlaps_bar">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.structure.HarmonySpan.overlaps_bar">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">overlaps_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_bar</span> <span class="o">&lt;=</span> <span class="n">bar_number</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_bar</span></div>
 </div>
 
@@ -268,7 +283,16 @@
 <a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.structure.HarmonyPlan.chord_for_bar">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">chord_for_bar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HarmonySpan</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">span</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spans</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">covers</span><span class="p">(</span><span class="n">bar_number</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">overlaps_bar</span><span class="p">(</span><span class="n">bar_number</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">span</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="HarmonyPlan.chord_for_position">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.structure.HarmonyPlan.chord_for_position">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">chord_for_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">beat_in_bar</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">bar_length</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HarmonySpan</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">span</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spans</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">span</span><span class="o">.</span><span class="n">covers</span><span class="p">(</span><span class="n">bar_number</span><span class="p">,</span> <span class="n">beat_in_bar</span><span class="p">,</span> <span class="n">bar_length</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">span</span>
         <span class="k">return</span> <span class="kc">None</span></div>
 </div>

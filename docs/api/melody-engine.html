@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Main CLI Module" href="main-module.html" />
-    <link rel="prev" title="Thesis Workflow" href="../guides/thesis-workflow.html" />
+    <link rel="prev" title="Architecture" href="../guides/architecture.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -45,7 +45,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../guides/getting-started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/cli-reference.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../guides/architecture.html">Architecture</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../guides/thesis-workflow.html">Thesis Workflow</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
@@ -60,12 +59,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="main-module.html">Main CLI Module</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../guides/thesis-workflow.html">Author Documentation</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../guides/thesis-workflow.html" title="previous chapter">Thesis Workflow</a></li>
+      <li>Previous: <a href="../guides/architecture.html" title="previous chapter">Architecture</a></li>
       <li>Next: <a href="main-module.html" title="next chapter">Main CLI Module</a></li>
   </ul></li>
 </ul>
@@ -326,7 +328,7 @@ index stays unambiguous.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="melody_engine.structure.HarmonySpan">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">melody_engine.structure.</span></span><span class="sig-name descname"><span class="pre">HarmonySpan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'int'</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'int'</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roman_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'str'</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'float'</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/melody_engine/structure.html#HarmonySpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#melody_engine.structure.HarmonySpan" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">melody_engine.structure.</span></span><span class="sig-name descname"><span class="pre">HarmonySpan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'int'</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'int'</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">roman_symbol</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'str'</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'float'</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_beat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'float'</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_beat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="s"><span class="pre">'float</span> <span class="pre">|</span> <span class="pre">None'</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/melody_engine/structure.html#HarmonySpan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#melody_engine.structure.HarmonySpan" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="melody_engine.structure.HarmonySpan.start_bar">
@@ -348,9 +350,24 @@ index stays unambiguous.</p>
 <span class="sig-name descname"><span class="pre">weight</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></em><a class="headerlink" href="#melody_engine.structure.HarmonySpan.weight" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="melody_engine.structure.HarmonySpan.start_beat">
+<span class="sig-name descname"><span class="pre">start_beat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#melody_engine.structure.HarmonySpan.start_beat" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="melody_engine.structure.HarmonySpan.end_beat">
+<span class="sig-name descname"><span class="pre">end_beat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#melody_engine.structure.HarmonySpan.end_beat" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="melody_engine.structure.HarmonySpan.covers">
-<span class="sig-name descname"><span class="pre">covers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bar_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/melody_engine/structure.html#HarmonySpan.covers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#melody_engine.structure.HarmonySpan.covers" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">covers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bar_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beat_in_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/melody_engine/structure.html#HarmonySpan.covers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#melody_engine.structure.HarmonySpan.covers" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="melody_engine.structure.HarmonySpan.overlaps_bar">
+<span class="sig-name descname"><span class="pre">overlaps_bar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bar_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/melody_engine/structure.html#HarmonySpan.overlaps_bar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#melody_engine.structure.HarmonySpan.overlaps_bar" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -367,6 +384,11 @@ index stays unambiguous.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="melody_engine.structure.HarmonyPlan.chord_for_bar">
 <span class="sig-name descname"><span class="pre">chord_for_bar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bar_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#melody_engine.structure.HarmonySpan" title="melody_engine.structure.HarmonySpan"><span class="pre">HarmonySpan</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/melody_engine/structure.html#HarmonyPlan.chord_for_bar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#melody_engine.structure.HarmonyPlan.chord_for_bar" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="melody_engine.structure.HarmonyPlan.chord_for_position">
+<span class="sig-name descname"><span class="pre">chord_for_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bar_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beat_in_bar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#melody_engine.structure.HarmonySpan" title="melody_engine.structure.HarmonySpan"><span class="pre">HarmonySpan</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/melody_engine/structure.html#HarmonyPlan.chord_for_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#melody_engine.structure.HarmonyPlan.chord_for_position" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
