@@ -51,18 +51,18 @@ For the third iteration the use of \ac{AI} was implemented.
     ]
 
       % Main vertical pipeline
-      \node[stage] (input) {User input\\key, mode, bars, seed, voice profile, harmony, form};
-      \node[stage, below=of input] (cli) {\texttt{code/main.py}\\parses CLI arguments and render mode};
+      \node[stage] (input) {User input\\key, mode, bars, seed, texture,\\voice profile, harmony, form};
+      \node[stage, below=of input] (cli) {\texttt{code/main.py}\\parses CLI arguments, compact harmony,\\and render mode};
       \node[stage, below=of cli] (settings) {\texttt{GenerationSettings}\\with \texttt{Key}, \texttt{Motif}, \texttt{FormPlan},\\\texttt{HarmonyPlan} and \texttt{VoiceProfile}};
-      \node[stage, below=of settings] (generator) {\texttt{MelodyGenerator}\\candidate generation, motif reuse,\\weighted search and best-attempt selection};
-      \node[stage, below=of generator] (melody) {\texttt{Melody}\\events, durations, metadata, selected clef};
-      \node[stage, below=of melody] (render) {\texttt{lilypond.py}\\notation export and optional rendering};
+      \node[stage, below=of settings] (generator) {\texttt{MelodyGenerator}\\candidate generation, beat-resolved harmony,\\motif reuse, and weighted selection};
+      \node[stage, below=of generator] (melody) {\texttt{Melody} or \texttt{ChoraleScore}\\events, metadata, harmony plan,\\and selected clefs};
+      \node[stage, below=of melody] (render) {\texttt{lilypond.py}\\notation export, rerendering,\\and optional PDF/WAV rendering};
 
       % Side modules
-      \node[support, left=18mm of settings] (structure) {\texttt{structure.py}\\core data model};
+      \node[support, left=18mm of settings] (structure) {\texttt{structure.py}\\core data model,\\HarmonySpan and ChoraleScore};
       \node[support, right=18mm of settings] (theory) {\texttt{theory.py}\\pitch spelling, Roman numerals,\\transposition and chord tones};
       \node[support, left=18mm of generator] (constraints) {\texttt{constraints.py}\\stepwise motion, leaps, cadence,\\climax, rests, motif and form scoring};
-      \node[support, right=18mm of generator] (chorale) {\texttt{ChoralePlan}\\future SATB-compatible\\extension point};
+      \node[support, right=18mm of generator] (chorale) {\texttt{chorale.py}\\SATB harmonization from\\the generated soprano line};
 
       % Outputs
       \node[output, below left=10mm and 10mm of render] (ly) {\texttt{.ly} source};
@@ -89,7 +89,7 @@ For the third iteration the use of \ac{AI} was implemented.
 
     \end{tikzpicture}%
     }
-    \caption{Architecture of the third iteration melody generator. The command-line layer builds a structured settings object, the generator combines theory-aware candidate generation with a soft-constraint stack, and the resulting melody is exported through LilyPond into notation and audio assets.}\label{fig:iter3_architecture}
+    \caption{Architecture of the third iteration melody generator. The command-line layer builds a structured settings object, the generator combines beat-resolved harmony with a soft-constraint stack, and the resulting melody or chorale is exported through LilyPond into notation and audio assets.}\label{fig:iter3_architecture}
   \end{figure}
 
 \section{Implementation}

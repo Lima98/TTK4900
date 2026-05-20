@@ -29,7 +29,9 @@
       range\\
       form plan\\
       harmony plan\\
-      voice profile
+      texture\\
+      voice profile\\
+      chorale plan
     };
 
     \node[support, left=of settings] (motif) {
@@ -42,9 +44,16 @@
       sections: FormSection[]
     };
 
-    \node[support, below right=of settings] (harmony) {
+    \node[support, right=of settings] (harmony) {
       \textbf{HarmonyPlan}\\
       spans: HarmonySpan[]
+    };
+
+    \node[support, right=of harmony] (span) {
+      \textbf{HarmonySpan}\\
+      start bar / beat\\
+      end bar / beat\\
+      Roman symbol
     };
 
     \node[support, above left=of settings] (voice) {
@@ -62,6 +71,15 @@
       clef
     };
 
+    \node[class, right=of melody] (chorale_result) {
+      \textbf{ChoraleScore}\\
+      soprano\\
+      alto\\
+      tenor\\
+      bass\\
+      harmony plan
+    };
+
     \node[support, left=of melody] (event) {
       \textbf{NoteEvent}\\
       scale step\\
@@ -73,12 +91,14 @@
     \draw[arrow] (motif) -- (settings);
     \draw[arrow] (form) -- (settings);
     \draw[arrow] (harmony) -- (settings);
+    \draw[arrow] (span) -- (harmony);
     \draw[arrow] (voice) -- (settings);
-    \draw[arrow] (settings) -- node[right] {guides generation of} (melody);
-    \draw[arrow] (event) -- node[above] {contained in} (melody);
-    \draw[arrow] (motif) to[bend right=16] node[left] {reused as} (event);
+    \draw[arrow] (settings) -- node[left] {used in generating} (melody);
+    \draw[arrow] (settings) -- node[right] {also drives} (chorale_result);
+    \draw[arrow] (event) -- node[above] {used in} (melody);
+    \draw[arrow] (motif) -- node[left] {reused as} (event);
   \end{tikzpicture}%
   }
-  \caption{Simplified object model of the third iteration. Compared with the earlier iterations, musical information is no longer limited to notes and phrases, but also includes form, harmony, voice range, rests, and event-level metadata.}
+  \caption{Simplified object model of the third iteration. Compared with the earlier iterations, musical information is no longer limited to notes and phrases, but also includes beat-resolved harmony spans, texture settings, voice profiles, rests, and a separate chorale result type.}
   \label{fig:iter3_object_model}
 \end{figure}
