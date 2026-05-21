@@ -3,7 +3,7 @@
   \begin{tikzpicture}[
     >=Latex,
     font=\small,
-    node distance=12mm and 12mm,
+    node distance=12mm and 25mm,
     class/.style={
       draw,
       rounded corners=3pt,
@@ -20,7 +20,7 @@
       scale helper methods
     };
 
-    \node[class, right=of key] (note) {
+    \node[class, below=of key] (note) {
       \textbf{Note}\\
       degree\\
       pitch
@@ -33,9 +33,9 @@
       rhythm
     };
 
-    \draw[arrow] (key) -- node[above] {defines scale} (note);
+    \draw[arrow] (key) -- node[left] {defines scale} (note);
     \draw[arrow] (note) -- node[above] {contained in} (melody);
-    \draw[arrow] (key) to[bend left=18] node[below] {attached to} (melody);
+    \draw[arrow] (key) to[bend left=25] node[right] {attached to} (melody);
   \end{tikzpicture}
   \caption{Simplified object model of the first iteration. The representation is enough to store notes in a key and export a melody, but it does not yet describe motifs, bars, phrases, harmony, or form.}
   \label{fig:iter1_object_model}
