@@ -4,10 +4,16 @@
   \subsection{Notes}
     The very core of music is composed of notes. Notes are vibration in air which we interpret as pitches. In the western system we agree upon the standard of pitches is based around \musPitch{A}{4} which is $440Hz$. All other pitches are tuned in relation to this reference.
 
-    The musical note is represented on the staff by a circular symbol called the note-head. The vertical placement of the note-head on the staff determines which pitch it represents. The horizontal placement is not directly an indication of time or duration, the temporal aspect is rather defined symbolically. The note can also have a stem, which is a vertical line attached to the note-head. The direction of the stem (up or down) does not change the pitch, but it can affect the visual layout of the music. When multiple notes are close together, stems can be directed in opposite directions to make the differentiation of voices clearer.
+    The musical note is represented on the staff by a circular symbol called the note-head. The vertical placement of the note-head on the staff determines which pitch it represents. This is illustrated in Figure~\ref{fig:piano-notes} where we can see the placement of the notes from \musPitch{C}{2} up to \musPitch{C}{5}. Notice how only the white keys form the piano are notated. The black keys are notated with the \musSharp- and \musFlat-symbols. The \musSharp-symbol is pronounced "sharp" and raises the note by a semitone and the \musFlat-symbol is pronounced flat and lowers the note by a semitone. The horizontal placement is not directly an indication of time or duration, the temporal aspect is rather defined symbolically. The note can also have a stem, which is a vertical line attached to the note-head. The direction of the stem (up or down) does not change the pitch, but it can affect the visual layout of the music. When multiple notes are close together, stems can be directed in opposite directions to make the differentiation of voices clearer.
 
-    The same musical pitch can be written in several different ways in order to dictate the duration of the note. This is done by using variations of the note. This can be by 
-    Refering to Figure~\ref{fig:note-value} we can see the different parts of the note highlighted with colour. The note-head is black and the placement of this decides which musical pitch is represented. The stem can go either up or down, this does not change the meaning it just makes it more compact to make it go down if the note placement is high on the staff. The direction of the stem can carry meaning if there are two notes simultaneously on a staff, then it usually indicates two different voices. Meaning one player playes the melody with stem up and one with the stem down. 
+    \begin{figure}[h]
+      \begin{center}
+        \includegraphics[trim={0.8cm 7.5cm 1.1cm 3.1cm}, clip, width=1\textwidth]{figures/04theory/Piano-notes.pdf}
+      \end{center}
+      \caption{Overview of note placement on the staff and piano, additionally the corresponding midi numbers are written below the note names. Notice how the number increases by two when there is a black key between consecutive notes.}\label{fig:piano-notes}
+    \end{figure}
+
+    The same musical pitch can be written in several different ways in order to dictate the duration of the note. This is done by using variations of the note. This can be by refering to Figure~\ref{fig:note-value} we can see the different parts of the note highlighted with colour. The note-head is black and the placement of this decides which musical pitch is represented. The stem can go either up or down, this does not change the meaning it just makes it more compact to make it go down if the note placement is high on the staff. The direction of the stem can carry meaning if there are two notes simultaneously on a staff, then it usually indicates two different voices. Meaning one player playes the melody with stem up and one with the stem down. 
     Next we have the beams and the flags coloured in purple and blue respectively. These two carry the same meaning, one flag is the same as one beam, meaning they have the same duration. The beam simply makes it less visually crowded when reading. The omitting of beams and only using flags \textit{can} mean that the notes are more separated, but this is not neccessarily the case.
 
     \begin{figure}[h] % Note values
@@ -17,7 +23,7 @@
       \caption{The figure shows the parts of the musical note. The note-head in red, stem in green, beam in purple and flag in blue.}\label{fig:note-value}
     \end{figure}
 
-    \begin{table} % Table note values
+    \begin{table}[h] % Table note values
       \NewDocumentCommand{\musWholeRest} {}{\musFont{\symbol{11}}}
       \NewDocumentCommand{\musHalfRest} {}{\musFont{\symbol{10}}}
       \NewDocumentCommand{\musQuarterRest} {}{\musFont{\symbol{62}}}
@@ -111,7 +117,7 @@
 
     Next up we have the dominant function, there are two notes degrees which fall into this category, that is the 5th and 7th scale degree. These notes have tension. They want to move, especially the 7th scale degree, it has a great pull toward the tonic. You can hear this in the example under Example~\ref{fig:c-major-scale}. The penultimate tone is the 7th scale degree and it leads to the tonic. 
 
-    To lead us to the tonic functions we have what are called the pre-dominant function. This simply means 'before dominant', and their function is to set up the tension to lead us to the dominant degrees which in turn leads us back to the tonic. 
+    To lead us to the dominant functions we have what are called the pre-dominant function. This simply means 'before dominant', and their function is to set up the tension to lead us to the dominant degrees which in turn leads us back to the tonic. 
 
     % C major scale
     \begin{example}[H]
@@ -257,6 +263,8 @@
       \caption[The four main triads: major, minor, diminished, and augmented.]{The four main triads(chords with three notes), major, minor, diminished and augmented. These are the most basic chords, but major and minor are the most common ones. \examplelink.}\label{fig:four_chords}
     \end{example}
     
+
+  \pagebreak{}
   \subsection{Time signatures}
     The time signature explains what is in a bar of music. A bar is the space between the vertical lines on the staff.
     A $4/4$, sometimes written as \meterC, time means that there are four quarter notes per bar and consequently $3/4$ time means that there are three quarter notes per bar.
@@ -288,9 +296,3 @@
       \caption[A classical example of the musical period form from the melody of the British folk song \textit{Greensleves}.]{A classical example of the musical period form. This is the melody of the British folk song \textit{Greensleves} \cite{PeriodMusic2025}. \examplelink}\label{fig:period}
     \end{example}
 
-    \begin{figure}
-      \begin{center}
-        \includegraphics[trim={0.8cm 7.5cm 1.1cm 3.1cm}, clip, width=1\textwidth]{figures/04theory/Piano-notes.pdf}
-      \end{center}
-      \caption{Overview of note placement on the staff and piano, additionally the corresponding midi numbers are written below the note names. Notice how the number increases by two when there is a black key between consecutive notes.}\label{fig:piano-notes}
-    \end{figure}
