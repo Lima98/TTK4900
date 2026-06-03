@@ -1,5 +1,5 @@
 \section{Music theory}
-  This section contains some basic music theory relevant to understand how music is constructed. It is not neccessary to understand everything in depth, but farmiliarity with these concepts will be of great help to understand the project as a whole. Throughout the thesis there will be several examples and figures using musical notation so a basic understanding of how to read these figures will be benefitial.
+  This section contains some basic music theory relevant to understand how music is constructed. It is not neccessary to understand everything in depth, but farmiliarity with these concepts will be of great help to understand the musical aspect of the thesis. Throughout the thesis there will be several examples and figures using musical notation so a basic understanding of how to read these figures will be benefitial.
 
   \subsection{Notes}
     The very core of music is composed of notes. Notes are vibration in air which we interpret as pitches. In the western system we agree upon the standard of pitches is based around \musPitch{A}{4} which is $440Hz$. All other pitches are tuned in relation to this reference.
@@ -110,9 +110,12 @@
 
   \subsection{Scales and Keys}
     The musical scale is building block for creating not only melodies but also harmony, which we will cover a bit later.
-    Firstly the musical scale is, for the most part, constructed using seven notes. In the western canon this is usually seven notes. You can see the basic c-major scale in Figure~\ref{fig:c-major-scale}, it is comprised of the notes c d e f g a b c. The tones of the scale can be named according to their function within the scale. We often label the notes \musDegree{1}, \musDegree{2}, \musDegree{3}, \musDegree{4}, \musDegree{5}, \musDegree{6}, \musDegree{7},  and then starting back at \musDegree{1}. The use of the carets are called the Nashville Number System, this is used to differentiate the scale degrees from the chord tones which will be discussed in Section~\ref{sec:harmony} When we consider chord structures we use the numbers but usually count above from 8 to signify harmonic functions, but when considering only scales and melodies we usually only use 1 through 7 
+    Firstly the musical scale is an orderet set of musical notes. In the western canon this is usually seven notes. You can see the basic c-major scale in Figure~\ref{fig:c-major-scale}, it is comprised of the notes \musPitch{C}{} \musPitch{D}{} \musPitch{E}{} \musPitch{F}{} \musPitch{G}{} \musPitch{A}{} \musPitch{B}{}  The tones of the scale can be named according to their function within the scale. We often label the notes \musDegree{1}, \musDegree{2}, \musDegree{3}, \musDegree{4}, \musDegree{5}, \musDegree{6}, \musDegree{7},  and then starting back at \musDegree{1}. The use of the carets are called the Nashville Number System, this is used to differentiate the scale degrees from the chord tones which will be discussed in Section~\ref{sec:harmony}.
+    We can also alter these degree numbers using the \musFlat- and \musSharp-symbols for instance the minor scale would be notated \musDegree{1}, \musDegree{2}, \musFlat\musDegree{3}, \musDegree{4}, \musDegree{5}, \musFlat\musDegree{6}, \musFlat\musDegree{7}. And the notes in the \musPitch{C}{}-minor scale would be \musPitch{C}{} \musPitch{D}{} \musPitch{E\fl}{} \musPitch{F}{} \musPitch{G}{} \musPitch{A\fl}{} \musPitch{B\fl}{}. The placement of the sharp- and flat-symbols before or after comes from the pronunciation of the notes, we say "flat three" and "sharp four", but we say "E flat" and "F sharp". 
+    When we consider chord structures we use the numbers but usually count above from 8 to signify harmonic functions, but when considering only scales and melodies we usually only use 1 through 7.
     \newline
 
+    The different notes in the scale have different functional names, these names are not tied to the pitch, meaning whether it is a \musPitch{C}{} or a \musPitch{E\fl}{} the functional name of the note is the same as long as it is the same scale degree.
     \noindent The most important function is that of the scale degree 1, this is the \textit{tonic}, which is the 'home' of the key. This is the most stable function there is, it feels resolved and does not have any tension urging it to move anywhere. 
 
     Next up we have the dominant function, there are two notes degrees which fall into this category, that is the 5th and 7th scale degree. These notes have tension. They want to move, especially the 7th scale degree, it has a great pull toward the tonic. You can hear this in the example under Example~\ref{fig:c-major-scale}. The penultimate tone is the 7th scale degree and it leads to the tonic. 
@@ -263,11 +266,10 @@
       \caption[The four main triads: major, minor, diminished, and augmented.]{The four main triads(chords with three notes), major, minor, diminished and augmented. These are the most basic chords, but major and minor are the most common ones. \examplelink.}\label{fig:four_chords}
     \end{example}
     
-
   \pagebreak{}
   \subsection{Time signatures}
     The time signature explains what is in a bar of music. A bar is the space between the vertical lines on the staff.
-    A $4/4$, sometimes written as \meterC, time means that there are four quarter notes per bar and consequently $3/4$ time means that there are three quarter notes per bar.
+    A $4/4$, sometimes written as \meterC, time means that there are four quarter notes per bar and consequently $3/4$ time means that there are three quarter notes per bar. For this thesis I will only employ the standard $4/4$ time signature, it is the most common and straightforward time signature.
 
     \begin{figure}
       \begin{center}
@@ -277,7 +279,7 @@
     \end{figure}
 
   \subsection{Musical form}
-    Now that we have an idea of the musical structures on the melodic and harmonic layer we will take a look at musical forms. This is a very important idea when it comes to constructing melodies. A melody is not an infinitely wandering idea of music. A good melody follows a form. Often this can be viewed as repetitions and variations of a given musical idea. Two very common forms of musical form are the \textit{sentence form} and the \textit{period form}. 
+  Now that we have an idea of the musical structures on the melodic and harmonic layer we will take a look at musical forms. This is a very important idea when it comes to constructing melodies. A melody is not an infinitely wandering idea of music. A good melody follows a form. Often this can be viewed as repetitions and variations of a given musical idea. Two very common forms of musical form are the \textit{sentence form} and the \textit{period form} \cite[pp.20-24]{shoenbergComposition}.
 
     In Example~\ref{fig:sentence} we can see an example of the musical sentence. It starts with a 2-bar opnening phrase, labeled as the \textit{basic idea}, then we have a repetition of the same idea only adapted for a new chord. Then the following 2 bars are a fragmentation of the idea. Then for the last two bars we have a conclusion, this ties the idea together. The cadence at the end can be considered the end of a sentence. It concludes the idea before it moves on to something else. 
 

@@ -127,6 +127,18 @@ def save_figure(fig: plt.Figure, output_dir: Path, stem: str) -> None:
     plt.close(fig)
 
 
+def draw_simple_perlin_noise(width: int, height: int, seed: int, output_dir: Path) -> None:
+    noise = fbm_noise(width, height, seed=seed, octaves=5, base_frequency=4, persistence=0.55)
+
+    fig, ax = plt.subplots(figsize=(4.2, 2.9))
+    ax.imshow(noise, cmap="gray", interpolation="nearest")
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    fig.subplots_adjust(top=0.98, bottom=0.02, left=0.02, right=0.98)
+    save_figure(fig, output_dir, "00_perlin_noise_intro")
+
+
 def draw_seed_comparison(width: int, height: int, seeds: Iterable[int], output_dir: Path) -> None:
     seed_list = list(seeds)
     fig, axes = plt.subplots(1, len(seed_list), figsize=(9.6, 3.0))
@@ -239,6 +251,7 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, default=Path(__file__).with_name("figures"))
     args = parser.parse_args()
 
+    draw_simple_perlin_noise(args.width, args.height, args.seed, args.output_dir)
     draw_seed_comparison(args.width, args.height, [12, 42, 77], args.output_dir)
     draw_octave_layers(args.width, args.height, args.seed, args.output_dir)
     draw_terrain_pipeline(args.width, args.height, args.seed, args.output_dir)

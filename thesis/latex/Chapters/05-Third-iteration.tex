@@ -10,7 +10,7 @@ For the third iteration the use of \ac{AI} was implemented.
 
 \section{Software architecture}
 
-  In Figure~\ref{fig:iter3_architecture} we can see how the system is built and how the different modules interact. As we can see this is a much bigger and complicated system than the first two iterations already.  
+  In Figure~\ref{fig:iter3_architecture} we can see how the system is built and how the different modules interact. Compared with the earlier iterations, the third iteration is no longer organized around one large entry script. The command-line workflow has been moved into its own module, while the main entry point is used to define the default configuration of the generator, such as the weighting of the soft constraints. This makes the architecture easier to understand and easier to adapt for experiments.
 
 
   \begin{figure}[htbp] % Architecture
@@ -52,8 +52,9 @@ For the third iteration the use of \ac{AI} was implemented.
 
       % Main vertical pipeline
       \node[stage] (input) {User input\\key, mode, bars, seed, texture,\\voice profile, harmony, form};
-      \node[stage, below=of input] (cli) {\texttt{code/main.py}\\parses CLI arguments, compact harmony,\\and render mode};
-      \node[stage, below=of cli] (settings) {\texttt{GenerationSettings}\\with \texttt{Key}, \texttt{Motif}, \texttt{FormPlan},\\\texttt{HarmonyPlan} and \texttt{VoiceProfile}};
+      \node[stage, below=of input] (mainconfig) {\texttt{code/main.py}\\default configuration,\\constraint weights, and entry point};
+      \node[stage, below=of mainconfig] (cli) {\texttt{code/app\_cli.py}\\CLI parsing, harmony/form setup,\\and render mode};
+      \node[stage, below=of cli] (settings) {\texttt{GenerationSettings}\\with \texttt{Key}, \texttt{Motif}, \texttt{FormPlan},\\\texttt{HarmonyPlan}, and \texttt{VoiceProfile}};
       \node[stage, below=of settings] (generator) {\texttt{MelodyGenerator}\\candidate generation, beat-resolved harmony,\\motif reuse, and weighted selection};
       \node[stage, below=of generator] (melody) {\texttt{Melody} or \texttt{ChoraleScore}\\events, metadata, harmony plan,\\and selected clefs};
       \node[stage, below=of melody] (render) {\texttt{lilypond.py}\\notation export, rerendering,\\and optional PDF/WAV rendering};
@@ -70,7 +71,8 @@ For the third iteration the use of \ac{AI} was implemented.
       \node[output, below right=10mm and 10mm of render] (audio) {\texttt{.midi} and \texttt{.wav}};
 
       % Pipeline arrows
-      \draw[arrow] (input) -- (cli);
+      \draw[arrow] (input) -- (mainconfig);
+      \draw[arrow] (mainconfig) -- (cli);
       \draw[arrow] (cli) -- (settings);
       \draw[arrow] (settings) -- (generator);
       \draw[arrow] (generator) -- (melody);
@@ -89,7 +91,7 @@ For the third iteration the use of \ac{AI} was implemented.
 
     \end{tikzpicture}%
     }
-    \caption{Architecture of the third iteration melody generator. The command-line layer builds a structured settings object, the generator combines beat-resolved harmony with a soft-constraint stack, and the resulting melody or chorale is exported through LilyPond into notation and audio assets.}\label{fig:iter3_architecture}
+    \caption{Architecture of the third iteration melody generator. The reusable CLI layer in \texttt{app\_cli.py} handles parsing and workflow concerns, while \texttt{main.py} defines the default constraint configuration. The generator then combines beat-resolved harmony with a soft-constraint stack, and the resulting melody or chorale is exported through LilyPond into notation and audio assets.}\label{fig:iter3_architecture}
   \end{figure}
 
 \section{Implementation}
@@ -103,7 +105,7 @@ The code excerpt below shows one small but important part of that change. A sing
 
 This may look like a small change, but it is one of the things that makes the third iteration much more flexible. Earlier versions had difficulty representing anything beyond diatonic note streams. With \texttt{NoteEvent}, the generator can treat sounding notes and rests through the same structure, and it becomes easier to transpose, re-use, and reshape musical material without losing information.
 
-Another important improvement is that the generation task is gathered into a single settings object. Rather than relying on hard-coded assumptions spread across the script, the third iteration collects key, form, harmony, durations, range, and voice information before generation starts. This makes the system easier to extend and also makes the constraints easier to apply consistently.
+Another important improvement is that the generation task is gathered into a single settings object. Rather than relying on hard-coded assumptions spread across one large script, the third iteration collects key, form, harmony, durations, range, and voice information before generation starts, while leaving the default weighting of the musical constraints in the main entry point. This makes the system easier to extend and also makes the constraints easier to apply consistently.
 
 \section{Results}
 The musical output of the third iteration is noticeably more controlled than in the previous versions. The melodies remain within a defined vocal or instrumental range, the generator can take a harmonic plan into account, and motif reuse is no longer limited to literal repetition. The addition of form planning also makes it possible to think in larger units such as sentences and periods rather than only local note-to-note movement.
@@ -122,6 +124,22 @@ Examples~\ref{fig:iter3_melody_1} and \ref{fig:iter3_melody_2} show two melodies
     \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_melody_2.cropped.pdf}
   \end{center}
   \caption[A second melody generated by the third iteration in C major.]{A second melody generated by the third iteration in C major. The surface is different, but the same form and harmony handling are still visible. \examplelink.}\label{fig:iter3_melody_2}
+\end{example}
+
+The form handling also becomes easier to observe when the melodies are made longer. Examples~\ref{fig:iter3_sentence_16} and \ref{fig:iter3_period_16} show two 16-bar melodies generated with the explicit \texttt{sentence} and \texttt{period} form plans. These examples are useful because the larger span makes it easier to hear and see how repetition, continuation, and cadence are shaped differently by the two form types.
+
+\begin{example}
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_sentence_16.cropped.pdf}
+  \end{center}
+  \caption[A 16-bar sentence-form melody generated by the third iteration in C major.]{A 16-bar melody generated by the third iteration in C major using the explicit \texttt{sentence} form plan and seed 3100. The repeated opening idea and the later continuation make the sentence-like design clearer than in the shorter examples. \examplelink.}\label{fig:iter3_sentence_16}
+\end{example}
+
+\begin{example}
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_period_16.cropped.pdf}
+  \end{center}
+  \caption[A 16-bar period-form melody generated by the third iteration in C major.]{A 16-bar melody generated by the third iteration in C major using the explicit \texttt{period} form plan and seed 3200. Here the balanced phrase structure is more prominent, and the return toward cadence is shaped differently than in the sentence example. \examplelink.}\label{fig:iter3_period_16}
 \end{example}
 
 The third iteration also makes it possible to harmonize the generated melody into a simple SATB-style texture. This is an important step compared with the earlier iterations, since the first iteration only generated several independent voices, while the second iteration did not return to multi-voice writing at all. In Examples~\ref{fig:iter3_chorale_1} and \ref{fig:iter3_chorale_2} we can see how the same final system can produce a harmonized result instead of only a single melodic line.

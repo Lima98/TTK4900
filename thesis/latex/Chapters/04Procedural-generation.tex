@@ -29,60 +29,83 @@
   \end{figure}
     
 
-  This section will cover several methods of \ac{PG} and discuss similarities, differences and most importantly limitations of the methods. Additionally we will take a look at and what we are trying to achieve with the procedural generation in this project and propose a new method that will handle the problem of music generation in a new way. 
+  This section will cover several methods of \ac{PG} and discuss similarities, differences and most importantly limitations of the methods. Some of these methods have been used to experimentally generate music \cite{nierhausAlgorithmicComposition2009}. However we will try to figure out which methods are suitable and maybe combine different methods to create something new.
 
 \subsection{L-systems (Lindenmayer systems)}
-    Lindenmayer systems, usually shortened to L-systems, are rule-based rewriting systems originally introduced for modelling the growth of plants and other branching biological structures. An L-system starts from an initial string, often called the \textit{axiom}, and repeatedly rewrites every symbol in that string according to a set of production rules. After each rewriting step the string becomes longer or more detailed, and the resulting sequence of symbols can then be interpreted geometrically, for example as line segments, turns, or branches. Because all symbols are rewritten in parallel, the method is well suited for modelling iterative growth.
+  Lindenmayer systems, usually shortened to L-systems, are rule-based rewriting systems originally introduced for modelling the growth of plants and other branching biological structures. An L-system starts from an initial string, often called the \textit{axiom}, and repeatedly rewrites every symbol in that string according to a set of production rules. After each rewriting step the string becomes longer or more detailed, and the resulting sequence of symbols can then be interpreted geometrically, for example as line segments, turns, or branches. Because all symbols are rewritten in parallel, the method is well suited for modelling iterative growth.
 
-    In procedural generation this makes L-systems particularly useful when the goal is to create self-similar structure. A small set of rules can produce outputs that preserve an overall identity while still increasing in complexity from one iteration to the next. This is why the method is often associated with fractal geometry, botanical forms, and decorative branching patterns \cite{freiknechtSurveyProceduralGeneration2017}. The strength of the method is that global visual complexity emerges from very compact local rules.
+  In procedural generation this makes L-systems particularly useful when the goal is to create self-similar structure. A small set of rules can produce outputs that preserve an overall identity while still increasing in complexity from one iteration to the next. This is why the method is often associated with fractal geometry, botanical forms, and decorative branching patterns \cite{freiknechtSurveyProceduralGeneration2017}. The strength of the method is that global visual complexity emerges from very compact local rules.
 
-    Figure~\ref{fig:l_systems} shows this clearly. The Sierpinski triangle demonstrates that L-systems can produce highly regular and mathematically rigid forms, while the plant and bush examples show that the same basic mechanism can also create more organic-looking structures. The arrowhead construction in Figure~\ref{fig:arrowhead_sierpinski} further illustrates how repeated rewriting can gradually approximate a larger fractal shape through a sequence of simple local expansions.
+  Figure~\ref{fig:l_systems} shows this clearly. The Sierpinski triangle demonstrates that L-systems can produce highly regular and mathematically rigid forms, while the plant and bush examples show that the same basic mechanism can also create more organic-looking structures. The arrowhead construction in Figure~\ref{fig:arrowhead_sierpinski} further illustrates how repeated rewriting can gradually approximate a larger fractal shape through a sequence of simple local expansions.
 
-    The main limitation of L-systems is that they are strongest when the target structure can be described as iterative growth. They provide elegant control over repetition and branching, but they are less natural for domains where the important relationships are not hierarchical or do not arise from repeated rewriting. In practice, the quality of the output depends heavily on the chosen grammar and on how the generated symbols are interpreted geometrically.
+  A compact way to think about an L-system is that it begins from a short starting string and repeatedly rewrites that string according to a small number of fixed rules. For the Sierpinski arrowhead curve, this means that a very small symbolic description is expanded step by step into a much longer drawing instruction. The important point is that the rewrite happens simultaneously for every symbol in the current string. In this way, a short rule set can expand into a detailed command sequence, and once that sequence is interpreted geometrically it produces the increasingly refined triangular structure seen in Figure~\ref{fig:arrowhead_sierpinski}. We can also look at a simple pattern where we start with the axiom\footnote{the axiom can be thought of as the initial state of the system}:
 
-    \begin{figure}[H] % Sierpinksy and plant
-      \begin{tabular}{ccc}
+  \begin{align*}
+    \texttt{A}
+  \end{align*}
+  and the production rules:
+  \begin{align*}
+    1: \texttt{A} &\to \texttt{AB} \\
+    2: \texttt{B} &\to \texttt{A}
+  \end{align*}
+  These simple rules result in the following rather complex sequence after a few iterations:
+  \begin{align*}
+    \text{Axiom:}& \texttt{ A} \\
+    &\to \texttt{AB} \\
+    &\to \texttt{ABA} \\
+    &\to \texttt{ABAAB} \\
+    &\to \texttt{ABAABABA} \\
+    &\to \texttt{ABAABABAABAAB} \\
+    &\to \texttt{ABAABABAABAABABAABABA} \\
+    &\to \texttt{ABAABABAABAABABAABABAABAABABAABAAB} \\
+  \end{align*}
 
-        \includegraphics[width=0.3\textwidth]{figures/04theory/sierpinski1.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/sierpinski3.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/sierpinski5.png} \\
-        & (a) sierpinksi triangle & \\
-      
-        \includegraphics[width=0.3\textwidth]{figures/04theory/plant1.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/plant3.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/plant5.png} \\
-        & (b) fractal plant & \\
 
-        \includegraphics[width=0.3\textwidth]{figures/04theory/bush1.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/bush3.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/bush5.png} \\
-        & (c) fractal bush & \\
+  The main limitation of L-systems is that they are strongest when the target structure can be described as iterative growth. They provide elegant control over repetition and branching, but they are less natural for domains where the important relationships are not hierarchical or do not arise from repeated rewriting. In practice, the quality of the output depends heavily on the chosen grammar and on how the generated symbols are interpreted geometrically.
 
-      \end{tabular}
+  \begin{figure}[H] % Sierpinksy and plant
+    \begin{tabular}{ccc}
 
-      \caption{Demonstration of the sierpinski triangle, a fractal plant and bush after one, three and five iterations repsectively.}\label{fig:l_systems}
-    \end{figure}
+      \includegraphics[width=0.24\textwidth]{figures/04theory/sierpinski1.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/sierpinski3.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/sierpinski5.png} \\
+      & (a) sierpinksi triangle & \\
+    
+      \includegraphics[width=0.24\textwidth]{figures/04theory/plant1.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/plant3.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/plant5.png} \\
+      & (b) fractal plant & \\
 
-    \begin{figure}[H] % Arrowhead sierpinski
-      \begin{tabular}{ccc}
+      \includegraphics[width=0.24\textwidth]{figures/04theory/bush1.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/bush3.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/bush5.png} \\
+      & (c) fractal bush & \\
 
-        \includegraphics[width=0.3\textwidth]{figures/04theory/arrowhead1.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/arrowhead2.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/arrowhead3.png} \\
-        (a) first iteration & (b) second iteration & (c) third iteration \\
-        \includegraphics[width=0.3\textwidth]{figures/04theory/arrowhead4.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/arrowhead5.png} &
-        \includegraphics[width=0.3\textwidth]{figures/04theory/arrowhead6.png} \\
-        (d) fourth iteration & (e) fifth iterations & (f) sixth iteration \\
+    \end{tabular}
 
-      \end{tabular}
-      \caption{Approximation of the sierpinski triangle using the sierpinski arrowhead curve.}\label{fig:arrowhead_sierpinski}
-    \end{figure}
+    \caption{Demonstration of the sierpinski triangle, a fractal plant and bush after one, three and five iterations repsectively.}\label{fig:l_systems}
+  \end{figure}
 
-  \subsection{Constraint satisfaction (CS)}
+  \begin{figure}[H] % Arrowhead sierpinski
+    \begin{tabular}{ccc}
+
+      \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead1.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead2.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead3.png} \\
+      (a) first iteration & (b) second iteration & (c) third iteration \\
+      \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead4.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead5.png} &
+      \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead6.png} \\
+      (d) fourth iteration & (e) fifth iterations & (f) sixth iteration \\
+
+    \end{tabular}
+    \caption{Approximation of the sierpinski triangle using the sierpinski arrowhead curve.}\label{fig:arrowhead_sierpinski}
+  \end{figure}
+
+\subsection{Constraint satisfaction (CS)}
   Constraint satisfaction approaches describe generation as a search problem. Instead of directly constructing an output step by step, the designer first specifies a set of variables, the domain of possible values for each variable, and a set of rules that describe which combinations are allowed \cite{andersConstraintProgrammingSystems2011}. The generator then searches for an assignment of values that satisfies all the constraints. In procedural generation this is attractive because it gives explicit control over the properties the output should have. The user is not only asking for randomness, but for randomness inside a carefully designed space of valid solutions.
 
-  In the present example, each cell in the map is a variable and each terrain type is one of the possible states in that variable's domain. The constraints describe which terrain types may be adjacent to one another and which global relationships should hold across the full map. Figure~\ref{fig:cons_adjacent} shows the adjacency graph that defines the local rules, Figure~\ref{fig:domain_prop} shows how the domain of each cell is reduced during propagation, and Figure~\ref{fig:cs_solution} shows one final configuration satisfying the imposed rules.
+  In the following example, each cell in the map is a variable and each terrain type is one of the possible states in that variable's domain. The constraints describe which terrain types may be adjacent to one another and which global relationships should hold across the full map. Figure~\ref{fig:cons_adjacent} shows the adjacency graph that defines the local rules, Figure~\ref{fig:domain_prop} shows how the domain of each cell is reduced during propagation, and Figure~\ref{fig:cs_solution} shows one final configuration satisfying the imposed rules. This is a simple example of how the method works, the algorthm can be a bit complex due to having to backtrack when a solution is not found, but the general idea is quite simple.
 
   Constraint propagation is important because it reduces the search space before or during search. The \ac{AC}-3 algorithm is a standard example: it removes values that can no longer participate in any valid local assignment, thereby establishing arc consistency between neighbouring variables \cite{ArcConsistencyAlgorithmOverview}. If a cell can only become \textit{water} or \textit{sand}, then the adjacent cells do not need to consider terrain types that are incompatible with both of those possibilities. This kind of pruning does not in itself produce a full solution, but it removes impossible choices early and makes the remaining search much more manageable.
 
@@ -104,7 +127,7 @@
 
   \begin{figure}[H] % Final map
     \begin{center}
-      \includegraphics[width=0.6\textwidth]{figures/04theory/03_generated_solution.pdf}
+      \includegraphics[width=0.7\textwidth]{figures/04theory/03_generated_solution.pdf}
     \end{center}
     \caption{Final generated map satisfying all constraints.}\label{fig:cs_solution}
   \end{figure}
@@ -167,14 +190,14 @@
 
   \begin{figure}[H] % Initial partitioning
     \begin{center}
-      \includegraphics[width=0.5\textwidth]{figures/04theory/01_bsp_partitions.pdf}
+      \includegraphics[width=0.6\textwidth]{figures/04theory/01_bsp_partitions.pdf}
     \end{center}
     \caption{Initial domain partitioning, made by recursively divinging the domain in two.}\label{fig:bsp_partitions}
   \end{figure}
   
   \begin{figure}[H] % Rooms and corridors
     \begin{center}
-      \includegraphics[width=0.5\textwidth]{figures/04theory/02_rooms_and_corridors.pdf}
+      \includegraphics[width=0.6\textwidth]{figures/04theory/02_rooms_and_corridors.pdf}
     \end{center}
     \caption{Generated rooms inside the partitions and connected them with corridors between rooms.}\label{fig:rooms_and_corridors}
   \end{figure}
@@ -187,9 +210,16 @@
   \end{figure}
 
 \subsection{Random noise and seeds}
-  Noise functions are a common foundation for procedural generation because they provide continuous variation instead of isolated random values. A well-known example is Perlin noise, introduced as a smooth pseudo-random signal for image synthesis \cite{perlinImageSynthesizer1985}. Unlike white noise, where neighbouring values are unrelated, gradient noise produces gradual transitions. This makes it useful for height maps, clouds, textures, and other domains where abrupt changes would look artificial.
+  Noise functions are a common foundation for procedural generation because they provide continuous variation instead of isolated random values. A well-known example is Perlin noise, introduced as a smooth pseudo-random signal for image synthesis \cite{perlinImageSynthesizer1985}. Unlike white noise, where neighbouring values are unrelated, gradient noise produces gradual transitions. Figure~\ref{fig:perlin_noise_intro} shows a simple generated noise field of this kind. Such smooth variation makes noise useful for height maps, clouds, textures, and other domains where abrupt changes would look artificial.
 
-  Another central idea is the use of a \textit{seed}. The seed initializes the pseudo-random process and makes the output reproducible. If the seed and the parameters remain the same, the same generated result can be obtained again. Figure~\ref{fig:seed_variations} shows this directly: changing the seed changes the concrete realization, while keeping the generation method fixed. This is extremely useful in procedural systems, since it allows variation without sacrificing reproducibility.
+  \begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=0.30\textwidth]{figures/04theory/00_perlin_noise_intro.pdf}
+    \end{center}
+    \caption{A simple example of smooth Perlin-like noise.}\label{fig:perlin_noise_intro}
+  \end{figure}
+
+  Another central idea is the use of a \textit{seed}. The seed initializes the pseudo-random process and makes the output reproducible. If the seed and the parameters remain the same, the same generated result can be obtained again. Figure~\ref{fig:seed_variations} shows this directly: changing the seed changes the concrete realization, while keeping the generation method fixed. This is extremely useful in procedural systems, since it allows variation without sacrificing reproducibility. Another benefit of using seeds it that it makes debugging and troubleshooting easier. If you get an error when running your code you can use the same seed to reproduce the error and figure out where it went wrong. This is not a feature of the seed itself but rather a very useful consequence of using seeds in procedural generation.
 
   Noise also becomes more expressive when several frequencies are combined. Lower-frequency components define the broad shape of a terrain, while higher-frequency components add local detail. This layered construction, often described in terms of octaves or fractal Brownian motion, is shown in Figure~\ref{fig:noise_to_terrain}. Once a smooth scalar field has been generated, it can be classified into discrete terrain types such as water, grass, rock, or mountain. In that way a continuous noise field becomes a terrain map or texture map rather than just an abstract signal \cite{perlinImageSynthesizer1985,freiknechtSurveyProceduralGeneration2017}.
 
@@ -197,21 +227,21 @@
   
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=0.95\textwidth]{figures/04theory/01_seed_variation.pdf}
+      \includegraphics[width=0.9\textwidth]{figures/04theory/01_seed_variation.pdf}
     \end{center}
     \caption{A seed makes random generation reproducible.}\label{fig:seed_variations}
   \end{figure}
 
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=0.95\textwidth]{figures/04theory/03_noise_to_terrain_story.pdf}
+      \includegraphics[width=0.9\textwidth]{figures/04theory/03_noise_to_terrain_story.pdf}
     \end{center}
-    \caption{Using different octaves we can combine lower and higher frequency textures to create something more complex. Using this layered noise we can classify the noise and make it into terrain.}\label{fig:noise_to_terrain}
+    \caption{Using different octaves we can combine lower and higher frequency textures to create something more complex.}\label{fig:noise_to_terrain}
   \end{figure}
 
   \begin{figure}[H]
     \begin{center}
-      \includegraphics[width=0.95\textwidth]{figures/04theory/04_parameter_control.pdf}
+      \includegraphics[width=0.9\textwidth]{figures/04theory/04_parameter_control.pdf}
     \end{center}
     \caption{Using the same seed with different parameters we can control the identity of the output like style and scale.}\label{fig:parameter_control}
   \end{figure}
@@ -230,8 +260,9 @@
       \includegraphics[width=0.32\textwidth]{figures/04theory/ex_wood.png}
       \includegraphics[width=0.32\textwidth]{figures/04theory/ex_sand.png}
       \includegraphics[width=0.32\textwidth]{figures/04theory/ex_map.png}
-    \caption{Three different textures generated using random walks.}\label{fig:random_walks}
+    \caption{Three different textures generated using random walks. }\label{fig:random_walks}
   \end{figure}
+  \clearpage{}
 
 \subsection{Discussion}
   Now that we have looked at several methods of \ac{PG}, some common themes become clear. All of the methods combine structure with variation, but they do so in different ways. L-systems create complexity through repeated rewriting, constraint satisfaction creates it through explicit validity rules, \ac{WFC} learns local rules from examples, \ac{BSP} organizes space through recursive subdivision, noise produces continuous variation through smooth pseudo-random fields, and random walks produce structure through accumulated local motion. In each case the generator is not merely choosing random values, but constraining randomness through a model.
