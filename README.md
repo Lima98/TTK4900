@@ -1,57 +1,62 @@
-# TTK4900
-Master Project Cybernetics and Robotics at NTNU, the [thesis](thesis/latex/main.pdf) is located in the `thesis/` directory. 
+# Procedural Music Generator
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Scripts](#scripts)
-- [Workflow using the program](#workflow)
+This repository contains a procedural music generator developed as part of a master's thesis at NTNU. The program generates tonal melodies from configurable musical settings and can also produce simple four-part harmonizations.
 
-## Project Overview
-This repository contains the code and documentation for the Master Project in Cybernetics and Robotics at NTNU. The project focuses on development of software to generate music procedurally.
+![Example output](thesis/latex/examples/iter3/iter3_long_explicit_chorale_bb.cropped.png)
 
-To listen to generated audio files and view documentation you can visit my [github.io page](htts://lima98.github.io/TTK4900).
+## What the program does
 
-## Project Structure
-The repository is organized as follows:
-- `code/`: Code files. 
-- `output/`: Generated audio files and other outputs from the code.
-- `docs/_build`: Contains documentation generated using Sphinx.
-- `research/`: Documents and notes on relevant theory and research papers.
-- `thesis/`: Latex files and rendered [PDF](thesis/latex/main.pdf) of the thesis. 
-- `webpage/`: Files related to the [NTNU-webpage](https://janoivil.folk.ntnu.no) where generated audio files and documentation can be accessed.
-- `README.md`: This file.
+The current generator supports:
 
-## Getting Started
-This project is in a too early stage to provide detailed instructions for getting started. However, you can explore the `code/`, `docs/`, `research/`, and `thesis/` directories to see the current state of the project. Future updates will include more detailed instructions and documentation as the project progresses.
+- tonal melody generation in different keys and modes
+- form-aware generation with `auto`, `sentence`, `period`, and `phrase`
+- automatic or explicit harmonic plans
+- rhythmic restriction through configurable allowed durations
+- different voice profiles and ranges
+- melody-only or chorale-style output
+- LilyPond export, with optional PDF and WAV rendering
 
-## Scripts
-There are a few scripts in the repository which to different things. 
-- `webpage/deploy.zsh`: Builds documentation and deploys the webpage to my NTNU-webpage.
-- `thesis/examples/script.py`: Uses lilypond to generate the files in a directory to thesis-ready format and places them in the latex directory for easy inclusion.
-- `docs/build_docs.zsh`: Build the documentation. Is automatically run by the deploy script, but can be ran separately from here.
-- `code/main.py`: Generates the current melody-engine iteration and can optionally call LilyPond and TiMidity++ directly.
-- `code/melody_engine/render_outputs.py`: Optional helper for re-rendering existing `.ly` files.
+The system is built around an object-oriented music model and a weighted soft-constraint approach. In practice, this means the generator creates candidate melodies and prefers the ones that better satisfy musical rules such as stepwise motion, cadence shaping, chord-tone preference, and motivic reuse.
 
-## Workflow using the program
-From the project root you can now use the program from the terminal:
+## Repository layout
+
+- `code/` – the music generator and CLI
+- `docs/` – user-facing program documentation
+- `thesis/` – thesis source, figures, and example material
+- `webpage/` – archive-page builder for generated thesis examples
+- `research/` – notes and source material used during the project
+
+## Basic usage
+
+Run the generator from the repository root:
 
 ```bash
 python3 code/main.py
-python3 code/main.py --pdf
-python3 code/main.py --pdf --wav
-python3 code/main.py --key D --mode major --seed 1337 --bars 8 --form period
-python3 code/main.py --seed 1337 --with-variants
+```
+
+Common examples:
+
+```bash
+python3 code/main.py --key D --mode major --bars 8 --seed 1337
+python3 code/main.py --form sentence --pdf --wav
+python3 code/main.py --texture chorale --key Eb --bars 8 --seed 2000 --pdf --wav
+python3 code/main.py --harmony "2I,2V,4I,2IV,2iv" --seed 3000 --pdf
 python3 code/main.py render --seed 1337 --pdf --wav
 ```
 
-The generated LilyPond files are written to seed-named folders such as [code/output/1337](/Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/code/output/1337), and both scripts use stable paths relative to the repository so they work cleanly from `nvim` or `ghostty` as long as `lilypond` and `timidity` are available in your shell. By default only the main melody is exported; transposed variants are now opt-in with `--with-variants`. Exported filenames are descriptive, so different keys or settings can live in the same seed folder without overwriting each other.
+Generated LilyPond files are written to `code/output/<seed>/` by default. Optional rendering uses LilyPond for notation output and TiMidity++ for WAV export.
 
-Iteration three now supports:
+## How it is structured
 
-- `--form auto|sentence|period|phrase` for form-aware reuse and development of melodic ideas.
-- `--harmony auto` to derive a tonal progression from the thesis discussion of tonic, predominant, dominant, and return functions.
-- `--voice-profile melody|soprano1|soprano2|alto1|alto2|tenor1|tenor2|bass1|bass2` so ranges and clefs stay compatible with later multi-voice work.
-- `--pdf` for cropped thesis-ready PDFs and `--wav` for audio only when needed.
-- `render --seed <n> --pdf --wav` to render existing `.ly` files later without regenerating the melody.
+- [code/main.py](code/main.py) defines the default project configuration, especially the soft-constraint weights.
+- [code/app_cli.py](code/app_cli.py) contains the reusable command-line workflow.
+- `code/melody_engine/` contains the musical data structures, generator logic, harmonization logic, and export pipeline.
+
+This makes it possible to keep the CLI stable while still experimenting with different generator settings in `main.py`.
+
+## Documentation and thesis
+
+- Program documentation: [docs/_build/html/index.html](docs/_build/html/index.html)
+- Thesis PDF: [thesis/latex/main.pdf](thesis/latex/main.pdf)
+
+Author-specific workflow notes for thesis building, archive generation, and deployment are kept in [thesis/README.md](thesis/README.md).
