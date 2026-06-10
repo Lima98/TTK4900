@@ -60,6 +60,7 @@
 \usepackage{acronym}
 \usepackage{tablefootnote}
 \usepackage[bigger]{musicography}
+\input{Chapters/02Abbreviations}
 \usepackage{float}
 \newfloat{example}{htbp}{loe}
 \floatname{example}{Example}
@@ -158,11 +159,6 @@ Department of Engineering Cybernetics\\
 \addcontentsline{toc}{chapter}{\protect\numberline{}\listtablename}
 
 
-\chapter*{Abbreviations}
-\addcontentsline{toc}{chapter}{\protect\numberline{}Abbreviations}
-\input{Chapters/02Abbreviations}
-\newpage
-\myemptypage
 %add an empty non-counted page by the command below in order to get the first chapter on the left hand side, if needed (check your page number so that the first chapter is on an odd page)
 
 
@@ -183,7 +179,9 @@ Department of Engineering Cybernetics\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %main content 
 
+\cleardoublepage
 \pagenumbering{arabic}
+\setcounter{page}{1}
 
 \chapter{Introduction}
 \input{Chapters/03Introduction}
@@ -228,6 +226,7 @@ Department of Engineering Cybernetics\\
 \chapter*{\LARGE \textbf{Appendices}}
 \fancyhf{} %clear the header, it should be empty for the appendices
 \renewcommand{\headrulewidth}{0pt} %no rule
+The appendices collect supporting material that would have interrupted the flow of the main text. They include a link to the project repository, a link to the online audio archive, and a broader set of non-cherry-picked examples from the third iteration. Together these appendices document the implementation, make the generated results easier to inspect and listen to, and provide additional material beyond what was necessary to include in the main chapters.
 \fancyfoot[C]{\thepage} %set the page numbers in the center of the footer instead 
 
 %it is possible to set a different page numbering style for the appendix, but I personally just continued with the same page numbering as the main content as I find that more tidy

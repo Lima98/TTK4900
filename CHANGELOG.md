@@ -1,3 +1,26 @@
+## 0.16.0 (2026-06-10)
+
+### Feat
+
+- **thesis**: updated music theory section while re-writing
+- **iter3-and-thesis**: updated iter3 to have a smaller main file and separate cli file and thesis changes up to subsection 2.2.2
+- **thesis**: updated theory section, moved figures and added content to the conclusion
+- **thesis-figure**: figure update to not have overlapping text
+- **thesis**: updated example captions to look better in list of examples while still having the link in the actual thesis
+- **thesis**: updated sections tried to fix contencts numbering being off
+- **thesis**: added new figures in the third iteration, updated harmonic dictation for the CLI
+- **thesis**: filled out the missing setions all sections have text proofreading is up next
+- **thesis-figure**: updated bad figure and changed some text
+- **thesis**: lots of added text to the thesis and some figures too
+- **thesis**: new examples and figure updates for cleaner look and representation
+- **thesis-background**: updated a lot in the background section and converted some figures to examples
+- **thesis**: updated lots of figures, increased text size to make sure legends are readable also deleted sandbox folder in the code section
+
+### Fix
+
+- **thesis-figure-and-music-theory**: changed some figures and updated music theory section also renamed some examples to avoid deletion when runing example generator script
+- **updated-brokes-files**: abbreviations file was deleted due to swapfile error, remade it and thesis now compiles correctly
+
 ## 0.15.0 (2026-05-10)
 
 ### Feat

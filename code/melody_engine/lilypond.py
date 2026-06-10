@@ -22,6 +22,16 @@ def lilypond_duration(duration: float) -> str:
     return BEAT_TO_DURATION[duration]
 
 
+def lilypond_key_name(tonic: str) -> str:
+    normalized = tonic.strip().lower()
+    if not normalized:
+        raise ValueError("Tonic may not be empty.")
+    letter = normalized[0]
+    accidental_text = normalized[1:]
+    accidental_text = accidental_text.replace("#", "s").replace("b", "f")
+    return f"{letter}{accidental_text}"
+
+
 def choose_clef(melody: Melody) -> str:
     if melody.clef is not None:
         return melody.clef
@@ -57,7 +67,7 @@ def choose_clef(melody: Melody) -> str:
 
 
 def melody_to_lilypond_source(melody: Melody) -> str:
-    key_name = melody.key.tonic.lower().replace("b", "f")
+    key_name = lilypond_key_name(melody.key.tonic)
     music_body = voice_music_body(melody)
 
     return f"""\\version "2.24.4"
@@ -111,7 +121,7 @@ def export_melody(melody: Melody, output_path: str | Path) -> Path:
 
 
 def chorale_to_lilypond_source(score: ChoraleScore) -> str:
-    key_name = score.key.tonic.lower().replace("b", "f")
+    key_name = lilypond_key_name(score.key.tonic)
     soprano_body = voice_music_body(score.soprano)
     alto_body = voice_music_body(score.alto)
     tenor_body = voice_music_body(score.tenor)
@@ -134,7 +144,7 @@ def chorale_to_lilypond_source(score: ChoraleScore) -> str:
       }}
     >>
     \\new Staff <<
-      \\clef "bass"
+      \\clef "{choose_clef(score.tenor)}"
       \\key {key_name} \\{score.key.mode}
       \\time {score.time_signature}
       \\new Voice = "tenor" {{ \\voiceOne

@@ -4,7 +4,8 @@ Getting Started
 Repository Structure
 --------------------
 
-- ``code/main.py`` is the main user-facing entry point.
+- ``code/main.py`` is the default user-facing entry point and constraint configuration.
+- ``code/app_cli.py`` contains the reusable CLI workflow.
 - ``code/melody_engine/`` contains the reusable engine modules.
 - ``code/output/<seed>/`` stores generated LilyPond, PDF, MIDI, and WAV files.
 - ``webpage/index.html`` contains the static archive and companion project page.

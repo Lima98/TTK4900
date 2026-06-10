@@ -3,8 +3,9 @@ Procedural Music Generation
 
 `Back to the thesis example archive <../index.html>`_
 
-This documentation covers the current melody-generation engine, the command-line workflow in
-``code/main.py``, and the internal modules that power form, harmony, notation, and rendering.
+This documentation covers the current melody-generation engine, the default entry point in
+``code/main.py``, the reusable CLI workflow in ``code/app_cli.py``, and the internal modules
+that power form, harmony, notation, and rendering.
 
 The guides are written to match the current repository layout, while the API reference is
 generated directly from the Python modules and docstrings in ``code/main.py`` and
@@ -61,7 +62,8 @@ Render audio later without regenerating:
 Useful Entry Points
 -------------------
 
-- ``code/main.py``: primary CLI for generation and rerendering
+- ``code/main.py``: default project entry point and constraint configuration
+- ``code/app_cli.py``: reusable CLI workflow for generation and rerendering
 - ``code/melody_engine/``: reusable engine modules
 - ``docs/``: documentation source
 - ``webpage/index.html``: static example archive and project page

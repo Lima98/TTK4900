@@ -166,25 +166,26 @@ class Key:
 
         return tuple(spellings)
 
+    def _degree_index_and_octave(self, scale_step: int) -> tuple[int, int]:
+        tonic_letter_index = LETTERS.index(self.tonic.lower()[0])
+        octave_offset, degree_index = divmod(scale_step, 7)
+        letter_wraps = (tonic_letter_index + degree_index) // 7
+        octave = self.tonic_octave + octave_offset + letter_wraps
+        return degree_index, octave
+
     def lilypond_pitch(self, scale_step: int) -> str:
-        degree_index = scale_step % 7
-        octave_offset = scale_step // 7
+        degree_index, octave = self._degree_index_and_octave(scale_step)
         pitch_name = self.scale_spellings[degree_index]
-        octave = self.tonic_octave + octave_offset
         return f"{pitch_name}{lilypond_octave(octave)}"
 
     def chromatic_pitch(self, scale_step: int, chromatic_adjustment: int = 0) -> str:
-        degree_index = scale_step % 7
-        octave_offset = scale_step // 7
+        degree_index, octave = self._degree_index_and_octave(scale_step)
         pitch_name = self.scale_spellings[degree_index]
         letter, accidental = split_spelling(pitch_name)
-        octave = self.tonic_octave + octave_offset
         return f"{letter}{accidental_suffix(accidental + chromatic_adjustment)}{lilypond_octave(octave)}"
 
     def absolute_midi(self, scale_step: int, chromatic_adjustment: int = 0) -> int:
-        octave_offset = scale_step // 7
-        degree_index = scale_step % 7
-        octave = self.tonic_octave + octave_offset
+        degree_index, octave = self._degree_index_and_octave(scale_step)
         pitch_class = (self.tonic_pitch_class + self.scale_intervals[degree_index] + chromatic_adjustment) % 12
         return (octave + 1) * 12 + pitch_class
 

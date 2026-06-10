@@ -52,6 +52,11 @@ SECTION_METADATA = {
         "title": "Third Iteration Examples",
         "description": "Examples from the third melody-generation iteration.",
     },
+    "C": {
+        "display_label": "Appendix C",
+        "title": "Third Iteration Appendix Examples",
+        "description": "Extended example material from the third iteration appendix.",
+    },
 }
 
 
@@ -75,7 +80,10 @@ class Example:
 
     @property
     def section(self) -> str:
-        return ".".join(self.number.split(".")[:2])
+        parts = self.number.split(".")
+        if parts and not parts[0].isdigit():
+            return parts[0]
+        return ".".join(parts[:2])
 
     @property
     def pdf_page(self) -> int:
@@ -141,7 +149,17 @@ def collect_examples(labels: dict[str, AuxLabel]) -> list[Example]:
                     tags=tags_for(pdf, aux.number),
                 )
             )
-    return sorted(examples, key=lambda example: tuple(int(part) for part in example.number.split(".")))
+    return sorted(examples, key=example_sort_key)
+
+
+def example_sort_key(example: Example) -> tuple[tuple[int, int | str], ...]:
+    key: list[tuple[int, int | str]] = []
+    for part in example.number.split("."):
+        if part.isdigit():
+            key.append((0, int(part)))
+        else:
+            key.append((1, part))
+    return tuple(key)
 
 
 def caption_from_body(body: str) -> str:

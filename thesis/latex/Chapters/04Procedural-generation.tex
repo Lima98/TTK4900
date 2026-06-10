@@ -1,9 +1,9 @@
 \section{Procedural generation}
 
-  \ac{PCG}, often reffered to as just \ac{PG}, is algorithmic generation of content. This content can take many forms including landscape, levels, textures or even 3D models. This leads to smaller file sizes since the program can generate the content using algorithms rather than having everything pre-made and saved. 
+  \ac{PCG}, often referred to as just \ac{PG}, is algorithmic generation of content. This content can take many forms including landscape, levels, textures or even 3D models. This leads to smaller file sizes since the program can generate the content using algorithms rather than having everything pre-made and saved. 
   In video games procedural generation is often used to create large spaces and to create high replayability. In the game \textit{No Man's Sky} procedural generation was used to procedurally generate "infinite procedurally generated galaxy" \cite{PressNoMans}. In Figure~\ref{fig:NMS_examples} we can see some examples of the worlds and animals generated in this video game. For real world applications we have the \textit{ArcGIS CityEngine} that can assist in generating city layouts based on real world or imaginary data. Figure~\ref{fig:arcgis_city-engine} shows a few examples of generated city layouts using the engine.
 
-  As mentioned \ac{PCG} can be used to reduce file sizes and a prime example of this is the demo game \textit{.kkrieger} which is only a measely $102KB$ in size, but it is able to generate a whole first person shooter game using procedural generation \cite{blizzardBriefHistoryWorlds2023}. This is an extreme example of how procedural generation can be used to create a large amount of content with a very small file size. For reference the \textit{\.jpeg} image in Figure~\ref{fig:kkrieger} is a screenshot\footnote{This game was made for a competition and is a free demo, therefore no explicit rights are needed to include the picture here.} from the game, and the file size of the image is $193KB$ which is about $1.9$ times more data than the entire source code of the game.
+  As mentioned \ac{PCG} can be used to reduce file sizes and a prime example of this is the demo game \textit{.kkrieger} which is only a measly $102KB$ in size, but it is able to generate a whole first person shooter game using procedural generation \cite{blizzardBriefHistoryWorlds2023}. This is an extreme example of how procedural generation can be used to create a large amount of content with a very small file size. For reference the \textit{\.jpeg} image in Figure~\ref{fig:kkrieger} is a screenshot\footnote{This game was made for a competition and is a free demo, therefore no explicit rights are needed to include the picture here.} from the game, and the file size of the image is $193KB$ which is about $1.9$ times more data than the entire source code of the game.
 
   \begin{figure}
     \centering
@@ -103,7 +103,7 @@
   \end{figure}
 
 \subsection{Constraint satisfaction (CS)}
-  Constraint satisfaction approaches describe generation as a search problem. Instead of directly constructing an output step by step, the designer first specifies a set of variables, the domain of possible values for each variable, and a set of rules that describe which combinations are allowed \cite{andersConstraintProgrammingSystems2011}. The generator then searches for an assignment of values that satisfies all the constraints. In procedural generation this is attractive because it gives explicit control over the properties the output should have. The user is not only asking for randomness, but for randomness inside a carefully designed space of valid solutions.
+  \ac{CS} approaches describe generation as a search problem. Instead of directly constructing an output step by step, the designer first specifies a set of variables, the domain of possible values for each variable, and a set of rules that describe which combinations are allowed \cite{andersConstraintProgrammingSystems2011}. The generator then searches for an assignment of values that satisfies all the constraints. In procedural generation this is attractive because it gives explicit control over the properties the output should have. The user is not only asking for randomness, but for randomness inside a carefully designed space of valid solutions.
 
   In the following example, each cell in the map is a variable and each terrain type is one of the possible states in that variable's domain. The constraints describe which terrain types may be adjacent to one another and which global relationships should hold across the full map. Figure~\ref{fig:cons_adjacent} shows the adjacency graph that defines the local rules, Figure~\ref{fig:domain_prop} shows how the domain of each cell is reduced during propagation, and Figure~\ref{fig:cs_solution} shows one final configuration satisfying the imposed rules. This is a simple example of how the method works, the algorthm can be a bit complex due to having to backtrack when a solution is not found, but the general idea is quite simple.
 
@@ -122,7 +122,7 @@
     \begin{center}
       \includegraphics[width=0.95\textwidth]{figures/04theory/02_domain_propagation.pdf}
     \end{center}
-    \caption{Initial domain and domain after AC-3 propagation. The AC-3 algoriths reduces the search space by ensuring arc consistency.}\label{fig:domain_prop}
+    \caption{Initial domain and domain after AC-3 propagation. The AC-3 algorithm reduces the search space by ensuring arc consistency.}\label{fig:domain_prop}
   \end{figure}
 
   \begin{figure}[H] % Final map

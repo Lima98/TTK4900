@@ -107,10 +107,53 @@ This may look like a small change, but it is one of the things that makes the th
 
 Another important improvement is that the generation task is gathered into a single settings object. Rather than relying on hard-coded assumptions spread across one large script, the third iteration collects key, form, harmony, durations, range, and voice information before generation starts, while leaving the default weighting of the musical constraints in the main entry point. This makes the system easier to extend and also makes the constraints easier to apply consistently.
 
+It is also useful to follow what the system actually does after a command is received. The first step is shown in Figure~\ref{fig:iter3_setup_flow}. The command line is parsed in \texttt{app\_cli.py}, and the separate user choices are then collected into a single \texttt{GenerationSettings} object. This is where the key, time signature, form plan, harmony plan, motif, texture, and voice profile are brought together into one consistent description of the task.
+
+\input{Figures/05iterations/iter3_setup_flow}
+
+Once the settings are ready, the melody generator begins to prepare the musical context before it commits to any pitches. Figure~\ref{fig:iter3_melody_flow} shows this middle stage. The generator first creates a rhythmic skeleton that fits the number of bars and the phrase layout. It then decides where the motif should return and where the melodic climax should be placed. Only after those larger targets are set does it begin to choose notes.
+
+\input{Figures/05iterations/iter3_melody_flow}
+
+Figure~\ref{fig:iter3_process_rhythm} illustrates this idea using the opening of one real third-iteration output. At this stage the interesting information is not yet the pitch contour, but the rhythmic shape and the bar structure. The generator has already committed to note lengths and phrase pacing, which means the later pitch decisions will happen inside a more stable framework.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{examples/iter3/iter3_process_rhythm.cropped.pdf}
+  \caption{A rhythmic skeleton corresponding to the first four bars of a generated third-iteration melody. At this stage the durations and bar structure are fixed, while the actual pitch content is still to be chosen.}
+  \label{fig:iter3_process_rhythm}
+\end{figure}
+
+The pitch generation itself happens as a repeated local decision process. For each event position, the code looks up the current bar, beat, harmony span, and form role, and then builds a group of candidate notes around the existing melodic context. These candidates are scored by the soft-constraint stack, which considers things such as stepwise motion, leap recovery, harmonic fit, motif similarity, cadence behaviour, and the general melodic shape. Rather than simply walking around the scale, the third iteration repeatedly asks what would make musical sense at this exact point in the phrase.
+
+The result of that process is shown in Figure~\ref{fig:iter3_process_melody}. Here the same rhythmic outline has been given actual pitches, and the opening four bars now begin to show the musical character of the line. This makes the implementation easier to follow because it shows how the final melody is not generated all at once, but emerges from rhythm, context, and repeated local choices.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{examples/iter3/iter3_process_melody.cropped.pdf}
+  \caption{The same opening after pitch generation. The rhythmic framework has now been turned into a concrete melody by repeated candidate evaluation under the active harmonic and formal context.}
+  \label{fig:iter3_process_melody}
+\end{figure}
+
+The final melody is selected from several complete attempts rather than from one single pass. After that, the workflow splits as shown in Figure~\ref{fig:iter3_output_flow}. If the requested texture is just a melody, the resulting line is exported directly. If the texture is chorale, the melody is treated as a soprano line and passed to the harmonizer, which chooses alto, tenor, and bass notes according to the same harmony plan and the SATB voice profiles. The last step in both cases is export through LilyPond, with optional PDF, MIDI, and WAV rendering.
+
+\input{Figures/05iterations/iter3_output_flow}
+
+Figure~\ref{fig:iter3_process_chorale} shows the final branch where the melody is no longer kept as a single line, but is instead used as the soprano basis for a simple SATB-style texture. This figure is especially useful because it shows that the third iteration does not only improve the quality of isolated melodies, but also provides enough harmonic and structural information to support a later harmonization stage.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{examples/iter3/iter3_process_chorale.cropped.pdf}
+  \caption{The same musical material after chorale harmonization. The generated melody is treated as a soprano line, and alto, tenor, and bass voices are chosen against the same harmonic plan.}
+  \label{fig:iter3_process_chorale}
+\end{figure}
+
 \section{Results}
 The musical output of the third iteration is noticeably more controlled than in the previous versions. The melodies remain within a defined vocal or instrumental range, the generator can take a harmonic plan into account, and motif reuse is no longer limited to literal repetition. The addition of form planning also makes it possible to think in larger units such as sentences and periods rather than only local note-to-note movement.
 
-Examples~\ref{fig:iter3_melody_1} and \ref{fig:iter3_melody_2} show two melodies generated by the final single-line system. Both are generated in C major using the same overall setup, but with different seeds. What is important here is not only that the outputs differ, but that they still follow the same larger outline: they stay within a usable range, they show repetition and continuation, and they move toward a clearer cadence than in the previous iterations.
+Rather than presenting many examples that differ only in seed, it is more useful to structure the results by capability. The examples below therefore act as a compact version of the appendix: one example for a basic melody result, one for explicit form handling, one for rhythmic restriction, one for alternative choral scoring, and one final longer example showing what can be done when the user gives the system a more detailed harmonic plan.
+
+The first capability is simply that the generator now produces a usable single-line melody. Example~\ref{fig:iter3_melody_1} shows an ordinary output in C major using the default settings. Compared with the first two iterations, the important point is not that the melody is perfect, but that it remains within range, reuses material in a more deliberate way, and arrives at a cadence that feels shaped rather than accidental.
 
 \begin{example}
   \begin{center}
@@ -119,64 +162,45 @@ Examples~\ref{fig:iter3_melody_1} and \ref{fig:iter3_melody_2} show two melodies
   \caption[A melody generated by the third iteration in C major using seed 2000.]{A melody generated by the third iteration in C major. This example uses seed 2000 and shows a sentence-like shape with clear motivic reuse. \examplelink.}\label{fig:iter3_melody_1}
 \end{example}
 
+The second capability is explicit form control. This becomes easier to observe when the melody is allowed to unfold over a larger span. Example~\ref{fig:iter3_period_16_d} shows a 16-bar melody in D major generated using the \texttt{period} form plan. In this case the balanced phrase structure and the different treatment of the return toward cadence are easier to recognize than in the shorter examples, and this makes it clearer that the generator is no longer only producing note-to-note movement, but is instead working with a larger formal outline.
+
 \begin{example}
   \begin{center}
-    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_melody_2.cropped.pdf}
+    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_period_16_d.cropped.pdf}
   \end{center}
-  \caption[A second melody generated by the third iteration in C major.]{A second melody generated by the third iteration in C major. The surface is different, but the same form and harmony handling are still visible. \examplelink.}\label{fig:iter3_melody_2}
+  \caption[A 16-bar period-form melody generated by the third iteration in D major.]{A 16-bar melody generated by the third iteration in D major using the explicit \texttt{period} form plan and seed 4510. \examplelink.}\label{fig:iter3_period_16_d}
 \end{example}
 
-The form handling also becomes easier to observe when the melodies are made longer. Examples~\ref{fig:iter3_sentence_16} and \ref{fig:iter3_period_16} show two 16-bar melodies generated with the explicit \texttt{sentence} and \texttt{period} form plans. These examples are useful because the larger span makes it easier to hear and see how repetition, continuation, and cadence are shaped differently by the two form types.
+The third capability is rhythmic restriction. The generator can be given a narrower rhythmic vocabulary, which changes the surface character without changing the larger harmonic and formal workflow. Example~\ref{fig:iter3_rhythm_mixed_a} shows a melody in A major generated using only whole, half, and quarter notes. This is useful because it demonstrates that the rhythmic content can be shaped deliberately instead of always relying on the default mixture of durations.
 
 \begin{example}
   \begin{center}
-    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_sentence_16.cropped.pdf}
+    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_rhythm_mixed_a.cropped.pdf}
   \end{center}
-  \caption[A 16-bar sentence-form melody generated by the third iteration in C major.]{A 16-bar melody generated by the third iteration in C major using the explicit \texttt{sentence} form plan and seed 3100. The repeated opening idea and the later continuation make the sentence-like design clearer than in the shorter examples. \examplelink.}\label{fig:iter3_sentence_16}
+  \caption[A melody in A major generated with restricted rhythm values.]{A melody in A major generated using only whole, half, and quarter notes with seed 4511. \examplelink.}\label{fig:iter3_rhythm_mixed_a}
 \end{example}
 
+The fourth capability is flexible scoring. The same harmonization workflow does not have to be limited to a standard SATB arrangement. Example~\ref{fig:iter3_chorale_ttbb_g_minor} shows a four-part result in G minor using a TTBB layout. This demonstrates that the harmonization layer can be adapted to other ensemble requirements, as long as appropriate voice profiles are provided.
+
 \begin{example}
   \begin{center}
-    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_period_16.cropped.pdf}
+    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_chorale_ttbb_g_minor.cropped.pdf}
   \end{center}
-  \caption[A 16-bar period-form melody generated by the third iteration in C major.]{A 16-bar melody generated by the third iteration in C major using the explicit \texttt{period} form plan and seed 3200. Here the balanced phrase structure is more prominent, and the return toward cadence is shaped differently than in the sentence example. \examplelink.}\label{fig:iter3_period_16}
+  \caption[A TTBB-style harmonized example generated by the third iteration in G minor.]{A four-part TTBB-style example generated by the third iteration in G minor using seed 4512. \examplelink.}\label{fig:iter3_chorale_ttbb_g_minor}
 \end{example}
 
-The third iteration also makes it possible to harmonize the generated melody into a simple SATB-style texture. This is an important step compared with the earlier iterations, since the first iteration only generated several independent voices, while the second iteration did not return to multi-voice writing at all. In Examples~\ref{fig:iter3_chorale_1} and \ref{fig:iter3_chorale_2} we can see how the same final system can produce a harmonized result instead of only a single melodic line.
+The final capability is explicit harmonic control. This is perhaps the clearest example of how the program can be used differently by someone with more musical knowledge. Instead of relying on the automatic tonal plan, the user can specify a progression directly and use the compact harmony syntax to shape the result bar by bar and beat by beat. Example~\ref{fig:iter3_long_explicit_chorale_bb} shows a longer 16-bar chorale in B$\flat$ major using an explicit progression with borrowed chords such as \texttt{iv} and \texttt{bVII}. This kind of input allows the output to move beyond the most standard diatonic patterns and makes the system feel more like a compositional tool than only a generator of default examples.
 
 \begin{example}
   \begin{center}
-    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_chorale_1.cropped.pdf}
+    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_long_explicit_chorale_bb.cropped.pdf}
   \end{center}
-  \caption[A harmonized SATB-style example generated by the third iteration in C major using seed 2000.]{A harmonized SATB-style example generated by the third iteration in C major using seed 2000. \examplelink.}\label{fig:iter3_chorale_1}
-\end{example}
-
-\begin{example}
-  \begin{center}
-    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_chorale_2.cropped.pdf}
-  \end{center}
-  \caption[A second harmonized SATB-style example from the third iteration in C major with a different seed.]{A second harmonized SATB-style example from the third iteration, again in C major but with a different seed. \examplelink.}\label{fig:iter3_chorale_2}
-\end{example}
-
-The third iteration also allows the harmony to be given explicitly from the command line. This makes it possible to test specific harmonic ideas rather than only relying on the automatic tonal plan. Examples~\ref{fig:iter3_explicit_harmony_melody} and \ref{fig:iter3_explicit_harmony_chorale} show the same explicit harmonic plan first as a single melody and then as a harmonized SATB-style texture. The progression was entered beat by beat using the compact harmony format, and the repeated use of the borrowed minor subdominant, written as \texttt{iv}, gives the passage a darker colour before the music returns to the tonic.
-
-\begin{example}
-  \begin{center}
-    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_explicit_harmony_melody.cropped.pdf}
-  \end{center}
-  \caption[A melody generated in D major using an explicit harmonic progression.]{A melody generated in D major using an explicit harmonic progression.  \examplelink.}\label{fig:iter3_explicit_harmony_melody}
-\end{example}
-
-\begin{example}
-  \begin{center}
-    \includegraphics[width=0.95\textwidth]{examples/iter3/iter3_explicit_harmony_chorale.cropped.pdf}
-  \end{center}
-  \caption[The same explicit D-major progression realized as a harmonized SATB-style texture.]{The same explicit D-major progression as Example~\ref{fig:iter3_explicit_harmony_melody}, but realized as a harmonized SATB-style texture. This shows how the harmonic plan can shape both a single melody and a fuller chorale result. \examplelink.}\label{fig:iter3_explicit_harmony_chorale}
+  \caption[A 16-bar explicit-harmony chorale generated by the third iteration in B$\flat$ major with modal mixture.]{A 16-bar harmonized example generated by the third iteration in B$\flat$ major using an explicit harmonic progression with the borrowed \texttt{iv} and \texttt{bVII} chords. This is the kind of input that becomes possible when the user approaches the program with a more deliberate harmonic idea. \examplelink.}\label{fig:iter3_long_explicit_chorale_bb}
 \end{example}
 
 Another clear improvement is that the notation workflow became much more usable. The system can now place generated files in seed-based output folders, choose a clef more intelligently, and optionally render cropped PDF files and audio from the same command-line call. This does not change the melody itself, but it makes the generator much easier to use as part of a real compositional and thesis-writing workflow.
 
-Even with these improvements, the results are still heuristic rather than guaranteed. The generator is better at preferring musically convincing solutions, but it does not prove that every melody will be good. The value of the third iteration is therefore that it makes good results much more likely while also making the failures easier to understand and improve.
+Even with these improvements, the results are still heuristic rather than guaranteed. The generator is better at preferring musically convincing solutions, but it does not prove that every melody will be good. The value of the third iteration is therefore that it makes good results much more likely while also making the failures easier to understand and improve. The appendix can be read as an extended version of this results section, where the same capabilities are shown across more keys, more rhythm settings, and more texture choices.
 
 \section{Discussion}
 The third iteration is the first version where the musical objects and the generation strategy point in the same direction. In the earlier iterations the generator could produce output, but the internal representation was too weak to carry much musical meaning. Here, the object model is rich enough that concepts such as form, harmony, range, and motif transformation can be represented directly in the code instead of only being implied by the generation procedure.

@@ -157,61 +157,70 @@
       \label{fig:eb-major-scale}
     \end{example}
 
-    The concept of a musical key is simply shifting around where the tonic note is. For instance in Example~\ref{fig:c-major-scale} you can see the major scale in \musPitch{C}{}. And in Example~\ref{fig:eb-major-scale} you can see the major scale in \musPitch{E\musFlat}{}. In todays tuning system there are no differences between the keys, meaning that the sound the same, just higher and lower. This was not the case earlier in history, where the temperament(how the tones were tunes in relation to each other) of the keys differed. Today it just sounds higher or lower depending on the key.
+    The concept of a musical key is simply shifting around where the tonic note is. For instance in Example~\ref{fig:c-major-scale} you can see the major scale in \musPitch{C}{} and Example~\ref{fig:eb-major-scale} shows the major scale in \musPitch{E\musFlat}{}. These two scales sound "the same" meaning the relationship betweenall the notes are the same but the actual pitches are different. The key is simply the name of the tonic note, so the first example is in the key of \musPitch{C}{}-major and the second example is in the key of \musPitch{E\fl}{}-major. The concept of a key is important because it gives us a reference point for understanding the function of notes and chords within a piece of music. It also helps us to understand how melodies and harmonies are constructed and how they relate to each other.
 
   % \subsection{Melodies}
   %   Melodies is the horizontal component of music, meaning we look at it as a time-series. We have a given note at a given length followed by another note or rest of a given length etc... This means that you can look at a melody as a series of intervals as well. If we do this on known melodies we will observe that they are mainly composed of steps and skips. This means that the distance between one note and the next is one or two tones. Large leaps are usually leaping to important tones like the tonic or the root of the current chord. 
 
   \subsection{Intervals}
-    Before discussing harmony we need to consider the different types of distances between notes. The musical distance between two notes are called an \textit{interval}. Intervals can be identified by the number of semitones between the notes. Additionally we have special names for all the intervals, these names can be seen in Table~\ref{tab:intervals}. The list also provides the number of semitones between the notes.
+    Before discussing harmony we need to consider the different types of distances between notes. The musical distance between two notes are called an \textit{interval}. Intervals can be identified by the number of semitones between the notes. All the intervals the intervals have special names and some distances can have different names depending on how they are spelled\footnote{the same pitch can be "spelled" in different ways, for instance \musPitch{A\fl}{} and \musPitch{G\musSharp}{} are written differently, but sound the same since they are the same pitch}, these names can be seen in Table~\ref{tab:intervals}. The list also provides the number of semitones between the notes.
 
-    In Figure~\ref{fig:normal_intervals} we can see how all the normal intervals look on a stave. Naming the interval on a general basis means looks at the distance, this means that a second is two consecutive notes and a third has "one space" between the notes, this is regardless whether it is minor or major a third looks the same distance wise regardless of quality. You can see this in Example~\ref{fig:all_intervals}, here we observe that the distance between the notes in a minor third and a major third is the same, the only difference is that the minor third is one semitone smaller, but that is shown by the \musFlat{}-symbol which means the note has been lowered by a semitone. Consequently for the tritone we see there are two ways to spell the same interval, one is a fourth that has been raised and the other is a fifth that has been lowered. These two are \textit{enharmonically equivilant} which just means that they are the same pitches, they are just spelled differently. For the augmented fourth(the first spelling of the tritone) we se the \musSharp{}-symbol used, which simply means the note is raised by a semitone.
+    In Figure~\ref{fig:normal_intervals} we can see how all the normal intervals look on a stave. Naming the interval starts by finding the "general distance", meaning we look at the note name. If we consider the interval between \musPitch{C}{} and \musPitch{E\fl}{} we first consider that from \musPitch{C}{} to \musPitch{E}{} we have three letters. \musPitch{C}{}, \musPitch{D}{} then \musPitch{E}{}, which means we have a third, then we look at the variant. Since the \musPitch{E}{} is flattened to \musPitch{E\fl}{} we have the minor third since the distance is 3 semitones instead of 4. You can see this in Example~\ref{fig:all_intervals}, here we observe that the distance between the notes in a minor third and a major third is the same, the only difference is that the minor third is one semitone smaller, but that is shown by the \musFlat{}-symbol which means the note has been lowered by a semitone. Consequently for the tritone we see there are two ways to spell the same interval, one is a fourth that has been raised and the other is a fifth that has been lowered. These two are \textit{enharmonically equivilant} which just means that they are the same pitches, they are just spelled differently. For the augmented fourth(the first spelling of the tritone) we se the \musSharp{}-symbol used, which simply means the note is raised by a semitone.
 
 
-    \begin{table}
-      \caption{Table containing all musical intervals up to an octave, the number of semitones and their abbreviated form.}\label{tab:intervals}
-      \begin{center}
-        \begin{tabular}[c]{|l|l|l|}
-          \hline
-          \multicolumn{1}{|c|}{\textbf{Interval name}} & 
-          \multicolumn{1}{c|}{\textbf{Semitones}} &
-          \multicolumn{1}{c|}{\textbf{Abbreviation}} \\
-          \hline
-          Unison & 0 & P1\\
-          Minor second & 1 & P1 \\
-          Major second & 2 & m2 \\
-          Minor third & 3 & m3 \\
-          Major third & 4 & M3 \\
-          Perfect fourth & 5 & P4 \\
-          Tritone\tablefootnote{can also be called diminished fifth or augmented fourth, where diminished simply means lowered by semitone and augmented means raised by one semitone} & 6 & TT or aug4/dim5\\
-          Perfect fifth & 7 & P5 \\
-          Minor sixth & 8 & m6 \\
-          Major sixth & 9 & M6 \\
-          Minor seventh & 10 & m7 \\
-          Major seventh & 11 & M7 \\
-          Octave & 12 & P8 \\
-          
-          \hline
-        \end{tabular}
-      \end{center}
-    \end{table}
+      \begin{table}
+        \caption{Table containing all musical intervals up to an octave, the number of semitones and their abbreviated form.}\label{tab:intervals}
+        \begin{center}
+          \begin{tabular}[c]{|l|l|l|}
+            \hline
+            \multicolumn{1}{|c|}{\textbf{Interval name}} & 
+            \multicolumn{1}{c|}{\textbf{Semitones}} &
+            \multicolumn{1}{c|}{\textbf{Abbreviation}} \\
+            \hline
+            Unison & 0 & P1\\
+            Minor second & 1 & P1 \\
+            Major second & 2 & m2 \\
+            Minor third & 3 & m3 \\
+            Major third & 4 & M3 \\
+            Perfect fourth & 5 & P4 \\
+            Tritone\tablefootnote{can also be called diminished fifth or augmented fourth, where diminished simply means lowered by semitone and augmented means raised by one semitone} & 6 & TT or aug4/dim5\\
+            Perfect fifth & 7 & P5 \\
+            Minor sixth & 8 & m6 \\
+            Major sixth & 9 & M6 \\
+            Minor seventh & 10 & m7 \\
+            Major seventh & 11 & M7 \\
+            Octave & 12 & P8 \\
+            
+            \hline
+          \end{tabular}
+        \end{center}
+      \end{table}
 
-    \begin{figure}[h]
-      \begin{center}
-        \includegraphics[width=0.95\textwidth]{examples/04theory/03-normal_intervals.cropped.pdf}
-      \end{center}
-      \caption{All normal intervals from the note \musPitch{C}{4} devoid their variants in quality.}\label{fig:normal_intervals}
-    \end{figure}
+      \begin{figure}[h]
+        \begin{center}
+          \includegraphics[width=0.95\textwidth]{examples/04theory/03-normal_intervals.cropped.pdf}
+        \end{center}
+        \caption{All normal intervals from the note \musPitch{C}{4} devoid their variants in quality.}\label{fig:normal_intervals}
+      \end{figure}
 
-    \begin{example}[h]
-      \begin{center}
-        \includegraphics[width=0.95\textwidth]{examples/04theory/04-all_intervals.cropped.pdf}
-      \end{center}
-      \caption[All musical intervals from the unison to the octave, including their variants.]{All the musical intervals from the unison to the octave including their variants. \examplelink.}\label{fig:all_intervals}
-    \end{example}
+      \begin{example}[h]
+        \begin{center}
+          \includegraphics[width=0.95\textwidth]{examples/04theory/04-all_intervals.cropped.pdf}
+        \end{center}
+        \caption[All musical intervals from the unison to the octave, including their variants.]{All the musical intervals from the unison to the octave including their variants. \examplelink.}\label{fig:all_intervals}
+      \end{example}
     
   \subsection{Harmony}\label{sec:harmony}
     Harmony is the vertical component of the music, harmony is what happens when two or more notes happen at the same time. This is what chords are build around. When considering the harmonic progression in tonal music we can consider all the standard chords in the major key. They are labeled by numbers using the roman numerals. Upper case means the chord in major and lower case means minor. You can see the difference between major and minor chords in Example~\ref{fig:four_chords}, and listen to the difference at the link provided in the caption. \\
+
+    Example~\ref{fig:diatonic_chords_d_major} shows the full set of diatonic triads in D major. The Roman numerals make the chord quality clear, and the functional labels connect each triad to its role in the key. This is the harmonic material that forms the basis for the progression patterns discussed below.
+
+    \begin{example}[h]
+      \begin{center}
+        \includegraphics[width=0.98\textwidth]{examples/04theory/11-diatonic_chords.cropped.pdf}
+      \end{center}
+      \caption[The diatonic triads in D major with Roman numerals and functional names.]{The diatonic triads in D major with Roman numerals and functional names. \examplelink.}\label{fig:diatonic_chords_d_major}
+    \end{example}
 
     Looking at Figure~\ref{fig:harmonic_progression} we can see the typical flow of harmonic functions in tonal music. Tonic means the home, the most stable function. Dominant is the function with the most tension. Pre-dominant usually leads into the dominant or sets the expectation for the dominant. The mediant and submediant are usually not considered to be part of the main harmonic progression, but they can be used to create interesting harmonic progressions and add some color to the music. The arrows indicate the typical flow of harmonic functions, however this is not a strict rule. \\
 
@@ -296,7 +305,7 @@
     \end{figure}
 
   \subsection{Musical form}
-  Now that we have an idea of the musical structures on the melodic and harmonic layer we will take a look at musical forms. This is a very important idea when it comes to constructing melodies. A melody is not an infinitely wandering idea of music. A good melody follows a form. Often this can be viewed as repetitions and variations of a given musical idea. Two very common forms of musical form are the \textit{sentence form} and the \textit{period form} \cite[pp.20-24]{shoenbergComposition}.
+    Now that we have an idea of the musical structures on the melodic and harmonic layer we will take a look at musical forms. This is a very important idea when it comes to constructing melodies. A melody is not an infinitely wandering idea of music. A good melody follows a form. Often this can be viewed as repetitions and variations of a given musical idea. Two very common forms of musical form are the \textit{sentence form} and the \textit{period form} \cite[pp.20-24]{shoenbergComposition}.
 
     In Example~\ref{fig:sentence} we can see an example of the musical sentence. It starts with a 2-bar opnening phrase, labeled as the \textit{basic idea}, then we have a repetition of the same idea only adapted for a new chord. Then the following 2 bars are a fragmentation of the idea. Then for the last two bars we have a conclusion, this ties the idea together. The cadence at the end can be considered the end of a sentence. It concludes the idea before it moves on to something else. 
 
