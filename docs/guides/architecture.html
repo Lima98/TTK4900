@@ -102,7 +102,8 @@
 <h2>High-Level Design<a class="headerlink" href="#high-level-design" title="Link to this heading">¶</a></h2>
 <p>The project is organized around a single melody-generation pipeline:</p>
 <ol class="arabic simple">
-<li><p>parse CLI settings in <code class="docutils literal notranslate"><span class="pre">code/main.py</span></code></p></li>
+<li><p>launch the default configuration from <code class="docutils literal notranslate"><span class="pre">code/main.py</span></code></p></li>
+<li><p>parse CLI settings and workflow commands in <code class="docutils literal notranslate"><span class="pre">code/app_cli.py</span></code></p></li>
 <li><p>build a <code class="docutils literal notranslate"><span class="pre">GenerationSettings</span></code> object</p></li>
 <li><p>generate rhythm, form targets, and harmony-aware note candidates</p></li>
 <li><p>score candidates with melodic constraints</p></li>
@@ -126,6 +127,11 @@ punishment, and rest usage.</p>
 across multiple attempts to keep the best result.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">melody_engine.lilypond</span></code></dt><dd><p>Converts melodies to LilyPond and handles rendering to PDF, MIDI, and WAV.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">code/app_cli.py</span></code></dt><dd><p>Owns the reusable command-line workflow: parsing, harmony/form setup, render mode,
+and generation orchestration.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">code/main.py</span></code></dt><dd><p>Defines the default constraint stack and acts as the project entry point.</p>
 </dd>
 </dl>
 </section>

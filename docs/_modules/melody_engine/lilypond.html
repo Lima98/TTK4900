@@ -115,6 +115,19 @@
 
 
 
+<div class="viewcode-block" id="lilypond_key_name">
+<a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.lilypond_key_name">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">lilypond_key_name</span><span class="p">(</span><span class="n">tonic</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="n">tonic</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">normalized</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Tonic may not be empty.&quot;</span><span class="p">)</span>
+    <span class="n">letter</span> <span class="o">=</span> <span class="n">normalized</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">accidental_text</span> <span class="o">=</span> <span class="n">normalized</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">accidental_text</span> <span class="o">=</span> <span class="n">accidental_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">letter</span><span class="si">}{</span><span class="n">accidental_text</span><span class="si">}</span><span class="s2">&quot;</span></div>
+
+
+
 <div class="viewcode-block" id="choose_clef">
 <a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.choose_clef">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">choose_clef</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -155,7 +168,7 @@
 <div class="viewcode-block" id="melody_to_lilypond_source">
 <a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.melody_to_lilypond_source">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">melody_to_lilypond_source</span><span class="p">(</span><span class="n">melody</span><span class="p">:</span> <span class="n">Melody</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">key_name</span> <span class="o">=</span> <span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonic</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">)</span>
+    <span class="n">key_name</span> <span class="o">=</span> <span class="n">lilypond_key_name</span><span class="p">(</span><span class="n">melody</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonic</span><span class="p">)</span>
     <span class="n">music_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">melody</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\\</span><span class="s2">version &quot;2.24.4&quot;</span>
@@ -221,7 +234,7 @@
 <div class="viewcode-block" id="chorale_to_lilypond_source">
 <a class="viewcode-back" href="../../api/melody-engine.html#melody_engine.lilypond.chorale_to_lilypond_source">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">chorale_to_lilypond_source</span><span class="p">(</span><span class="n">score</span><span class="p">:</span> <span class="n">ChoraleScore</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="n">key_name</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonic</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">)</span>
+    <span class="n">key_name</span> <span class="o">=</span> <span class="n">lilypond_key_name</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">tonic</span><span class="p">)</span>
     <span class="n">soprano_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">soprano</span><span class="p">)</span>
     <span class="n">alto_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">alto</span><span class="p">)</span>
     <span class="n">tenor_body</span> <span class="o">=</span> <span class="n">voice_music_body</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">tenor</span><span class="p">)</span>
@@ -244,7 +257,7 @@
 <span class="s2">      </span><span class="se">}}</span>
 <span class="s2">    &gt;&gt;</span>
 <span class="s2">    </span><span class="se">\\</span><span class="s2">new Staff &lt;&lt;</span>
-<span class="s2">      </span><span class="se">\\</span><span class="s2">clef &quot;bass&quot;</span>
+<span class="s2">      </span><span class="se">\\</span><span class="s2">clef &quot;</span><span class="si">{</span><span class="n">choose_clef</span><span class="p">(</span><span class="n">score</span><span class="o">.</span><span class="n">tenor</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="s2">      </span><span class="se">\\</span><span class="s2">key </span><span class="si">{</span><span class="n">key_name</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="si">{</span><span class="n">score</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span>
 <span class="s2">      </span><span class="se">\\</span><span class="s2">time </span><span class="si">{</span><span class="n">score</span><span class="o">.</span><span class="n">time_signature</span><span class="si">}</span>
 <span class="s2">      </span><span class="se">\\</span><span class="s2">new Voice = &quot;tenor&quot; </span><span class="se">{{</span><span class="s2"> </span><span class="se">\\</span><span class="s2">voiceOne</span>

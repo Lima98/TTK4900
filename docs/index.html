@@ -91,8 +91,9 @@
   <section id="procedural-music-generation">
 <h1>Procedural Music Generation<a class="headerlink" href="#procedural-music-generation" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="../index.html">Back to the thesis example archive</a></p>
-<p>This documentation covers the current melody-generation engine, the command-line workflow in
-<code class="docutils literal notranslate"><span class="pre">code/main.py</span></code>, and the internal modules that power form, harmony, notation, and rendering.</p>
+<p>This documentation covers the current melody-generation engine, the default entry point in
+<code class="docutils literal notranslate"><span class="pre">code/main.py</span></code>, the reusable CLI workflow in <code class="docutils literal notranslate"><span class="pre">code/app_cli.py</span></code>, and the internal modules
+that power form, harmony, notation, and rendering.</p>
 <p>The guides are written to match the current repository layout, while the API reference is
 generated directly from the Python modules and docstrings in <code class="docutils literal notranslate"><span class="pre">code/main.py</span></code> and
 <code class="docutils literal notranslate"><span class="pre">code/melody_engine/</span></code>.</p>
@@ -144,27 +145,7 @@ generated directly from the Python modules and docstrings in <code class="docuti
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/main-module.html">Main CLI Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_voice_profile"><code class="docutils literal notranslate"><span class="pre">build_voice_profile()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_settings"><code class="docutils literal notranslate"><span class="pre">build_settings()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_constraints"><code class="docutils literal notranslate"><span class="pre">build_constraints()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_harmony_plan"><code class="docutils literal notranslate"><span class="pre">build_harmony_plan()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_compact_beat_plan"><code class="docutils literal notranslate"><span class="pre">build_compact_beat_plan()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_beat_progression_plan"><code class="docutils literal notranslate"><span class="pre">build_beat_progression_plan()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_timed_harmony_plan"><code class="docutils literal notranslate"><span class="pre">build_timed_harmony_plan()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_default_harmony_plan"><code class="docutils literal notranslate"><span class="pre">build_default_harmony_plan()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.default_function_symbols"><code class="docutils literal notranslate"><span class="pre">default_function_symbols()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_form_plan"><code class="docutils literal notranslate"><span class="pre">build_form_plan()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_chorale_plan"><code class="docutils literal notranslate"><span class="pre">build_chorale_plan()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_output_stem"><code class="docutils literal notranslate"><span class="pre">build_output_stem()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.sanitize_token"><code class="docutils literal notranslate"><span class="pre">sanitize_token()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_generate_parser"><code class="docutils literal notranslate"><span class="pre">build_generate_parser()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.build_render_parser"><code class="docutils literal notranslate"><span class="pre">build_render_parser()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.describe_melody"><code class="docutils literal notranslate"><span class="pre">describe_melody()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.describe_chorale"><code class="docutils literal notranslate"><span class="pre">describe_chorale()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.maybe_render"><code class="docutils literal notranslate"><span class="pre">maybe_render()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.resolve_render_target"><code class="docutils literal notranslate"><span class="pre">resolve_render_target()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.collect_render_sources"><code class="docutils literal notranslate"><span class="pre">collect_render_sources()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.handle_render_mode"><code class="docutils literal notranslate"><span class="pre">handle_render_mode()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="api/main-module.html#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
@@ -190,7 +171,8 @@ generated directly from the Python modules and docstrings in <code class="docuti
 <section id="useful-entry-points">
 <h2>Useful Entry Points<a class="headerlink" href="#useful-entry-points" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">code/main.py</span></code>: primary CLI for generation and rerendering</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">code/main.py</span></code>: default project entry point and constraint configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">code/app_cli.py</span></code>: reusable CLI workflow for generation and rerendering</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">code/melody_engine/</span></code>: reusable engine modules</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">docs/</span></code>: documentation source</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">webpage/index.html</span></code>: static example archive and project page</p></li>

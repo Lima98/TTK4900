@@ -6,11 +6,12 @@ High-Level Design
 
 The project is organized around a single melody-generation pipeline:
 
-1. parse CLI settings in ``code/main.py``
-2. build a ``GenerationSettings`` object
-3. generate rhythm, form targets, and harmony-aware note candidates
-4. score candidates with melodic constraints
-5. export LilyPond and optionally render PDF/WAV assets
+1. launch the default configuration from ``code/main.py``
+2. parse CLI settings and workflow commands in ``code/app_cli.py``
+3. build a ``GenerationSettings`` object
+4. generate rhythm, form targets, and harmony-aware note candidates
+5. score candidates with melodic constraints
+6. export LilyPond and optionally render PDF/WAV assets
 
 Core Modules
 ------------
@@ -34,6 +35,13 @@ Core Modules
 
 ``melody_engine.lilypond``
   Converts melodies to LilyPond and handles rendering to PDF, MIDI, and WAV.
+
+``code/app_cli.py``
+  Owns the reusable command-line workflow: parsing, harmony/form setup, render mode,
+  and generation orchestration.
+
+``code/main.py``
+  Defines the default constraint stack and acts as the project entry point.
 
 Current Design Priorities
 -------------------------
