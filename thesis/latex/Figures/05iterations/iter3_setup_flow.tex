@@ -1,0 +1,28 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.92\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=10mm and 8mm,
+    stage/.style={
+      draw,
+      rounded corners=3pt,
+      align=center,
+      minimum width=0.25\textwidth,
+      minimum height=9mm,
+      fill=gray!8
+    },
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+  ]
+    \node[stage] (cmd) {CLI command\\key, bars, form, harmony, seed, texture};
+    \node[stage, right=of cmd] (cli) {\texttt{app\_cli.py}\\parse arguments and validate input};
+    \node[stage, right=of cli] (settings) {\texttt{GenerationSettings}\\key, motif, form plan,\\harmony plan, and voice profile};
+
+    \draw[arrow] (cmd) -- (cli);
+    \draw[arrow] (cli) -- (settings);
+  \end{tikzpicture}%
+  }
+  \caption{The first stage of the third iteration. The command line is parsed and translated into a single structured settings object before any music is generated.}
+  \label{fig:iter3_setup_flow}
+\end{figure}

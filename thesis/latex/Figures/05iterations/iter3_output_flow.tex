@@ -1,0 +1,41 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.92\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=10mm and 12mm,
+    stage/.style={
+      draw,
+      rounded corners=3pt,
+      align=center,
+      minimum width=0.23\textwidth,
+      minimum height=9mm,
+      fill=gray!8
+    },
+    output/.style={
+      draw,
+      rounded corners=3pt,
+      align=center,
+      minimum width=0.2\textwidth,
+      minimum height=9mm,
+      fill=green!8
+    },
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+  ]
+    \node[stage] (melody) {Best melody};
+    \node[output, right=of melody] (single) {\texttt{Melody}\\export directly};
+    \node[stage, below=of melody] (chorale) {\texttt{ChoraleHarmonizer}\\choose alto, tenor, bass};
+    \node[output, right=of chorale] (satb) {\texttt{ChoraleScore}\\SATB export};
+    \node[stage, right=28mm of single] (render) {\texttt{lilypond.py}\\PDF, MIDI, WAV};
+
+    \draw[arrow] (melody) -- (single);
+    \draw[arrow] (melody) -- (chorale);
+    \draw[arrow] (chorale) -- (satb);
+    \draw[arrow] (single) -- (render);
+    \draw[arrow] (satb) -- (render);
+  \end{tikzpicture}%
+  }
+  \caption{The final stage of the workflow. The best melody can either be exported directly or used as soprano input for chorale harmonization before rendering.}
+  \label{fig:iter3_output_flow}
+\end{figure}

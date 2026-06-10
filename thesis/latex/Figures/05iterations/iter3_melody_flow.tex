@@ -1,0 +1,30 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.95\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=9mm and 8mm,
+    stage/.style={
+      draw,
+      rounded corners=3pt,
+      align=center,
+      minimum width=0.22\textwidth,
+      minimum height=9mm,
+      fill=gray!8
+    },
+    arrow/.style={-{Latex[length=2.2mm]}, thick}
+  ]
+    \node[stage] (rhythm) {Build rhythm\\bar durations and phrase endings};
+    \node[stage, right=of rhythm] (targets) {Choose targets\\motif returns and climax position};
+    \node[stage, right=of targets] (candidates) {For each event\\find harmony and make candidates};
+    \node[stage, right=of candidates] (score) {Score attempts\\soft constraints and best attempt};
+
+    \draw[arrow] (rhythm) -- (targets);
+    \draw[arrow] (targets) -- (candidates);
+    \draw[arrow] (candidates) -- (score);
+  \end{tikzpicture}%
+  }
+  \caption{The melody-generation stage in the third iteration. The generator first decides structural targets, then evaluates candidate notes under the active harmonic and formal context.}
+  \label{fig:iter3_melody_flow}
+\end{figure}
