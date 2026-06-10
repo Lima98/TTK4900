@@ -4,6 +4,14 @@ This repository contains a procedural music generator developed as part of a mas
 
 ![Example output](thesis/latex/examples/iter3/iter3_long_explicit_chorale_bb.cropped.png)
 
+## Quick start
+
+```bash
+python3 code/main.py --form sentence --pdf --wav
+```
+
+This generates a melody with a sentence-like form and optionally renders notation and audio.
+
 ## What the program does
 
 The current generator supports:
@@ -17,6 +25,17 @@ The current generator supports:
 - LilyPond export, with optional PDF and WAV rendering
 
 The system is built around an object-oriented music model and a weighted soft-constraint approach. In practice, this means the generator creates candidate melodies and prefers the ones that better satisfy musical rules such as stepwise motion, cadence shaping, chord-tone preference, and motivic reuse.
+
+## At a glance
+
+| Area | Support |
+|---|---|
+| Keys and modes | Major, minor, and modal tonal settings |
+| Form | `auto`, `sentence`, `period`, `phrase` |
+| Harmony | Automatic or explicit beat-based plans |
+| Texture | Single melody or chorale-style output |
+| Rendering | LilyPond source, cropped PDF, WAV |
+| Control surface | CLI with reusable configuration in `code/main.py` |
 
 ## Repository layout
 
