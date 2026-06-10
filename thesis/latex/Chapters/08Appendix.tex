@@ -44,7 +44,9 @@ Audio-files for all the examples in the thesis can be found on my github.io page
 \setcounter{example}{0}
 \captionsetup[example]{list=no}
 
-This appendix gathers a broader selection of outputs from the third iteration than could reasonably be included in the main discussion. The examples are organized by purpose: first a survey across all twelve major keys, then examples showing formal control, explicit harmony, longer spans, and automatic SATB-style harmonization.
+This appendix gathers a broader selection of outputs from the third iteration than could reasonably be included in the main discussion.  These are non-cherry-picked examples, meaning I did not change the seed to try and find a better output, i simply generated them and then let them be.
+
+The examples are organized by purpose: first a survey across all twelve major keys, then a short comparison between parallel major and minor keys, followed by examples showing formal and modal control, rhythmic restriction, explicit harmonic control, longer spans, and several four-part textures.
 
 \section*{Automatic melodies in all twelve major keys}\label{sec:appendix-keys}
 The following figures use the default third-iteration melody configuration with automatic harmony, eight bars, and the standard 4/4 setting. They are presented in the order C, D$\flat$, D, E$\flat$, E, F, F$\sharp$, G, A$\flat$, A, B$\flat$, and B. Together they show that the same generator can be applied across the full set of major keys while preserving the same overall workflow.
@@ -134,8 +136,40 @@ The following figures use the default third-iteration melody configuration with 
 \end{example}
 
 \clearpage
+\section*{Parallel major and minor comparison}
+The major-key survey above shows that the generator can be used across the full chromatic set of tonics. The following four examples instead compare pairs of parallel keys directly. Each pair keeps the same tonic while changing only the mode, which makes it easier to see how the harmonic plan, pitch content, and general melodic colour change when the system moves from major to minor.
+
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_parallel_g_major.cropped.pdf}
+  \caption[Eight-bar melody in G major.]{Automatically generated eight-bar melody in G major using the default automatic harmony plan and seed 4120. \examplelink}
+  \label{fig:c-parallel-g-major}
+\end{example}
+
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_parallel_g_minor.cropped.pdf}
+  \caption[Eight-bar melody in G minor.]{Automatically generated eight-bar melody in G minor using the default automatic harmony plan and seed 4121. \examplelink}
+  \label{fig:c-parallel-g-minor}
+\end{example}
+
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_parallel_e_major.cropped.pdf}
+  \caption[Eight-bar melody in E major.]{Automatically generated eight-bar melody in E major using the default automatic harmony plan and seed 4122. \examplelink}
+  \label{fig:c-parallel-e-major}
+\end{example}
+
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_parallel_e_minor.cropped.pdf}
+  \caption[Eight-bar melody in E minor.]{Automatically generated eight-bar melody in E minor using the default automatic harmony plan and seed 4123. \examplelink}
+  \label{fig:c-parallel-e-minor}
+\end{example}
+
+\clearpage
 \section*{Formal and modal variation}\label{sec:appendix-form}
-The next examples show that the same generator can be given more explicit musical structure. The first two use the sentence and period form plans discussed in the main text, while the third shows the system working in a minor mode rather than in a major key.
+The next examples show that the same generator can be given more explicit musical structure. The first two use the sentence and period form plans discussed in the main text in major keys, while the last two show that the same formal ideas can also be applied in a minor mode.
 
 \begin{example}[H]
   \centering
@@ -158,9 +192,16 @@ The next examples show that the same generator can be given more explicit musica
   \label{fig:c-sentence-e-minor}
 \end{example}
 
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_period_e_minor.cropped.pdf}
+  \caption[Sixteen-bar period in E minor.]{Sixteen-bar melody in E minor using the period form plan and seed 4302. This complements the earlier minor sentence example by showing the second large-scale form in the same mode. \examplelink}
+  \label{fig:c-period-e-minor}
+\end{example}
+
 \clearpage
 \section*{Rhythmic control}\label{sec:appendix-rhythm}
-The generator can also be constrained through the allowed rhythmic values. The following examples use the same general workflow as the earlier melody outputs, but with different rhythm palettes. Together they show how the rhythmic surface becomes more static or more active depending on which durations are made available.
+The generator can also be constrained through the allowed rhythmic values. The following examples use the same general workflow as the earlier melody outputs, but with different rhythm palettes. Together they show how the rhythmic surface becomes more static or more active depending on which durations are made available, ranging here from only whole notes to a continuous stream of eighth notes.
 
 \begin{example}[H]
   \centering
@@ -190,9 +231,16 @@ The generator can also be constrained through the allowed rhythmic values. The f
   \label{fig:c-rhythm-quarter-f}
 \end{example}
 
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_rhythm_eighth_g.cropped.pdf}
+  \caption[Eight-bar melody using only eighth notes.]{Automatically generated eight-bar melody in G major using only eighth notes and seed 4416. \examplelink}
+  \label{fig:c-rhythm-eighth-g}
+\end{example}
+
 \clearpage
 \section*{Explicit harmonic control}\label{sec:appendix-explicit}
-The third iteration also allows the harmonic progression to be specified directly from the command line. These two examples use a new explicit progression in A major that includes modal mixture through both the borrowed minor subdominant and a borrowed flat seventh chord. The first shows the melody on its own, while the second shows the same harmonic plan realized as a harmonized texture.
+The third iteration also allows the harmonic progression to be specified directly from the command line. The first two examples use an explicit progression in A major that includes modal mixture through both the borrowed minor subdominant and a borrowed flat seventh chord. The third focuses on chromatic-mediant colour in C major, while the fourth is intentionally unstable and is included to show that explicit control is only useful when the harmonic choices themselves are musically convincing.
 
 \begin{example}[H]
   \centering
@@ -206,6 +254,20 @@ The third iteration also allows the harmonic progression to be specified directl
   \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_explicit_mixture_chorale_a.cropped.pdf}
   \caption[Explicit-harmony chorale in A major with modal mixture.]{The same explicit A-major progression, including the borrowed \texttt{iv} and \texttt{bVII} chords, realized as a harmonized SATB-style texture. \examplelink}
   \label{fig:c-explicit-mixture-chorale-a}
+\end{example}
+
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_explicit_chromatic_mediants_c.cropped.pdf}
+  \caption[Explicit-harmony melody in C major using chromatic mediants.]{Melody generated in C major from an explicitly specified progression that emphasizes chromatic-mediant motion through \texttt{iii}, \texttt{bIII}, and \texttt{bVI}. \examplelink}
+  \label{fig:c-explicit-chromatic-mediants-c}
+\end{example}
+
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_explicit_unstable_d.cropped.pdf}
+  \caption[Explicit-harmony melody in D major with intentionally unstable planning.]{Melody generated in D major from an intentionally unstable harmonic plan. The example is included to show that direct harmonic control also makes it possible to steer the generator toward results that are structurally weaker if the chosen progression is not musically well-formed. \examplelink}
+  \label{fig:c-explicit-unstable-d}
 \end{example}
 
 \clearpage
@@ -228,7 +290,7 @@ The examples above are intentionally short and compact. The following two are su
 
 \clearpage
 \section*{Automatic chorale output}\label{sec:appendix-chorale}
-Finally, the appendix includes harmonized examples in several textures. The first group contains shorter SATB-style results in both major and minor keys, included to show the basic extension from a generated melody to a four-part realization. The second group demonstrates that the same harmonization approach can be adapted to other upper- and lower-voice layouts, and the final example is longer and uses an explicit harmonic progression with modal mixture and stronger cadential shaping.
+Finally, the appendix includes harmonized examples in several four-part textures. The first group contains shorter SATB-style results in both major and minor keys, included to show the basic extension from a generated melody to a four-part realization across different tonal settings. The next two examples demonstrate that the same harmonization approach can also be adapted to alternative ensemble layouts, here shown as TTBB and SSAA with suitable clefs and ranges. The last two examples are more directed: one is a longer SATB example with explicit modal mixture, while the final example keeps all melodic durations at the quarter-note level and uses a more baroque-inspired harmonic succession.
 
 \begin{example}[H]
   \centering
@@ -277,4 +339,11 @@ Finally, the appendix includes harmonized examples in several textures. The firs
   \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_long_explicit_chorale_g.cropped.pdf}
   \caption[Sixteen-bar explicit SATB example in G major with modal mixture.]{Sixteen-bar harmonized SATB-style example in G major using an explicit harmonic progression with the borrowed \texttt{iv} and \texttt{bVII} chords, generated with seed 4402. \examplelink}
   \label{fig:c-long-explicit-chorale-g}
+\end{example}
+
+\begin{example}[H]
+  \centering
+  \includegraphics[width=0.95\textwidth]{examples/appendix/iter3_baroque_quarter_chorale_g.cropped.pdf}
+  \caption[Eight-bar quarter-note chorale in G major with baroque-inspired harmony.]{Eight-bar harmonized SATB-style example in G major using only quarter notes and an explicit progression inspired by baroque sequential harmony, generated with seed 4422. \examplelink}
+  \label{fig:c-baroque-quarter-chorale-g}
 \end{example}

@@ -3,7 +3,7 @@
   \begin{tikzpicture}[
     >=Latex,
     font=\small,
-    node distance=12mm and 12mm,
+    node distance=12mm and 30mm,
     class/.style={
       draw,
       rounded corners=3pt,
@@ -21,7 +21,7 @@
       duration
     };
 
-    \node[class, right=of note] (motif) {
+    \node[class, above=of note] (motif) {
       \textbf{Motif}\\
       beats\\
       notes: Note[]
@@ -33,13 +33,13 @@
       notes: Note[]
     };
 
-    \node[class, below=of motif] (phrase) {
+    \node[class, below right=of motif] (phrase) {
       \textbf{Phrase}\\
       bars: Bar[]\\
       key
     };
 
-    \draw[arrow] (note) -- node[above] {reused in} (motif);
+    \draw[arrow] (note) -- node[left] {reused in} (motif);
     \draw[arrow] (motif) -- node[above] {fills or shapes} (bar);
     \draw[arrow] (bar) -- node[right] {contained in} (phrase);
   \end{tikzpicture}
