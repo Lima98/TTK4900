@@ -77,6 +77,14 @@
                \begingroup\setlength{\parskip}{\z@}%
                     \@starttoc{\@nameuse{ext@#1}}%
                \endgroup}}
+     \newcommand{\masterfrontlist}[2]{%
+          \chapter*{#1}%
+          \phantomsection
+          \addcontentsline{toc}{chapter}{\protect\numberline{}#1}%
+          \@starttoc{#2}}
+     \newcommand{\masterlistofexamples}{%
+          \@namedef{l@example}{\@dottedtocline{1}{1em}{3.2em}}%
+          \masterfrontlist{List of Examples}{loe}}
 \makeatother
 \newfloat{examples}{htbp}{loe}
 
@@ -143,15 +151,12 @@ Department of Engineering Cybernetics\\
 \addcontentsline{toc}{chapter}{\protect\numberline{}Preface} 
 \input{Chapters/01Preface}
 
-\tableofcontents
-\addcontentsline{toc}{chapter}{\protect\numberline{}Contents}
+\masterfrontlist{\contentsname}{toc}
 
 %add to table of contents list of figures and tables, and insert list of figures and tables
-\listoffigures
-\addcontentsline{toc}{chapter}{\protect\numberline{}\listfigurename}
+\masterfrontlist{\listfigurename}{lof}
 % === LIST OF EXAMPLES ===
-\listof{example}{List of Examples}
-\addcontentsline{toc}{chapter}{\protect\numberline{}{List of Examples}}
+\masterlistofexamples
 \vfill
 \noindent All examples can be found at my \href{https://lima98.github.io/TTK4900}{github.io page} where they can be listened to, numberings are consistent with the thesis.
 % === === === === === === 
