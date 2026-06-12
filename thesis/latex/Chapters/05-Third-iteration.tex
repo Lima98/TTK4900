@@ -1,24 +1,27 @@
-For the third iteration the use of \ac{AI} was implemented. 
+The third iteration is the final development stage of the project. It builds on the observations from the first two iterations and aims to turn the earlier prototypes into a more complete and usable system. The first iteration established that the basic workflow of generating \textit{lilypond} code from \textit{python} was workable, and the second iteration introduced a more meaningful musical object model. The purpose of the third iteration is to bring those lessons together into a generator where form, harmony, range, and rendering belong to the same coherent workflow.
 
-\section{Use of \ac{AI}}
+This is also the stage where \ac{AI} is introduced directly into the development process. By waiting until the earlier iterations had already exposed the central musical and technical problems, it became possible to use \ac{AI} support more deliberately. The point was not to let it define the musical direction of the system, but to use it while refining and extending a design that was already understood well enough to evaluate critically.
 
-  The third iteration is the first stage of the project where \ac{AI} is used directly as part of the development workflow. This choice was deliberate. By first developing two iterations without \ac{AI} assistance, the project established a clearer understanding of the domain, the weaknesses of earlier designs, and the kinds of musical and architectural decisions that had to remain under human control. This made it possible to use \ac{AI} more critically and productively in the third iteration, rather than relying on it before the problem itself was properly understood.
+\section{Development workflow}
 
-  Codex was chosen as the main \ac{AI} tool because it is designed specifically for software engineering work rather than only general chat interaction \cite{CodexAICoding,CodexNowGenerally2026}. In practical terms, this means it is suited to tasks such as reading an existing code base, proposing or implementing code changes, helping with refactoring, and supporting documentation and debugging in context. These capabilities are especially relevant in a project like this one, where the challenge is not merely to generate isolated code fragments, but to evolve a structured system over several iterations.
+  The third iteration is the first stage of the project where \ac{AI} is used directly as part of the implementation work. This was a natural point to introduce it, because the earlier iterations had already revealed the main weaknesses in both the musical output and the software structure. That meant the development could focus less on discovering the problem and more on improving a known design.
 
-  The rationale for using Codex in this thesis is therefore not that it replaces software engineering judgment. Rather, it is used as a development aid inside an already established iterative process. The intention is to use \ac{AI} as a tool for acceleration, exploration, and implementation support, while ensuring that architectural choices, musical decisions, and validation remain the responsibility of the developer. In that sense, Codex is treated as a collaborator within the workflow, not as a crutch that removes the need for understanding the system being built.
+  Codex was chosen as the main \ac{AI} tool because it is designed specifically for software engineering work rather than only general chat interaction \cite{CodexAICoding,CodexNowGenerally2026}. In practical terms, this means it is suited to reading an existing code base, proposing or implementing code changes, supporting refactoring, and helping work through design alternatives in context. Those capabilities are especially relevant here, since the main challenge in the final iteration is not simply to generate more code, but to reshape the earlier prototypes into a more structured musical system.
+
+  The role of Codex in this iteration is therefore as a development aid rather than a substitute for musical or architectural judgment. It was useful for acceleration, exploration, and implementation support, while the overall design choices, the musical evaluation of the outputs, and the direction of the system remained under human control. In that sense, the use of \ac{AI} belongs inside the iterative development process rather than standing apart from it.
 
 \section{Software architecture}
 
-  In Figure~\ref{fig:iter3_architecture} we can see how the system is built and how the different modules interact. Compared with the earlier iterations, the third iteration is no longer organized around one large entry script. The command-line workflow has been moved into its own module, while the main entry point is used to define the default configuration of the generator, such as the weighting of the soft constraints. This makes the architecture easier to understand and easier to adapt for experiments.
-
+  In Figure~\ref{fig:iter3_architecture} we can see how the system is built and how the different modules interact. Compared with the earlier iterations, the third iteration is no longer organized around one large entry script. The command-line workflow has been moved into its own module, while the main entry point is used to define the default configuration of the generator, such as the weighting of the soft constraints. This makes the architecture easier to understand and easier to adapt.
 
   \begin{figure}[htbp] % Architecture
     \centering
-    \resizebox{\textwidth}{!}{%
+    \begin{adjustbox}{max width=\textwidth,max totalheight=0.85\textheight}
     \begin{tikzpicture}[
       >=Latex,
-      font=\small,
+      font=\normalsize,
+      scale=1,
+      transform shape,
       node distance=8mm and 10mm,
       stage/.style={
         draw,
@@ -90,20 +93,32 @@ For the third iteration the use of \ac{AI} was implemented.
       \draw[arrow] (render) -- (audio);
 
     \end{tikzpicture}%
-    }
+    \end{adjustbox}
     \caption{Architecture of the third iteration melody generator. The reusable CLI layer in \texttt{app\_cli.py} handles parsing and workflow concerns, while \texttt{main.py} defines the default constraint configuration. The generator then combines beat-resolved harmony with a soft-constraint stack, and the resulting melody or chorale is exported through LilyPond into notation and audio assets.}\label{fig:iter3_architecture}
   \end{figure}
 
-\section{Implementation}
-\input{Figures/05iterations/iter3_object_model}
+  A useful way to think about the third iteration is that the code is now divided into clearer layers of responsibility. The top layer handles configuration and user interaction through \texttt{main.py} and \texttt{app\_cli.py}. Beneath that is a representation layer, where the requested task is gathered into a \texttt{GenerationSettings} object together with explicit musical structures such as keys, harmony plans, form plans, motifs, and voice profiles. Only after that does the actual generation layer begin, and once the result has been produced it passes into a separate export layer through \texttt{lilypond.py}. This is a much more deliberate organization than in the first two iterations, where several of these concerns were mixed together.
 
+  Another important difference from the second iteration is that the architectural boundary between user input and musical generation is more explicit. In the second iteration the script still moved rather directly from a few fixed values to phrase generation. In the third iteration, the separate user choices are first collected and normalized before any pitch generation begins. That may sound like a technical detail, but it is significant, because it means the generator can work from a stable description of the task rather than from scattered assumptions. The same core generator can therefore be reused with different keys, forms, textures, rhythmic vocabularies, and harmonic plans without rewriting the surrounding workflow.
+
+
+
+  The figure also shows that the side modules are no longer just utility files, but important parts of the architecture. The data model in \texttt{structure.py} defines the musical objects the rest of the system depends on, while \texttt{theory.py} handles pitch spelling, transposition, Roman numeral interpretation, and chord-tone logic. The constraint layer is also much more central than before. Instead of only restricting a few intervals, \texttt{constraints.py} participates directly in candidate evaluation by scoring melodic motion, harmonic fit, cadence behaviour, climax placement, rest handling, and motivic similarity. This means that the architecture is not only more modular, but also more musical, since the modules correspond more closely to distinct musical tasks.
+
+  It is also worth noting that melody generation and chorale generation now belong to the same overall pipeline. The system first produces a melodic result with its formal and harmonic context intact, and only then, when requested, passes that material into \texttt{chorale.py} for four-part realization. That is a cleaner architecture than treating harmonization as a separate script, because both single-line and multi-voice results depend on the same settings object, the same harmonic description, and the same rendering workflow. In practice this makes the final system feel less like a collection of disconnected experiments and more like one program with a shared musical model.
+
+\section{Implementation}
 The most important change in the third iteration is not only that the system got larger, but that the internal representation became detailed enough to support actual musical reasoning. In the first iteration the program mainly handled notes inside a key, and in the second iteration it added motifs, bars, and phrases. In the third iteration, the object model was extended further to include explicit event objects, form sections, harmony spans, and voice profiles. This gives the generator a much clearer description of the musical situation it is working in.
 
-The code excerpt below shows a more representative part of that change. Instead of only storing notes and durations, the third iteration introduces objects that describe vocal range, formal function, and motivic material directly in the data model.
+Figure~\ref{fig:iter3_object_model} summarizes this richer object model. Compared with the second iteration, the system now gathers the task into a dedicated settings object and distinguishes more clearly between the structures used during generation and the resulting melody or chorale output.
 
-\lstinputlisting[language=Python, firstline=48, lastline=114, basicstyle=\ttfamily\footnotesize, breaklines=true, breakatwhitespace=true, columns=fullflexible]{../../code/melody_engine/structure.py}
+\input{Figures/05iterations/iter3_object_model}
 
-This is a more useful view of the third iteration than a very small note object on its own. \texttt{VoiceProfile} gives the generator a way to talk about range and tessitura, \texttt{FormSection} and \texttt{FormPlan} describe larger formal roles such as repetition and cadence, and \texttt{Motif} makes it possible to store and transform a musical cell as an object instead of only reproducing it procedurally. Taken together, these structures show that the third iteration is not just generating more notes, but reasoning about richer musical objects.
+The short code excerpt below shows an important part of that change. Instead of only storing notes and durations, the third iteration introduces objects that describe vocal range, formal function, and motivic material directly in the data model.
+
+\lstinputlisting[language=Python]{code/iter3_structure_excerpt.py}
+
+This is a more useful view of the third iteration than a very small note object on its own. \texttt{VoiceProfile} gives the generator a way to talk about range and tessitura, \texttt{FormSection} describes the role of each part of the phrase, and \texttt{Motif} makes it possible to store a musical cell as an object instead of only reproducing it procedurally. Taken together, these structures show that the third iteration is not just generating more notes, but reasoning about richer musical objects.
 
 Another important improvement is that the generation task is gathered into a single settings object. Rather than relying on hard-coded assumptions spread across one large script, the third iteration collects key, form, harmony, durations, range, and voice information before generation starts, while leaving the default weighting of the musical constraints in the main entry point. This makes the system easier to extend and also makes the constraints easier to apply consistently.
 
@@ -126,9 +141,9 @@ Figure~\ref{fig:iter3_process_rhythm} illustrates this idea using the opening of
 
 The pitch generation itself happens as a repeated local decision process. For each event position, the code looks up the current bar, beat, harmony span, and form role, and then builds a group of candidate notes around the existing melodic context. These candidates are scored by the soft-constraint stack, which considers things such as stepwise motion, leap recovery, harmonic fit, motif similarity, cadence behaviour, and the general melodic shape. Rather than simply walking around the scale, the third iteration repeatedly asks what would make musical sense at this exact point in the phrase.
 
-The next code excerpt shows that process more directly. It is short, but it captures the main difference from the previous iterations: the note choice is made inside an explicit musical context containing beat position, harmony, motif targets, and form role.
+The next code excerpt shows that process more directly. Rather than showing the whole function, it shows the essential step: a context object is assembled for the current note, and the candidate is chosen against that context.
 
-\lstinputlisting[language=Python, firstline=66, lastline=99, basicstyle=\ttfamily\footnotesize, breaklines=true, breakatwhitespace=true, columns=fullflexible]{../../code/melody_engine/generator.py}
+\lstinputlisting[language=Python, breaklines=true, breakatwhitespace=true]{code/iter3_generation_excerpt.py}
 
 The result of that process is shown in Figure~\ref{fig:iter3_process_melody}. Here the same rhythmic outline has been given actual pitches, and the opening four bars now begin to show the musical character of the line. This makes the implementation easier to follow because it shows how the final melody is not generated all at once, but emerges from rhythm, context, and repeated local choices.
 
@@ -209,6 +224,14 @@ Even with these improvements, the results are still heuristic rather than guaran
 \section{Discussion}
 The third iteration is the first version where the musical objects and the generation strategy point in the same direction. In the earlier iterations the generator could produce output, but the internal representation was too weak to carry much musical meaning. Here, the object model is rich enough that concepts such as form, harmony, range, and motif transformation can be represented directly in the code instead of only being implied by the generation procedure.
 
-This is also the first iteration that feels like a reusable foundation rather than only an experiment. Because the settings, structure, theory, and constraint layers are separated more clearly, the system can be extended without rewriting the entire program. That is especially important for future work such as more robust four-part writing, since multi-voice generation requires a representation that can handle range, harmonic function, and voice-leading information at the same time.
+The most important improvement is therefore not only that the output is better, but that the reasons for the output are easier to understand. A melody can now be discussed in terms of its form plan, harmonic context, rhythmic vocabulary, and voice profile, because those things exist explicitly in the system. This makes the successes more meaningful, but it also makes the failures easier to diagnose. If a phrase feels weak, it is now possible to ask whether the problem lies in the form handling, the candidate scoring, the harmonic plan, or the chosen range, rather than only hearing that the result sounds wrong.
 
-The third iteration is still not a complete compositional system. The constraint weights are chosen heuristically, and musical quality still depends on how well those constraints are balanced. However, compared with the first two iterations, the final version is much closer to a tool that can be discussed, refined, and extended in a systematic way rather than only adjusted by trial and error.
+This is also the first iteration that feels like a reusable foundation rather than only an experiment. Because the settings, structure, theory, and constraint layers are separated more clearly, the system can be extended without rewriting the entire program. That is especially important for later work such as more robust four-part writing, since multi-voice generation requires a representation that can handle range, harmonic function, and voice-leading information at the same time.
+
+At the same time, the third iteration still depends heavily on heuristic balancing. The constraint weights are chosen by judgment and testing rather than derived from a formal model, and the quality of the result still depends on how well those weights interact. A setting that works well for one kind of melody may work less well for another, especially when the key, rhythm, or texture changes. The generator is therefore much more controlled than before, but it is not guaranteed to produce a strong result every time.
+
+Another remaining limitation is that the system still makes many of its decisions locally, even though the local choices are informed by a richer context. The generator knows much more about the phrase than in the earlier iterations, but it still does not plan an entire melody in the way a human composer might. Because of this, some results can still contain moments that are individually acceptable but not fully convincing when heard as part of the larger line. The use of several complete attempts helps mitigate this, but it does not remove the problem entirely.
+
+The chorale output should also be understood in that light. It demonstrates that the third iteration has enough harmonic and structural information to support four-part realization, which is a major improvement over the earlier versions. However, the harmonization is still relatively simple compared with a fully developed model of chorale writing. It is useful as a proof that the architecture can support this kind of extension, but there is still room for more detailed control of spacing, doubling, and voice-leading.
+
+Even with these limitations, the third iteration represents a substantial step forward. Compared with the first two iterations, the final version is much closer to a tool that can be discussed, refined, and extended in a systematic way rather than only adjusted by trial and error.

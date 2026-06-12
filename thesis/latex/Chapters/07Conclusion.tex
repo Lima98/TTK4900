@@ -1,18 +1,15 @@
-This project has shown the development of a procedural music generator. The process utilized iterative development as well as \ac{AI} assistance in developing the system. 
-This resulted in a modular system which encapsultes musical ideas in an effictive manner which is easy to understand and modify. 
+This thesis has developed a procedural music generator that turns explicit music-theory principles into a working software system. Over three iterations, the project moved from a small proof-of-concept script to a modular generator that can create melodies and harmonized outputs, render them as notation and audio, and be steered through concrete musical choices. The final iteration is therefore not just a better prototype, but a finished system with a clear musical model and a clear technical structure.
 
-The use of \ac{AI} proved to be a very useful tool to speed up development both in terms of troubleshooting or debugging as well as helping find solutions to the problems you are working on. The issue with \ac{AI} is that is removes the creative element of programming and simply regurgitates from the ocean of information it has access to. This means that it solves the problems in similar ways they have been done before, this hinders true innovation and creating something completely new. 
-
-On the other end we have the problem that \ac{AI} is very good at generating content, meaning that by prompting \ac{AI} to solve a problem for us it generates a lot of code. This means that in addition to formulating the problem in such a way that \ac{AI} can solve it, we also need to go over the code and check that it actually does what we intended it to do, as well as ensuring that it is maintainable and easy to read. In order to do this part effectively we need to understand not only the language we are developing in, but we also need knowledge of the existing code base. For this problem it means that we need to know not only how the language works, but also the language of music theory. If we do not understand this then we would not be able to make any meaningful changes to the code by ourselves, let alone try to prompt engineer without knowing anything about music.
-
-There seems to be a sort of silver lining in the use of \ac{AI} when developing software. Using it to develop entire systems will lead to the developer not understanding how the code works or having to spend a substantial amount of time reading through the \ac{AI}-generated code to figure out how it works. Using \ac{AI} in smaller contexts can yield better results. It is very good at saving time by completing trivial tasks that simply take time, or by debugging small functions that you could have spent minutes or hours tinkering with to solve yourself. This keeps the code your own, but it makes you faster by helping you with the small tasks. \\
-
-\noindent{}
-Overall the system generates passable music, there is no defined way to actually grade music objectively, but at least we know that the output follows a few principles associated with good melodic and harmonic structure.
-
-Key takeaways from the project:
+The thesis shows concretely that:
 \begin{itemize}
-  \item Procedural generation can be used to create music, but it requires a good understanding of the domain and careful design of the system.
-  \item The use of \ac{AI} in software development can be a powerful tool, but it should be used with caution and in a way that complements human creativity and understanding rather than replacing it.
-  \item The generated music is still heuristic and cannot be evaluated objectively in a complete musical sense, but the final iteration produces results that are substantially more structured, singable, and musically coherent than the earlier versions.
+  \item procedural generation can create structured musical material without relying on large training data sets
+  \item explicit representations of motifs, form sections, harmony spans, and voice profiles give meaningful control over the generated music
+  \item a rule-based generator can be guided by key, rhythm, form, texture, and harmony while still remaining transparent to the user
+  \item iterative development was the right way to solve the problem, because each iteration exposed the weaknesses the next one had to address
 \end{itemize}
+
+That is the main contribution of the work. The final system does not merely produce notes that stay inside a key. It produces musical examples with phrase shape, motivic reuse, harmonic direction, range awareness, and controllable output formats. It can be used as a compositional aid, as a rapid prototyping tool for melodic and harmonic ideas, and as a technical foundation for continued work in procedural or mixed-initiative music generation. The thesis therefore contributes both a generator and a practical architectural approach to building theory-aware music software.
+
+The use of \ac{AI} in development also led to a clear conclusion. Codex was useful when it was used as a tool for implementation, refactoring, debugging, and iteration inside an already understood problem space. It accelerated development, but it did not replace musical judgment, software design judgment, or responsibility for the result. That is an important finding, because it places \ac{AI} in a realistic and useful role inside software engineering work.
+
+Within the scope of the thesis, the original problem has been solved. The project set out to design a system capable of generating coherent musical material from explicit musical principles while also examining iterative development and \ac{AI}-assisted software development. The final system achieves that goal. It generates structured musical examples, supports a wide range of controlled inputs, and is strong enough to produce the musical material used throughout the thesis itself. That is a concrete result, and it shows that procedural music generation can be both technically robust and musically convincing when the underlying model is designed with care.
