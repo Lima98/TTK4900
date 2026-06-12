@@ -3,10 +3,11 @@
   \epigraph{
 A major problem in the design of a computer system is that many aspects of system behaviour and performance are not discovered until the system has been built...\cite{zurcherIterativeMultiLevelModeling1968}}{\textit{F.W. Zurcher \\ B. Randell}}
 
-  Iterative development is a way of building a system through repeated cycles of implementation, evaluation, and revision. Instead of trying to design the entire system perfectly from the beginning, a smaller version is built first, then examined to identify weaknesses, missing functionality, or new opportunities. The next version is then developed using the knowledge gained from the previous one.
+  Iterative development is a way of building a system through repeated cycles of implementation, evaluation, and revision. Instead of trying to design the entire system perfectly from the start, a smaller version is built first, then examined to identify weaknesses, missing functionality, or new opportunities. The next version is then developed using the knowledge gained from the previous one.
 
-  This approach is especially useful when the problem is only partly understood at the beginning, or when the behaviour of the system cannot be fully predicted from planning alone. In such cases, implementation itself becomes a way of learning about the problem.
+  This approach is especially useful when the problem is only partly understood at the beginning, when the behaviour of the system cannot be fully predicted from planning alone or if the developer needs more experience to know how to properly structure the program to solve the problem. In such cases, implementation itself becomes a way of learning about the problem.
 
+  Figure~\ref{fig:iterative_cycle} shows the circular nature of the iterative process. We start with an idea or specification, then we protytype and implement the idea. After implementation we evaluate the result, we extract learning points and issues with the current solution. Finally we revise the modes and requirements before coming up with new ideas and creating new specifications. This loop continues until we are satisfied with the result.
   \input{Figures/04theory/iterative_cycle}
 
 \subsection{Prototype and evaluation}
@@ -29,6 +30,6 @@ A major problem in the design of a computer system is that many aspects of syste
 
 \subsection{Relevance to the thesis}
 
-  Iterative development is relevant to this thesis because the project concerns a creative and technically uncertain problem. A melody generator is not only a software system, but also a musical one, meaning that its quality cannot be judged solely by whether it runs correctly. It must also be evaluated according to how coherent, singable, and useful the generated musical output is.
+  Iterative development is relevant to this thesis because the project concerns a creative and technically uncertain problem. A melody generator is not only a software system, but also a musical one, meaning that its quality cannot be judged solely by whether it runs correctly. It must also be evaluated according to how coherent, singable, and musical the generated musical output is.
 
-  Because of this, a purely top-down design would have been difficult. Many of the important requirements become visible only after hearing and inspecting generated examples. An iterative process is therefore a suitable background method for the project: it supports prototyping, evaluation of musical output, and revision of both the code structure and the musical rules between versions.
+  Because of this, a purely top-down design would have been difficult. Many of the important requirements become visible only after hearing and inspecting generated examples.

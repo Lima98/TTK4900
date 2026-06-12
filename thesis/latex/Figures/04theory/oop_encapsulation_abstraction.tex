@@ -1,0 +1,54 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{0.95\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=20mm and 14mm,
+    outerbox/.style={
+      draw,
+      rounded corners=3pt,
+      minimum width=78mm,
+      minimum height=50mm,
+      fill=gray!6
+    },
+    innerbox/.style={
+      draw,
+      rounded corners=3pt,
+      minimum width=60mm,
+      align=left
+    },
+    caller/.style={
+      draw,
+      rounded corners=3pt,
+      minimum width=30mm,
+      align=center,
+      fill=blue!6
+    },
+    arrow/.style={-{Latex[length=2.3mm]}, thick}
+  ]
+    \node[caller] (user) {Other code};
+
+    \node[outerbox, right=24mm of user] (melody) {};
+    \node[anchor=north] at (melody.north) {\textbf{Melody object}};
+
+    \node[innerbox, fill=green!8, anchor=north] (public) at ([yshift=-6mm]melody.north) {
+      \textbf{Public operations}\\
+      \quad add\_event()\\
+      \quad transpose()\\
+      \quad to\_lilypond()
+    };
+
+    \node[innerbox, fill=yellow!10, anchor=south] (internal) at ([yshift=2mm]melody.south) {
+      \textbf{Internal details}\\
+      \quad events\\
+      \quad cached length\\
+      \quad harmony references
+    };
+
+    \draw[arrow] (user) -- node[above] {uses} (public.west);
+  \end{tikzpicture}%
+  }
+  \caption{Illustration of encapsulation and abstraction. Encapsulation groups related data and behaviour inside one object, while abstraction lets other code use a small public interface without needing direct access to the internal representation.}
+  \label{fig:oop_encapsulation_abstraction}
+\end{figure}

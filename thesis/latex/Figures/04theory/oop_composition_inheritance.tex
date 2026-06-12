@@ -1,0 +1,38 @@
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{%
+  \begin{tikzpicture}[
+    >=Latex,
+    font=\small,
+    node distance=10mm and 16mm,
+    box/.style={
+      draw,
+      rounded corners=3pt,
+      align=center,
+      minimum width=30mm,
+      minimum height=9mm
+    },
+    comp/.style={box, fill=blue!6},
+    inh/.style={box, fill=green!8},
+    arrow/.style={-{Latex[length=2.3mm]}, thick}
+  ]
+    % \node[anchor=west] at (-6.2,2.2) {\textbf{Composition}};
+    \node[comp] (phrase) at (-3.8,1.0) {Phrase};
+    \node[comp] (motif) at (-3.8,-0.4) {Motif};
+    \node[comp] (note) at (-3.8,-1.8) {NoteEvent};
+
+    \draw[arrow] (phrase) -- node[right] {contains} (motif);
+    \draw[arrow] (motif) -- node[right] {contains} (note);
+
+    % \node[anchor=west] at (1.0,2.2) {\textbf{Inheritance}};
+    \node[inh] (base) at (4.2,1.0) {MusicalObject};
+    \node[inh] (melody) at (2.5,-0.7) {Melody};
+    \node[inh] (chord) at (5.9,-0.7) {ChordProgression};
+
+    \draw[arrow] (melody) -- (base);
+    \draw[arrow] (chord) -- (base);
+  \end{tikzpicture}%
+  }
+  \caption{Comparison of two common relationships in object-oriented design. Composition models part-whole structures such as phrases, motifs, and note events, while inheritance models an is-a relationship where several classes share behaviour from a more general parent class.}
+  \label{fig:oop_composition_inheritance}
+\end{figure}
