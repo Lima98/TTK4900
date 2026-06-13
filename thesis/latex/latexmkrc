@@ -1,0 +1,11 @@
+use strict;
+use warnings;
+
+my $render_readme_script = '../render_github_readme_pdf.py';
+
+if ( -e $render_readme_script ) {
+    my $status = system( 'python3', $render_readme_script );
+    if ( $status != 0 ) {
+        die "Failed to render GitHub README PDF via $render_readme_script\n";
+    }
+}

@@ -10,6 +10,8 @@ From `thesis/latex/`:
 latexmk -pdf main.tex
 ```
 
+The build regenerates the appendix PDF snapshot of the repository `README.md` automatically through `thesis/latex/latexmkrc`, so the appendix stays in sync with the real project README.
+
 If the build state gets messy, remove stale generated files and rebuild in the usual LaTeX order.
 
 ## Render thesis example files

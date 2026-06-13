@@ -43,7 +43,6 @@ The system is built around an object-oriented music model and a weighted soft-co
 - `docs/` – user-facing program documentation
 - `thesis/` – thesis source, figures, and example material
 - `webpage/` – archive-page builder for generated thesis examples
-- `research/` – notes and source material used during the project
 
 ## Basic usage
 

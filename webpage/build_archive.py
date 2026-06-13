@@ -328,7 +328,7 @@ def render_page(examples: list[Example]) -> str:
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <title>Procedural Generation: Music - Thesis Example Archive</title>
+    <title>Procedural Music Generator: Example Archive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
 {STYLE}
@@ -348,9 +348,7 @@ def render_page(examples: list[Example]) -> str:
         <aside class="hero-note">
           <h2>Archive Overview</h2>
           <ul>
-            <li>Example numbers match the numbering used in the thesis.</li>
-            <li>Each card contains a score preview, a short description, and audio playback when available.</li>
-            <li>Examples are grouped by the same sections used in the written thesis.</li>
+            <p>This archive contains all the musical examples from the thesis and the appendix. All numberings of examples are consistent with the thesis to make navigation easier. </p>
           </ul>
         </aside>
       </div>

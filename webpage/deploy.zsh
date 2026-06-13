@@ -21,6 +21,7 @@ echo "Done!\n"
 
 echo "Building thesis PDF and LaTeX references...\n"
 cd ../thesis/latex/
+rm -f main.aux main.bcf main.bbl main.blg main.fdb_latexmk main.fls main.lof main.loe main.log main.out main.run.xml main.toc
 latexmk -pdf -interaction=nonstopmode main.tex
 cd ../../webpage/
 echo "Done!\n"

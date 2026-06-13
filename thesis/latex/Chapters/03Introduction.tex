@@ -32,21 +32,27 @@ If we are able to solve this problem of creating a good structure and model for 
 
 % ////////// PROBLEM DESCRIPTION
 \section{Problem description}
-The problem we want to solve is the problem of creating a coherent system that will be able to generate music that adheres to certain musical principles.
-In order to do this we need to consider many things, and system design is a big part of this.
-When building such a program we need to consider what parts it should consist of as well as how they are supposed to interact. \ac{OOP} is a solid way to approach this system design.
-Additionally I will explore how the use of \ac{AI} in software development can aid in solving problems and speeding up the process.
-\\
+This thesis addresses two connected problems. The first is how to build a procedural music generator that can create short tonal musical examples from explicit music-theory principles rather than from a training data set. This is not only a matter of generating notes that belong to a key. The system must also represent things such as motif, phrase structure, range, rhythm, cadence, and harmonic context well enough that the result becomes coherent and musically discussable.
+
+The second problem is how such a system should be developed in practice. A generator of this kind is both a musical and a software-architectural problem: the output has to improve, but the code also has to be structured in a way that makes further improvement possible. For that reason the thesis follows the development across three iterations and also examines the introduction of \ac{AI} in the final iteration, not as a musical model, but as a software-development tool that can support implementation, refactoring, and iteration.
+
+Within that frame, the thesis aims to solve a concrete task: to design and implement a rule-based generator that can produce melodies and simple harmonized outputs, render them as notation and audio, and allow the user to guide the result through musical choices such as key, rhythm, form, texture, and harmony.
+
 The main goals of the project are as follows:
 \begin{itemize}
-  \item Develop a procedural music generator based on music theory principles
-  \item Use iterative development to refine both the software design and the musical output
-  \item Investigate how \ac{AI} can be used as a software development tool
+  \item develop a procedural music generator based on explicit music-theory principles
+\item investigate procedural generation methods in order to choose a u
+  \item refine the system through iterative development 
+  \item investigate how \ac{AI} can be used as a software-development tool
 \end{itemize}
 
 % ////////// PROBLEM SOLUTION
-\section{Problem solution}
-The ideal solution to this problem would be a system that not only is able to solve this problem of creating music that is self similar and coherent, but is constructed in such a way that the solution can easily be generalized in order to solve other problems. The problem of generating something coherent is not special to only music, but has applications for many other domains, especially creative ones or where there are a large number of usable solutions. For instance ways to connect cities by roads.  \\
+\section{Approach and scope}
+The work was approached as an iterative design and implementation project. Instead of trying to specify the final system in full from the start, I built three increasingly capable versions of the generator. The first iteration tested the basic generation and rendering workflow. The second focused on improving the internal musical representation through motifs, bars, and phrases. The third turned those earlier lessons into a more complete system with form handling, harmonic planning, soft constraints, explicit musical objects, and optional chorale-style output.
+
+This approach rests on a few clear assumptions. The thesis focuses on small-scale tonal material where the musical reasoning can be inspected directly. It assumes that useful results can be produced from explicit rules and musical objects without relying on large training corpora, and that iterative development is a suitable way to improve both the architecture and the music. The aim is therefore not to model all of composition, but to build a transparent generator that can create controlled and musically meaningful examples.
+
+The use of \ac{AI} is also limited deliberately. It is introduced only after the earlier iterations have made the central musical and technical problems clear. This makes it possible to evaluate \ac{AI} as a development aid inside an already understood problem space, rather than letting it define the musical direction of the project. Evaluation throughout the thesis is based on both sides of the work: how the code structure develops, and how the generated musical results improve from one iteration to the next.
 
 % /////// Thesis structure
 \section{Thesis structure}
@@ -54,4 +60,11 @@ The thesis is structured as follows. Firstly there is some background to give so
 
 % ///////// Examples remarks
 \section{Note on examples and figures}
-Throughout the thesis you can find both figure and examples. Examples are a special kind of figure which can be listened to in the example archive. All examples contain a link to the given example in the archive. Some figures also contain musical notation, but these are not meant to be listened to, but rather just to illustrate a point about the structure of the music.
+Throughout the thesis there is a distinction between figures and examples. Examples are a special kind of figure containing musical material that is intended to be heard as well as seen, and each example contains a link to the corresponding entry in the online archive. Some ordinary figures also contain musical notation, but in those cases the notation is included only to illustrate a concept rather than to serve as a listening example.
+
+\section{The example archive}
+Because this thesis deals with music, notation on the page is only part of the result. The examples also need to be heard. For that reason, an online archive was created for the numbered musical examples in the thesis. The archive presents each example together with its score preview and audio, making it easier to move between the written discussion and the sounding result.
+
+The archive is not part of the generator itself, but it solves an important presentation problem in the thesis. Without it, the reader would have to search through separate files to hear the results. A short description of how the archive page is built is given in Appendix~B, while its practical role in the thesis is simply to make the examples easy to inspect and listen to through the links placed directly in their captions.
+
+A significant amount of time was spent creating this webpage. Even though it is not part of the actual problem, it was a meta-problem that needes solving in order to properly present the thesis in a professional manner. I deem this a good use of the time since it enhanced the end result of the thesis presentation.

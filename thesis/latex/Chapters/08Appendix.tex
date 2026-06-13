@@ -1,13 +1,14 @@
 \chapter*{A - Github repository}\label{chap:github}
 \addcontentsline{toc}{chapter}{\protect\numberline{}A - Github repository} 
 
-All code and latex-files used in this document are included in the Github repository linked below. Further explanations are given in the readme-file. 
-
+All code and latex-files used in this document are included in the Github repository linked below. The \textbf{README.md} is included in the following pages and explains the contents and structure of the repository.
 
 \subsection*{Github repository link}
 \begin{itemize}
     \item \url{https://github.com/lima98/TTK4900} - Github repository
 \end{itemize}
+
+\includepdf[pages=-,pagecommand={\thispagestyle{readmeappendix}}]{generated/github_readme.generated.pdf}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -22,13 +23,49 @@ All code and latex-files used in this document are included in the Github reposi
 \renewcommand{\thetable}{B.\arabic{table}}
 \setcounter{table}{0}
 
-Audio-files for all the examples in the thesis can be found on the project \textit{github.io} page. Additionally we have a complete documentation of the final code available from the same page.
+Audio-files for all the examples in the thesis can be found on the project \textit{github.io} page. Additionally we have a complete documentation of the final code available from the same page. Below you can see a description of how the archive is built. You can also see the scripts that build the webpage in the \textit{webpage/} directory in the repo shown in Appendix~A.
 
 \subsection*{Audio example archive}
 \begin{itemize}
     \item \url{https://lima98.github.io/TTK4900} - Audio example archive
 \end{itemize}
 
+\subsection*{How the archive page is built}
+The archive page is generated automatically from the thesis source rather than maintained by hand. The builder script reads the \texttt{example} environments from the LaTeX chapter files, uses the auxiliary metadata from the thesis build to recover the resolved example numbers and printed page numbers, and then matches each example with its rendered score PDF and WAV file. The resulting HTML page therefore mirrors the examples that actually appear in the thesis and keeps the same numbering as the document itself.
+
+This approach avoids maintaining a separate manually curated example list. When an example is added, removed, or renumbered in the thesis, the archive can be rebuilt from the same source material. The page groups the examples by thesis section and presents each one as a card with score preview, caption, audio playback, and a direct link back to the corresponding location in the PDF.
+
+Figures~\ref{fig:archive-preview-top}--\ref{fig:archive-preview-iter3} show rendered excerpts from the online archive page. Together they illustrate the landing section, the navigation sidebar, and the example cards for the main thesis sections up through the third iteration. The appendix-example section of the webpage is omitted here to keep the preview compact.
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.95\textwidth]{Figures/appendix/archive_preview_top.png}
+  \caption{Top portion of the online example archive, showing the landing section, the sidebar navigation, and the beginning of the music-theory example section.}
+  \label{fig:archive-preview-top}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.95\textwidth]{Figures/appendix/archive_preview_first.png}
+  \caption{Rendered view of the first-iteration example section in the online archive.}
+  \label{fig:archive-preview-first}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.95\textwidth]{Figures/appendix/archive_preview_second.png}
+  \caption{Rendered view of the second-iteration example section in the online archive.}
+  \label{fig:archive-preview-second}
+\end{figure}
+
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.95\textwidth]{Figures/appendix/archive_preview_iter3.png}
+  \caption{Rendered view of the third-iteration example section in the online archive.}
+  \label{fig:archive-preview-iter3}
+\end{figure}
+
+\clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

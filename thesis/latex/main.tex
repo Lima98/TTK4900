@@ -13,6 +13,7 @@
 \usepackage[bf]{caption} %makes float captions bold
 \usepackage{array, booktabs} %to make better tables
 \usepackage{graphicx} %to include graphics
+\usepackage{pdfpages} %to include generated pdf pages such as the repository readme appendix
 \usepackage{float} %to include floats
 \usepackage[export]{adjustbox} %to adjust floats
 \usepackage{subfig} %to include subfigures
@@ -38,7 +39,9 @@
     } %sets new page command to insert an empty page without adding to the page counter or having a page number
 
 
-% MY OWN COMMANDS AND PACKAGES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MY OWN COMMANDS AND PACKAGES %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\hfuzz}{100pt}
 \makeatletter
 \newcommand{\master@linktext}{Listen in the online archive}
@@ -49,6 +52,12 @@
   \xdef\master@currentlink{\noexpand\href{https://lima98.github.io/TTK4900/\#example-\master@anchorexample}{#1}}%
   \endgroup
   \master@currentlink
+}
+\fancypagestyle{readmeappendix}{%
+  \fancyhf{}%
+  \fancyhead[C]{\footnotesize Included from \texttt{README.md} (page \AM@page/\AM@pagecount)}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
 }
 \makeatother
 \usepackage{tikz}
@@ -91,6 +100,9 @@
 
 % \usepackage{refcheck} % Enable this to ensure all imporant things have references.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
@@ -102,35 +114,36 @@
 %the title page should be an odd page (right hand side)
 
 \begin{titlepage}
-\hbadness=10000 % to avoide warnings about underfull hbox in the title page.
-\newgeometry{left=1.6in, right=2in}
-\vspace*{1.5cm}
+  \hbadness=10000 % to avoide warnings about underfull hbox in the title page.
+  \newgeometry{left=1.6in, right=2in}
+  \vspace*{1.5cm}
 
-\noindent  \textcolor{gray}{\large Jan-Øivind Lima} \\
-\vspace{1cm}
+  \noindent  \textcolor{gray}{\large Jan-Øivind Lima} \\
+  \vspace{1cm}
 
-\noindent \textbf{\Large Iterative Development of a Constraint-Based Procedural Music Generator} \\
-\vspace{0.5cm}
+  \noindent \textbf{\Large Iterative Development of a Constraint-Based Procedural Music Generator} \\
+  \vspace{0.5cm}
 
-\noindent {From simple melodic rules to form- and harmonically-aware generation} \\
+  \noindent {From simple melodic rules to form- and harmonically-aware generation} \\
 
 
 
-% \vspace{7cm}
-\vfill
-\noindent Master's thesis in Cybernetics and Robotics\\
-Supervisor: Sverre Hendseth\\
-June 2026 \\
+  % \vspace{7cm}
+  \vfill
+  \noindent Master's thesis in Cybernetics and Robotics\\
+  Supervisor: Sverre Hendseth\\
+  June 2026 \\
 
-\vspace{0.2cm}
-\noindent Norwegian University of Science and Technology \\
-Faculty of Information Technology and Electrical Engineering\\
-Department of Engineering Cybernetics\\
+  \vspace{0.2cm}
+  \noindent Norwegian University of Science and Technology \\
+  Faculty of Information Technology and Electrical Engineering\\
+  Department of Engineering Cybernetics\\
 
-\begin{figure}[h]
-    \includegraphics[width=0.28\textwidth]{Figures/ntnu_basic.png}
-\end{figure}
+  \begin{figure}[h]
+      \includegraphics[width=0.28\textwidth]{Figures/ntnu_basic.png}
+  \end{figure}
 \end{titlepage}
+
 \restoregeometry
 \myemptypage %empty page such that the abstract starts at the first right hand side after the title page
 %\end{comment}

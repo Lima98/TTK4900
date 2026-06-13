@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Archive Preview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+      :root {
+        --bg: #f3efe7;
+        --paper: #fffdf8;
+        --ink: #1f1a17;
+        --muted: #6d625a;
+        --line: #d7c8b8;
+        --accent: #8a4b2a;
+        --accent-soft: #ead6c6;
+        --shadow: 0 18px 40px rgba(64, 42, 27, 0.09);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(138, 75, 42, 0.08), transparent 30%),
+          linear-gradient(180deg, #f7f2ea 0%, var(--bg) 40%, #efe7da 100%);
+        line-height: 1.6;
+      }
+
+      a { color: inherit; }
+
+      .hero { padding: 4rem 1.5rem 2.5rem; }
+
+      .hero-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: 1.4fr 0.9fr;
+        align-items: start;
+      }
+
+      .hero-copy h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 5vw, 4.6rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .hero-copy p {
+        max-width: 60ch;
+        margin: 1.2rem 0 0;
+        font-size: 1.05rem;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .hero-actions a {
+        text-decoration: none;
+        padding: 0.8rem 1.1rem;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        border: 1px solid var(--line);
+        background: rgba(255, 253, 248, 0.85);
+      }
+
+      .hero-actions a.primary {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+
+      .hero-note {
+        background: rgba(255, 253, 248, 0.78);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 1.4rem;
+        box-shadow: var(--shadow);
+      }
+
+      .hero-note h2 {
+        margin-top: 0;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-note ul {
+        margin: 0.8rem 0 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+
+      .layout {
+        max-width: 1200px;
+        margin: 0 auto 4rem;
+        padding: 0 1.5rem;
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: 2rem;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 1rem;
+        align-self: start;
+        background: rgba(255, 253, 248, 0.8);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 1rem;
+        box-shadow: var(--shadow);
+      }
+
+      .sidebar h2 {
+        margin: 0 0 0.8rem;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .sidebar a {
+        display: block;
+        text-decoration: none;
+        padding: 0.7rem 0.8rem;
+        border-radius: 14px;
+        color: var(--muted);
+      }
+
+      .sidebar a:hover,
+      .sidebar a:focus {
+        background: var(--accent-soft);
+        color: var(--ink);
+      }
+
+      .content { min-width: 0; }
+
+      .chapter { margin-bottom: 3rem; }
+
+      .chapter-header { margin-bottom: 1rem; }
+
+      .chapter-header span {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        padding: 0.35rem 0.7rem;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .chapter-header h2 {
+        margin: 0;
+        font-size: clamp(1.6rem, 2vw, 2.3rem);
+      }
+
+      .chapter-header p {
+        margin: 0.7rem 0 0;
+        color: var(--muted);
+        max-width: 72ch;
+      }
+
+      .example-grid {
+        display: grid;
+        gap: 1.2rem;
+      }
+
+      .example-card {
+        display: grid;
+        gap: 1rem;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 1.2rem;
+        box-shadow: var(--shadow);
+      }
+
+      .example-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .example-heading {
+        min-width: 0;
+        display: grid;
+        gap: 0.55rem;
+      }
+
+      .example-heading h3 {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--muted);
+        font-weight: normal;
+      }
+
+      .example-number {
+        margin: 0;
+        font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+
+      .meta span {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        background: #f5ece2;
+        color: #5c4335;
+      }
+
+      .example-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+      }
+
+      .example-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        min-width: 148px;
+        padding: 0.65rem 1rem;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: white;
+        font-size: 0.92rem;
+        white-space: nowrap;
+      }
+
+      .example-media {
+        width: 100%;
+        aspect-ratio: var(--score-ratio);
+        min-height: 140px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: #fbf8f2;
+        overflow: hidden;
+      }
+
+      .score-frame {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .score-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .score-pdf {
+        display: block;
+        width: 112%;
+        height: 112%;
+        margin-left: -6%;
+        margin-top: -3%;
+        border: 0;
+        background: white;
+      }
+
+      .example-body {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 320px;
+        gap: 1rem;
+        align-items: start;
+      }
+
+      .example-body p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      audio { width: 100%; }
+
+      .audio-missing {
+        padding: 0.75rem 0.9rem;
+        border: 1px dashed var(--line);
+        border-radius: 14px;
+        background: #fbf8f2;
+      }
+
+      footer {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem 3rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 980px) {
+        .hero-inner,
+        .layout,
+        .example-body {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar { position: static; }
+
+        .example-top { flex-direction: column; }
+      }
+    
+
+      img.score-pdf {
+        object-fit: cover;
+        object-position: top left;
+      }
+    </style>
+  </head>
+  <body id="top">
+    
+    <div class="layout" style="margin-top: 2rem;">
+      <nav class="sidebar" aria-label="Page sections">
+        <h2>Navigate</h2>
+        <a href="#chapter-2-2">Section 2.2 - Music Theory Examples</a>
+        <a href="#chapter-3-4">Section 3.4 - First Iteration Examples</a>
+        <a href="#chapter-4-3">Section 4.3 - Second Iteration Examples</a>
+        <a href="#chapter-5-4">Section 5.4 - Third Iteration Examples</a>
+        <a href="#chapter-C">Appendix C - Third Iteration Appendix Examples</a>
+        <a href="#top">Back to top</a>
+      </nav>
+      <main class="content">
+        <section class="chapter" id="chapter-5-4">
+          <div class="chapter-header">
+            <span>Section 5.4</span>
+            <h2>Third Iteration Examples</h2>
+            <p>Examples from the third melody-generation iteration.</p>
+          </div>
+
+          <div class="example-grid">
+            <article class="example-card" id="example-5-4-1">
+              <div class="example-top">
+                <div class="example-heading">
+                  <p class="example-number">5.4.1</p>
+                  <div class="meta">
+                    <span>Iteration 3</span>
+                    <span>Melody</span>
+                    <span>Form</span>
+                  </div>
+                </div>
+                <div class="example-links">
+                  <a href="thesis/main.pdf#page=67" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
+                </div>
+              </div>
+              <div class="example-media" style="--score-ratio: 6.5000;">
+                <div class="score-frame">
+                  <a class="score-link" href="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_melody_1.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 5.4.1 score PDF">
+                    <img class="score-pdf" src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_melody_1.cropped.png" alt="Score preview">
+                  </a>
+                </div>
+              </div>
+              <div class="example-body">
+                <p>A melody generated by the third iteration in C major using seed 2000.</p>
+                <audio controls>
+                  <source src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_melody_1.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-5-4-2">
+              <div class="example-top">
+                <div class="example-heading">
+                  <p class="example-number">5.4.2</p>
+                  <div class="meta">
+                    <span>Iteration 3</span>
+                    <span>Melody</span>
+                    <span>Form</span>
+                  </div>
+                </div>
+                <div class="example-links">
+                  <a href="thesis/main.pdf#page=68" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
+                </div>
+              </div>
+              <div class="example-media" style="--score-ratio: 6.5000;">
+                <div class="score-frame">
+                  <a class="score-link" href="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_period_16_d.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 5.4.2 score PDF">
+                    <img class="score-pdf" src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_period_16_d.cropped.png" alt="Score preview">
+                  </a>
+                </div>
+              </div>
+              <div class="example-body">
+                <p>A 16-bar period-form melody generated by the third iteration in D major.</p>
+                <audio controls>
+                  <source src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_period_16_d.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-5-4-3">
+              <div class="example-top">
+                <div class="example-heading">
+                  <p class="example-number">5.4.3</p>
+                  <div class="meta">
+                    <span>Iteration 3</span>
+                    <span>Melody</span>
+                    <span>Form</span>
+                  </div>
+                </div>
+                <div class="example-links">
+                  <a href="thesis/main.pdf#page=68" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
+                </div>
+              </div>
+              <div class="example-media" style="--score-ratio: 6.5000;">
+                <div class="score-frame">
+                  <a class="score-link" href="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_rhythm_mixed_a.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 5.4.3 score PDF">
+                    <img class="score-pdf" src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_rhythm_mixed_a.cropped.png" alt="Score preview">
+                  </a>
+                </div>
+              </div>
+              <div class="example-body">
+                <p>A melody in A major generated with restricted rhythm values.</p>
+                <audio controls>
+                  <source src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_rhythm_mixed_a.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-5-4-4">
+              <div class="example-top">
+                <div class="example-heading">
+                  <p class="example-number">5.4.4</p>
+                  <div class="meta">
+                    <span>Iteration 3</span>
+                    <span>Chorale</span>
+                    <span>SATB</span>
+                  </div>
+                </div>
+                <div class="example-links">
+                  <a href="thesis/main.pdf#page=68" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
+                </div>
+              </div>
+              <div class="example-media" style="--score-ratio: 4.8932;">
+                <div class="score-frame">
+                  <a class="score-link" href="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_chorale_ttbb_g_minor.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 5.4.4 score PDF">
+                    <img class="score-pdf" src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_chorale_ttbb_g_minor.cropped.png" alt="Score preview">
+                  </a>
+                </div>
+              </div>
+              <div class="example-body">
+                <p>A TTBB-style harmonized example generated by the third iteration in G minor.</p>
+                <audio controls>
+                  <source src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_chorale_ttbb_g_minor.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+
+            <article class="example-card" id="example-5-4-5">
+              <div class="example-top">
+                <div class="example-heading">
+                  <p class="example-number">5.4.5</p>
+                  <div class="meta">
+                    <span>Iteration 3</span>
+                    <span>Chorale</span>
+                    <span>SATB</span>
+                  </div>
+                </div>
+                <div class="example-links">
+                  <a href="thesis/main.pdf#page=69" target="_blank" rel="noopener noreferrer">Find In Thesis</a>
+                </div>
+              </div>
+              <div class="example-media" style="--score-ratio: 2.6634;">
+                <div class="score-frame">
+                  <a class="score-link" href="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_long_explicit_chorale_bb.cropped.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Example 5.4.5 score PDF">
+                    <img class="score-pdf" src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_long_explicit_chorale_bb.cropped.png" alt="Score preview">
+                  </a>
+                </div>
+              </div>
+              <div class="example-body">
+                <p>A 16-bar explicit-harmony chorale generated by the third iteration in B$flatat $ major with modal mixture.</p>
+                <audio controls>
+                  <source src="file:///Users/jan-oivindlima/Documents/arbeid/skole/10.%20semester/TTK4900%20-%20Masteroppgave/thesis/latex/examples/iter3/iter3_long_explicit_chorale_bb.wav" type="audio/wav">
+                </audio>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
