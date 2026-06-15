@@ -1,3 +1,18 @@
+## 0.17.0 (2026-06-15)
+
+### BREAKING CHANGE
+
+- Finalized project
+
+### Feat
+
+- **thesis-and-scripts**: final document before proofreading, next commit will hopefully be final version
+- **thesis**: updated sections in thesis, still WIP
+- **thesis**: added more examples in the appendix and updated some figures and sections int the thesis
+- **thesis**: abstract and sammendrag updated to hopefully final form
+- **thesis**: lots of small updates throughout the thesis
+- **thesis**: updated music theory section and added appendix with more musical examples
+
 ## 0.16.0 (2026-06-10)
 
 ### Feat
