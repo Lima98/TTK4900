@@ -1,12 +1,12 @@
 The development of this program started by getting a proof of concept up and running without much regard for whether the system was well constructed. This was done to not get stuck in the planning phase and to get some code working as soon as possible. The idea was to try and identify a good workflow and how the musical structures could be implemented.
 
 
-The goal of the first iteration was to get a "proof of concept" working. I wanted to test out how I could generate notes and visualize them as well as listen to audio of the notes generated. For this I used \textit{python} to generate \textit{lilypond}\footnote{lilypond is a text based musical typesetting language\cite{LilyPondMusicNotation}} files. From these files I was able to generate PDFs of sheet music as well as \textit{wave-files} to listen to how it sounds without having to play or sing it myself.
+I wanted to test out how I could generate notes and visualize them as well as listen to audio of the notes generated. For this I used \textit{python} to generate \textit{lilypond}\footnote{lilypond is a text based musical typesetting language\cite{LilyPondMusicNotation}} files. From these files I was able to generate PDFs of sheet music as well as \textit{wave-files} to listen to how it sounds without having to play or sing it myself.
 
-After the first iteration lots of issues were observed and were put into the specifications for the second iteration which improved upon the model in various ways. Some important missing features were restricting the range so that an actual instrument can play it, be that an instrument or the human voice, and properly implementing the scale degrees.
+After the first iteration, lots of issues were observed and were put into the specifications for the second iteration which improved upon the model in various ways. Some important missing features were restricting the range so that an actual instrument can play it and the melody followed no structure.
 
 \section{Software architecture}
-  This initial software architecture can barely be called architecture. The first iteration works more like a script that generates a simple rhythm with the melody moving randomly in small intervals, 2nds and 3rds.
+  This initial software architecture can barely be called architecture. The first iteration works more like a script that generates a simple rhythm with the melody moving randomly in small intervals, 2nds and 3rds, analogous to a random walk only in one dimension.
   The system has musical representation of keys and spelling notes correctly regarding the key, but no phrasing or harmonic restrictions are implemented.
 
   Figure~\ref{fig:iter1_architecture} shows the structure of the first iteration. The pipeline is small and direct: the configuration is hard-coded in the main script, rhythm and pitch are generated independently for each voice, and the result is exported directly to LilyPond without a richer planning or constraint layer.

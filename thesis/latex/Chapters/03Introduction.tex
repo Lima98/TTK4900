@@ -7,64 +7,64 @@ This is a very basic way of generating music, however by the random nature of th
 
 If we want to generate everything from scratch we need a way more sophisticated system. 
 This is where procedural generation comes into the picture.
-If we base the melody on something random and then use the conventions and "rules" for melodic composition we might be able to generate music that sounds somewhat coherent.
+If we base the melody on something random and then use the conventions and "rules" for melodic composition we might be able to generate music that sounds more coherent.
 \\
 
-Getting external help has not only been used by composers, but also by programmers. In recent years the use of \ac{AI} in software development has become more and more widespread. As an experiment in this thesis I will compare "old-school" development and \ac{AI}. I will start with normal development without using \ac{AI}. Then after I have built up some knowledge of the domain and system I will try to improve upon it using \ac{AI} tools and evaluate both the output of the code and the code itself. 
+Getting external help has not only been used by composers, but also by programmers. In recent years the use of \ac{AI} in software development has become more and more widespread. As an experiment in this thesis I will compare "old-school" development and \ac{AI}-assisted development. I will start with normal development without using \ac{AI}. Then after I have built up some knowledge of the domain and system I will try to improve upon it using \ac{AI} tools and evaluate both the output of the code and the code itself. 
 \\
 
 % ////////// CONTEXT and MOTIVATION
 \section{Context and motivation}
-\ac{PCG} is today widespread and used in many different applications. Generating content for video games is a common example of \ac{PCG} being used in an artistic process. However the use of content using \ac{PG} is not straightforward, there is a big difference between hand crafting content and automatically generated content. \ac{PCG} enables us to create more content faster, however it will be at the expense of the quality unless we have a highly sophisticated generator \cite{freiknechtSurveyProceduralGeneration2017}. However the use of \ac{PG} is not only for artistic purposes, it can have many other uses, a few examples are city planning and simulating vascular trees for medicinal purposes.
-The program \textit{ArcGIS CityEngine} is an example of \ac{PG} being used for assisting city planners in creating sketches, ideas or finished plans for cities \cite{ProceduralCityGenerator}. And \textit{VascuSynth} is used to generate volumetric image data used for vascular health analysis \cite{hamarnehVascuSynthSimulatingVascular2010}. \\
+\ac{PCG} is today widespread and used in many different applications. Generating content for video games is a common example of \ac{PCG} being used in an creative process. However the generation of content using \ac{PG} is not straightforward, there is a big difference between hand crafting content and automatically generated content. \ac{PCG} enables us to create more content faster, though it will be at the expense of the quality unless we have a highly sophisticated generator \cite{freiknechtSurveyProceduralGeneration2017}. However the use of \ac{PG} is not only for creative and artistic purposes, it can have many other uses, a few examples are city planning and simulating vascular trees for medical purposes.
+The program \textit{ArcGIS CityEngine} is an example of \ac{PG} being used for assisting city planners in creating sketches, ideas or finished plans for cities \cite{ProceduralCityGenerator}. \textit{VascuSynth} is used to generate volumetric image data used for vascular health analysis \cite{hamarnehVascuSynthSimulatingVascular2010}. \\
 
 Today a very common way to go about generating music is using \ac{AI} and \ac{LLM}, but what goes on inside these large models is not easy to understand and tweaking them for a specific use case is not trivial.
 Several state of the art music generation models are using these kinds of models to generate the music \cite{180904281MusicTransformer, hawthorneEnablingFactorizedPiano2019, ooreThisTimeFeeling2020, dhariwalJukeboxGenerativeModel2020, baiSeedMusicUnifiedFramework2024, ferreiraLearningGenerateMusic2021}
-Using such models enables anyone to create music, however these models are trained on large data sets and imitates what has come before not generating something truly new.
-For this thesis the focus is on the craft of creating music, breaking it down to its very primitive form, only pitches and durations.
+Using such models enables anyone to create music, however these models are trained on large data sets and imitates what has come before not generating something truly new since it imitates the training data.
+For this thesis the focus is on the craft of creating music, breaking it down to its very primitive form, only pitches and durations. Then using music theory to shape the output in a coherent manner.
 This will enable the user to have more control over exactly what is being generated.
-However this requires us to create a system and models that capture the essence of how exactly we are to go about constructing the very basic musical ideas. 
-It will not depend on large data sets and will create a musical ideas that can be processed into a fully fledged musical idea.
+However this requires us to create a system and models that capture the essence of how exactly we are to go about constructing the basic musical ideas. 
+It will not depend on large data sets but will use music theory and smart restrictions to realise fully fledged musical ideas. 
 This task is not trivial since the rules of creating music is not absolute and the innate human element of creativity needs to be done by a computer.
 
-If we are able to solve this problem of creating a good structure and model for this kind of generation we will not only have a solution for musical ideas, but this kind of system could solve many kinds of creative problems.
+If we are able to solve this problem of creating a good structure and model for this kind of generation we will not only have a solution for musical ideas, but this kind of system could solve many kinds of creative problems where there is no absolute right answer, but degrees of subjective "goodness".
 \\
 
 % ////////// PROBLEM DESCRIPTION
 \section{Problem description}
-This thesis addresses two connected problems. The first is how to build a procedural music generator that can create short tonal musical examples from explicit music-theory principles rather than from a training data set. This is not only a matter of generating notes that belong to a key. The system must also represent things such as motif, phrase structure, range, rhythm, cadence, and harmonic context well enough that the result becomes coherent and musically discussable.
+This thesis addresses two connected problems. The first is how to build a procedural music generator that can create short tonal musical examples from explicit music-theory principles rather than from a training data set. This is not only a matter of generating notes that belong to a musical key\footnote{explanation of what a musical key is can be found in \ref{sec:keys}}. The system must also represent things such as motif, phrase structure, range, rhythm, cadence, and harmonic context well enough that the result becomes coherent and musically discussable.
 
 The second problem is how such a system should be developed in practice. A generator of this kind is both a musical and a software-architectural problem: the output has to improve, but the code also has to be structured in a way that makes further improvement possible. For that reason the thesis follows the development across three iterations and also examines the introduction of \ac{AI} in the final iteration, not as a musical model, but as a software-development tool that can support implementation, refactoring, and iteration.
 
 Within that frame, the thesis aims to solve a concrete task: to design and implement a rule-based generator that can produce melodies and simple harmonized outputs, render them as notation and audio, and allow the user to guide the result through musical choices such as key, rhythm, form, texture, and harmony.
 
-The main goals of the project are as follows:
+The main goals of the project are:
 \begin{itemize}
   \item develop a procedural music generator based on explicit music-theory principles
 \item investigate procedural generation methods in order to choose a u
   \item refine the system through iterative development 
-  \item investigate how \ac{AI} can be used as a software-development tool
+  \item investigate usefulness and dangers when using \ac{AI} as a software-development tool
 \end{itemize}
 
 % ////////// PROBLEM SOLUTION
 \section{Approach and scope}
 The work was approached as an iterative design and implementation project. Instead of trying to specify the final system in full from the start, I built three increasingly capable versions of the generator. The first iteration tested the basic generation and rendering workflow. The second focused on improving the internal musical representation through motifs, bars, and phrases. The third turned those earlier lessons into a more complete system with form handling, harmonic planning, soft constraints, explicit musical objects, and optional chorale-style output.
 
-This approach rests on a few clear assumptions. The thesis focuses on small-scale tonal material where the musical reasoning can be inspected directly. It assumes that useful results can be produced from explicit rules and musical objects without relying on large training corpora, and that iterative development is a suitable way to improve both the architecture and the music. The aim is therefore not to model all of composition, but to build a transparent generator that can create controlled and musically meaningful examples.
+This approach rests on a few clear assumptions. The thesis focuses on melody and harmony generating based on western music theory. The problem description does not narrow down the realization of the music therefor I chose to focus on tonal melodies and harmonies since there exists lots of theory on this subject. It assumes that useful results can be produced from explicit rules and musical objects without relying on large training data, and that iterative development is a suitable way to improve both the architecture and the music. The aim is therefore not to model all of composition, but to build a transparent generator that can create controlled and musically meaningful examples.
 
 The use of \ac{AI} is also limited deliberately. It is introduced only after the earlier iterations have made the central musical and technical problems clear. This makes it possible to evaluate \ac{AI} as a development aid inside an already understood problem space, rather than letting it define the musical direction of the project. Evaluation throughout the thesis is based on both sides of the work: how the code structure develops, and how the generated musical results improve from one iteration to the next.
 
 % /////// Thesis structure
 \section{Thesis structure}
-The thesis is structured as follows. Firstly there is some background to give some context. This background includes music theory, this section is just to give the reader a basic insight in how music is constructed and how notation works in order to understand figures and examples that show up throughout the thesis. Following is a section about procedural generation, this section explains a few methods of procedural generation briefly to give context about how a few methods work as well as some illustrative examples on how they can be utilized. After this there are a few brief sections about object oriented programming and the use of \ac{AI} in software development. Then comes the bulk of the thesis with the iterations of the software. The three iterations are presented as their own complete system in separate chapters. Before ending the thesis with a discussion and the concluding thoughts. \\
+The thesis is structured as follows. Firstly there is some background to give some context. This background includes music theory, this section is just to give the reader a basic insight in how music is constructed and how notation works in order to understand figures and examples that show up throughout the thesis. Following is a section about procedural generation, this section explores a few methods of procedural generation briefly to give context about how a few methods work as well as some illustrative examples on how they can be utilized. After this there are sections about object oriented programming and the use of \ac{AI} in software development. Then comes the bulk of the thesis with the iterations of the software. The three iterations are presented as their own complete system in separate chapters. Before ending the thesis with a discussion and the concluding thoughts. \\
 
 % ///////// Examples remarks
 \section{Note on examples and figures}
-Throughout the thesis there is a distinction between figures and examples. Examples are a special kind of figure containing musical material that is intended to be heard as well as seen, and each example contains a link to the corresponding entry in the online archive. Some ordinary figures also contain musical notation, but in those cases the notation is included only to illustrate a concept rather than to serve as a listening example.
+Throughout the thesis you can find both Figures and Examples. Examples are a special kind of figure containing musical material that is intended to be heard as well as seen, and each example contains a link to the corresponding entry in the online archive. Some ordinary figures also contain musical notation, but in those cases the notation is included only to illustrate a concept rather than to serve as a listening example.
 
 \section{The example archive}
-Because this thesis deals with music, notation on the page is only part of the result. The examples also need to be heard. For that reason, an online archive was created for the numbered musical examples in the thesis. The archive presents each example together with its score preview and audio, making it easier to move between the written discussion and the sounding result.
+Because this thesis deals with music, notation on the page is only part of the result. The examples also need to be heard. For that reason, an online archive was created for the musical examples in the thesis. The archive presents each example together with its score preview and audio.
 
-The archive is not part of the generator itself, but it solves an important presentation problem in the thesis. Without it, the reader would have to search through separate files to hear the results. A short description of how the archive page is built is given in Appendix~B, while its practical role in the thesis is simply to make the examples easy to inspect and listen to through the links placed directly in their captions.
+The archive is not part of the generator and problem itself, but it solves an important presentation problem in the thesis. Without it, the reader would have to search through files in a \textit{.zip} archive to hear the results. A short description of how the online archive page is built is given in Appendix~B, while its practical role in the thesis is simply to make the examples easy to inspect and listen to through the links placed directly in their captions. A \textit{.zip} file containing all the examples is also provided, but serves as a backup if the webpage does not work.
 
-A significant amount of time was spent creating this webpage. Even though it is not part of the actual problem, it was a meta-problem that needes solving in order to properly present the thesis in a professional manner. I deem this a good use of the time since it enhanced the end result of the thesis presentation.
+A significant amount of time was spent creating this webpage. Even though it is not part of the actual problem, it was a meta-problem that needs solving in order to properly present the thesis in a professional manner. I deem this a good use of the time since it enhanced the end result of the thesis presentation.

@@ -1,10 +1,15 @@
 \begin{figure}[htbp]
   \centering
-  \resizebox{\textwidth}{!}{%
+  \resizebox{0.85\textwidth}{!}{%
   \begin{tikzpicture}[
     >=Latex,
     font=\small,
     node distance=10mm and 16mm,
+    outerbox/.style={
+      draw,
+      rounded corners=3pt,
+      fill=gray!6
+    },
     box/.style={
       draw,
       rounded corners=3pt,
@@ -16,7 +21,9 @@
     inh/.style={box, fill=green!8},
     arrow/.style={-{Latex[length=2.3mm]}, thick}
   ]
-    % \node[anchor=west] at (-6.2,2.2) {\textbf{Composition}};
+    \node[outerbox, minimum width=56mm, minimum height=54mm] (compgroup) at (-3.8,-0.4) {};
+    \node[anchor=north] at (compgroup.north) {\textbf{Composition}};
+
     \node[comp] (phrase) at (-3.8,1.0) {Phrase};
     \node[comp] (motif) at (-3.8,-0.4) {Motif};
     \node[comp] (note) at (-3.8,-1.8) {NoteEvent};
@@ -24,10 +31,12 @@
     \draw[arrow] (phrase) -- node[right] {contains} (motif);
     \draw[arrow] (motif) -- node[right] {contains} (note);
 
-    % \node[anchor=west] at (1.0,2.2) {\textbf{Inheritance}};
-    \node[inh] (base) at (4.2,1.0) {MusicalObject};
-    \node[inh] (melody) at (2.5,-0.7) {Melody};
-    \node[inh] (chord) at (5.9,-0.7) {ChordProgression};
+    \node[outerbox, minimum width=76mm, minimum height=54mm] (inhgroup) at (4.2,-0.4) {};
+    \node[anchor=north] at (inhgroup.north) {\textbf{Inheritance}};
+
+    \node[inh] (base) at (4.2,0.5) {MusicalObject};
+    \node[inh] (melody) at (2.5,-1.2) {Melody};
+    \node[inh] (chord) at (5.9,-1.2) {ChordProgression};
 
     \draw[arrow] (melody) -- (base);
     \draw[arrow] (chord) -- (base);

@@ -113,37 +113,37 @@
 
 %the title page should be an odd page (right hand side)
 
-\begin{titlepage}
-  \hbadness=10000 % to avoide warnings about underfull hbox in the title page.
-  \newgeometry{left=1.6in, right=2in}
-  \vspace*{1.5cm}
-
-  \noindent  \textcolor{gray}{\large Jan-Øivind Lima} \\
-  \vspace{1cm}
-
-  \noindent \textbf{\Large Iterative Development of a Constraint-Based Procedural Music Generator} \\
-  \vspace{0.5cm}
-
-  \noindent {From simple melodic rules to form- and harmonically-aware generation} \\
-
-
-
-  % \vspace{7cm}
-  \vfill
-  \noindent Master's thesis in Cybernetics and Robotics\\
-  Supervisor: Sverre Hendseth\\
-  June 2026 \\
-
-  \vspace{0.2cm}
-  \noindent Norwegian University of Science and Technology \\
-  Faculty of Information Technology and Electrical Engineering\\
-  Department of Engineering Cybernetics\\
-
-  \begin{figure}[h]
-      \includegraphics[width=0.28\textwidth]{Figures/ntnu_basic.png}
-  \end{figure}
-\end{titlepage}
-
+% \begin{titlepage}
+%   \hbadness=10000 % to avoide warnings about underfull hbox in the title page.
+%   \newgeometry{left=1.6in, right=2in}
+%   \vspace*{1.5cm}
+%
+%   \noindent  \textcolor{gray}{\large Jan-Øivind Lima} \\
+%   \vspace{1cm}
+%
+%   \noindent \textbf{\Large Iterative Development of a Constraint-Based Procedural Music Generator} \\
+%   \vspace{0.5cm}
+%
+%   \noindent {From simple melodic rules to form- and harmonically-aware generation} \\
+%
+%
+%
+%   % \vspace{7cm}
+%   \vfill
+%   \noindent Master's thesis in Cybernetics and Robotics\\
+%   Supervisor: Sverre Hendseth\\
+%   June 2026 \\
+%
+%   \vspace{0.2cm}
+%   \noindent Norwegian University of Science and Technology \\
+%   Faculty of Information Technology and Electrical Engineering\\
+%   Department of Engineering Cybernetics\\
+%
+%   \begin{figure}[h]
+%       \includegraphics[width=0.28\textwidth]{Figures/ntnu_basic.png}
+%   \end{figure}
+% \end{titlepage}
+%
 \restoregeometry
 \myemptypage %empty page such that the abstract starts at the first right hand side after the title page
 %\end{comment}
@@ -250,6 +250,7 @@ The appendices collect supporting material that would have interrupted the flow 
 %it is possible to set a different page numbering style for the appendix, but I personally just continued with the same page numbering as the main content as I find that more tidy
 %\pagenumbering{roman}
 %\setcounter{page}{1}
+\addtocontents{toc}{\protect\newpage}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Appendices:}
 \appendix
 \input{Chapters/08Appendix}

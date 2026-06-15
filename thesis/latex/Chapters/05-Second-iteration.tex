@@ -3,7 +3,7 @@ As discussed in the previous section there are several issues with the first ite
 The second iteration continues with the use of \textit{python} and generating \textit{lilypond} code to generate the music. This proved to be a suitable way to display not only the music as images with musical notation, but getting audio output also proved to be quite straightforward.
 
 \section{Software architecture}
-Figure~\ref{fig:iter2_architecture} shows the second iteration in the same architectural style as the other iterations. Compared with the first iteration, the generation now passes through explicit musical objects such as \texttt{Motif}, \texttt{Bar}, and \texttt{Phrase}, and the generator reuses motivic material instead of producing every event independently.
+Figure~\ref{fig:iter2_architecture} shows the second iteration architecture. Compared with the first iteration, the generation now passes through explicit musical objects such as \texttt{Motif}, \texttt{Bar}, and \texttt{Phrase}, and the generator reuses motivic material instead of producing every event independently.
 
 The architecture is still quite script-driven, but it is more clearly divided than in the first iteration. The main script requests a phrase, the generator module creates the musical content, the \texttt{music.py} file defines the musical objects, and the LilyPond module handles export and playback. This means that the second iteration is not yet modular in the same way as the third iteration, but it is no longer one large proof-of-concept script where everything happens at once.
 
@@ -92,7 +92,7 @@ The generation process is also more structured than in the first iteration. The 
 
 Structurally the second iteration is quite similar to the first iteration however, the objects used for handling the melodies and such are more robust and easier to understand. The most important improvement is therefore not a large increase in theoretical correctness, but that the representation now makes it possible to talk about repeated material and phrase structure in the code itself.
 
-At the same time, the objects are still quite lightweight. A \texttt{Note} stores a MIDI number and a duration, but there is still no explicit harmonic plan, no voice profile, and no event metadata for things such as rests or chromatic adjustments. The motif handling is also mostly literal repetition rather than actual variation or development. This means that the representation is better than in the first iteration, but still too limited to support the kinds of transformations and constraints that are needed in the final system.
+At the same time, the objects are still quite lightweight. A \texttt{Note} stores a MIDI\footnote{MIDI is a music format named Musical Instrument Digital Interface, and a midi number is a musical pitch. For reference \musPitch{C}{4} is no. 60} number and a duration, but there is still no explicit harmonic plan, no voice profile, and no event metadata for things such as rests or chromatic adjustments. The motif handling is also mostly literal repetition rather than actual variation or development. This means that the representation is better than in the first iteration, but still too limited to support the kinds of transformations and constraints that are needed in the final system.
 
 \section{Results}
 Compared with the first iteration, the clearest improvement in the second iteration is that the melody now has some internal identity. Instead of generating one long stream of unrelated notes, the generator begins with a motif and places that motif at the start of each bar. This gives the phrase a repeated idea the listener can recognize, even when the remaining notes are still produced quite locally.
@@ -113,7 +113,7 @@ Example~\ref{fig:iter2_melody} shows this fairly clearly. The repeated opening g
   \caption[Second iteration melody where the motif contains larger leaps, but repetition still gives it some coherence.]{Second iteration melody where the motif contains larger leaps, but repetition still gives it some coherence. \examplelink.}\label{fig:iter2_melody_alt1}
 \end{example}
 
-Example~\ref{fig:iter2_melody_alt1} shows something a bit more interesting. The motif itself contains fairly large leaps, which would often feel awkward if they appeared only once. Here they become more acceptable because the same shape returns again and again. In other words, repetition can make even a somewhat angular idea feel like a deliberate gesture. This is one of the real musical improvements in the second iteration: the generator is still weak, but it has at least found one way of making material sound more related to itself.
+Example~\ref{fig:iter2_melody_alt1} shows something a bit more interesting. The motif itself contains a fairly large leap, which would often feel awkward if they appeared only once. Here they become more acceptable because the same shape returns again and again. In other words, repetition can make even a somewhat angular idea feel like a deliberate gesture. This is one of the real musical improvements in the second iteration: the generator is still weak, but it has at least found one way of making material sound more related to itself.
 
 \begin{example}
   \begin{center}
@@ -141,5 +141,5 @@ Example~\ref{fig:iter2_melody_problem} shows the other side of the same method. 
     \item Support augmentation and transformation of already generated material, such as transposition, reuse over new harmony, and more varied motif handling.
     \item Improve the musical object model further so that it can carry more information about harmony, phrase context, and later multi-voice use.
     \item Fix practical issues such as note spelling in different keys and make the representation compatible with a more robust final implementation.
-    \item Reintroduce multi-voice output in a more meaningful way, this time with harmonic awareness rather than fully independent voices.
+    \item Reintroduce multi-voice output in a more meaningful way, this time with harmonic awareness rather than independent voices.
   \end{itemize}

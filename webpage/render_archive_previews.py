@@ -34,7 +34,7 @@ PREVIEWS = (
     {
         "name": "archive_preview_first",
         "include_hero": False,
-        "chapter_ids": ("chapter-3-4",),
+        "chapter_ids": ("chapter-3-3",),
     },
     {
         "name": "archive_preview_second",

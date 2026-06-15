@@ -14,8 +14,8 @@ All code and latex-files used in this document are included in the Github reposi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\chapter*{B - Audio examples}\label{chap:audio-examples}
-\addcontentsline{toc}{chapter}{\protect\numberline{}B - Audio examples}
+\chapter*{B - Audio archive and zip file}\label{chap:audio-examples}
+\addcontentsline{toc}{chapter}{\protect\numberline{}B - Audio archive and zip file}
 
 %For included tables and figures renew the numbering such that they are numbered by the appendix they are attached to and not to the conclusion chapter
 \renewcommand{\thefigure}{B.\arabic{figure}}
@@ -30,12 +30,15 @@ Audio-files for all the examples in the thesis can be found on the project \text
     \item \url{https://lima98.github.io/TTK4900} - Audio example archive
 \end{itemize}
 
+\subsection*{Delivered zip file}
+Alongside the thesis submission there is also a separate file named \texttt{example\_audio\_appendix.zip}. It is not embedded in the thesis PDF, but delivered as its own appendix file. Inside that archive the WAV files are grouped by thesis section, and each file is named by the example number used in the thesis. This makes it straightforward to locate the audio for a specific example directly from its numbering in the text.
 \subsection*{How the archive page is built}
 The archive page is generated automatically from the thesis source rather than maintained by hand. The builder script reads the \texttt{example} environments from the LaTeX chapter files, uses the auxiliary metadata from the thesis build to recover the resolved example numbers and printed page numbers, and then matches each example with its rendered score PDF and WAV file. The resulting HTML page therefore mirrors the examples that actually appear in the thesis and keeps the same numbering as the document itself.
 
 This approach avoids maintaining a separate manually curated example list. When an example is added, removed, or renumbered in the thesis, the archive can be rebuilt from the same source material. The page groups the examples by thesis section and presents each one as a card with score preview, caption, audio playback, and a direct link back to the corresponding location in the PDF.
 
 Figures~\ref{fig:archive-preview-top}--\ref{fig:archive-preview-iter3} show rendered excerpts from the online archive page. Together they illustrate the landing section, the navigation sidebar, and the example cards for the main thesis sections up through the third iteration. The appendix-example section of the webpage is omitted here to keep the preview compact.
+\captionsetup[figure]{list=no}
 
 \begin{figure}[p]
   \centering

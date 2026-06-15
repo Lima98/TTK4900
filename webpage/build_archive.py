@@ -37,8 +37,8 @@ SECTION_METADATA = {
         "title": "Music Theory Examples",
         "description": "Examples related to scales, harmony, and interval structure.",
     },
-    "3.4": {
-        "display_label": "Section 3.4",
+    "3.3": {
+        "display_label": "Section 3.3",
         "title": "First Iteration Examples",
         "description": "Examples from the first melody-generation iteration.",
     },
@@ -283,7 +283,7 @@ def tags_for(pdf: Path, number: str) -> tuple[str, ...]:
             tags.append("Period Form")
         else:
             tags.append("Notation")
-    elif section == "3.4":
+    elif section == "3.3":
         tags.append("Iteration 1")
         if "register" in stem:
             tags.append("Range")
