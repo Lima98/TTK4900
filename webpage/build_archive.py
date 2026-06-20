@@ -91,6 +91,10 @@ class Example:
 
 
 def main() -> None:
+    if not MAIN_AUX.exists():
+        raise FileNotFoundError(
+            f"Missing {MAIN_AUX}. Build the thesis once first, or run the deploy script with --rebuild-thesis."
+        )
     labels = read_aux_labels(MAIN_AUX)
     examples = collect_examples(labels)
     OUTPUT.write_text(render_page(examples), encoding="utf-8")

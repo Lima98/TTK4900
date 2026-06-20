@@ -5,11 +5,20 @@ set -euo pipefail
 
 SCRIPT_DIR="${0:A:h}"
 ROOT_DIR="${SCRIPT_DIR:h}"
+THESIS_DIR="${ROOT_DIR}/thesis/latex"
 REMOTE="${PAGES_REMOTE:-origin}"
 PAGES_BRANCH="${PAGES_BRANCH:-gh-pages}"
 WORKTREE="${PAGES_WORKTREE:-${ROOT_DIR:h}/TTK4900-gh-pages}"
 DEFAULT_MESSAGE="Deploy thesis website $(date '+%Y-%m-%d %H:%M')"
 COMMIT_MESSAGE="${1:-}"
+REBUILD_THESIS=0
+
+if [[ "${2:-}" == "--rebuild-thesis" || "${1:-}" == "--rebuild-thesis" ]]; then
+    REBUILD_THESIS=1
+    if [[ "${1:-}" == "--rebuild-thesis" ]]; then
+        COMMIT_MESSAGE=""
+    fi
+fi
 
 if [[ -z "$COMMIT_MESSAGE" ]]; then
     if [[ -t 0 ]]; then
@@ -19,10 +28,14 @@ if [[ -z "$COMMIT_MESSAGE" ]]; then
     COMMIT_MESSAGE="${COMMIT_MESSAGE:-$DEFAULT_MESSAGE}"
 fi
 
-echo "Building thesis PDF and LaTeX references..."
-cd "$ROOT_DIR/thesis/latex"
-rm -f main.aux main.bcf main.bbl main.blg main.fdb_latexmk main.fls main.lof main.loe main.log main.out main.run.xml main.toc
-latexmk -pdf -interaction=nonstopmode main.tex
+if [[ "$REBUILD_THESIS" == "1" || ! -f "${THESIS_DIR}/main.aux" || ! -f "${THESIS_DIR}/main.pdf" ]]; then
+    echo "Building thesis PDF and LaTeX references..."
+    cd "$THESIS_DIR"
+    latexmk -pdf -interaction=nonstopmode main.tex
+else
+    echo "Using existing thesis build artifacts from $THESIS_DIR."
+    echo "Pass --rebuild-thesis if you want to force a fresh LaTeX build."
+fi
 
 echo "Building archive page from thesis examples..."
 cd "$SCRIPT_DIR"

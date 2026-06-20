@@ -8,6 +8,15 @@ exec > >(tee -a deploy.log) 2>&1
 set -e
 
 VOLUME_PATH="/Volumes/janoivil/"
+SCRIPT_DIR="${0:A:h}"
+ROOT_DIR="${SCRIPT_DIR:h}"
+THESIS_DIR="${ROOT_DIR}/thesis/latex"
+REBUILD_THESIS=0
+
+if [[ "${1:-}" == "--rebuild-thesis" ]]; then
+    REBUILD_THESIS=1
+fi
+
 if [ ! -d "$VOLUME_PATH" ]; then
     echo "Error: $VOLUME_PATH is not mounted. Please connect to smb://webedit.ntnu.no/janoivil through finder and try again.\n"
     exit 1
@@ -19,12 +28,16 @@ echo "Activating venv...\n"
 source ../.venv/bin/activate
 echo "Done!\n"
 
-echo "Building thesis PDF and LaTeX references...\n"
-cd ../thesis/latex/
-rm -f main.aux main.bcf main.bbl main.blg main.fdb_latexmk main.fls main.lof main.loe main.log main.out main.run.xml main.toc
-latexmk -pdf -interaction=nonstopmode main.tex
-cd ../../webpage/
-echo "Done!\n"
+if [[ "$REBUILD_THESIS" == "1" || ! -f "${THESIS_DIR}/main.aux" || ! -f "${THESIS_DIR}/main.pdf" ]]; then
+    echo "Building thesis PDF and LaTeX references...\n"
+    cd "${THESIS_DIR}"
+    latexmk -pdf -interaction=nonstopmode main.tex
+    cd "${SCRIPT_DIR}"
+    echo "Done!\n"
+else
+    echo "Using existing thesis build artifacts from ${THESIS_DIR}.\n"
+    echo "Pass --rebuild-thesis if you want to force a fresh LaTeX build.\n"
+fi
 
 echo "Building archive page from thesis examples...\n"
 python3 build_archive.py
