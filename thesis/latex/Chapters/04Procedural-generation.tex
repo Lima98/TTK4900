@@ -1,13 +1,13 @@
 \section{Procedural generation}
 
-  Procedural Content Generation (PCG), often referred to as just Procedural Generation (PG), is algorithmic generation of content. This content can take many forms including landscape, dungeouns, textures or even 3D models. This leads to smaller file sizes since the program can generate the content using algorithms rather than having everything pre-made and saved. 
+  Procedural Content Generation (PCG), often referred to as just Procedural Generation (PG), is algorithmic generation of content. This content can take many forms including landscape, dungeons, textures, or even 3D models. This leads to smaller file sizes since the program can generate the content using algorithms rather than having everything pre-made and saved. 
   In video games procedural generation is often used to create large spaces and to create high replayability. In the game \textit{No Man's Sky} procedural generation was used to procedurally generate "infinite procedurally generated galaxy" \cite{PressNoMans}. In Figure~\ref{fig:NMS_examples} we can see some examples of the worlds and animals generated in this video game.
   The demo game \textit{.kkrieger} is only $102KB$ in size, but it is able to generate a whole first person shooter game using procedural generation \cite{blizzardBriefHistoryWorlds2023}. For reference the \textit{\.jpeg} image in Figure~\ref{fig:kkrieger} is a screenshot\footnote{This game was made for a competition and is a free demo, therefore no explicit rights are needed to include the picture here.} from the game, and the file size of the image is $193KB$ which is about $1.9$ times more data than the entire source code of the game.
 
   \begin{figure}
     \centering
     \includegraphics[width=0.95\textwidth]{figures/04theory/kkrieger.jpeg}
-    \caption{Screenshot from the game \textit{.kkreiger}.  All assets like textures and 3D models are procedually generated to save space.}\label{fig:kkrieger}
+    \caption{Screenshot from the game \textit{.kkrieger}. All assets such as textures and 3D models are procedurally generated to save space.}\label{fig:kkrieger}
   \end{figure}
 
   \begin{figure}
@@ -68,7 +68,7 @@
       \includegraphics[width=0.24\textwidth]{figures/04theory/sierpinski1.png} &
       \includegraphics[width=0.24\textwidth]{figures/04theory/sierpinski3.png} &
       \includegraphics[width=0.24\textwidth]{figures/04theory/sierpinski5.png} \\
-      & (a) sierpinksi triangle & \\
+      & (a) Sierpinski triangle & \\
     
       \includegraphics[width=0.24\textwidth]{figures/04theory/plant1.png} &
       \includegraphics[width=0.24\textwidth]{figures/04theory/plant3.png} &
@@ -82,7 +82,7 @@
 
     \end{tabular}
 
-    \caption{Demonstration of the sierpinski triangle, a fractal plant and bush after one, three and five iterations repsectively.}\label{fig:l_systems}
+    \caption{Demonstration of the Sierpinski triangle, a fractal plant, and a fractal bush after one, three, and five iterations respectively.}\label{fig:l_systems}
   \end{figure}
 
   \begin{figure}[H] % Arrowhead sierpinski
@@ -95,7 +95,7 @@
       \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead4.png} &
       \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead5.png} &
       \includegraphics[width=0.24\textwidth]{figures/04theory/arrowhead6.png} \\
-      (d) fourth iteration & (e) fifth iterations & (f) sixth iteration \\
+      (d) fourth iteration & (e) fifth iteration & (f) sixth iteration \\
 
     \end{tabular}
     \caption{Approximation of the sierpinski triangle using the sierpinski arrowhead curve.}\label{fig:arrowhead_sierpinski}
@@ -104,7 +104,7 @@
 \subsection{Constraint satisfaction (CS)}
   \ac{CS} approaches describe procedural generation as a search problem. Instead of directly constructing an output step by step, the designer first specifies a set of variables, the domain of possible values for each variable, and a set of rules that describe which combinations are allowed \cite{andersConstraintProgrammingSystems2011}. The generator then searches for an assignment of values that satisfies all the constraints. In procedural generation this is attractive because it gives explicit control over the properties the output should have. The user is not only asking for randomness, but for randomness inside a carefully designed space of valid solutions.
 
-  In the following example, each cell in the map is a variable and each terrain type is one of the possible states in that variable's domain. The constraints describe which terrain types may be adjacent to one another and which global relationships should hold across the full map. Figure~\ref{fig:cons_adjacent} shows the adjacency graph that defines the local rules, Figure~\ref{fig:domain_prop} shows how the domain of each cell is reduced during propagation, and Figure~\ref{fig:cs_solution} shows one final configuration satisfying the imposed rules. This is a simple example of how the method works, the algorthm can be a bit complex due to having to backtrack when a solution is not found, but the general idea is quite simple.
+  In the following example, each cell in the map is a variable and each terrain type is one of the possible states in that variable's domain. The constraints describe which terrain types may be adjacent to one another and which global relationships should hold across the full map. Figure~\ref{fig:cons_adjacent} shows the adjacency graph that defines the local rules, Figure~\ref{fig:domain_prop} shows how the domain of each cell is reduced during propagation, and Figure~\ref{fig:cs_solution} shows one final configuration satisfying the imposed rules. This is a simple example of how the method works. The algorithm can be a bit complex due to having to backtrack when a solution is not found, but the general idea is quite simple.
 
   \begin{figure}[H] % Nodes
     \begin{center}
@@ -126,7 +126,7 @@
 
   \begin{figure}[H] % Final map
     \begin{center}
-      \includegraphics[width=0.7\textwidth]{figures/04theory/03_generated_solution.pdf}
+      \includegraphics[width=0.6\textwidth]{figures/04theory/03_generated_solution.pdf}
     \end{center}
     \caption{Final generated map satisfying all constraints.}\label{fig:cs_solution}
   \end{figure}
@@ -154,7 +154,7 @@
         (a) initial wave & (b) after first collapse \\
         \includegraphics[width=0.4\textwidth]{figures/04theory/02_after_propagation.pdf} &
         \includegraphics[width=0.4\textwidth]{figures/04theory/02_complete_collapse.pdf} \\
-        (c) after propagation & (d) compete collapse
+        (c) after propagation & (d) complete collapse
       \end{tabular}
     \caption{Shows how collapsing/observing a state propagates. An observation reduces the local uncertainty.}\label{fig:observe_propagate_steps}
   \end{figure}
@@ -169,7 +169,7 @@
     \caption{An example output for a larger domain than the original exemplar. The consistent rules lead to consistently similar outputs.}\label{fig:generated_wfc_map}
   \end{figure}
 
-  Finally, the learned rules do not imply that there is only one valid output. By changing the seed for generation, we can obtain visibly different results that still adhere to the rules derived from the exemplar in the first step. This is an important strength of the method: it preserves stylistic consistency while still allowing variation.
+  Finally, the learned rules do not imply that there is only one valid output. Figure~\ref{fig:wfc_seed_variations} shows that by changing the seed for generation, we can obtain visibly different results that still adhere to the rules derived from the exemplar in the first step. This is an important strength of the method: it preserves stylistic consistency while still allowing variation.
 
   The main limitation of \ac{WFC} is that the model only reasons locally. It can be extremely effective at preserving texture, neighbourhood relationships, and low-level style, but larger structural goals are not guaranteed unless additional constraints or hierarchy are introduced. This becomes especially relevant when the target domain has strong long-range dependencies, such as architecture, level progression, or musical form \cite{vargaProceduralMixedinitiativeMusic2023}.
 
@@ -177,7 +177,7 @@
     \begin{center}
       \includegraphics[width=0.95\textwidth]{figures/04theory/04_seed_variations.pdf}
     \end{center}
-    \caption{Illustration that the learned rules stay consistend while the seed changes the output.}\label{fig:wfc_seed_variations}
+    \caption{Illustration that the learned rules stay consistent while the seed changes the output.}\label{fig:wfc_seed_variations}
   \end{figure}
 
 \subsection{Binary Space Partitioning (BSP)}
@@ -191,7 +191,7 @@
     \begin{center}
       \includegraphics[width=0.6\textwidth]{figures/04theory/01_bsp_partitions.pdf}
     \end{center}
-    \caption{Initial domain partitioning, made by recursively divinging the domain in two.}\label{fig:bsp_partitions}
+    \caption{Initial domain partitioning, made by recursively dividing the domain in two.}\label{fig:bsp_partitions}
   \end{figure}
   
   \begin{figure}[H] % Rooms and corridors
@@ -205,7 +205,7 @@
     \begin{center}
       \includegraphics[width=0.6\textwidth]{figures/04theory/03_final_bsp_dungeon.pdf}
     \end{center}
-    \caption{Rasterization of the generated dungeoun to show "final product".}\label{fig:final_bsp_dungeoun}
+    \caption{Rasterization of the generated dungeon to show the final product.}\label{fig:final_bsp_dungeoun}
   \end{figure}
 
 \subsection{Random noise and seeds}
