@@ -1,3 +1,9 @@
+## 1.0.0 (2026-06-20)
+
+### Fix
+
+- **thesis**: final thesis updates for delivery
+
 ## 0.17.0 (2026-06-15)
 
 ### BREAKING CHANGE
